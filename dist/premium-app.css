@@ -1,0 +1,280 @@
+:root{--color-canvas:#181310;--color-surface:#29201B;--color-surface-muted:#342923;--color-sidebar:#181310;--color-sidebar-raised:#29201B;--color-text:#F5EEE8;--color-text-muted:#B7B093;--color-border:#58473C;--color-action:#CB9478;--color-action-hover:#DDA98D;--color-link:#E4AE91;--color-brass:#B7B093;--color-brass-hover:#CEC7A9;--color-danger:#F09088;--color-success:#B7B093;--color-focus:#CB9478;--navy:var(--color-sidebar);--navy2:var(--color-sidebar-raised);--blue:var(--color-action);--gold:var(--color-brass);--gold2:var(--color-brass-hover);--cream:var(--color-canvas);--paper:var(--color-surface);--ink:var(--color-text);--muted:var(--color-text-muted);--line:var(--color-border);--red:var(--color-danger);--green:var(--color-success);--shadow:0 8px 26px #08060566}
+body{min-width:280px;background:var(--cream);color:var(--ink);letter-spacing:-.015em}
+.top{background:#f9f8f4;color:var(--ink);border:0;border-bottom:1px solid #deded4;box-shadow:none}
+.top:after{display:none}.top-inner{max-width:none;padding:12px 29px;min-height:68px}
+.top .emblem{width:32px;height:36px;background:#c1a16a;color:#1f2a2a;clip-path:polygon(50% 0,88% 14%,88% 69%,50% 96%,12% 69%,12% 14%);font:18px Georgia,serif}
+.brand-kicker{font-size:9px;letter-spacing:.18em;color:#92764d}
+.brand h1{font:650 18px Georgia,"Noto Serif KR",serif;letter-spacing:-.055em;margin:3px 0 0;color:#243331}
+.brand p{font-size:10px;color:#73807a;margin-top:2px}
+.top-actions{gap:8px}.languageSwitch{background:#efeee8;border:1px solid #dbdcd3;border-radius:5px}
+.languageSwitch button{color:#65736e;border-radius:3px}.languageSwitch button.active{background:#fffdf8;color:#233632;box-shadow:0 1px 3px #263b3620}
+.top-btn{border-color:#c8cec3;background:#fffdf9;color:#3e554d;border-radius:4px;font-weight:750}
+.top-btn:hover{background:#f0f1e9}.top-btn.gold{background:var(--color-brass);border-color:var(--color-brass);color:#20302c}
+.top-btn.menuBtn{display:block;white-space:nowrap}
+.actionItems{display:none;position:absolute;z-index:25;right:0;top:44px;width:210px;padding:7px;flex-direction:column;align-items:stretch;gap:2px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:5px;box-shadow:0 12px 30px #20302c26}
+.top-actions.open .actionItems{display:flex}
+.actionItems .top-btn{width:100%;padding:10px 11px;text-align:left;border:0;background:transparent;color:#2f463d}
+.actionItems .top-btn:hover{background:#edf0e8}
+.actionItems .top-btn.gold{background:#eee5d4;color:#2f463d}
+.shell{max-width:1320px;padding:37px clamp(22px,3vw,45px) 90px}
+.navBrand{display:none}.navFooter{display:none}
+.bottomNav svg{width:20px;height:20px;display:block;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.bottomNav .navIcon{display:grid;place-items:center;width:23px;height:23px;flex:none}
+.sectionNav{margin:0 0 25px;border-bottom:1px solid #d8d9d0}
+.sectionTabs{display:flex;align-items:center;gap:5px;max-width:100%;overflow-x:auto;scrollbar-width:thin}
+.sectionTabs button{flex:none;min-height:48px;padding:10px 18px;border:0;border-bottom:2px solid transparent;background:transparent;color:#697771;font-size:13px;font-weight:750;white-space:nowrap}
+.sectionTabs button:hover{color:#263e37;background:#eaece5}
+.sectionTabs button.active{color:#25473b;border-bottom-color:#b59a6a}
+.homeHeading{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:24px}
+.homeHeading h2{font:650 clamp(30px,3vw,43px)/1.23 Georgia,"Noto Serif KR",serif;letter-spacing:-.06em;margin:8px 0}
+.homeHeading p{margin:0;color:#6b7673;font-size:13px;line-height:1.55}
+.homeSaveStatus{font-size:10px;font-weight:750;color:#537263;border:1px solid #cfd7c8;border-radius:3px;padding:7px 10px;white-space:nowrap}
+.homeHero{position:relative;overflow:hidden;min-height:276px;border:1px solid #4d5d58;border-radius:7px;background:linear-gradient(100deg,#202e30,#263839 65%,#334340);color:white;box-shadow:0 21px 42px #1d302d1e}
+.homeHero:before{content:"";position:absolute;top:0;left:30px;width:70%;height:2px;background:linear-gradient(90deg,#c6a66f,transparent)}
+.homeHero:after{content:"";position:absolute;right:-55px;top:-85px;width:430px;height:430px;background:url('./redesign-crest.svg') center/contain no-repeat;opacity:.58;pointer-events:none}
+.homeHeroContent{position:relative;z-index:1;max-width:710px;padding:31px 35px 34px}
+.homeHeroTop{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.homeHeroTop>span:first-child{color:#dac495;font-size:10px;font-weight:800;letter-spacing:.13em}
+.homeHeroTop>span:last-child{border:1px solid #8c9b90;border-radius:3px;padding:5px 8px;color:#d2d9d0;font-size:10px}
+.homeHero h3{font:600 clamp(27px,3.1vw,39px)/1.3 Georgia,"Noto Serif KR",serif;letter-spacing:-.055em;margin:18px 0 15px;overflow-wrap:anywhere}
+.homeHeroNumbers{display:flex;align-items:end;justify-content:space-between;gap:12px;max-width:540px}
+.homeHeroNumbers strong{font:600 42px Georgia,serif;font-variant-numeric:tabular-nums}
+.homeHeroNumbers span{font-size:12px;color:#bac8c0}
+.homeHeroProgress{height:4px;max-width:540px;background:#a8b8ae42;margin:11px 0 24px}
+.homeHeroProgress i{display:block;height:100%;background:#c9aa74}
+.homeHeroActions{display:flex;gap:9px}
+.homeHeroActions button{width:auto;min-height:42px;border-radius:4px;padding:10px 17px;font-size:12px}
+.homeHeroActions .primary{background:var(--color-brass);color:#20302c;border-color:var(--color-brass)}
+.homeHeroActions .primary:hover{background:var(--color-brass-hover)}
+.homeHeroActions .secondary{background:#ffffff09;color:#edf1e9;border-color:#aab7ad80}
+.homeHeroActions .secondary:hover{background:#ffffff17}
+.homeColumns{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:15px;margin-top:16px}
+.homePanel{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:7px;box-shadow:var(--shadow)}
+.homePanelHead{display:flex;align-items:center;justify-content:space-between;gap:9px;padding:21px 23px 17px}
+.homePanelHead h3{font:650 21px Georgia,"Noto Serif KR",serif;letter-spacing:-.05em;margin:5px 0 0}
+.homePanelHead .ghost{white-space:nowrap;font-size:11px;color:#43625d}
+.homeUnit{display:flex;align-items:center;gap:11px;padding:14px 23px;border-top:1px solid #e7e7de}
+.homeUnitSymbol{display:grid;place-items:center;width:34px;height:34px;flex:none;border-radius:4px;background:#ebece5;color:#49655f;font:18px Georgia,serif}
+.homeUnitInfo{display:block;flex:1;min-width:0}.homeUnitInfo strong{display:block;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.homeUnitInfo small{display:block;margin-top:4px;color:#838c86;font-size:10px}
+.homeUnit>b{font-size:12px;white-space:nowrap;color:#334843}.homeEmpty,.homeMore{font-size:12px;line-height:1.55;color:#78857f;padding:0 23px 20px;margin:0}.homeMore{padding-top:13px;border-top:1px solid #e7e7de}
+.homeQuickLinks{padding:0 15px 9px}.homeQuickLinks button{display:flex;align-items:center;gap:12px;text-align:left;width:100%;padding:10px 8px;margin-bottom:6px;border:0;border-radius:4px;background:transparent;color:var(--ink)}
+.homeQuickLinks button:hover{background:#f2f1ea}.homeQuickLinks button>span:nth-child(2){flex:1;min-width:0}
+.homeQuickLinks button strong,.homeQuickLinks button small{display:block}
+.homeQuickLinks button strong{font-size:12px}.homeQuickLinks button small{font-size:10px;color:#818d87;margin-top:4px;line-height:1.4}
+.homeQuickLinks button>span:last-child{font-size:22px;color:#89998d}
+.homeQuickNumber{display:grid;place-items:center;width:39px;height:39px;flex:none;border-radius:4px;background:#e9e8df;color:#5f6e60;font:600 15px Georgia,serif}
+.intro h2,.viewIntro h2{font:650 clamp(28px,3vw,41px)/1.24 Georgia,"Noto Serif KR",serif;letter-spacing:-.06em;color:var(--color-sidebar)}
+.intro p,.viewIntro p{color:#6b7673;font-size:13px}.eyebrow,.cardKicker{color:#8c7047;font-weight:850;letter-spacing:.14em}
+.panel,.metric,.factionCard,.referenceCard,.savedCard,.rulesSidebar,.rulesMain,.quickCard,.tutorialContent,.tutorialChapters{border:1px solid #d8d9d0;border-radius:7px;background:var(--paper);box-shadow:var(--shadow)}
+.panel-heading{background:var(--color-surface-muted);border-color:#dedfd5}.panel-heading h3,.roster-head h3{font:650 22px Georgia,"Noto Serif KR",serif;letter-spacing:-.05em}
+.section,.roster-head,.roster-body{border-color:#e2e3d9}
+.section-title{color:#2f4b42}.section-title:before{color:#a78b59}
+.primary{background:var(--color-action);border-color:var(--color-action);border-radius:4px}.primary:hover{background:var(--color-action-hover)}
+.secondary{border-color:#c9d3c8;border-radius:4px;color:var(--color-link)}.secondary:hover{background:#eef1e9}
+.ghost{color:#43625d}.side-note{background:#f3eee3;border-color:#ae9165;color:#665f50}
+input,select,textarea{border-color:#cfd4ca;border-radius:4px;background:#fffefa;color:#263832}
+input:focus-visible,select:focus-visible,button:focus-visible,textarea:focus-visible{outline-color:var(--color-focus)}
+.metric{padding:18px}.metric span{color:#748178}.metric strong{font:650 29px Georgia,serif;color:#274138}.metric .progress{background:#e5e7df;border-radius:0}.metric .progress i{background:#ae9164}
+.unit{border-color:#e1e3d9;border-radius:5px;background:#fffefa}.unit-name{color:#22352f;overflow-wrap:anywhere}.unit-detail{color:#6e7a73}.unit-points{font:650 20px Georgia,serif;color:#37534a}.unit-controls{flex-wrap:wrap}
+.group-header h4{color:#8d7046}.category-breakdown{background:#f4f4ee;border-color:#e0e2d8}.chip{border-color:#d8dcd1;color:#6b786f;border-radius:3px}
+.factionCard,.referenceCard,.savedCard{padding:21px}.factionCard:hover,.referenceCard:hover{border-color:#acae9d;box-shadow:0 14px 30px #25352e18}.factionCard.current{background:#f2f4ec;border-color:#799182}
+.cardTitle,.referenceCard .cardTitle{font:650 19px Georgia,"Noto Serif KR",serif;letter-spacing:-.04em;color:#263832}
+.cardMeta{color:#76847d}.rulePill{border-color:#d1dbcf;background:#edf1ea;color:#34594f;border-radius:4px}.rulePill:hover{background:#e2ebdf;border-color:#9bb7a3}
+.referenceSummary{background:#eaece4;border-color:#d8dccf;border-radius:5px;color:#546a5f}.referenceActions button{border-radius:4px}
+.rulesViewTabs{display:none}.rulesTools input,.rulesTools select,.quickTools input{border-radius:4px}
+.rulesChapter{border-radius:4px}.rulesChapter.active{background:#e7ece4;color:#2c5143}.rulesEntry:hover,.rulesEntry:focus-visible{background:#f2f4ec}.rulesListHeader,.rulesEntry{border-color:#e2e5db}.rulesListHeader h3{color:#223b32}
+.quickTools{background:var(--cream)}.quickTabs button{border-radius:4px;border-color:#d2d9cd;color:#4f695d}.quickTabs button.active{background:var(--color-action);border-color:var(--color-action)}
+.quickCard h3{color:#23372f}.quickCardHead button{background:#edf1ea;color:var(--color-link);border-color:#d1dbcf;border-radius:4px}
+.tutorialChapter{border-radius:4px}.tutorialChapter.active{background:#e7ece4;box-shadow:inset 3px 0 #ad9263}.tutorialLessonHead{background:linear-gradient(120deg,#f4f2eb,#eaf0e9);border-color:#dce2d6}.tutorialLessonHead h3{color:#22362d}
+.tutorialExample{background:#f5f0e7;border-color:#b09565}.tutorialQuiz{background:#eaf0e9;border-color:#537562}.tutorialRuleLink{border-radius:4px;color:#355b50;border-color:#cbd9cb}
+.savedCard .savedActions button{border-radius:4px}
+.sheetBackdrop,.ruleBackdrop{background:#0b1715bf}.detailSheet,.ruleDialog,.modal{background:var(--color-surface)}
+.sheetHead,.sheetFooter{border-color:#dedfd5}.sheetHead h2,.ruleDialog h2{font-family:Georgia,"Noto Serif KR",serif;color:#253a32}
+.sheetClose{border-radius:4px}.ruleNavButton{border-color:#cbd8ca;background:#edf1e9;color:#355b50;border-radius:5px}
+/* Carry the palette through the older reference, rule, and tutorial components. */
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline-color:var(--color-focus)}
+input:focus,select:focus,textarea:focus{border-color:var(--color-focus)}
+input[type="checkbox"],input[type="radio"]{accent-color:var(--color-action)}
+label,.sheetBody h3,.configGroup h3,#configMagic h3,#configLore h3{color:#344b42}
+.danger,.metric.over strong{color:var(--color-danger)}.metric.over .progress i{background:var(--color-danger)}
+.toast{background:var(--color-sidebar);color:var(--color-surface)}
+.referenceSummary b,.chip b,.empty h4,.configFooter strong{color:var(--color-action)}
+.detailMeta span,.configChoice.selected,.magicSelectedRow,.ruleUnitDetails>div{background:#edf1e9;color:#344e42;border-color:#cbd9cb}
+.detailOption,.detailOptionWrap,.configChoice,.ruleTableWrap,.quickTableScroll{border-color:var(--color-border)}
+.configChoicePrice,.ruleInlineLink,.quickSource a,.rulesListHeader a{color:var(--color-link)}
+.configNested{border-color:#cbd9cb}.detailNotes{background:#f5f0e7;color:#665f50}
+.ruleText,.ruleSpecTable,.quickPoints,.rulesEntry{color:var(--color-text)}
+.ruleSpecTable th,.quickTable thead th,.quickTable tbody th{background:#e9ede5;color:#304c3e}
+.ruleSpecTable th,.ruleSpecTable td,.quickTable th,.quickTable td{border-color:#dce2d6}
+.ruleSpecTable td,.quickCard,.rulesSidebar,.rulesMain{background:var(--color-surface)}
+.ruleInlineLink:hover{color:#203e3a}.ruleUnitSpecial .ruleInlineLink{background:#edf1e9;border-color:#cbd9cb}
+.quickCard h4,.rulesListHeader h3,.rulesEntryTitle,.tutorialDiagram figcaption{color:#263e35}
+.quickPoints li::marker,.diagramArrow{color:#967849}
+.quickSource,.quickEmpty,.rulesListHeader p,.rulesEntryTitle small,.rulesEntryTitle em{color:var(--color-text-muted)}
+.rulesChapter,.rulesEntry,.rulesEntryArrow,.tutorialDiagramNote{color:#52695f}
+.rulesChapter:hover{background:#edf1e9}.rulesChapter b,.rulesEntryNo{color:#829086}
+.quickTableScroll,.quickCard,.rulesSidebar,.rulesMain,.tutorialDiagram{border-color:var(--color-border)}
+.tutorialDiagram{background:linear-gradient(160deg,#fafaf6,#edf1e9)}
+.tutorialDiagramIcon,.diagramTimingNo,.diagramChecklist span{background:#e6ebe1;color:#446054}
+.tutorialProgress,.tutorialChapter,.tutorialLead,.tutorialLessonBody h4{color:#304c42}
+.tutorialProgress>div{background:#e3e8df}.tutorialProgress i{background:var(--color-brass)}
+.tutorialChapter span,.tutorialLessonBody li::marker{color:#967849}
+.tutorialEnglish{color:var(--color-text-muted)}
+.tutorialQuiz{background:#eaf0e9;border-color:var(--color-success)}
+.tutorialSources{background:var(--color-surface);border-color:var(--color-border)}
+.tutorialLessonFoot{border-color:var(--color-border)}
+.tutorialDiagramNote,.diagramLegend,.diagramStats b,.diagramProfileTitle,.diagramTimingRow>span:last-child,.diagramBreakGrid small{color:#64786b}
+.diagramBlock,.diagramStats strong,.diagramTimingRow b,.diagramBreakRoll,.diagramBreakGrid strong,.diagramChecklist>div{color:#2b4b3e}
+.diagramBlock,.diagramProfile,.diagramTiming,.diagramBreakGrid>div,.diagramChecklist>div{border-color:#cad8c9;background:var(--color-surface)}
+.diagramProfileTitle,.diagramStats b{background:#e9ede5}.diagramTimingRow,.diagramStats>div{border-color:#dce2d6}
+.diagramDie{border-color:#aabbaa;color:#365a49;box-shadow:0 3px 0 #d7dfd3}
+.diagramLegend i.own,.diagramUnit.own{background:#4b7564}
+@media(min-width:881px){
+  .bottomNav{position:fixed;z-index:22;left:0;top:0;bottom:0;transform:none;width:252px;height:100vh;max-height:none;display:flex;flex-direction:column;align-items:stretch;gap:2px;padding:26px 18px 18px;background:var(--color-sidebar);border:0;border-right:1px solid #34413e;border-radius:0;box-shadow:none;backdrop-filter:none}
+  .navBrand{display:flex;align-items:center;gap:10px;color:#f0f0e8;padding:0 9px 36px}
+  .navBrandMark{display:grid;place-items:center;width:40px;height:44px;flex:none;background:#c1a16a;color:#1f2a2a;clip-path:polygon(50% 0,88% 14%,88% 69%,50% 96%,12% 69%,12% 14%);font:21px Georgia,serif}
+  .navBrand small{display:block;font-size:8px;letter-spacing:.18em;color:#c2ad87;font-weight:800}
+  .navBrand strong{display:block;margin-top:3px;font:650 15px Georgia,"Noto Serif KR",serif;white-space:nowrap}
+  .navFooter{display:block;margin-top:auto;padding:16px 11px 0;border-top:1px solid #465650;font-size:9px;letter-spacing:.14em;color:#889990}
+  .bottomNav button{display:flex;align-items:center;gap:13px;text-align:left;min-height:48px;padding:11px 13px;border-radius:5px;color:#b9c6c2;background:transparent;font-size:13px;font-weight:750}
+  .bottomNav button:hover{background:#ffffff0b;color:#fff}
+  .bottomNav button.active{background:#ffffff10;color:#fff;box-shadow:inset 2px 0 #c8aa77}
+  .bottomNav .navIcon{color:#c2ac83}
+  .top{margin-left:252px}
+  .shell{margin-left:252px}
+}
+@media(min-width:881px) and (max-width:1180px){.layout{grid-template-columns:1fr}.homeColumns{grid-template-columns:1fr}.factionGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.rulesLayout{grid-template-columns:205px minmax(0,1fr)}}
+@media(max-width:880px){
+  .bottomNav{position:fixed;left:0;right:0;bottom:0;top:auto;transform:none;width:100%;height:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;padding:5px 7px max(6px,env(safe-area-inset-bottom));background:#f9f8f4;border:0;border-top:1px solid #d5d9cf;border-radius:0;box-shadow:0 -8px 24px #1a2f2820;backdrop-filter:none}
+  .bottomNav button{position:relative;display:grid;justify-items:center;align-content:center;gap:2px;min-height:51px;padding:3px 1px;border-radius:3px;color:#7b8981;background:transparent;font-size:10px;font-weight:750}
+  .bottomNav button.active{background:#e8e9df;color:#253e35}
+  .bottomNav button.active:before{content:"";position:absolute;top:0;width:32px;height:2px;background:#a88b59}
+  .bottomNav .navIcon{width:21px;height:22px}
+  .bottomNav svg{width:19px;height:19px}
+  .top{margin:0}.shell{margin:0;max-width:none;padding:25px 17px 112px}
+  .homeColumns{grid-template-columns:1fr}
+}
+@media(max-width:680px){
+  .top-inner{min-height:59px;display:flex;flex-wrap:nowrap;align-items:center;gap:7px;padding:9px 15px}
+  .top .emblem{width:28px;height:32px;font-size:15px;flex:none}
+  .brand{min-width:0;flex:1}.brand-kicker,.brand p{display:none}.brand h1{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .top-actions{width:auto;min-width:0;margin:0 0 0 auto;display:flex;flex:none;justify-content:flex-end;flex-wrap:nowrap;gap:4px}
+  .languageSwitch{padding:2px}.languageSwitch button{font-size:10px;padding:5px 6px}
+  .top-btn.menuBtn{display:block;white-space:nowrap;padding:7px 8px;font-size:11px}
+  .actionItems{top:41px}
+  .shell{padding:24px 15px 108px}
+  .sectionNav{margin-bottom:22px}
+  .sectionTabs button{padding:9px 14px;font-size:12px;min-height:43px}
+  .homeHeading{align-items:start;gap:8px}.homeHeading h2{font-size:31px}.homeHeading p{font-size:12px}
+  .homeSaveStatus{display:none}
+  .homeHero{min-height:0}
+  .homeHero:before{left:22px}
+  .homeHero:after{width:285px;height:285px;right:-100px;top:-15px;opacity:.18}
+  .homeHeroContent{padding:25px 22px 28px}
+  .homeHero h3{font-size:27px}
+  .homeHeroNumbers strong{font-size:39px}
+  .homeHeroActions button{flex:1;padding:10px 7px}
+  .homePanelHead{padding:19px 20px 15px}.homeUnit{padding:13px 20px}
+  .homeQuickLinks{padding:0 12px 8px}
+  .factionCard,.referenceCard,.savedCard{padding:17px}
+  .unit{display:grid;grid-template-columns:minmax(0,1fr);gap:9px}
+  .unit-side{display:flex;align-items:center;justify-content:space-between;gap:9px;text-align:left;min-width:0}
+  .unit-controls{margin-top:0;flex-wrap:wrap;gap:2px 7px;justify-content:flex-end}
+  .unit-controls button{font-size:11px;white-space:nowrap}
+  .unit-name,.unit-detail{overflow-wrap:anywhere}
+  .roster-head{padding:19px}.roster-body{padding:12px}
+  .summary{gap:8px}.metric{padding:12px}.metric strong{font-size:23px}
+  .ruleDialog,.detailSheet{background:var(--color-surface)}
+}
+@media(max-width:370px){.brand h1{font-size:12px}.top .emblem{width:24px;height:29px}.languageSwitch button{padding:5px 4px;font-size:9px}.top-btn.menuBtn{font-size:10px;padding:7px 6px}.homeHeroActions{flex-direction:column}.homeHeroActions button{width:100%}.homeHero h3{font-size:24px}}
+/* Old World palette: umber, copper, and aged parchment. */
+body,.shell{background:var(--color-canvas);color:var(--color-text)}
+.top,.bottomNav{background:var(--color-sidebar);border-color:var(--color-border);color:var(--color-text)}
+.top .emblem,.navBrandMark{background:var(--color-action);color:var(--color-canvas)}
+.brand h1,.navBrand strong,.homeHeading h2,.homePanelHead h3,.intro h2,.viewIntro h2,.panel-heading h3,.roster-head h3,.cardTitle,.referenceCard .cardTitle,.quickCard h3,.rulesListHeader h3,.tutorialLessonHead h3,.sheetHead h2,.ruleDialog h2,.unit-name,.empty h4{color:var(--color-text)}
+.brand-kicker,.eyebrow,.cardKicker,.homeHeroTop>span:first-child,.group-header h4,.homeQuickNumber,.tutorialChapter span{color:var(--color-action)}
+.brand p,.homeHeading p,.homePanelHead .ghost,.homeQuickLinks button small,.homeUnitInfo small,.intro p,.viewIntro p,.panel-heading p,.metric span,.cardMeta,.unit-detail,.empty,.rulesListHeader p,.rulesEntryTitle small,.rulesEntryTitle em,.quickSource,.quickEmpty,.rulePage,.viewHint,.footer,.tutorialEnglish,.tutorialDiagramNote{color:var(--color-text-muted)}
+.languageSwitch,.actionItems,.homeQuickNumber,.homeUnitSymbol{background:var(--color-surface-muted);border-color:var(--color-border)}
+.languageSwitch button,.top-btn,.actionItems .top-btn{color:var(--color-text-muted)}
+.languageSwitch button.active,.top-btn:hover,.actionItems .top-btn:hover{background:#4A352B;color:var(--color-text)}
+.top-btn,.homeSaveStatus{background:var(--color-surface);border-color:var(--color-border);color:var(--color-text)}
+.top-btn.gold,.actionItems .top-btn.gold{background:var(--color-action);border-color:var(--color-action);color:var(--color-canvas)}
+.bottomNav button{color:var(--color-text-muted)}.bottomNav button:hover{background:#ffffff12;color:var(--color-text)}
+.bottomNav button.active{background:var(--color-surface-muted);color:var(--color-text);box-shadow:inset 2px 0 var(--color-action)}
+.bottomNav button.active:before{background:var(--color-action)}.bottomNav .navIcon,.navBrand small,.navFooter{color:var(--color-brass)}
+.sectionNav{border-color:var(--color-border)}.sectionTabs button{color:var(--color-text-muted)}
+.sectionTabs button:hover,.sectionTabs button.active{color:var(--color-text);background:var(--color-surface-muted)}.sectionTabs button.active{border-color:var(--color-action)}
+.homeSaveStatus{color:var(--color-brass)}
+.homeHero{background:linear-gradient(110deg,#29201B 0%,#36281F 68%,#483226 100%);border-color:#665043;color:var(--color-text)}
+.homeHero:before{background:linear-gradient(90deg,var(--color-action),transparent)}
+.homeHeroTop>span:last-child{border-color:#8A7060;color:var(--color-text-muted)}
+.homeHeroNumbers span,.homeEmpty,.homeMore{color:var(--color-text-muted)}
+.homeHeroProgress{background:#ffffff24}.homeHeroProgress i{background:var(--color-action)}
+.homeHeroActions .primary,.primary,.quickTabs button.active{background:var(--color-action);border-color:var(--color-action);color:var(--color-canvas)}
+.homeHeroActions .primary:hover,.primary:hover{background:var(--color-action-hover);border-color:var(--color-action-hover)}
+.homeHeroActions .secondary,.secondary{background:transparent;border-color:#8F7463;color:var(--color-link)}
+.homeHeroActions .secondary:hover,.secondary:hover{background:#CB94781A}
+.ghost,.footer a,.quickSource a,.rulesListHeader a,.ruleInlineLink,.configChoicePrice,.homePanelHead .ghost{color:var(--color-link)}
+.homePanel,.panel,.metric,.factionCard,.referenceCard,.savedCard,.rulesSidebar,.rulesMain,.quickCard,.tutorialContent,.tutorialChapters,.ruleDialog,.detailSheet,.modal{background:var(--color-surface);border-color:var(--color-border);color:var(--color-text)}
+.panel-heading,.category-breakdown,.rulesListHeader,.tutorialLessonHead{background:var(--color-surface-muted);border-color:var(--color-border)}
+.homeUnit,.homeMore,.section,.roster-head,.roster-body,.group-header:after,.rulesEntry,.rulesListHeader,.sheetHead,.sheetFooter,.tutorialLessonFoot{border-color:var(--color-border)}
+.homeUnitSymbol,.homeQuickNumber{color:var(--color-action)}.homeUnitInfo strong,.homeUnit>b,.homeQuickLinks button,.homeQuickLinks button strong{color:var(--color-text)}
+.homeQuickLinks button:hover,.factionCard.current,.referenceCard:hover,.factionCard:hover,.savedCard:hover,.rulesEntry:hover,.rulesEntry:focus-visible{background:var(--color-surface-muted);border-color:var(--color-action)}
+.metric strong,.unit-points,.referenceSummary b,.chip b,.configFooter strong{color:var(--color-text)}
+.metric .progress,.diagramStats b,.diagramProfileTitle{background:#48382D}.metric .progress i{background:var(--color-action)}
+.unit,.chip,.configChoice,.detailOption,.detailOptionWrap,.ruleSpecTable td,.rulesEntry,.quickTabs button,.ruleSpecTable,.diagramBlock,.diagramProfile,.diagramTiming,.diagramBreakGrid>div,.diagramChecklist>div{background:var(--color-surface);border-color:var(--color-border);color:var(--color-text)}
+.rulePill,.tutorialRuleLink,.ruleUnitSpecial .ruleInlineLink,.quickCardHead button,.ruleNavButton{background:#3A2B23;border-color:#705244;color:var(--color-link)}
+.rulePill:hover,.tutorialRuleLink:hover,.quickCardHead button:hover,.ruleNavButton:hover{background:#4A352B;border-color:var(--color-action)}
+.referenceSummary,.side-note,.detailNotes,.tutorialExample{background:#382B22;border-color:#846047;color:var(--color-text-muted)}
+.configChoice.selected,.detailMeta span,.magicSelectedRow,.ruleUnitDetails>div,.tutorialQuiz,.rulesChapter.active,.tutorialChapter.active{background:#4A352B;border-color:var(--color-action);color:var(--color-text)}
+.magicGroupCard{margin:12px 0;padding:14px;border:1px solid var(--color-border);border-radius:5px;background:var(--color-surface-muted)}
+.magicGroupHead{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;align-items:start}
+.magicGroupHead strong{color:var(--color-text);font-size:13px;overflow-wrap:anywhere}.magicGroupHead span,.magicGroupEmpty{color:var(--color-text-muted);font-size:11px;line-height:1.45;overflow-wrap:anywhere}
+.magicGroupEmpty{margin:8px 0}.magicGroupSelected{margin:10px 0}.magicGroupSelected .magicSelectedRow{border-radius:4px}
+.magicGroupCard .configMagicRow{grid-template-columns:minmax(0,1fr);gap:8px}.magicGroupCard .configMagicRow select{width:100%;min-width:0}
+.magicGroupCard .configMagicRow button{grid-column:1;width:100%;min-width:0}
+.magicRulePreview{margin-top:6px}.magicGroupCard .optionRuleLinks{margin-left:0}.magicChoiceName{margin:6px 0 4px;color:var(--color-text-muted);font-size:12px;line-height:1.5;overflow-wrap:anywhere}.loreChoice{margin:0 0 7px}.loreChoice .configChoice{margin-bottom:0}
+.magicCategoryTitle{margin:14px 0 6px;padding:5px 0;border-bottom:1px solid var(--color-border);color:var(--color-action);font-size:11px;font-weight:750;letter-spacing:.03em}
+.magicGroupSelected .magicSelectedRow{gap:10px;padding:8px 9px}.magicSelectedName{display:grid;gap:2px;min-width:0;overflow-wrap:anywhere}.magicSelectedName small{color:var(--color-text-muted);font-size:11px}.magicQuantity{display:flex;align-items:center;gap:4px;flex:none}.magicQuantity b{min-width:18px;text-align:center;font-size:12px}.magicQuantity button{display:grid;place-items:center;min-width:30px;width:30px;height:30px;padding:0;font-size:18px;line-height:1}.magicQuantity button:disabled{opacity:.4}
+.unitItemNames{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.unitItemName{display:inline-flex;align-items:center;gap:5px;max-width:100%;padding:3px 7px;border:1px solid var(--color-border);border-radius:4px;color:var(--color-text-muted);font-size:11px;overflow-wrap:anywhere}.unitItemName b{color:var(--color-action)}
+.savedTools{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:17px}.savedTools button{width:auto;min-width:150px}
+.seedModal{width:min(100%,620px);max-height:min(90vh,760px);overflow:auto;padding:22px;color:var(--color-text)}.seedHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.seedHead h2{margin:5px 0 0;font:650 25px Georgia,"Noto Serif KR",serif;color:var(--color-text)}.seedTabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:20px 0 16px;padding:4px;border:1px solid var(--color-border);border-radius:5px;background:var(--color-surface-muted)}.seedTabs button{border:0;background:transparent;color:var(--color-text-muted);padding:10px;border-radius:4px;font-weight:700}.seedTabs button[aria-selected="true"]{background:var(--color-action);color:var(--color-background,#181310)}.seedHint{margin:0 0 15px;color:var(--color-text-muted);font-size:13px;line-height:1.5}.seedModal label{display:block;margin:0 0 6px;font-size:12px;font-weight:700}.seedModal textarea{width:100%;min-height:110px;padding:12px;resize:vertical;overflow-wrap:anywhere;font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}.seedModal section>button{width:100%;margin-top:10px}.seedPreview{margin-top:15px;padding:13px;border:1px solid var(--color-border);border-radius:5px;background:var(--color-surface-muted)}.seedPreview strong{display:block;overflow-wrap:anywhere}.seedPreview p{margin:5px 0 0;color:var(--color-text-muted);font-size:12px;line-height:1.5}.seedMessage{min-height:18px;margin:12px 0 0;color:var(--color-action);font-size:12px;line-height:1.4}
+@media(max-width:680px){.seedModal{padding:18px;max-height:calc(100dvh - 36px)}.savedTools button{flex:1;min-width:135px}}
+.loreChoice .optionRuleLinks{margin:5px 0 9px 28px}
+.configChoiceText strong,.detailOption b,.quickCard h4,.rulesEntryTitle,.tutorialLessonBody h4,.tutorialLead,.tutorialProgress,.tutorialChapter,.rulesChapter,.ruleText,.ruleSpecTable,.quickPoints,.diagramBlock,.diagramStats strong,.diagramTimingRow b,.diagramBreakRoll,.diagramBreakGrid strong,.diagramChecklist>div{color:var(--color-text)}
+.rulesChapter:hover{background:#3A2B23}.rulesChapter b,.rulesEntryNo,.rulesEntryArrow{color:var(--color-text-muted)}
+.ruleText blockquote{color:var(--color-text-muted)}
+.ruleText>.secondary{width:auto;margin-top:16px}
+.ruleSpecTable th,.quickTable thead th,.quickTable tbody th{background:#48382D;color:var(--color-text)}
+.ruleSpecTable th,.ruleSpecTable td,.quickTable th,.quickTable td,.quickTableScroll,.ruleTableWrap,.diagramProfile,.diagramTiming,.diagramTimingRow,.diagramStats>div{border-color:var(--color-border)}
+.quickTools{background:var(--color-canvas)}.quickTabs button{color:var(--color-text-muted)}
+.quickCardHead button,.quickPage,.quickPoints li::marker,.diagramArrow{color:var(--color-action)}
+.tutorialProgress>div{background:#48382D}.tutorialProgress i{background:var(--color-action)}
+.tutorialChapters,.tutorialDiagram,.tutorialSources{background:var(--color-surface);border-color:var(--color-border)}
+.tutorialDiagram{background:linear-gradient(160deg,#29201B,#352922)}
+.tutorialDiagramIcon,.diagramTimingNo,.diagramChecklist span{background:#4A352B;color:var(--color-action)}
+.tutorialLessonHead{background:linear-gradient(120deg,#382B22,#29201B)}
+.tutorialQuiz{border-color:var(--color-action)}.tutorialAnswer{border-color:var(--color-border);color:var(--color-brass)}
+.diagramBlock.success{background:#3B3A2C;border-color:var(--color-brass);color:var(--color-text)}
+.diagramUnit.own,.diagramLegend i.own{background:#786954}.diagramUnit.enemy,.diagramLegend i.enemy{background:#9C5B56}
+.diagramDie{background:var(--color-surface);border-color:#8A7060;color:var(--color-text);box-shadow:0 3px 0 #58473C}
+.diagramDie.chosen{background:#4A352B;border-color:var(--color-action);color:var(--color-text)}
+.diagramBreakGrid>div:first-child{border-top-color:var(--color-brass)}.diagramBreakGrid>div:nth-child(2){border-top-color:var(--color-action)}
+.tutorialDiagram figcaption,.tutorialDiagramNote,.diagramLegend,.diagramProfileTitle,.diagramStats b,.diagramTimingRow>span:last-child,.diagramBreakGrid small,.diagramChecklist strong{color:var(--color-text)}
+.tutorialExample>span,.tutorialQuiz>span,.tutorialSources>span{color:var(--color-action)}
+.ruleEnglishDetails,.ruleEnglishOriginal,.ruleParagraphLinks strong,.weaponSpecialRules strong{color:var(--color-text-muted)}
+.ruleEnglishDetails summary,.ruleText a{color:var(--color-link)}
+.ruleEnglishDetails p{background:var(--color-surface-muted);color:var(--color-text)}
+.ruleEnglishOriginal{border-color:var(--color-action)}
+.ruleParagraphLinks .ruleInlineLink,.weaponSpecialRules .ruleInlineLink,.weaponSpecialRules span{background:#3A2B23;border-color:#705244;color:var(--color-link)}
+.ruleParagraphLinks .ruleInlineLink:hover,.weaponSpecialRules .ruleInlineLink:hover{background:#4A352B}
+.diagramLegend i.objective{background:var(--color-action)}.diagramLegend i.own{background:#705648}
+input,select,textarea{background:var(--color-surface-muted);border-color:var(--color-border);color:var(--color-text);color-scheme:dark}
+input::placeholder,textarea::placeholder{color:#B6A89A}
+input:focus,select:focus,textarea:focus{border-color:var(--color-action)}
+label,.sheetBody h3,.configGroup h3,#configMagic h3,#configLore h3{color:var(--color-text)}
+.sheetFooter{background:var(--color-surface)}.sheetClose{background:var(--color-surface-muted);border-color:var(--color-border);color:var(--color-text)}
+.ruleBackdrop,.sheetBackdrop,.modal-backdrop{background:#100D0BC9}
+.danger,.metric.over strong{color:var(--color-danger)}.metric.over .progress i{background:var(--color-danger)}
+.status{color:var(--color-brass)}
+@media print{.bottomNav,.sectionNav,#homeScreen{display:none!important}.top,.shell{margin-left:0}.shell{max-width:none;padding:14px}body,.shell,.top,.panel,.metric,.unit,.category-breakdown{background:#fff!important;color:#111!important}.shell *,.top *{color:#111!important;background-image:none!important;box-shadow:none!important}.panel,.metric,.unit{border-color:#bbb!important}}

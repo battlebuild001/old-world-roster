@@ -1,0 +1,10 @@
+{
+  "source": "Old World Builder",
+  "repository": "https://github.com/nthiebes/old-world-builder",
+  "commit": "de3b6c3b585d348eef7e219ac0964ee2791e0963",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "retrieved": "2026-10-10",
+  "files": 41,
+  "changes": "Copied JSON datasets; application interface and calculations are separate adaptations."
+}
