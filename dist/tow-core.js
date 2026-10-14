@@ -9,13 +9,14 @@ window.BTHTOWCore = (() => {
   const PREFIX = 'bth_tow';
   const CURRENT_KEY = `${PREFIX}_current_v1`;
   const LEGACY_KEY = 'old-world-bretonnia-roster-v1';
-  const CATEGORIES = ['characters','core','special','rare'];
+  const CATEGORIES = ['characters','core','special','rare','mercenaries'];
+  const MATCHED_MODES = ['open-war','combined-arms','grand-melee'];
   const whole = (value,min,max) => Math.max(min,Math.min(max,Math.trunc(Number(value) || 0)));
   const armyKey = faction => `${PREFIX}_${faction}_army_v1`;
   const savedKey = faction => `${PREFIX}_${faction}_saved_v1`;
   const read = key => { try { return localStorage.getItem(key); } catch { return null; } };
   const write = (key,value) => { try { localStorage.setItem(key,value); return true; } catch { return false; } };
-  const fresh = (faction='kingdom-of-bretonnia') => ({version:2,faction,composition:faction,name:faction==='kingdom-of-bretonnia'?'새 브레토니아 군세':'새 군세',limit:2000,notes:'',units:[]});
+  const fresh = (faction='kingdom-of-bretonnia') => ({version:2,faction,composition:faction,matchedMode:'open-war',name:faction==='kingdom-of-bretonnia'?'새 브레토니아 군세':'새 군세',limit:2000,notes:'',units:[]});
   function normalizeUnit(unit) {
     const rawCategory = String(unit.category || 'core').toLowerCase();
     return {
@@ -25,6 +26,7 @@ window.BTHTOWCore = (() => {
       count:whole(unit.count,1,999), points:whole(unit.points,0,999999),
       label:String(unit.label || '').slice(0,80), options:String(unit.options || '').slice(0,1000),
       sourceId:String(unit.sourceId || ''), sourceFaction:String(unit.sourceFaction || ''),
+      sourceComposition:String(unit.sourceComposition || ''), isDetachment:Boolean(unit.isDetachment),
       basePoints:whole(unit.basePoints || 0,0,999999),
       selections:unit.selections && typeof unit.selections === 'object' && !Array.isArray(unit.selections) ? unit.selections : {},
       magicItems:Array.isArray(unit.magicItems) ? unit.magicItems.slice(0,30).map(item=>({group:String(item.group||''),name:String(item.name||''),points:whole(item.points,0,99999),type:String(item.type||''),slot:whole(item.slot,0,99)})) : [],
@@ -35,7 +37,7 @@ window.BTHTOWCore = (() => {
   function normalize(raw) {
     if (!raw || typeof raw !== 'object' || !Array.isArray(raw.units)) throw Error('올바른 로스터 파일이 아닙니다.');
     const faction = String(raw.faction || 'kingdom-of-bretonnia');
-    return {version:2,faction,composition:String(raw.composition || faction),name:String(raw.name || '새 군세').slice(0,80),limit:whole(raw.limit || 2000,1,999999),notes:String(raw.notes || '').slice(0,2000),units:raw.units.slice(0,1000).map(normalizeUnit)};
+    return {version:2,faction,composition:String(raw.composition || faction),matchedMode:MATCHED_MODES.includes(raw.matchedMode)?raw.matchedMode:'open-war',name:String(raw.name || '새 군세').slice(0,80),limit:whole(raw.limit || 2000,1,999999),notes:String(raw.notes || '').slice(0,2000),units:raw.units.slice(0,1000).map(normalizeUnit)};
   }
   function loadFaction(faction) {
     try { const raw = read(armyKey(faction)); if (raw) return normalize(JSON.parse(raw)); } catch {}
@@ -81,7 +83,7 @@ window.BTHTOWCore = (() => {
   }
   function unitsForComposition(data,composition) {
     const result=[];
-    for (const originalCategory of CATEGORIES) for (const unit of data?.[originalCategory] || []) {
+    for (const originalCategory of CATEGORIES.slice(0,4)) for (const unit of data?.[originalCategory] || []) {
       const map=unit.armyComposition;
       if (map && Object.keys(map).length && !map[composition]) continue;
       const category=map?.[composition]?.category || originalCategory;
