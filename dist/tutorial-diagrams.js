@@ -1,6 +1,8 @@
 (()=>{
   'use strict';
-  const t=(mode,ko,en)=>mode==='en'?en:mode==='both'?ko+' / '+en:ko;
+  const statNames={'이동력':['Movement','무브먼트'],'지도력':['Leadership','리더십']};
+  const statTerms=value=>String(value).replace(/이동력|지도력/g,term=>window.TOWI18n?.phonetic(statNames[term][0])||statNames[term][1]);
+  const t=(mode,ko,en)=>mode==='en'?en:mode==='both'?statTerms(ko)+' / '+en:statTerms(ko);
   const figure=(mode,title,visual,note)=>'<figure class="tutorialDiagram"><figcaption><span class="tutorialDiagramIcon" aria-hidden="true">✦</span>'+t(mode,title[0],title[1])+'</figcaption>'+visual+'<p class="tutorialDiagramNote">'+t(mode,note[0],note[1])+'</p></figure>';
   const block=(mode,ko,en,kind='')=>'<div class="diagramBlock '+kind+'">'+t(mode,ko,en)+'</div>';
   const arrow='<span class="diagramArrow" aria-hidden="true">→</span>';

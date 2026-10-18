@@ -60,7 +60,10 @@
   ];
   const $ = id => document.getElementById(id);
   const lang = () => window.TOWI18n?.language || 'ko';
-  const label = (ko,en) => lang()==='both' ? `${ko} / ${en}` : lang()==='en' ? en : ko;
+  // Replace characteristic names, while retaining readable Korean rule instructions.
+  const statNames={'이동력':['Movement','무브먼트'],'주도권':['Initiative','이니셔티브'],'통솔력':['Leadership','리더십']};
+  const statTerms = value => String(value).replace(/이동력|주도권|통솔력/g,term=>window.TOWI18n?.phonetic(statNames[term][0])||statNames[term][1]);
+  const label = (ko,en) => lang()==='both' ? `${statTerms(ko)} / ${en}` : lang()==='en' ? en : statTerms(ko);
   const esc = value => String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const table = (rows,axis) => `<div class="quickTableScroll" role="region" tabindex="0" aria-label="${esc(axis)}"><table class="quickTable"><thead><tr><th scope="col">${esc(axis)}</th>${Array.from({length:10},(_,i)=>`<th scope="col">${i+1}</th>`).join('')}</tr></thead><tbody>${rows.map((row,i)=>`<tr><th scope="row">${i+1}</th>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
   let active = 'all';
@@ -69,12 +72,13 @@
     $('quickSheetTitle').textContent=label('올드 월드 퀵시트','The Old World quick sheet');
     $('quickSheetIntro').textContent=label('전투 중 자주 쓰는 순서와 판정을 빠르게 확인하세요. 항목의 원문 버튼으로 세부 규칙을 볼 수 있습니다.','Look up common phase sequences and rolls during play. Open each source for the full rule.');
     $('quickSearch').placeholder=label('규칙 검색','Search rules');
-    document.querySelector('[data-screen="quicksheet"]').textContent=label('퀵시트','Quick');
+    document.querySelector('#sectionNav button[data-screen="quicksheet"]').textContent=label('퀵시트','Quick');
     const tabs=[['all','전체','All'],...sections.map(({id,ko,en})=>[id,ko,en]),['charts','판정표','Charts']];
     $('quickTabs').innerHTML=tabs.map(([id,ko,en])=>`<button type="button" data-quick-tab="${id}" class="${active===id?'active':''}" aria-pressed="${active===id}">${esc(label(ko,en))}</button>`).join('');
     const query=$('quickSearch').value.trim().toLocaleLowerCase();
-    let cards=sections.filter(s=>(active==='all'||active===s.id) && (!query||[s.ko,s.en,...s.items.flat()].join(' ').toLocaleLowerCase().includes(query))).map(s=>`<article class="quickCard"><div class="quickCardHead"><div><span class="quickPage">${s.page}</span><h3>${esc(label(s.ko,s.en))}</h3></div><button type="button" data-quick-source="${s.id}">${esc(label('원문 보기 ↗','Full rule ↗'))}</button></div><ol class="quickPoints">${s.items.map(([ko,en])=>`<li>${esc(label(ko,en))}</li>`).join('')}</ol></article>`).join('');
-    const showCharts=(active==='all'||active==='charts') && (!query||'판정표 charts 명중 피해 wound hit 무기 숙련 weapon skill 힘 강인함 strength toughness ws'.includes(query)||query.includes('표'));
+    let cards=sections.filter(s=>{const text=[s.ko,s.en,...s.items.flat()].join(' ');return (active==='all'||active===s.id)&&(!query||(text+' '+statTerms(text)).toLocaleLowerCase().includes(query));}).map(s=>`<article class="quickCard"><div class="quickCardHead"><div><span class="quickPage">${s.page}</span><h3>${esc(label(s.ko,s.en))}</h3></div><button type="button" data-quick-source="${s.id}">${esc(label('원문 보기 ↗','Full rule ↗'))}</button></div><ol class="quickPoints">${s.items.map(([ko,en])=>`<li>${esc(label(ko,en))}</li>`).join('')}</ol></article>`).join('');
+    const chartTerms=['Weapon Skill','Strength','Toughness'].map(term=>window.TOWI18n?.phonetic(term)||term).join(' ');
+    const showCharts=(active==='all'||active==='charts') && (!query||('판정표 charts 명중 피해 wound hit 무기 숙련 weapon skill 힘 강인함 strength toughness ws '+chartTerms).toLowerCase().includes(query)||query.includes('표'));
     if(showCharts)cards+=`<article class="quickCard"><div class="quickCardHead"><div><span class="quickPage">${label('룰북 p. 344','Rulebook p. 344')}</span><h3>${esc(label('핵심 판정표','Core roll charts'))}</h3></div><button type="button" data-quick-source="charts">${esc(label('원문 보기 ↗','Full rule ↗'))}</button></div><h4>${esc(label('근접 명중: 공격 WS → 방어 WS','Melee hit: attacker WS → defender WS'))}</h4>${table(hitRows,'WS')}<h4>${esc(label('피해: 공격 S → 방어 T','Wound: attacking S → defending T'))}</h4>${table(woundRows,'S / T')}</article>`;
     $('quickSheetContent').innerHTML=cards||`<p class="quickEmpty">${esc(label('검색 결과가 없습니다.','No matching rules.'))}</p>`;
     $('quickSheetSource').innerHTML=`${esc(label('요약 출처: 온라인 룰 색인 Quick Reference (룰북 p. 344). 문구는 간추려 옮겼습니다. 정확한 적용 조건은 원문과 최신 정오표를 확인하세요.','Summary source: Online Rules Index Quick Reference (Rulebook p. 344). Wording is condensed; check the full rule and current errata for exact conditions.'))} <a href="https://tow.whfb.app/quick-reference" target="_blank" rel="noopener">${esc(label('원본 퀵 레퍼런스 ↗','Original quick reference ↗'))}</a> · <a href="https://tow.whfb.app/errata" target="_blank" rel="noopener">${esc(label('정오표 ↗','Errata ↗'))}</a>`;

@@ -10,13 +10,14 @@
   };
   let catalog=null,entries=[],pathIndex=new Map(),chapter='overview-of-the-game',query='',shown=60;
   window.TOWRulesReader={neighbors(path){const at=pathIndex.get(path);if(at===undefined)return null;const current=entries[at];return {previous:entries[at-1]||null,next:entries[at+1]||null,chapter:current.section,position:current.position,count:current.section.items.length};}};
-  function title(item){return lang()==='en'?item.en:(item.ko||curated[item.en]||item.en);}
+  function koreanTitle(item){return window.TOWPhonetic?.has(item.en)?(window.TOWI18n?.nameLabel(item.en,'ko')||item.en):(item.ko||curated[item.en]||item.en);}
+  function title(item){return lang()==='en'?item.en:koreanTitle(item);}
   function chapterTitle(section){return tr(section.ko,section.en);}
   function refresh(){
     $('rulesTitle').textContent=tr('전체 룰 설명집','Complete rules library');
     $('rulesIntro').textContent=tr('장별 목차를 탐색하거나 규칙 이름을 검색하세요. 항목을 누르면 앱 안에서 본문을 읽을 수 있습니다.','Browse by chapter or search rule titles. Tap an entry to read the full article in the app.');
     $('rulesSearch').placeholder=tr('규칙 이름 검색','Search rule titles');
-    document.querySelector('[data-screen="rules"]').textContent=tr('룰북','Rules');
+    document.querySelector('#sectionNav button[data-screen="rules"]').textContent=tr('룰북','Rules');
     $('rulesAttribution').innerHTML=`${esc(tr('목차 출처: The Old World Online Rules Index (2026-10-11 확인). 본문은 원문 사이트에서 열 때 불러옵니다. 원본의 최신 정오표를 함께 확인하세요.','Contents: The Old World Online Rules Index (checked 2026-10-11). Article text loads from the source when opened. Check current errata as well.'))} <a href="https://tow.whfb.app/" target="_blank" rel="noopener">${esc(tr('원문 색인 ↗','Source index ↗'))}</a> · <a href="https://tow.whfb.app/errata" target="_blank" rel="noopener">${esc(tr('정오표 ↗','Errata ↗'))}</a>`;
     if(!catalog)return;
     const selected=catalog.chapters.find(s=>s.id===chapter)||catalog.chapters[0];
@@ -24,13 +25,13 @@
     $('rulesChapters').innerHTML=catalog.chapters.map(s=>`<button type="button" class="rulesChapter ${s.id===chapter?'active':''}" data-rules-chapter="${esc(s.id)}" aria-current="${s.id===chapter?'true':'false'}"><span>${esc(chapterTitle(s))}</span><b>${s.items.length}</b></button>`).join('');
     const searching=!!query.trim(),needle=query.trim().toLocaleLowerCase();
     const candidates=searching?catalog.chapters.flatMap(s=>s.items.map(item=>({...item,section:s}))):selected.items.map(item=>({...item,section:selected}));
-    const matches=searching?candidates.filter(item=>(item.en+' '+(item.ko||'')+' '+item.section.ko+' '+item.section.en).toLocaleLowerCase().includes(needle)):candidates;
+    const matches=searching?candidates.filter(item=>(item.en+' '+(item.ko||'')+' '+koreanTitle(item)+' '+item.section.ko+' '+item.section.en).toLocaleLowerCase().includes(needle)):candidates;
     $('rulesKicker').textContent=searching?tr('전체 장 검색','Search all chapters'):tr('규칙 목차','Contents');
     $('rulesCurrentTitle').textContent=searching?tr('검색 결과','Search results'):chapterTitle(selected);
     $('rulesCount').textContent=tr(`${matches.length}개 항목`,`${matches.length} entries`);
     $('rulesChapterSource').href=`https://tow.whfb.app${searching?'/':`/${selected.id}`}`;
     $('rulesChapterSource').textContent=tr('원문 목차 ↗','Source chapter ↗');
-    $('rulesList').innerHTML=matches.slice(0,shown).map((item,index)=>`<button type="button" class="rulesEntry" data-rules-path="${esc(item.path)}" data-rules-title="${esc(item.en)}" data-rules-ko="${esc(item.ko||'')}"><span class="rulesEntryNo">${index+1}</span><span class="rulesEntryTitle">${esc(title(item))}${lang()!=='en'&&item.ko&&item.ko!==item.en?`<small>${esc(item.en)}</small>`:''}${searching?`<em>${esc(chapterTitle(item.section))}</em>`:''}</span><span class="rulesEntryArrow" aria-hidden="true">›</span></button>`).join('')||`<p class="rulesEmpty">${esc(tr('일치하는 규칙이 없습니다.','No matching rules.'))}</p>`;
+    $('rulesList').innerHTML=matches.slice(0,shown).map((item,index)=>`<button type="button" class="rulesEntry" data-rules-path="${esc(item.path)}" data-rules-title="${esc(item.en)}" data-rules-ko="${esc(koreanTitle(item))}"><span class="rulesEntryNo">${index+1}</span><span class="rulesEntryTitle">${esc(title(item))}${lang()!=='en'&&koreanTitle(item)!==item.en?`<small>${esc(item.en)}</small>`:''}${searching?`<em>${esc(chapterTitle(item.section))}</em>`:''}</span><span class="rulesEntryArrow" aria-hidden="true">›</span></button>`).join('')||`<p class="rulesEmpty">${esc(tr('일치하는 규칙이 없습니다.','No matching rules.'))}</p>`;
     $('rulesMore').classList.toggle('hidden',shown>=matches.length);
     $('rulesMore').textContent=tr(`더 보기 · ${matches.length-shown}개 남음`,`Show more · ${matches.length-shown} remaining`);
   }

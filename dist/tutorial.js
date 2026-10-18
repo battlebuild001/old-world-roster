@@ -7,8 +7,8 @@
       ['게임의 종료·승리 조건은 시나리오에 따릅니다. 게임 중에도 목표를 확인하세요.','The scenario determines the end and victory conditions. Recheck your objective during play.']
     ],example:['처음에는 유닛을 적게 쓰고 각 턴의 목표를 소리 내어 말해 보세요.','Use fewer units in your first game and state your objective each turn.'],quiz:['시작 전에 확인할 승리 관련 정보는?','What victory information must you check before play?','선택한 시나리오의 승리 조건과 종료 조건입니다.','The chosen scenario’s victory and end conditions.'],refs:[['Victory Points','/warhammer-battles/victory-points-warhammer-battles'],['Set up the Battlefield','/overview-of-the-game/set-up-the-battlefield']]},
     {title:['모델의 능력치','Read a model profile'],intro:['유닛 카드의 숫자가 이동·공격·방어·사기 판정의 출발점입니다.','A unit profile provides the starting numbers for movement, attacks, defence and morale.'],steps:[
-      ['M은 이동, WS는 근접 전투 기술, BS는 사격 기술, S는 힘, T는 강인함입니다.','M is Movement, WS Weapon Skill, BS Ballistic Skill, S Strength and T Toughness.'],
-      ['W는 상처, I는 주도권, A는 공격 횟수, Ld는 지도력입니다. 장비와 특수 규칙이 결과를 바꿀 수 있습니다.','W is Wounds, I Initiative, A Attacks and Ld Leadership. Equipment and special rules can modify results.'],
+      ['M은 이동력, WS는 웨폰 스킬, BS는 발리스틱 스킬, S는 스트렝스, T는 터프니스입니다.','M is Movement, WS Weapon Skill, BS Ballistic Skill, S Strength and T Toughness.'],
+      ['W는 운즈, I는 주도권, A는 어택스, Ld는 지도력입니다. 장비와 특수 규칙이 결과를 바꿀 수 있습니다.','W is Wounds, I Initiative, A Attacks and Ld Leadership. Equipment and special rules can modify results.'],
       ['능력치 판정은 보통 1D6을 능력치 이하로, 지도력 판정은 2D6 합을 Ld 이하로 굴립니다. 자연 눈 예외도 확인하세요.','A characteristic test generally needs 1D6 at or below the characteristic; a Leadership test needs 2D6 at or below Ld. Check natural roll exceptions.']
     ],example:['T4 판정에서 3은 성공, 5는 실패입니다. Ld8 판정에서 3+4=7은 성공입니다.','For T4, 3 succeeds and 5 fails. For Ld8, 3+4=7 succeeds.'],quiz:['Ld8 판정에서 4와 5가 나왔다면?','What if a Ld8 test rolls 4 and 5?','합계 9이므로 실패합니다.','The total is 9, so it fails.'],refs:[['Model Profiles','/model-profiles'],['Characteristic Tests','/model-profiles/characteristic-tests'],['Leadership Tests','/model-profiles/leadership-tests']]},
     {title:['방향과 시야','Facing and line of sight'],intro:['어디에 놓고 어느 쪽을 보게 하는지가 실제 규칙입니다.','Position and facing have rules consequences.'],steps:[
@@ -56,8 +56,10 @@
   let done=[];try{done=JSON.parse(localStorage.getItem('bth-tow-tutorial-done')||'[]').filter(Number.isInteger);}catch{}
   let current=0,answerOpen=false;
   const mode=()=>window.TOWI18n?.language||'ko';
-  const label=pair=>mode()==='en'?pair[1]:mode()==='both'?pair[0]+' / '+pair[1]:pair[0];
-  const line=(pair,cls='')=>mode()==='both'?'<p class="'+cls+'">'+pair[0]+'</p><p class="tutorialEnglish '+cls+'" lang="en">'+pair[1]+'</p>':'<p class="'+cls+'">'+label(pair)+'</p>';
+  const statNames={'이동력':['Movement','무브먼트'],'웨폰 스킬':['Weapon Skill','웨폰 스킬'],'발리스틱 스킬':['Ballistic Skill','발리스틱 스킬'],'스트렝스':['Strength','스트렝스'],'터프니스':['Toughness','터프니스'],'운즈':['Wounds','운즈'],'주도권':['Initiative','이니셔티브'],'어택스':['Attacks','어택스'],'지도력':['Leadership','리더십']};
+  const statTerms=value=>String(value).replace(/이동력|웨폰 스킬|발리스틱 스킬|스트렝스|터프니스|운즈|주도권|어택스|지도력/g,term=>window.TOWI18n?.phonetic(statNames[term][0])||statNames[term][1]);
+  const label=pair=>mode()==='en'?pair[1]:mode()==='both'?statTerms(pair[0])+' / '+pair[1]:statTerms(pair[0]);
+  const line=(pair,cls='')=>mode()==='both'?'<p class="'+cls+'">'+statTerms(pair[0])+'</p><p class="tutorialEnglish '+cls+'" lang="en">'+pair[1]+'</p>':'<p class="'+cls+'">'+label(pair)+'</p>';
   function render(){
     const en=mode()==='en',l=lessons[current];
     $('tutorialTitle').textContent=label(['처음 배우는 올드 월드','Learn The Old World']);
