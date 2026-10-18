@@ -28,7 +28,10 @@ const {fresh,normalize,normalizeUnit,unitsForComposition} = CORE;
 let state = CORE.loadCurrent();
 let metadata = null, armyData = null, catalog = new Map(), editing = null, manualPoints = false;
 const requestedScreen = new URLSearchParams(location.search).get('screen');
-let screen = ['home','factions','reference','forge','roster','rules','quicksheet','saved','play'].includes(requestedScreen) ? requestedScreen : 'home';
+const APP_SCREENS = ['home','factions','reference','forge','roster','rules','quicksheet','tutorial','saved','play'];
+let screen = APP_SCREENS.includes(requestedScreen) ? requestedScreen : 'home';
+const APP_NAV_KEY = 'towNavigation';
+let navigationReady = false, navigatingHistory = false;
 let rulesIndex = {}, ruleAliases = {additional:{},synonyms:{}}, detailUnit = null, ruleIndexPromise = null;
 let ruleRequestId = 0;
 let currentRulePath = null, currentRuleInfo = null;
@@ -330,7 +333,60 @@ function renderCatalog() {
   $('preset').replaceChildren(...choices);
   renderReference();
 }
+function appHistoryEntry(value=history.state) {
+  const entry=value?.[APP_NAV_KEY];
+  return entry?.version===1&&entry.scope===location.origin+location.pathname&&APP_SCREENS.includes(entry.screen)?entry:null;
+}
+function historyStateFor(next,root=false,scrollY=0) {
+  return {...history.state,[APP_NAV_KEY]:{version:1,scope:location.origin+location.pathname,screen:next,root,scrollY}};
+}
+function appScrollY() {
+  return document.body.style.position==='fixed'?Math.max(0,-parseFloat(document.body.style.top)||0):window.scrollY;
+}
+function ensureAppBackEntry() {
+  if(navigationReady&&appHistoryEntry()?.root)history.pushState(historyStateFor(screen,false,appScrollY()),'');
+}
+function dismissTopAppLayer() {
+  const dialog=window.TOWUIAccessibility?.getActiveDialog();
+  if(dialog){
+    const backdrop=dialog.closest('.modal-backdrop, .sheetBackdrop, .ruleBackdrop');
+    const closeIds={ruleBackdrop:'closeRule',configBackdrop:'closeConfig',detailBackdrop:'closeDetail',editBackdrop:'cancelEdit',seedBackdrop:'seedClose',installBackdrop:'closeInstall'};
+    const button=$(closeIds[backdrop?.id]);
+    if(button){button.click();return true;}
+  }
+  if(document.querySelector('.top-actions')?.classList.contains('open')){closeMenu();return true;}
+  return false;
+}
+function initializeAppNavigation() {
+  const entry=appHistoryEntry();
+  if(entry)screen=entry.screen;
+  else history.replaceState(historyStateFor('home',true),'');
+  // Keep an app entry beneath the initial screen, including direct links.
+  // Dialogs use the current entry so X/Cancel never leaves stale dialog history.
+  if(!entry||entry.root)history.pushState(historyStateFor(screen),'');
+  history.scrollRestoration='manual';
+  navigationReady=true;
+  window.TOWAppNavigation={ensureBackEntry:ensureAppBackEntry};
+  addEventListener('popstate',event=>{
+    const current=screen,scrollY=appScrollY();
+    if(dismissTopAppLayer()){
+      history.pushState(historyStateFor(current,false,scrollY),'');
+      return;
+    }
+    const destination=appHistoryEntry(event.state);
+    if(!destination)return;
+    navigatingHistory=true;
+    try{showScreen(destination.screen);}finally{navigatingHistory=false;}
+    window.scrollTo(0,Math.max(0,Number(destination.scrollY)||0));
+  });
+}
 function showScreen(next) {
+  if(!APP_SCREENS.includes(next))return;
+  if(navigationReady&&!navigatingHistory&&next!==screen){
+    const current=appHistoryEntry();
+    if(current)history.replaceState(historyStateFor(screen,current.root,appScrollY()),'');
+    history.pushState(historyStateFor(next),'');
+  }
   screen = next;
   document.body.dataset.screen=next;
   renderScreenChrome();
@@ -974,8 +1030,8 @@ $('seedLoadBtn').addEventListener('click',async()=>{if(!inspectedSeed)return;con
 document.addEventListener('tow-language-change',updateSeedLanguage);
 
 function closeMenu(){document.querySelector('.top-actions')?.classList.remove('open');$('menuBtn').setAttribute('aria-expanded','false');}
-$('menuBtn').addEventListener('click',()=>{const open=document.querySelector('.top-actions').classList.toggle('open');$('menuBtn').setAttribute('aria-expanded',String(open));});
+$('menuBtn').addEventListener('click',()=>{const open=document.querySelector('.top-actions').classList.toggle('open');$('menuBtn').setAttribute('aria-expanded',String(open));if(open)ensureAppBackEntry();});
 $('actionItems').addEventListener('click',event=>{if(event.target.closest('button'))closeMenu();});
 document.addEventListener('click',event=>{if(!event.target.closest('.top-actions'))closeMenu();});
-updateSeedLanguage();render(); showScreen(screen); loadMetadata(); loadRuleIndex();loadPlayWeaponProfiles();
+initializeAppNavigation();updateSeedLanguage();render(); showScreen(screen); loadMetadata(); loadRuleIndex();loadPlayWeaponProfiles();
 document.addEventListener('tow-language-change',()=>{if(armyData)renderCatalog();render();});

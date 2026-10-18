@@ -141,7 +141,10 @@
       if (!openSet.has(dialog)) records.delete(dialog);
     }
     let changedScreen = false;
-    if (top) lockScroll();
+    if (top) {
+      window.TOWAppNavigation?.ensureBackEntry();
+      lockScroll();
+    }
     else changedScreen = unlockScroll();
     if (closingTop) restoreFocus(changedScreen ? [] : closingTop.returnTo, top);
     else if (top && top !== previousTop && !top.contains(document.activeElement)) focusDialog(top);
