@@ -14,6 +14,7 @@ window.BTHTOWCore = (() => {
   const whole = (value,min,max) => Math.max(min,Math.min(max,Math.trunc(Number(value) || 0)));
   const armyKey = faction => `${PREFIX}_${faction}_army_v1`;
   const savedKey = faction => `${PREFIX}_${faction}_saved_v1`;
+  const playKey = faction => `${PREFIX}_${faction}_play_v1`;
   const read = key => { try { return localStorage.getItem(key); } catch { return null; } };
   const write = (key,value) => { try { localStorage.setItem(key,value); return true; } catch { return false; } };
   const fresh = (faction='kingdom-of-bretonnia') => ({version:2,faction,composition:faction,matchedMode:'open-war',name:faction==='kingdom-of-bretonnia'?'새 브레토니아 군세':'새 군세',limit:2000,notes:'',units:[]});
@@ -27,6 +28,7 @@ window.BTHTOWCore = (() => {
       label:String(unit.label || '').slice(0,80), options:String(unit.options || '').slice(0,1000),
       sourceId:String(unit.sourceId || ''), sourceFaction:String(unit.sourceFaction || ''),
       sourceComposition:String(unit.sourceComposition || ''), isDetachment:Boolean(unit.isDetachment),
+      manualStats:Object.fromEntries(['M','WS','BS','S','T','W','I','A','Ld'].filter(key=>unit.manualStats&&String(unit.manualStats[key]||'').trim()).map(key=>[key,String(unit.manualStats[key]).trim().slice(0,16)])),
       basePoints:whole(unit.basePoints || 0,0,999999),
       selections:unit.selections && typeof unit.selections === 'object' && !Array.isArray(unit.selections) ? unit.selections : {},
       magicItems:Array.isArray(unit.magicItems) ? unit.magicItems.slice(0,30).map(item=>({group:String(item.group||''),name:String(item.name||''),points:whole(item.points,0,99999),type:String(item.type||''),slot:whole(item.slot,0,99)})) : [],
@@ -74,6 +76,20 @@ window.BTHTOWCore = (() => {
     list.splice(index,1);
     return write(savedKey(faction),JSON.stringify(list));
   }
+  function loadPlayRoster(faction) {
+    try {
+      const value=JSON.parse(read(playKey(faction))||'null');
+      if(!value?.army||value.army.faction!==faction)return null;
+      return {army:normalize(value.army),confirmedAt:String(value.confirmedAt||'')};
+    } catch { return null; }
+  }
+  function confirmPlayRoster(army) {
+    const snapshot={army:normalize(army),confirmedAt:new Date().toISOString()};
+    return write(playKey(army.faction),JSON.stringify(snapshot));
+  }
+  function playRosterChanged(army,snapshot) {
+    return !snapshot||JSON.stringify(normalize(army))!==JSON.stringify(normalize(snapshot.army));
+  }
   function exportEnvelope(army) { return {format:FORMAT,game:GAME_ID,faction:army.faction,source:{name:'Old World Builder',commit:DATA_COMMIT},army:normalize(army)}; }
   function importEnvelope(value) {
     if (value?.format === FORMAT && value.game === GAME_ID) return normalize({...value.army,faction:value.faction});
@@ -93,5 +109,5 @@ window.BTHTOWCore = (() => {
   }
   const totalPoints = army => army.units.reduce((sum,unit) => sum + unit.points,0);
   const validate = army => ({errors:totalPoints(army)>army.limit ? [`포인트 초과: ${totalPoints(army)} / ${army.limit}`] : [],warnings:['군세 편성 제한과 일부 조건부 옵션은 자동 검사하지 않습니다.']});
-  return Object.freeze({GAME_ID,FORMAT,DATA_COMMIT,CATEGORIES,fresh,normalize,normalizeUnit,loadCurrent,loadFaction,saveArmy,listSaved,saveSnapshot,deleteSnapshot,exportEnvelope,importEnvelope,unitsForComposition,totalPoints,validate});
+  return Object.freeze({GAME_ID,FORMAT,DATA_COMMIT,CATEGORIES,fresh,normalize,normalizeUnit,loadCurrent,loadFaction,saveArmy,listSaved,saveSnapshot,deleteSnapshot,loadPlayRoster,confirmPlayRoster,playRosterChanged,exportEnvelope,importEnvelope,unitsForComposition,totalPoints,validate});
 })();

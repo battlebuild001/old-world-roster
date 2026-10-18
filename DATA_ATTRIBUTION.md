@@ -5,3 +5,5 @@ Army, unit, magic item, and spell JSON datasets in `dist/data/` are copied from 
 The data files are copied without modification. This application adds its own presentation and basic point calculation. This is an unofficial fan tool and is not endorsed by Games Workshop.
 
 `dist/data/src/components/rules-index/rule-aliases.json` extracts rule aliases and additional links from Old World Builder's `src/components/rules-index/rules-map.js` under the same CC BY 4.0 license. They let combined and plural weapon names resolve to the same rule pages as the original builder.
+
+`dist/data/play-weapon-profiles.json` contains factual weapon characteristics and source links from [The Old World Online Rules Index](https://tow.whfb.app/), retrieved on 2026-10-18. Conditional summaries and the profile display logic are authored for this application. The original linked rules remain the reference for equipment conditions.

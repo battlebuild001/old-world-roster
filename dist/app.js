@@ -33,6 +33,7 @@ let rulesIndex = {}, ruleAliases = {additional:{},synonyms:{}}, detailUnit = nul
 let ruleRequestId = 0;
 let currentRulePath = null, currentRuleInfo = null;
 let configured = null, magicData = null;
+let playWeaponProfiles=null;
 const armyCache = new Map();
 let mercenaryPool = [];
 
@@ -68,7 +69,9 @@ function linkedRuleNames(value,includeUnknown=false) {return splitRuleNames(valu
 function optionRuleLinks(value,label='규칙') {const names=linkedRuleNames(value,label==='무장 스펙');if(!names.length)return null;const links=node('div','','optionRuleLinks');for(const name of names){const button=ruleChip(name),language=window.TOWI18n?.language||'ko',prefix=language==='en'?(label==='무장 스펙'?'Weapon profile':'Rule'):language==='both'?(label==='무장 스펙'?'무장 스펙 / Weapon profile':'규칙 / Rule'):label;button.textContent=`${prefix} · ${window.TOWI18n?.ruleLabel(name)||name}`;links.append(button);}return links;}
 function sourceUnit(id,faction=state.faction) {const data=armyCache.get(faction)|| (faction===state.faction?armyData:null);for(const category of CATEGORY_KEYS) {const found=data?.[category]?.find(unit=>unit.id===id);if(found)return {...found,category:unitCategory(found,data,category),_sourceFaction:faction,_optionComposition:faction===state.faction?state.composition:faction};} return null; }
 function unitCategory(unit,data,fallback){if(fallback==='mercenaries')return fallback;return unit.armyComposition?.[state.composition]?.category||fallback;}
-function configuredSource(unit) {if(!unit.sourceId)return null;const source=sourceUnit(unit.sourceId,unit.sourceFaction||state.faction);return source?{...source,category:unit.category,_optionComposition:unit.sourceComposition||source._optionComposition}:null;}
+function rosterSource(unit,army=state) {if(!unit.sourceId)return null;const faction=unit.sourceFaction||army.faction,source=sourceUnit(unit.sourceId,faction);return source?{...source,category:unit.category,_optionComposition:unit.sourceComposition||(faction===army.faction?army.composition:faction)}:null;}
+function configuredSource(unit) {return rosterSource(unit,state);}
+function playText(ko,en){const language=window.TOWI18n?.language||'ko';return language==='en'?en:language==='both'?`${ko} / ${en}`:ko;}
 function ruleChip(value) {const button=node('button',window.TOWI18n?.ruleLabel(value)||value,'rulePill');button.type='button';button.dataset.rule=value;button.dataset.noI18n='';button.title=ruleInfo(value)?(window.TOWI18n?.language==='en'?'Open source rule':'규칙 원문 보기'):(window.TOWI18n?.language==='en'?'No source index link':'규칙 색인 링크 없음');return button;}
 function renderModelProfile(unit,targetId) {
   const target=$(targetId),info=ruleInfo(labelOf(unit));target.replaceChildren();
@@ -82,8 +85,8 @@ function renderModelProfile(unit,targetId) {
 
 function armyName() { return metadata?.armies?.find(army => army.id === state.faction)?.name_en || slugTitle(state.faction); }
 function compositionName() { return slugTitle(state.composition); }
-function matchedModeName(){const mode=window.TOWMatchedPlay.MODES[state.matchedMode]||window.TOWMatchedPlay.MODES['open-war'];return `${mode.ko} · ${mode.en}`;}
-function matchedFindings(){return window.TOWMatchedPlay.check(state,configuredSource,(source,unit)=>OPT.describe(source,unit.selections,unit.magicItems,unit.sourceComposition||source._optionComposition||state.composition));}
+function matchedModeName(army=state){const mode=window.TOWMatchedPlay.MODES[army.matchedMode]||window.TOWMatchedPlay.MODES['open-war'];return `${mode.ko} · ${mode.en}`;}
+function matchedFindings(army=state){return window.TOWMatchedPlay.check(army,unit=>rosterSource(unit,army),(source,unit)=>OPT.describe(source,unit.selections,unit.magicItems,unit.sourceComposition||source._optionComposition||army.composition));}
 function renderMatchedStatus(){
   const panel=$('matchedStatus'),mode=window.TOWMatchedPlay.MODES[state.matchedMode]||window.TOWMatchedPlay.MODES['open-war'],findings=matchedFindings();panel.replaceChildren();
   const head=node('div','','matchedHead');head.append(node('strong',matchedModeName()),node('span',findings.some(item=>item.kind==='error')?'제한 초과 · Check list':findings.length?'확인 필요 · Review':'추가 경고 없음 · No warnings','matchedBadge'));
@@ -115,6 +118,8 @@ function renderRoster() {
   const models = state.units.reduce((sum,unit) => sum + unit.count,0);
   const remaining = state.limit - total;
   $('rosterTitle').textContent = state.name || '새 군세';
+  $('confirmRoster').textContent=playText('로스터 확정 · 플레이 시작','Confirm roster · Play');
+  $('confirmRoster').disabled=!state.units.length;
   const factionLabel=armyName(),formationLabel=compositionName();
   $('rosterSubtitle').textContent = `${factionLabel}${formationLabel.toLowerCase()===factionLabel.toLowerCase()?'':` · ${formationLabel}`} · ${matchedModeName()} · ${fmt(state.limit)} pts`;
   renderMatchedStatus();
@@ -210,32 +215,92 @@ function renderHome() {
     if(state.units.length>4)preview.append(node('p',label('외 '+(state.units.length-4)+'개 유닛','And '+(state.units.length-4)+' more units'),'homeMore'));
   }
 }
+function playStatCell(profile,key,extra=null){
+  const cell=node('td','','playStatCell');cell.dataset.stat=key;cell.dataset.profile=profile.id;
+  const base=String(profile.base?.[key]??'–'),effects=[...(profile.modifiers?.[key]||[])];
+  cell.append(node('span',base,'playBase'));
+  const fixed=extra?.fixed?.[key];
+  if(fixed!==undefined){cell.append(node('span',`→${fixed}`,'playFixed'));cell.title=playText('조건 적용 시 사용하는 고정 능력치','Fixed characteristic under the stated condition');cell.setAttribute('aria-label',`${key} ${base} → ${fixed}`);return cell;}
+  const bonus=extra?.modifiers?.[key];if(bonus!==undefined)effects.push({value:bonus,source:extra.name});
+  let numeric=effects.filter(effect=>Number.isFinite(Number(effect.value))).reduce((sum,effect)=>sum+Number(effect.value),0);
+  if(Number.isFinite(Number(base))&&Number.isFinite(Number(profile.effective?.[key]))){const extraNumeric=bonus!==undefined&&Number.isFinite(Number(bonus))?Number(bonus):0;numeric=Number(profile.effective[key])-Number(base)+extraNumeric;if(extra?.cap)numeric=Math.min(Number(extra.cap),Number(base)+numeric)-Number(base);}
+  const symbolic=effects.filter(effect=>!Number.isFinite(Number(effect.value)));
+  const descriptions=effects.map(effect=>`${effect.source||''}: ${Number(effect.value)>0?'+':''}${effect.value}`);
+  if(numeric){const badge=node('span',`${numeric>0?'+':''}${numeric}`,'playBonus'+(numeric<0?' negative':''));badge.title=descriptions.join('\n');cell.append(badge);}
+  for(const effect of symbolic){const value=String(effect.value),badge=node('span',`${/^[+-]/.test(value)?'':'+'}${value}`,'playBonus');badge.title=effect.source||'';cell.append(badge);}
+  const effective=Number.isFinite(Number(base))&&!symbolic.length?Number(base)+numeric:null;
+  cell.setAttribute('aria-label',`${key} ${base}${numeric?` ${numeric>0?'+':''}${numeric}`:''}${effective!==null?` = ${effective}`:''}${descriptions.length?` · ${descriptions.join('; ')}`:''}`);
+  return cell;
+}
+function playRuleButton(name,url=null){
+  const button=ruleChip(name);
+  if(url)try{const path=new URL(url,'https://tow.whfb.app/');if(path.hostname==='tow.whfb.app')button.dataset.rulePath=path.pathname;}catch{}
+  return button;
+}
+function renderPlayProfiles(model,unit){
+  const table=node('table','','playProfileTable');table.setAttribute('aria-label',playText(`${unit.name} 전체 능력치`,`${unit.name} complete profiles`));
+  const head=document.createElement('thead'),headers=node('tr','');for(const key of model.keys||['M','WS','BS','S','T','W','I','A','Ld']){const th=node('th',key);th.scope='col';headers.append(th);}head.append(headers);table.append(head);
+  const body=document.createElement('tbody');
+  const appendRow=(profile,extra=null)=>{
+    const heading=node('tr','',extra?'playProfileLabel playVariantLabel':'playProfileLabel'),title=node('th','');title.colSpan=9;title.scope='rowgroup';
+    title.append(sourceName('span',profile.name));
+    if(profile.count!==undefined)title.append(node('span',` · ${profile.count} ${playText('모델','models')}`,'playProfileCount'));
+    if(extra)title.append(node('span',` · ${pairedName(extra.name)}`,'playVariantName'));
+    const condition=extra&&(window.TOWI18n?.language==='en'?extra.conditionEn:extra.conditionKo||extra.conditionEn);
+    if(condition)title.append(node('small',condition,'playCondition'));
+    heading.append(title);body.append(heading);
+    const row=node('tr','',extra?'playProfileValues playVariantValues':'playProfileValues');for(const key of model.keys||['M','WS','BS','S','T','W','I','A','Ld'])row.append(playStatCell(profile,key,extra));body.append(row);
+  };
+  for(const profile of model.profiles||[]){
+    appendRow(profile);
+    const variants=[...(model.weapons||[]),...(model.effects||[])].filter(effect=>(Object.keys(effect.modifiers||{}).length||Object.keys(effect.fixed||{}).length)&&effect.profileIds?.includes(profile.id));
+    for(const variant of variants)appendRow(profile,variant);
+  }
+  table.append(body);return table;
+}
 function renderPlay(){
-  const language=window.TOWI18n?.language||'ko',label=(ko,en)=>language==='en'?en:language==='both'?`${ko} / ${en}`:ko;
+  const language=window.TOWI18n?.language||'ko',label=playText,snapshot=CORE.loadPlayRoster(state.faction),army=snapshot?.army;
   const categoryKo={characters:'캐릭터',core:'코어',special:'스페셜',rare:'레어',mercenaries:'용병'};
-  $('playTitle').textContent=state.name||label('새 군세','New army');
-  $('playSubtitle').textContent=`${matchedModeName()} · ${fmt(CORE.totalPoints(state))} / ${fmt(state.limit)} pts`;
+  $('playConfirm').textContent=army?label('현재 로스터로 다시 확정','Confirm current roster'):label('로스터 확정 · 플레이 시작','Confirm roster · Play');
+  $('playConfirm').disabled=!state.units.length;
+  $('playConfirm').classList.toggle('hidden',Boolean(army&&!CORE.playRosterChanged(state,snapshot)));
+  $('playEdit').textContent=label('로스터 편집','Edit roster');
+  $('playQuick').textContent=label('퀵시트','Quick sheet');$('playRules').textContent=label('룰북','Rules');
+  $('playTitle').textContent=army?.name||label('플레이 모드','Play mode');
+  $('playSubtitle').textContent=army?`${matchedModeName(army)} · ${fmt(CORE.totalPoints(army))} / ${fmt(army.limit)} pts`:label('로스터를 확정해 전투용 능력치 표를 만드세요.','Confirm your roster to build its battle reference.');
+  const changed=army&&CORE.playRosterChanged(state,snapshot),notice=$('playNotice');
+  notice.classList.toggle('changed',Boolean(changed));
+  const date=snapshot?.confirmedAt?new Date(snapshot.confirmedAt):null,stamp=date&&!Number.isNaN(date.getTime())?date.toLocaleString(language==='en'?'en-GB':'ko-KR',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}):'';
+  notice.textContent=!army?label('현재 로스터의 유닛과 선택 옵션을 확정하면 모든 프로필을 한 화면에서 볼 수 있습니다.','Confirm the units and options in your current roster to see every profile together.'):changed?label('편성이 변경되었습니다. 아래 표는 이전에 확정한 로스터입니다. 현재 로스터로 다시 확정하면 갱신됩니다.','Your draft has changed. The reference below uses your last confirmed roster. Confirm the current roster to update it.'):label(`확정 로스터${stamp?` · ${stamp}`:''}`,`Confirmed roster${stamp?` · ${stamp}`:''}`);
+  $('playLegend').textContent=army?label('기본 수치 + 옵션 보너스. 무기·돌격 등 조건부 보너스는 조건이 적힌 별도 행에 표시됩니다.','Base value + option bonus. Weapon and other conditional bonuses have separate labelled rows.'):'';
   const search=$('playSearch').value.trim().toLowerCase(),host=$('playUnits');host.replaceChildren();
-  const findings=matchedFindings(),summary=$('playSummary');summary.replaceChildren(node('strong',`${state.units.length} ${label('유닛','units')} · ${state.units.reduce((sum,unit)=>sum+unit.count,0)} ${label('모델','models')}`),node('span',findings.some(item=>item.kind==='error')?label('편성 제한 초과 확인','Composition limits exceeded'):label('규칙·장비 이름을 눌러 상세 보기','Tap a rule or item for details')));
-  for(const unit of state.units){
-    const source=configuredSource(unit),choices=source?OPT.describe(source,unit.selections,unit.magicItems,optionComposition(source)):[];
+  $('playSearch').disabled=!army;
+  const summary=$('playSummary');summary.replaceChildren();
+  if(!army){summary.append(node('strong',`${state.units.length} ${label('유닛','units')} · ${fmt(CORE.totalPoints(state))} pts`));host.append(node('p',state.units.length?label('위의 확정 버튼을 누르면 플레이 모드가 시작됩니다.','Press Confirm roster above to start play mode.'):label('먼저 로스터에 유닛을 추가하세요.','Add units to your roster first.'),'playEmpty'));return;}
+  const findings=matchedFindings(army);summary.append(node('strong',`${army.units.length} ${label('유닛','units')} · ${army.units.reduce((sum,unit)=>sum+unit.count,0)} ${label('모델','models')}`),node('span',findings.some(item=>item.kind==='error')?label('편성 제한 초과 확인','Composition limits exceeded'):label('능력치는 모두 펼쳐 표시됩니다.','All profiles are shown.')));
+  for(const unit of army.units){
+    const source=rosterSource(unit,army),choices=source?OPT.describe(source,unit.selections,unit.magicItems,optionComposition(source)):[];
     const rules=source?keywords(source):[];
     if(search&&!`${unit.name} ${unit.label} ${choices.join(' ')} ${rules.join(' ')} ${pairedName(unit.name)}`.toLowerCase().includes(search))continue;
-    const card=document.createElement('details');card.className='playCard';card.dataset.unitId=unit.id;
-    const head=document.createElement('summary');head.className='playCardHead';
-    const title=node('span','','playCardTitle');title.append(sourceName('strong',unit.name),node('small',`${unit.count} ${label('모델','models')} · ${label(categoryKo[unit.category]||unit.category,CATEGORY_LABELS[unit.category]||unit.category)}${unit.label?` · ${unit.label}`:''}`));
-    head.append(title,node('b',`${fmt(unit.points)} pts`));card.append(head);
+    const card=node('article','','playCard playOverviewCard');card.dataset.unitId=unit.id;
+    const head=node('div','','playCardHead');const title=node('span','','playCardTitle');title.append(sourceName('strong',unit.name),node('small',`${unit.count} ${label('모델','models')} · ${label(categoryKo[unit.category]||unit.category,CATEGORY_LABELS[unit.category]||unit.category)}${unit.label?` · ${unit.label}`:''}`));head.append(title,node('b',`${fmt(unit.points)} pts`));card.append(head);
     const body=node('div','','playCardBody');
-    const stats=source&&ruleInfo(labelOf(source))?.stats?.[0];
-    if(stats){const strip=node('div','','playStats');for(const key of ['M','WS','BS','S','T','W','I','A','Ld'])strip.append(node('span',`${key} ${stats[key]||'–'}`));body.append(strip);}
-    if(choices.length){body.append(node('h3',label('선택 장비·옵션','Selected equipment and options')));const options=node('div','','playChips');for(const choice of choices){const parts=splitRuleNames(choice.replace(/^\d+×\s*/,'')),known=parts.filter(part=>ruleInfo(part));if(known.length){for(const part of known){const chip=ruleChip(part);chip.classList.add('playChip');options.append(chip);}}else options.append(node('span',choice,'playPlain'));}body.append(options);}
-    if(rules.length){body.append(node('h3',label('특수 규칙','Special rules')));const row=node('div','','playChips');for(const rule of rules)row.append(ruleChip(rule));body.append(row);}
-    if(unit.lore)body.append(node('p',`${label('마법 학파','Lore of Magic')}: ${slugTitle(unit.lore)}`,'playMeta'));
-    if(unit.options)body.append(node('p',unit.options,'playMeta'));
-    if(source){const detail=node('button',label('유닛 전체 자료 보기','Full unit reference'),'secondary playDetails');detail.type='button';detail.dataset.playDetails=unit.id;body.append(detail);}
+    const model=window.TOWPlayProfiles?.create({source,unit,ruleInfo,optionModel:OPT,weaponProfiles:playWeaponProfiles,composition:unit.sourceComposition||source?._optionComposition||army.composition});
+    if(model?.profiles?.length){body.append(renderPlayProfiles(model,unit));const sources=node('div','','playBonusSources');for(const profile of model.profiles){const bonuses=new Map();for(const [key,values] of Object.entries(profile.modifiers||{}))for(const effect of values){const list=bonuses.get(effect.source)||[];list.push(`${key} ${Number(effect.value)>0?'+':''}${effect.value}`);bonuses.set(effect.source,list);}for(const [name,values] of bonuses)sources.append(node('p',`${pairedName(profile.name)} · ${pairedName(name)}: ${values.join(' · ')}`));}if(sources.childElementCount)body.append(sources);}
+    else body.append(node('p',Object.keys(rulesIndex).length?label('이 유닛의 능력치 자료가 없습니다. 유닛 원문을 확인하세요.','No profile data is available for this unit. Check its source entry.'):label('능력치 자료를 불러오는 중…','Loading profiles…'),'playMeta'));
+    if(model?.defences?.length){const defences=node('div','','playDefences');for(const defence of model.defences){const condition=language==='en'?defence.conditionEn:defence.conditionKo||defence.conditionEn;defences.append(node('span',`${pairedName(defence.name)}${defence.value?` ${defence.value}`:''}${condition?` · ${condition}`:''}`));}body.append(defences);}
+    if(model?.weapons?.length){const weapons=node('div','','playWeapons');weapons.append(node('h3',label('무장 스펙','Weapon profiles')));for(const weapon of model.weapons){const row=node('div','','playWeaponRow');row.append(playRuleButton(weapon.name,weapon.url),node('span',`${label('사거리','Range')} ${weapon.range||'–'} · S ${weapon.strength||'–'} · AP ${weapon.armourPiercing||'–'}`));if(weapon.rules?.length){const rulesRow=node('div','','playChips');for(const rule of weapon.rules)rulesRow.append(ruleChip(rule));row.append(rulesRow);}const condition=language==='en'?weapon.conditionEn:weapon.conditionKo||weapon.conditionEn;if(condition)row.append(node('small',condition,'playWeaponCondition'));if(weapon.notes)row.append(node('small',Array.isArray(weapon.notes)?weapon.notes.join(' '):String(weapon.notes),'playWeaponCondition'));weapons.append(row);}body.append(weapons);}
+    const reference=document.createElement('details');reference.className='playReferenceDetails';reference.append(node('summary',label('선택 장비·특수 규칙 보기','Selected equipment and special rules')));const referenceBody=node('div','','playReferenceBody');
+    if(choices.length){referenceBody.append(node('h3',label('선택 장비·옵션','Selected equipment and options')));const options=node('div','','playChips');for(const choice of choices){const parts=splitRuleNames(choice.replace(/^\d+×\s*/,'')),known=parts.filter(part=>ruleInfo(part));if(known.length){for(const part of known)options.append(ruleChip(part));}else options.append(node('span',choice,'playPlain'));}referenceBody.append(options);}
+    if(rules.length){referenceBody.append(node('h3',label('특수 규칙','Special rules')));const row=node('div','','playChips');for(const rule of rules)row.append(ruleChip(rule));referenceBody.append(row);}
+    if(unit.lore)referenceBody.append(node('p',`${label('마법 학파','Lore of Magic')}: ${slugTitle(unit.lore)}`,'playMeta'));
+    if(unit.options)referenceBody.append(node('p',unit.options,'playMeta'));
+    for(const note of model?.notes||[])body.append(node('p',label(note.ko,note.en),'playProfileNote'));
+    if(source){const detail=node('button',label('유닛 전체 자료 보기','Full unit reference'),'secondary playDetails');detail.type='button';detail.dataset.playDetails=unit.id;referenceBody.append(detail);}
+    if(referenceBody.childElementCount){reference.append(referenceBody);body.append(reference);}
     card.append(body);host.append(card);
   }
-  if(!host.childElementCount)host.append(node('p',state.units.length?label('검색 결과가 없습니다.','No matching units.'):label('로스터에 유닛을 추가하면 이곳에서 바로 참조할 수 있습니다.','Add units to your roster to reference them here.'),'viewHint'));
+  if(!host.childElementCount)host.append(node('p',label('검색 결과가 없습니다.','No matching units.'),'viewHint'));
 }
 function render() { renderSettings(); renderRoster(); renderFactions(); renderReference(); renderSaved(); renderHome(); renderPlay(); }
 
@@ -277,7 +342,7 @@ function showScreen(next) {
   }
   if(next==='rules'||next==='tutorial')document.querySelector('[data-rules-view="'+(next==='tutorial'?'tutorial':'library')+'"]')?.click();
   if (next === 'saved') renderSaved();
-  if (next === 'play') renderPlay();
+  if (next === 'play') {renderPlay();loadPlaySources(CORE.loadPlayRoster(state.faction)?.army);}
   window.scrollTo(0,0);
 }
 function renderFactions() {
@@ -530,6 +595,11 @@ $('ruleContent').addEventListener('click',event=>{const link=event.target.closes
 function optionPrice(entry) {return `${Number(entry.points)||0 ? `+${fmt(Number(entry.points))}` : '0'} pts${entry.perModel ? '/모델' : ''}`;}
 function itemPrice(entry){const mode=window.TOWI18n?.language||'ko';return optionPrice(entry).replace('/모델',mode==='en'?'/model':mode==='both'?'/모델 / model':'/모델');}
 function optionComposition(source){return source?._optionComposition||state.composition;}
+function renderManualStats(prefix,values={}){
+  const host=$(`${prefix}ManualStats`);host.replaceChildren();
+  for(const key of ['M','WS','BS','S','T','W','I','A','Ld']){const label=node('label',key);label.dataset.noI18n='';const input=document.createElement('input');input.id=`${prefix}Stat${key}`;input.value=values[key]||'';input.maxLength=16;input.setAttribute('aria-label',key);label.append(input);host.append(label);}
+}
+function readManualStats(prefix){return Object.fromEntries(['M','WS','BS','S','T','W','I','A','Ld'].map(key=>[key,$(`${prefix}Stat${key}`)?.value.trim()||'']).filter(([,value])=>value));}
 function magicOptions(group) {
   return OPT.itemChoices(magicData,group,configured?.source?._sourceFaction||state.faction,optionComposition(configured?.source));
 }
@@ -589,6 +659,7 @@ function refreshConfig() {
   if(!configured)return;
   const {source,selections}=configured,count=whole($('configCount').value,1,Math.min(999,Number(source.maximum)||999));
   renderModelProfile(source,'configProfile');
+  $('configManualProfile').classList.toggle('hidden',Boolean(window.TOWPlayProfiles?.lookup(source,ruleInfo)?.stats?.length));
   configured.count=count;
   const groups=$('configGroups');groups.replaceChildren();
   for(const [field,title] of [['command','지휘부'],['equipment','무기'],['armor','방어구'],['options','추가 옵션'],['mounts','탈것']]) {
@@ -623,6 +694,7 @@ async function loadMagicData(){if(magicData)return;try{const response=await fetc
 function openConfig(source,existing=null,initialCount=null) {
   const count=existing?.count||whole(initialCount||source.minimum||1,Number(source.minimum)||1,Number(source.maximum)||999);
   configured={source,id:existing?.id||null,count,selections:existing?.selections?{...existing.selections}:OPT.defaults(source,optionComposition(source)),magicItems:(existing?.magicItems||[]).map(item=>({...item})),lore:existing?.lore||source.lores?.[0]||'',options:existing?.options||''};
+  renderManualStats('config',existing?.manualStats||{});
   $('configDetachmentWrap').classList.toggle('hidden',!source.detachment && !existing?.isDetachment);
   $('configDetachment').checked=Boolean(existing?.isDetachment);
   $('configTitle').textContent=pairedName(labelOf(source));$('configTitle').dataset.noI18n='';
@@ -641,6 +713,22 @@ async function loadRuleIndex(){if(ruleIndexPromise)return ruleIndexPromise;ruleI
 async function fetchArmyData(id){
   if(!armyCache.has(id)){const response=await fetch(`./data/games/the-old-world/${encodeURIComponent(id)}.json`);if(!response.ok)throw Error('진영 데이터를 읽지 못했습니다.');armyCache.set(id,await response.json());}
   return armyCache.get(id);
+}
+async function loadPlaySources(army){
+  if(!army)return;
+  const missing=[...new Set([army.faction,...army.units.map(unit=>unit.sourceFaction).filter(Boolean)])].filter(id=>!armyCache.has(id));
+  if(!missing.length)return;
+  await Promise.allSettled(missing.map(id=>fetchArmyData(id)));
+  renderPlay();
+}
+async function loadPlayWeaponProfiles(){
+  try{const response=await fetch('./data/play-weapon-profiles.json');if(response.ok){playWeaponProfiles=await response.json();renderPlay();}}catch{}
+}
+function confirmRosterForPlay(){
+  if(!state.units.length){toast(playText('먼저 유닛을 추가하세요.','Add units first.'));return;}
+  if(!CORE.confirmPlayRoster(state)){toast(playText('저장 공간이 부족해 로스터를 확정할 수 없습니다. JSON으로 내보내세요.','Could not save the confirmed roster. Export it as JSON to preserve it.'));return;}
+  $('playSearch').value='';showScreen('play');
+  toast(playText('로스터를 확정했습니다.','Roster confirmed.'));
 }
 async function loadMercenaries(id,composition){
   const lists=metadata?.armies?.find(army=>army.id===id)?.mercenaries?.[composition]||[];
@@ -689,12 +777,15 @@ $('factionSearch').addEventListener('input',renderFactions);
 $('referenceSearch').addEventListener('input',renderReference);
 $('referenceCategory').addEventListener('change',renderReference);
 $('playSearch').addEventListener('input',renderPlay);
+$('confirmRoster').addEventListener('click',confirmRosterForPlay);
+$('playConfirm').addEventListener('click',confirmRosterForPlay);
+$('playEdit').addEventListener('click',()=>showScreen('roster'));
 $('playQuick').addEventListener('click',()=>showScreen('quicksheet'));
 $('playRules').addEventListener('click',()=>showScreen('rules'));
 $('playUnits').addEventListener('click',event=>{
-  const rule=event.target.closest('[data-rule]');if(rule){event.preventDefault();openRule(rule.dataset.rule);return;}
+  const rule=event.target.closest('[data-rule]');if(rule){event.preventDefault();openRule(rule.dataset.rule,rule.dataset.rulePath||null);return;}
   const detail=event.target.closest('[data-play-details]');if(!detail)return;
-  const unit=state.units.find(item=>item.id===detail.dataset.playDetails),source=unit&&configuredSource(unit);if(source)openUnitDetail(source);
+  const army=CORE.loadPlayRoster(state.faction)?.army,unit=army?.units.find(item=>item.id===detail.dataset.playDetails),source=unit&&rosterSource(unit,army);if(source)openUnitDetail(source);
 });
 $('referenceGrid').addEventListener('click',event => {
   const rule=event.target.closest('[data-rule]');if(rule){openRule(rule.dataset.rule);return;}
@@ -763,7 +854,7 @@ $('configSave').addEventListener('click',()=>{
   if(!configured)return;
   const {source,selections,magicItems}=configured,count=whole($('configCount').value,Number(source.minimum)||1,Math.min(999,Number(source.maximum)||999));
   const old=state.units.find(unit=>unit.id===configured.id);
-  const record=normalizeUnit({...old,name:labelOf(source),category:source.category,count,points:OPT.price(source,count,selections,magicItems,optionComposition(source)),label:$('configLabel').value.trim(),options:$('configNotes').value.trim(),sourceId:source.id,sourceFaction:source._sourceFaction||state.faction,sourceComposition:optionComposition(source),isDetachment:$('configDetachment').checked,basePoints:source.points,selections,magicItems,lore:source.lores?.length ? configured.lore : '',pointsOverride:false});
+  const record=normalizeUnit({...old,name:labelOf(source),category:source.category,count,points:OPT.price(source,count,selections,magicItems,optionComposition(source)),label:$('configLabel').value.trim(),options:$('configNotes').value.trim(),sourceId:source.id,sourceFaction:source._sourceFaction||state.faction,sourceComposition:optionComposition(source),isDetachment:$('configDetachment').checked,manualStats:readManualStats('config'),basePoints:source.points,selections,magicItems,lore:source.lores?.length ? configured.lore : '',pointsOverride:false});
   if(old)state.units[state.units.indexOf(old)]=record;else state.units.push(record);
   closeConfig();update();showScreen('roster');toast(old?'유닛 옵션을 저장했습니다.':'유닛을 로스터에 추가했습니다.');
 });
@@ -815,6 +906,7 @@ $('rosterBody').addEventListener('click',event => {
   editing = unit.id;
   for (const [id,key] of [['editName','name'],['editCategory','category'],['editCount','count'],['editPoints','points'],['editLabel','label'],['editOptions','options']]) $(id).value = unit[key];
   $('editDetachment').checked=Boolean(unit.isDetachment);
+  renderManualStats('edit',unit.manualStats||{});
   $('editBackdrop').classList.remove('hidden'); $('editName').focus();
 });
 function closeEdit() { $('editBackdrop').classList.add('hidden'); editing = null; }
@@ -826,7 +918,7 @@ $('saveEdit').onclick = () => {
   const index = state.units.findIndex(unit => unit.id === editing); if (index < 0) return;
   const name = $('editName').value.trim(); if (!name) { $('editName').focus(); return; }
   const old = state.units[index];
-  state.units[index] = normalizeUnit({...old,name,category:$('editCategory').value,count:$('editCount').value,points:$('editPoints').value,label:$('editLabel').value.trim(),options:$('editOptions').value.trim(),isDetachment:$('editDetachment').checked});
+  state.units[index] = normalizeUnit({...old,name,category:$('editCategory').value,count:$('editCount').value,points:$('editPoints').value,label:$('editLabel').value.trim(),options:$('editOptions').value.trim(),isDetachment:$('editDetachment').checked,manualStats:readManualStats('edit')});
   closeEdit(); update(); toast('유닛을 수정했습니다.');
 };
 $('newBtn').onclick = () => {if (!confirm('현재 로스터를 새 로스터로 바꾸시겠습니까? 먼저 JSON으로 내보낼 수 있습니다.')) return; const faction=state.faction,composition=state.composition,matchedMode=state.matchedMode;state=fresh(faction);state.composition=composition;state.matchedMode=matchedMode;state.name=`${armyName()} 군세`;update();toast('새 로스터를 만들었습니다.');};
@@ -868,5 +960,5 @@ function closeMenu(){document.querySelector('.top-actions')?.classList.remove('o
 $('menuBtn').addEventListener('click',()=>{const open=document.querySelector('.top-actions').classList.toggle('open');$('menuBtn').setAttribute('aria-expanded',String(open));});
 $('actionItems').addEventListener('click',event=>{if(event.target.closest('button'))closeMenu();});
 document.addEventListener('click',event=>{if(!event.target.closest('.top-actions'))closeMenu();});
-updateSeedLanguage();render(); showScreen(screen); loadMetadata(); loadRuleIndex();
+updateSeedLanguage();render(); showScreen(screen); loadMetadata(); loadRuleIndex();loadPlayWeaponProfiles();
 document.addEventListener('tow-language-change',()=>{if(armyData)renderCatalog();render();});

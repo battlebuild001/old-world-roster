@@ -4,6 +4,8 @@ A bilingual, browser based roster builder for Warhammer: The Old World. The app 
 
 The builder offers Open War, Combined Arms and Grand Melee settings, faction specific mercenary choices, and a mobile play mode for tableside reference. Matched play warnings cover the guide's general limits; faction specific composition rules still need to be checked against the army list.
 
+Confirm a roster to save a separate play reference. Every selected model, champion and mount profile is shown, with verified option bonuses beside the original characteristics. Weapon alternatives and temporary bonuses use labelled conditional rows. Editing the draft does not change the confirmed roster until it is confirmed again. Units without indexed profiles can use manually entered base characteristics.
+
 ## Run locally
 
 ```sh
