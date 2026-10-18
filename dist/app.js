@@ -80,7 +80,8 @@ function renderModelProfile(unit,targetId) {
   const keys=['Name','M','WS','BS','S','T','W','I','A','Ld'];
   const head=node('tr','');for(const key of keys)head.append(node('th',key==='Name'?'Model':key));table.append(head);
   for(const stats of info.stats){const row=node('tr','');for(const key of keys)row.append(node('td',stats[key]||'-'));table.append(row);}
-  wrap.append(table);target.append(wrap);target.classList.remove('hidden');
+  wrap.append(table);target.append(wrap);
+  const hint=node('p',playText('↔ 좌우로 이동해 전체 능력치 보기','↔ Swipe to view the complete profile'),'profileScrollHint');hint.dataset.noI18n='';target.append(hint);target.classList.remove('hidden');
 }
 
 function armyName() { return metadata?.armies?.find(army => army.id === state.faction)?.name_en || slugTitle(state.faction); }
@@ -88,13 +89,14 @@ function compositionName() { return slugTitle(state.composition); }
 function matchedModeName(army=state){const mode=window.TOWMatchedPlay.MODES[army.matchedMode]||window.TOWMatchedPlay.MODES['open-war'];return `${mode.ko} · ${mode.en}`;}
 function matchedFindings(army=state){return window.TOWMatchedPlay.check(army,unit=>rosterSource(unit,army),(source,unit)=>OPT.describe(source,unit.selections,unit.magicItems,unit.sourceComposition||source._optionComposition||army.composition));}
 function renderMatchedStatus(){
-  const panel=$('matchedStatus'),mode=window.TOWMatchedPlay.MODES[state.matchedMode]||window.TOWMatchedPlay.MODES['open-war'],findings=matchedFindings();panel.replaceChildren();
-  const head=node('div','','matchedHead');head.append(node('strong',matchedModeName()),node('span',findings.some(item=>item.kind==='error')?'제한 초과 · Check list':findings.length?'확인 필요 · Review':'추가 경고 없음 · No warnings','matchedBadge'));
-  const link=node('a','원문 규칙 ↗ / Source rule','matchedSource');link.href=mode.url;link.target='_blank';link.rel='noopener noreferrer';head.append(link);panel.append(head);
-  if(state.matchedMode==='combined-arms')panel.append(node('p','동일 유닛 종류별 한도: 캐릭터 3 · 코어 4 · 스페셜 3 · 레어/용병 2. 2,000pts 초과 시 완성된 1,000pts마다 각 한도 +1. 원래 제한된 선택, 이름 있는 캐릭터, 분견대는 제외합니다.','matchedHint'));
-  if(state.matchedMode==='grand-melee')panel.append(node('p','단일 유닛·캐릭터 25% 이하, 한 유닛의 모델 수 50% 이하. 3레벨 마법사는 1,000pts당 1명, 4레벨은 2,000pts당 1명까지. 이름 있는 캐릭터는 제외합니다.','matchedHint'));
-  for(const finding of findings)panel.append(node('p',`${finding.kind==='error'?'⚠':'ℹ'} ${window.TOWI18n?.language==='en'?finding.en:window.TOWI18n?.language==='both'?`${finding.ko} / ${finding.en}`:finding.ko}`,'matchedFinding '+finding.kind));
-  panel.append(node('p','진영별 편성 비율과 용병 조건 등은 원본 군세 목록도 확인하세요. / Check faction limits and mercenary conditions in the original army list.','matchedFoot'));
+  const panel=$('matchedStatus'),mode=window.TOWMatchedPlay.MODES[state.matchedMode]||window.TOWMatchedPlay.MODES['open-war'],findings=matchedFindings(),expanded=panel.querySelector('details')?.open;
+  panel.replaceChildren();const details=document.createElement('details');details.className='matchedDetails';details.open=Boolean(expanded||findings.some(item=>item.kind==='error'));
+  const head=node('summary','','matchedHead');head.append(node('strong',matchedModeName()),node('span',findings.some(item=>item.kind==='error')?playText('제한 초과','Check list'):findings.length?playText('확인 필요','Review'):playText('추가 경고 없음','No warnings'),'matchedBadge'));details.append(head);
+  const body=node('div','','matchedBody'),link=node('a',playText('원문 규칙 ↗','Source rule ↗'),'matchedSource');link.href=mode.url;link.target='_blank';link.rel='noopener noreferrer';body.append(link);
+  if(state.matchedMode==='combined-arms')body.append(node('p','동일 유닛 종류별 한도: 캐릭터 3 · 코어 4 · 스페셜 3 · 레어/용병 2. 2,000pts 초과 시 완성된 1,000pts마다 각 한도 +1. 원래 제한된 선택, 이름 있는 캐릭터, 분견대는 제외합니다.','matchedHint'));
+  if(state.matchedMode==='grand-melee')body.append(node('p','단일 유닛·캐릭터 25% 이하, 한 유닛의 모델 수 50% 이하. 3레벨 마법사는 1,000pts당 1명, 4레벨은 2,000pts당 1명까지. 이름 있는 캐릭터는 제외합니다.','matchedHint'));
+  for(const finding of findings)body.append(node('p',`${finding.kind==='error'?'⚠':'ℹ'} ${playText(finding.ko,finding.en)}`,'matchedFinding '+finding.kind));
+  body.append(node('p',playText('진영별 편성 비율과 용병 조건 등은 원본 군세 목록도 확인하세요.','Check faction limits and mercenary conditions in the original army list.'),'matchedFoot'));details.append(body);panel.append(details);
 }
 function renderSettings() {
   $('armyName').value = state.name;
@@ -118,17 +120,15 @@ function renderRoster() {
   const models = state.units.reduce((sum,unit) => sum + unit.count,0);
   const remaining = state.limit - total;
   $('rosterTitle').textContent = state.name || '새 군세';
-  $('confirmRoster').textContent=playText('로스터 확정 · 플레이 시작','Confirm roster · Play');
+  $('confirmRoster').textContent=playText('확정하고 플레이','Confirm & play');
   $('confirmRoster').disabled=!state.units.length;
   const factionLabel=armyName(),formationLabel=compositionName();
   $('rosterSubtitle').textContent = `${factionLabel}${formationLabel.toLowerCase()===factionLabel.toLowerCase()?'':` · ${formationLabel}`} · ${matchedModeName()} · ${fmt(state.limit)} pts`;
   renderMatchedStatus();
   $('totalPoints').innerHTML = `${fmt(total)} <small>pts</small>`;
   $('remainingPoints').innerHTML = `${fmt(remaining)} <small>pts</small>`;
-  const language=window.TOWI18n?.language||'ko';
-  const countLabel=(english,count)=>{const noun=count===1?english.slice(0,-1):english;return language==='both'?`개 / ${noun}`:language==='en'?noun:'개';};
-  $('unitTotal').innerHTML = `${fmt(state.units.length)} <small data-no-i18n>${countLabel('units',state.units.length)}</small>`;
-  $('modelTotal').innerHTML = `${fmt(models)} <small data-no-i18n>${countLabel('models',models)}</small>`;
+  $('unitTotal').textContent=fmt(state.units.length);
+  $('modelTotal').textContent=fmt(models);
   $('totalMetric').classList.toggle('over',remaining < 0);
   $('progressFill').style.width = `${Math.min(100,Math.max(0,total/state.limit*100))}%`;
   const body = $('rosterBody'); body.replaceChildren();
@@ -214,6 +214,18 @@ function renderHome() {
     }
     if(state.units.length>4)preview.append(node('p',label('외 '+(state.units.length-4)+'개 유닛','And '+(state.units.length-4)+' more units'),'homeMore'));
   }
+  renderScreenChrome();
+}
+function renderScreenChrome(){
+  $('forgeHeading').textContent=screen==='roster'?playText('로스터','Your roster'):playText('군세 설정','Army settings');
+  $('forgeIntro').textContent=screen==='roster'?playText('편성을 확인하고 플레이를 시작하세요.','Review your army and start playing.'):playText('진영, 군세 편성과 목표 포인트를 설정하세요.','Set your faction, formation and points limit.');
+  $('manualAddTitle').textContent=playText('유닛 직접 입력·추가','Manual unit entry');
+  for(const [id,ko,en] of [['usedMetricLabel','사용','Used'],['remainingMetricLabel','잔여','Left'],['unitsMetricLabel','유닛','Units'],['modelsMetricLabel','모델','Models']])$(id).textContent=playText(ko,en);
+  requestAnimationFrame(()=>{for(const tabs of document.querySelectorAll('.sectionTabs')){if(!tabs.getClientRects().length)continue;const active=tabs.querySelector('.active');if(!active)continue;const item=active.getBoundingClientRect(),box=tabs.getBoundingClientRect();if(item.right>box.right)tabs.scrollLeft+=item.right-box.right;else if(item.left<box.left)tabs.scrollLeft+=item.left-box.left;}});
+  for(const [id,ko,en] of [['referenceSearch','유닛·규칙 검색','Search units or rules'],['playSearch','유닛·장비 검색','Search units or gear']]){const input=$(id);input.dataset.noI18n='';input.placeholder=window.TOWI18n?.language==='both'?'검색 / Search':playText(ko,en);}
+  const confirmed=CORE.loadPlayRoster(state.faction),ready=confirmed&&!CORE.playRosterChanged(state,confirmed);
+  $('homeContinue').dataset.homeScreen=ready?'play':'reference';
+  $('homeContinue').textContent=ready?playText('플레이 이어보기 →','Resume play →'):playText('유닛 선택하기 →','Choose units →');
 }
 function playStatCell(profile,key,extra=null){
   const cell=node('td','','playStatCell');cell.dataset.stat=key;cell.dataset.profile=profile.id;
@@ -270,6 +282,9 @@ function renderPlay(){
   $('playSubtitle').textContent=army?`${matchedModeName(army)} · ${fmt(CORE.totalPoints(army))} / ${fmt(army.limit)} pts`:label('로스터를 확정해 전투용 능력치 표를 만드세요.','Confirm your roster to build its battle reference.');
   const changed=army&&CORE.playRosterChanged(state,snapshot),notice=$('playNotice');
   notice.classList.toggle('changed',Boolean(changed));
+  notice.classList.toggle('confirmed',Boolean(army&&!changed));
+  $('playHelp').classList.toggle('hidden',!army);
+  $('playHelpLabel').textContent=label('스탯 표시 안내','Reading the profiles');
   const date=snapshot?.confirmedAt?new Date(snapshot.confirmedAt):null,stamp=date&&!Number.isNaN(date.getTime())?date.toLocaleString(language==='en'?'en-GB':'ko-KR',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}):'';
   notice.textContent=!army?label('현재 로스터의 유닛과 선택 옵션을 확정하면 모든 프로필을 한 화면에서 볼 수 있습니다.','Confirm the units and options in your current roster to see every profile together.'):changed?label('편성이 변경되었습니다. 아래 표는 이전에 확정한 로스터입니다. 현재 로스터로 다시 확정하면 갱신됩니다.','Your draft has changed. The reference below uses your last confirmed roster. Confirm the current roster to update it.'):label(`확정 로스터${stamp?` · ${stamp}`:''}`,`Confirmed roster${stamp?` · ${stamp}`:''}`);
   $('playLegend').textContent=army?label('기본 수치 + 옵션 보너스. 무기·돌격 등 조건부 보너스는 조건이 적힌 별도 행에 표시됩니다.','Base value + option bonus. Weapon and other conditional bonuses have separate labelled rows.'):'';
@@ -277,7 +292,7 @@ function renderPlay(){
   $('playSearch').disabled=!army;
   const summary=$('playSummary');summary.replaceChildren();
   if(!army){summary.append(node('strong',`${state.units.length} ${label('유닛','units')} · ${fmt(CORE.totalPoints(state))} pts`));host.append(node('p',state.units.length?label('위의 확정 버튼을 누르면 플레이 모드가 시작됩니다.','Press Confirm roster above to start play mode.'):label('먼저 로스터에 유닛을 추가하세요.','Add units to your roster first.'),'playEmpty'));return;}
-  const findings=matchedFindings(army);summary.append(node('strong',`${army.units.length} ${label('유닛','units')} · ${army.units.reduce((sum,unit)=>sum+unit.count,0)} ${label('모델','models')}`),node('span',findings.some(item=>item.kind==='error')?label('편성 제한 초과 확인','Composition limits exceeded'):label('능력치는 모두 펼쳐 표시됩니다.','All profiles are shown.')));
+  const findings=matchedFindings(army);summary.append(node('strong',`${army.units.length} ${label('유닛','units')} · ${army.units.reduce((sum,unit)=>sum+unit.count,0)} ${label('모델','models')}`),node('span',findings.some(item=>item.kind==='error')?label('편성 제한 초과','Check limits'):label('확정 로스터','Confirmed roster')));
   for(const unit of army.units){
     const source=rosterSource(unit,army),choices=source?OPT.describe(source,unit.selections,unit.magicItems,optionComposition(source)):[];
     const rules=source?keywords(source):[];
@@ -317,6 +332,8 @@ function renderCatalog() {
 }
 function showScreen(next) {
   screen = next;
+  document.body.dataset.screen=next;
+  renderScreenChrome();
   const armyScreens=['factions','reference','forge','roster'],libraryScreens=['rules','quicksheet','tutorial'];
   const primary=armyScreens.includes(next)?'army':libraryScreens.includes(next)?'library':next;
   $('homeScreen').classList.toggle('hidden',next!=='home');
@@ -907,7 +924,7 @@ $('rosterBody').addEventListener('click',event => {
   for (const [id,key] of [['editName','name'],['editCategory','category'],['editCount','count'],['editPoints','points'],['editLabel','label'],['editOptions','options']]) $(id).value = unit[key];
   $('editDetachment').checked=Boolean(unit.isDetachment);
   renderManualStats('edit',unit.manualStats||{});
-  $('editBackdrop').classList.remove('hidden'); $('editName').focus();
+  $('editBackdrop').classList.remove('hidden'); $('editHeading').focus({preventScroll:true});
 });
 function closeEdit() { $('editBackdrop').classList.add('hidden'); editing = null; }
 $('cancelEdit').onclick = closeEdit;
