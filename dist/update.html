@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#181310">
+  <meta name="robots" content="noindex, nofollow">
+  <title>앱 업데이트 · 올드 월드 빌더</title>
+  <style>
+    :root{color-scheme:dark;--canvas:#181310;--surface:#29201B;--accent:#CB9478;--muted:#B7B093;--text:#F2EDE5;--line:#59473B}
+    *{box-sizing:border-box}body{margin:0;min-height:100svh;display:grid;place-items:center;padding:24px;background:var(--canvas);color:var(--text);font:16px/1.7 system-ui,-apple-system,"Noto Sans KR",sans-serif}
+    main{width:min(100%,480px);padding:28px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}.eyebrow{margin:0;color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.13em}h1{margin:12px 0;font-size:28px;line-height:1.35}p{margin:12px 0}.hint{color:var(--muted);font-size:14px}.status{min-height:80px;margin:24px 0;padding:16px;border:1px solid var(--line);border-radius:8px;overflow-wrap:anywhere}.actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}button,a{min-height:48px;display:inline-flex;align-items:center;justify-content:center;font:inherit;font-weight:700}button{border:0;border-radius:8px;padding:10px 22px;color:var(--canvas);background:var(--accent);cursor:pointer}button:disabled{cursor:wait;opacity:.6}a{color:var(--muted);text-underline-offset:4px}:focus-visible{outline:3px solid var(--accent);outline-offset:4px}[hidden]{display:none!important}@media(max-width:360px){body{padding:16px}main{padding:22px}}
+  </style>
+</head>
+<body>
+  <main aria-labelledby="title">
+    <p class="eyebrow">THE OLD WORLD</p>
+    <h1 id="title">앱 업데이트</h1>
+    <p>최신 버전을 준비한 뒤 앱을 엽니다.</p>
+    <p class="hint">저장된 로스터와 메모는 그대로 유지됩니다.</p>
+    <p id="status" class="status" role="status" aria-live="polite" aria-atomic="true">최신 앱 파일을 확인하고 있습니다.</p>
+    <div class="actions">
+      <button id="retry" type="button" disabled>업데이트 중…</button>
+      <a href="./">앱으로 돌아가기</a>
+    </div>
+    <noscript><p>업데이트하려면 브라우저의 자바스크립트를 켜고 이 페이지를 다시 여세요.</p></noscript>
+  </main>
+  <script>
+    (()=>{
+      'use strict';
+      const targetVersion=44;
+      const status=document.getElementById('status'),retry=document.getElementById('retry');
+      let running=false;
+      const pause=milliseconds=>new Promise(resolve=>setTimeout(resolve,milliseconds));
+      const versionOf=value=>Number(String(value||'').match(/^bth-tow-v(\d+)(?:-|$)/)?.[1]||0);
+      function say(message){if(status.textContent!==message)status.textContent=message;}
+      async function beforeDeadline(promise,deadline){
+        let timer;
+        try{return await Promise.race([promise,new Promise((resolve,reject)=>{timer=setTimeout(()=>reject(Error('최신 앱 파일을 확인하지 못했습니다. 잠시 후 다시 시도하세요.')),Math.max(1,deadline-Date.now()));})]);}
+        finally{clearTimeout(timer);}
+      }
+      function cacheStatus(worker){
+        return new Promise(resolve=>{
+          if(!worker){resolve(null);return;}
+          const channel=new MessageChannel();
+          const timer=setTimeout(()=>{channel.port1.close();resolve(null);},2500);
+          channel.port1.onmessage=event=>{clearTimeout(timer);channel.port1.close();resolve(event.data);};
+          try{worker.postMessage({type:'CACHE_STATUS'},[channel.port2]);}
+          catch{clearTimeout(timer);channel.port1.close();resolve(null);}
+        });
+      }
+      async function update(){
+        if(running)return;
+        running=true;retry.disabled=true;retry.textContent='업데이트 중…';
+        say('최신 앱 파일을 확인하고 있습니다.');
+        const deadline=Date.now()+60000;
+        try{
+          if(!navigator.onLine)throw Error('인터넷에 연결한 뒤 다시 시도하세요. 업데이트에는 인터넷 연결이 필요합니다.');
+          if(!isSecureContext||!('serviceWorker' in navigator))throw Error('이 브라우저에서 자동 업데이트를 지원하지 않습니다. Chrome 또는 Safari에서 이 주소를 다시 여세요.');
+          const registration=await beforeDeadline(navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}),deadline);
+          await beforeDeadline(registration.update(),deadline);
+          say('앱 파일을 내려받고 있습니다. 이 창을 열어 두세요.');
+          while(Date.now()<deadline){
+            if(!navigator.onLine)throw Error('인터넷 연결이 끊겼습니다. 연결한 뒤 다시 시도하세요.');
+            registration.waiting?.postMessage({type:'SKIP_WAITING'});
+            const active=registration.active;
+            if(active?.state==='activated'){
+              const info=await cacheStatus(active);
+              if(info?.ready&&versionOf(info.version)>=targetVersion){
+                // Verify this page's controller too: its next navigation must
+                // use the completed new cache, rather than the old worker.
+                const controlled=await cacheStatus(navigator.serviceWorker.controller);
+                if(controlled?.ready&&versionOf(controlled.version)>=targetVersion){
+                  say('업데이트가 준비됐습니다. 앱을 엽니다.');
+                  location.replace(new URL('./?updated='+targetVersion,location.href));
+                  return;
+                }
+              }
+            }
+            await pause(500);
+          }
+          throw Error('최신 앱 파일을 확인하지 못했습니다. 잠시 후 다시 시도하세요.');
+        }catch(error){
+          say(error.message&&/인터넷|브라우저|최신 앱/.test(error.message)?error.message:'업데이트를 완료하지 못했습니다. 인터넷 연결을 확인한 뒤 다시 시도하세요.');
+          retry.textContent='다시 시도';retry.disabled=false;running=false;
+        }
+      }
+      retry.addEventListener('click',update);
+      update();
+    })();
+  </script>
+</body>
+</html>
