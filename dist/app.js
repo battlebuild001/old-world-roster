@@ -32,6 +32,7 @@ const APP_SCREENS = ['home','factions','reference','forge','roster','rules','qui
 let screen = APP_SCREENS.includes(requestedScreen) ? requestedScreen : 'home';
 const APP_NAV_KEY = 'towNavigation';
 let navigationReady = false, navigatingHistory = false, trustedBackGuard = false, traversingAppBack = false;
+let restoringAppHistory = null;
 let rulesIndex = {}, ruleAliases = {additional:{},synonyms:{}}, detailUnit = null, ruleIndexPromise = null;
 let ruleRequestId = 0;
 let currentRulePath = null, currentRuleInfo = null;
@@ -366,7 +367,7 @@ function installAppBackBoundary(next=screen,scrollY=appScrollY()) {
   history.pushState(historyStateFor(next,false,scrollY),'');
 }
 function ensureAppBackEntry() {
-  if(!navigationReady)return;
+  if(!navigationReady||restoringAppHistory)return;
   const entry=appHistoryEntry();
   if(!entry||hasInAppHistoryBehind()===false)installAppBackBoundary();
   else if(entry.root)history.pushState(historyStateFor(screen,false,appScrollY()),'');
@@ -390,6 +391,17 @@ function dismissTopAppLayer() {
   if(document.querySelector('.top-actions')?.classList.contains('open')){closeMenu();return true;}
   return false;
 }
+function showHistoryScreen(next,scrollY=0) {
+  navigatingHistory=true;
+  try{showScreen(next);}finally{navigatingHistory=false;}
+  window.scrollTo(0,Math.max(0,Number(scrollY)||0));
+}
+function restoreAppHistoryEntry(next,scrollY,backwards=true) {
+  // Reuse the activated entry. Creating another entry during Back makes the
+  // preceding entry skippable once Chrome's transient activation expires.
+  restoringAppHistory={screen:next,scrollY};
+  if(backwards)history.forward();else history.back();
+}
 function initializeAppNavigation() {
   const entry=appHistoryEntry();
   if(entry)screen=entry.screen;
@@ -411,13 +423,22 @@ function initializeAppNavigation() {
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)ensureAppBackEntry();});
   addEventListener('popstate',event=>{
     const current=screen,scrollY=appScrollY(),backwards=traversingAppBack;
+    if(restoringAppHistory){
+      const restored=restoringAppHistory;restoringAppHistory=null;
+      history.replaceState(historyStateFor(restored.screen,false,restored.scrollY),'');
+      showHistoryScreen(restored.screen,restored.scrollY);
+      return;
+    }
     if(dismissTopAppLayer()){
-      history.pushState(historyStateFor(current,false,scrollY),'');
+      restoreAppHistoryEntry(current,scrollY,window.navigation?backwards:true);
       return;
     }
     const destination=appHistoryEntry(event.state);
     if(!destination){installAppBackBoundary('home',0);}
-    else if(destination.root){history.pushState(historyStateFor('home'),'');}
+    else if(destination.root){
+      restoreAppHistoryEntry('home',0);
+      return;
+    }
     else if(backwards&&destination.screen===current&&current!=='home'){
       // Skip the extra gesture boundary, never an external browser entry.
       if(hasInAppHistoryBehind()===true){history.back();return;}
@@ -425,9 +446,7 @@ function initializeAppNavigation() {
     }
     else if(hasInAppHistoryBehind()===false)installAppBackBoundary(destination.screen,destination.scrollY||0);
     const next=!destination||destination.root||backwards&&destination.screen===current&&current!=='home'?'home':destination.screen;
-    navigatingHistory=true;
-    try{showScreen(next);}finally{navigatingHistory=false;}
-    window.scrollTo(0,next==='home'?0:Math.max(0,Number(destination?.scrollY)||0));
+    showHistoryScreen(next,next==='home'?0:destination?.scrollY);
   });
 }
 function showScreen(next) {
