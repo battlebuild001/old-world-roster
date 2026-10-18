@@ -31,7 +31,7 @@ const requestedScreen = new URLSearchParams(location.search).get('screen');
 const APP_SCREENS = ['home','factions','reference','forge','roster','rules','quicksheet','tutorial','saved','play'];
 let screen = APP_SCREENS.includes(requestedScreen) ? requestedScreen : 'home';
 const APP_NAV_KEY = 'towNavigation';
-let navigationReady = false, navigatingHistory = false;
+let navigationReady = false, navigatingHistory = false, trustedBackGuard = false, traversingAppBack = false;
 let rulesIndex = {}, ruleAliases = {additional:{},synonyms:{}}, detailUnit = null, ruleIndexPromise = null;
 let ruleRequestId = 0;
 let currentRulePath = null, currentRuleInfo = null;
@@ -349,13 +349,35 @@ function appHistoryEntry(value=history.state) {
   return entry?.version===1&&entry.scope===location.origin+location.pathname&&APP_SCREENS.includes(entry.screen)?entry:null;
 }
 function historyStateFor(next,root=false,scrollY=0) {
-  return {...history.state,[APP_NAV_KEY]:{version:1,scope:location.origin+location.pathname,screen:next,root,scrollY}};
+  return {...history.state,[APP_NAV_KEY]:{version:1,guardVersion:2,scope:location.origin+location.pathname,screen:next,root,scrollY}};
 }
 function appScrollY() {
   return document.body.style.position==='fixed'?Math.max(0,-parseFloat(document.body.style.top)||0):window.scrollY;
 }
+function hasInAppHistoryBehind() {
+  const navigation=window.navigation;
+  if(!navigation?.entries||!navigation.currentEntry)return null;
+  const previous=navigation.entries().find(entry=>entry.index===navigation.currentEntry.index-1);
+  if(!previous?.sameDocument||!previous.url)return false;
+  try{const url=new URL(previous.url);return url.origin===location.origin&&url.pathname===location.pathname;}catch{return false;}
+}
+function installAppBackBoundary(next=screen,scrollY=appScrollY()) {
+  history.replaceState(historyStateFor('home',true),'');
+  history.pushState(historyStateFor(next,false,scrollY),'');
+}
 function ensureAppBackEntry() {
-  if(navigationReady&&appHistoryEntry()?.root)history.pushState(historyStateFor(screen,false,appScrollY()),'');
+  if(!navigationReady)return;
+  const entry=appHistoryEntry();
+  if(!entry||hasInAppHistoryBehind()===false)installAppBackBoundary();
+  else if(entry.root)history.pushState(historyStateFor(screen,false,appScrollY()),'');
+}
+function reinforceAppBackGesture(event) {
+  if(trustedBackGuard||!event.isTrusted||navigator.userActivation?.isActive===false)return;
+  trustedBackGuard=true;
+  ensureAppBackEntry();
+  // Chrome may skip entries created before a real interaction. Install this
+  // additional same-document entry inside the user's pointer/key gesture.
+  history.pushState(historyStateFor(screen,false,appScrollY()),'');
 }
 function dismissTopAppLayer() {
   const dialog=window.TOWUIAccessibility?.getActiveDialog();
@@ -371,24 +393,41 @@ function dismissTopAppLayer() {
 function initializeAppNavigation() {
   const entry=appHistoryEntry();
   if(entry)screen=entry.screen;
-  else history.replaceState(historyStateFor('home',true),'');
-  // Keep an app entry beneath the initial screen, including direct links.
-  // Dialogs use the current entry so X/Cancel never leaves stale dialog history.
-  if(!entry||entry.root)history.pushState(historyStateFor(screen),'');
+  // Rebuild missing boundaries after direct entry, reload or tab restoration.
+  // At home, Back is handled in this document instead of exposing the launcher.
+  if(!entry||entry.root||hasInAppHistoryBehind()!==true)installAppBackBoundary(screen,entry?.scrollY||0);
+  else history.replaceState(historyStateFor(screen,false,entry.scrollY||0),'');
   history.scrollRestoration='manual';
   navigationReady=true;
   window.TOWAppNavigation={ensureBackEntry:ensureAppBackEntry};
+  window.navigation?.addEventListener('currententrychange',event=>{
+    traversingAppBack=event.from.index>=0&&window.navigation.currentEntry.index<event.from.index;
+  });
+  // Touch becomes an activation on pointerup, rather than pointerdown.
+  addEventListener('pointerup',reinforceAppBackGesture,true);
+  addEventListener('click',reinforceAppBackGesture,true);
+  addEventListener('keydown',reinforceAppBackGesture,true);
+  addEventListener('pageshow',ensureAppBackEntry);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)ensureAppBackEntry();});
   addEventListener('popstate',event=>{
-    const current=screen,scrollY=appScrollY();
+    const current=screen,scrollY=appScrollY(),backwards=traversingAppBack;
     if(dismissTopAppLayer()){
       history.pushState(historyStateFor(current,false,scrollY),'');
       return;
     }
     const destination=appHistoryEntry(event.state);
-    if(!destination)return;
+    if(!destination){installAppBackBoundary('home',0);}
+    else if(destination.root){history.pushState(historyStateFor('home'),'');}
+    else if(backwards&&destination.screen===current&&current!=='home'){
+      // Skip the extra gesture boundary, never an external browser entry.
+      if(hasInAppHistoryBehind()===true){history.back();return;}
+      installAppBackBoundary('home',0);
+    }
+    else if(hasInAppHistoryBehind()===false)installAppBackBoundary(destination.screen,destination.scrollY||0);
+    const next=!destination||destination.root||backwards&&destination.screen===current&&current!=='home'?'home':destination.screen;
     navigatingHistory=true;
-    try{showScreen(destination.screen);}finally{navigatingHistory=false;}
-    window.scrollTo(0,Math.max(0,Number(destination.scrollY)||0));
+    try{showScreen(next);}finally{navigatingHistory=false;}
+    window.scrollTo(0,next==='home'?0:Math.max(0,Number(destination?.scrollY)||0));
   });
 }
 function showScreen(next) {
