@@ -36,6 +36,8 @@ let restoringAppHistory = null;
 let rulesIndex = {}, ruleAliases = {additional:{},synonyms:{}}, detailUnit = null, ruleIndexPromise = null;
 let ruleRequestId = 0;
 let currentRulePath = null, currentRuleInfo = null;
+let currentRuleSummaryInput = null, currentRuleSummary = null, ruleSummaryRenderId = 0;
+let ruleSummaryOverrides = null, ruleSummaryOverridesPromise = null;
 let configured = null, magicData = null;
 let playWeaponProfiles=null;
 const armyCache = new Map();
@@ -704,6 +706,53 @@ function localizeRuleParagraphs(content,requestId) {
     else window.TOWI18n?.translateRuleText(original).then(renderTranslation);
   }
 }
+function loadRuleSummaryOverrides() {
+  if(ruleSummaryOverridesPromise)return ruleSummaryOverridesPromise;
+  ruleSummaryOverridesPromise=Promise.allSettled(['./data/rule-procedure-summaries.json','./data/rule-summary-overrides.json'].map(async path=>{
+    const response=await fetch(path);if(!response.ok)throw Error('summary data');return response.json();
+  })).then(results=>{
+    ruleSummaryOverrides=Object.assign({},...results.filter(result=>result.status==='fulfilled').map(result=>result.value));
+    updateRuleSummary();return ruleSummaryOverrides;
+  });
+  return ruleSummaryOverridesPromise;
+}
+function renderRuleSummary() {
+  const host=$('ruleSummary'),data=currentRuleSummary,requestId=ruleRequestId,renderId=++ruleSummaryRenderId;
+  const language=window.TOWI18n?.language||'ko';
+  host.replaceChildren();host.setAttribute('aria-busy',String(!data||data.kind==='loading'));
+  const heading=node('h3',language==='en'?'At a glance':language==='both'?'핵심 요약 / At a glance':'핵심 요약');heading.id='ruleSummaryTitle';host.append(heading);
+  if(!data||data.kind==='loading'){
+    host.append(node('p',playText('규칙 요약을 준비하고 있습니다…','Preparing the rule summary…'),'ruleSummaryStatus'));return;
+  }
+  const list=node('ul','','ruleSummaryList');host.append(list);
+  const count=Math.max(data.ko?.length||0,data.en?.length||0);
+  const valid=()=>requestId===ruleRequestId&&renderId===ruleSummaryRenderId&&window.TOWI18n?.language===language&&!$('ruleBackdrop').classList.contains('hidden');
+  let translationFailed=false;
+  const unavailableTranslation=()=>{
+    if(translationFailed||!valid())return;translationFailed=true;
+    host.append(node('p','한글 요약을 불러오지 못해 영문 요약을 표시합니다.','ruleSummaryStatus'));
+  };
+  for(let index=0;index<count;index++){
+    const english=data.en?.[index]||'',korean=data.ko?.[index]||'',item=node('li',''),text=node('span','');list.append(item);item.append(text);
+    if(language==='en'){text.textContent=english||korean;continue;}
+    const localized=value=>window.TOWI18n?.phoneticTerms(value,english)||value;
+    if(korean)text.textContent=localized(korean);
+    else if(english){
+      text.textContent=english;
+      const translate=window.TOWI18n?.translateRuleText;
+      if(translate)translate(english).then(value=>{if(!valid())return;if(value)text.textContent=localized(value);else unavailableTranslation();}).catch(unavailableTranslation);
+      else unavailableTranslation();
+    }
+    if(language==='both'&&english){item.append(node('span',english,'ruleSummaryOriginal'));}
+  }
+}
+function updateRuleSummary() {
+  const input=currentRuleSummaryInput;
+  if(!input||input.requestId!==ruleRequestId)return;
+  const data=window.TOWRuleSummaries?.build({...input,overrides:ruleSummaryOverrides||{},labelName:name=>window.TOWI18n?.nameLabel(name,'ko')||name,labelRule:name=>window.TOWI18n?.ruleLabel(name,'ko')||name});
+  currentRuleSummary=input.pending&&!data?.available?{kind:'loading'}:data||{kind:'unavailable',ko:['규칙 요약을 불러오지 못했습니다.'],en:['The rule summary is unavailable.']};
+  renderRuleSummary();
+}
 function showEmbeddedRule(url,name) {
   const frame=document.createElement('iframe');frame.src=url;frame.title=`${name} 규칙 원문`;frame.loading='eager';frame.referrerPolicy='no-referrer';
   $('ruleContent').classList.add('embedded');$('ruleContent').replaceChildren(frame);
@@ -735,10 +784,13 @@ function renderRuleNavigation(path,info) {
   }
 }
 async function openRule(name,path=null,translatedTitle=null) {
-  if(!Object.keys(rulesIndex).length)await loadRuleIndex();
-  const info=ruleInfo(name),url=path?`https://tow.whfb.app${path}?minimal=true`:info?.url?`https://tow.whfb.app/${info.url}?minimal=true`:null;
   const requestId=++ruleRequestId;
+  if(!Object.keys(rulesIndex).length)await loadRuleIndex();
+  if(requestId!==ruleRequestId)return;
+  const info=ruleInfo(name),url=path?`https://tow.whfb.app${path}?minimal=true`:info?.url?`https://tow.whfb.app/${info.url}?minimal=true`:null;
   currentRulePath=path||(info?.url?`/${info.url}`:null);currentRuleInfo=info;
+  currentRuleSummaryInput={requestId,name,path:currentRulePath,info,document:null,pending:Boolean(url)};
+  updateRuleSummary();loadRuleSummaryOverrides();
   const phoneticTitle=window.TOWPhonetic?.has(name),localizedTitle=phoneticTitle?window.TOWI18n.nameLabel(name):translatedTitle && window.TOWI18n?.language!=='en' ? (window.TOWI18n?.language==='both'?`${translatedTitle} / ${name}`:translatedTitle) : name;
   $('ruleName').toggleAttribute('data-no-i18n',Boolean(translatedTitle||phoneticTitle));
   $('ruleName').textContent=localizedTitle;renderRuleNavigation(currentRulePath,info);
@@ -753,8 +805,10 @@ async function openRule(name,path=null,translatedTitle=null) {
   try{
     const response=await fetch(url);
     if(!response.ok)throw Error('원문 응답 오류');
-    const documentOfRule=new DOMParser().parseFromString(await response.text(),'text/html');
+    const html=await response.text();if(requestId!==ruleRequestId)return;
+    const documentOfRule=new DOMParser().parseFromString(html,'text/html');
     hydrateWeaponRules(documentOfRule);
+    currentRuleSummaryInput.document=documentOfRule;currentRuleSummaryInput.pending=false;updateRuleSummary();
     const articles=[...documentOfRule.querySelectorAll('article.article--rich-text, .unit-profile')];
     if(!articles.length)throw Error('본문을 찾지 못했습니다.');
     const content=document.createDocumentFragment();
@@ -762,11 +816,11 @@ async function openRule(name,path=null,translatedTitle=null) {
     if(!content.childNodes.length)throw Error('본문을 찾지 못했습니다.');
     localizeRuleParagraphs(content,requestId);localizeRuleLabels(content);
     if(requestId===ruleRequestId)$('ruleContent').replaceChildren(content);
-  }catch{if(requestId===ruleRequestId){if(navigator.onLine)showEmbeddedRule(url,name);else showOfflineRule();}}
+  }catch{if(requestId===ruleRequestId){currentRuleSummaryInput.pending=false;updateRuleSummary();if(navigator.onLine)showEmbeddedRule(url,name);else showOfflineRule();}}
 }
-function closeRule() {ruleRequestId++;currentRulePath=null;currentRuleInfo=null;$('ruleBackdrop').classList.add('hidden');}
+function closeRule() {ruleRequestId++;ruleSummaryRenderId++;currentRulePath=null;currentRuleInfo=null;currentRuleSummaryInput=null;currentRuleSummary=null;$('ruleBackdrop').classList.add('hidden');}
 $('ruleNav').addEventListener('click',event=>{const button=event.target.closest('button[data-rule-path]');if(button && !button.disabled && button.dataset.rulePath)openRule(button.dataset.ruleTitle,button.dataset.rulePath,button.dataset.ruleKo);});
-document.addEventListener('tow-language-change',()=>{if(currentRulePath)renderRuleNavigation(currentRulePath,currentRuleInfo);});
+document.addEventListener('tow-language-change',()=>{if(currentRulePath)renderRuleNavigation(currentRulePath,currentRuleInfo);if(currentRuleSummaryInput)renderRuleSummary();});
 document.addEventListener('tow-rules-catalog-ready',()=>{if(currentRulePath)renderRuleNavigation(currentRulePath,currentRuleInfo);});
 $('ruleContent').addEventListener('click',event=>{const link=event.target.closest('[data-rule-path]');if(link)openRule(link.dataset.ruleTitle,link.dataset.rulePath);});
 function optionPrice(entry) {return `${Number(entry.points)||0 ? `+${fmt(Number(entry.points))}` : '0'} pts${entry.perModel ? '/모델' : ''}`;}
@@ -1142,5 +1196,5 @@ function closeMenu(){document.querySelector('.top-actions')?.classList.remove('o
 $('menuBtn').addEventListener('click',()=>{const open=document.querySelector('.top-actions').classList.toggle('open');$('menuBtn').setAttribute('aria-expanded',String(open));if(open)ensureAppBackEntry();});
 $('actionItems').addEventListener('click',event=>{if(event.target.closest('button'))closeMenu();});
 document.addEventListener('click',event=>{if(!event.target.closest('.top-actions'))closeMenu();});
-initializeAppNavigation();updateSeedLanguage();render(); showScreen(screen); loadMetadata(); loadRuleIndex();loadPlayWeaponProfiles();
+initializeAppNavigation();updateSeedLanguage();render(); showScreen(screen); loadMetadata(); loadRuleIndex();loadPlayWeaponProfiles();loadRuleSummaryOverrides();
 document.addEventListener('tow-language-change',()=>{if(armyData)renderCatalog();render();});

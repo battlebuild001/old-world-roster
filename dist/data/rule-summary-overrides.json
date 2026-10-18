@@ -1,0 +1,677 @@
+{
+  "special-rules/armour-bane": {
+    "ko": [
+      "투 운드(To Wound)에서 보정 전 주사위가 6이면, 그 운드에 한해 무기의 아머 피어싱(AP)을 {x}만큼 개선합니다."
+    ],
+    "en": [
+      "A natural 6 on a To Wound roll improves the weapon's AP by {x} for that wound only."
+    ],
+    "source": "https://tow.whfb.app/special-rules/armour-bane"
+  },
+  "special-rules/ensorcelled-weapons": {
+    "ko": [
+      "일반 핸드 웨폰 하나를 사용할 때, 그 무기는 매지컬 어택과 AP -1을 얻습니다.",
+      "마법 무기·핸드 웨폰 두 개·다른 종류의 무기에는 적용되지 않으며, 탈것에도 적용되지 않습니다."
+    ],
+    "en": [
+      "A single non-magical hand weapon gains Magical Attacks and AP -1.",
+      "This does not apply to a mount, magic weapon, two hand weapons, or any other weapon type."
+    ],
+    "source": "https://tow.whfb.app/special-rules/ensorcelled-weapons"
+  },
+  "special-rules/chaos-armour-warriors-of-chaos": {
+    "ko": [
+      "받는 모든 운드에 대해 규칙명에 표기된 {x} 와드 세이브를 사용할 수 있습니다.",
+      "이 규칙을 가진 위저드는 아머를 입어도 페널티를 받지 않습니다."
+    ],
+    "en": [
+      "Gain the {x} Ward save shown in the rule's name against any wounds suffered.",
+      "A Wizard with this rule can wear armour without penalty."
+    ],
+    "source": "https://tow.whfb.app/special-rules/chaos-armour-warriors-of-chaos"
+  },
+  "special-rules/chaos-armour-daemons-of-chaos": {
+    "ko": [
+      "받는 모든 운드에 대해 4+ 와드 세이브를 사용할 수 있습니다.",
+      "이 규칙을 가진 위저드는 아머를 입어도 페널티를 받지 않습니다."
+    ],
+    "en": [
+      "Gain a 4+ Ward save against any wounds suffered.",
+      "A Wizard with this rule can wear armour without penalty."
+    ],
+    "source": "https://tow.whfb.app/special-rules/chaos-armour-daemons-of-chaos"
+  },
+  "special-rules/strike-first": {
+    "ko": [
+      "컴뱃 페이즈에서 교전 중이면, 다른 보정을 적용하기 전에 이니셔티브(I)를 10으로 만듭니다.",
+      "스트라이크 라스트도 함께 있으면 두 규칙은 서로 상쇄됩니다."
+    ],
+    "en": [
+      "While engaged in the Combat phase, set Initiative to 10 before applying other modifiers.",
+      "If the model also has Strike Last, the two rules cancel each other."
+    ],
+    "source": "https://tow.whfb.app/special-rules/strike-first"
+  },
+  "special-rules/strike-last": {
+    "ko": [
+      "컴뱃 페이즈에서 교전 중이면, 다른 보정을 적용하기 전에 이니셔티브(I)를 1로 만듭니다.",
+      "스트라이크 퍼스트도 함께 있으면 두 규칙은 서로 상쇄됩니다."
+    ],
+    "en": [
+      "While engaged in the Combat phase, set Initiative to 1 before applying other modifiers.",
+      "If the model also has Strike First, the two rules cancel each other."
+    ],
+    "source": "https://tow.whfb.app/special-rules/strike-last"
+  },
+  "special-rules/requires-two-hands": {
+    "ko": [
+      "컴뱃 페이즈에서 이 무기를 사용하는 동안에는 실드를 함께 사용할 수 없습니다.",
+      "다른 페이즈의 사격·마법으로 받는 운드에는 실드를 사용할 수 있습니다."
+    ],
+    "en": [
+      "A shield cannot be used alongside this weapon during the Combat phase.",
+      "The shield can still protect against shooting or magic wounds in other phases."
+    ],
+    "source": "https://tow.whfb.app/special-rules/requires-two-hands"
+  },
+  "special-rules/magical-attacks": {
+    "ko": [
+      "이 규칙이 있는 모델이 가하는 공격·힛, 또는 이 규칙이 있는 무기로 하는 공격은 매지컬 어택입니다.",
+      "모든 스펠과 마법 아이템이 발생시키는 힛도 매지컬 어택으로 취급합니다."
+    ],
+    "en": [
+      "Attacks or hits caused by this model, or attacks made with this weapon, count as Magical attacks.",
+      "All spells and hits caused by magic items also count as Magical attacks."
+    ],
+    "source": "https://tow.whfb.app/special-rules/magical-attacks"
+  },
+  "special-rules/frenzy": {
+    "ko": [
+      "차지한 턴 또는 팔로 업한 다음 턴에 어택(A) +1. 기병의 탈것·채리엇 견인수·몬스터의 라이더에는 이 보정이 적용되지 않습니다.",
+      "프렌지 모델이 하나라도 있는 유닛은 가능한 차지를 선언해야 합니다. 과반수가 프렌지이면 피어·패닉·테러 테스트 자동 성공, 플리 반응과 리스트레인트 테스트 선택 불가.",
+      "컴뱃 한 라운드에서 패배한 모델은 즉시 프렌지를 잃습니다."
+    ],
+    "en": [
+      "Gain +1 Attack in a turn the model charged, or in the turn after it followed up. This bonus does not extend to a cavalry mount, chariot beasts, or a monster's rider.",
+      "A unit containing any Frenzied model must declare an available charge. A Frenzied majority automatically passes Fear, Panic and Terror tests, and cannot choose Flee or a Restraint test.",
+      "A model immediately loses Frenzy after losing a round of combat."
+    ],
+    "source": "https://tow.whfb.app/special-rules/frenzy"
+  },
+  "special-rules/fly": {
+    "ko": [
+      "팔로 업·퍼슈트를 제외한 이동에서 지상 이동 대신 플라이 이동력 {x}를 선택할 수 있습니다. 모델·유닛·지형 위를 지나며, 적 8인치 이내에서도 리더십 테스트 없이 마치할 수 있습니다.",
+      "이동 시작과 끝은 지상이어야 합니다. 다른 유닛·통과 불가 지형 위 또는 적 1인치 이내에서 끝낼 수 없고, 착지한 지형의 효과는 적용됩니다.",
+      "플라이 캐릭터와 플라이가 없는 유닛은 서로 합류할 수 없습니다."
+    ],
+    "en": [
+      "Except when following up or pursuing, choose Fly Movement {x} instead of ground movement. Pass over models, units and terrain; march within 8 inches of enemies without a Leadership test.",
+      "Start and finish on the ground. Do not finish on another unit, on impassable terrain, or within 1 inch of an enemy; landing terrain still affects the model.",
+      "Flying characters and non-flying units cannot join each other."
+    ],
+    "source": "https://tow.whfb.app/special-rules/fly"
+  },
+  "special-rules/swiftstride": {
+    "ko": [
+      "유닛의 모든 모델이 이 규칙을 가지면 최대 차지 가능 거리가 3인치 늘어납니다.",
+      "차지·플리·퍼슈트 굴림 전에 결과에 +D6을 더할지 선택할 수 있습니다."
+    ],
+    "en": [
+      "If every model has this rule, increase the unit's maximum possible charge range by 3 inches.",
+      "Before a Charge, Flee or Pursuit roll, choose whether to add +D6 to the result."
+    ],
+    "source": "https://tow.whfb.app/special-rules/swiftstride"
+  },
+  "special-rules/first-charge": {
+    "ko": [
+      "게임에서 이 유닛의 첫 차지가 성공해 대상과 접촉하면, 그 대상은 이번 턴 컴뱃 페이즈가 끝날 때까지 디스럽티드가 됩니다.",
+      "첫 차지가 실패한 경우 이 효과는 발생하지 않습니다."
+    ],
+    "en": [
+      "If this unit's first charge of the game contacts its target, that target becomes Disrupted until the end of this turn's Combat phase.",
+      "A failed first charge does not trigger the effect."
+    ],
+    "source": "https://tow.whfb.app/special-rules/first-charge"
+  },
+  "special-rules/counter-charge": {
+    "ko": [
+      "전원이 이 규칙을 가진 유닛이 정면으로 기병·채리엇·몬스터의 차지를 받으면 선택할 수 있습니다. 두 유닛 사이 거리가 차지하는 적의 이동력보다 짧으면 홀드·플리만 가능합니다.",
+      "적 유닛의 중앙을 향하도록 피벗한 뒤 D3+1인치 전진합니다. 양쪽 모두 이번 턴 차지한 것으로 취급합니다.",
+      "플리 중이거나 이미 교전 중이면 불가. 턴당 한 차지에만 사용하며, 다른 차지에는 홀드합니다."
+    ],
+    "en": [
+      "An all-Counter Charge unit may react to a frontal charge by cavalry, chariots or monsters. If the separation is less than the charger's Movement, choose Hold or Flee instead.",
+      "Pivot towards the charger's centre, then move D3+1 inches directly towards it. Both units count as charging this turn.",
+      "Unavailable while fleeing or already engaged; counter only one charge per turn and Hold against the others."
+    ],
+    "source": "https://tow.whfb.app/special-rules/counter-charge"
+  },
+  "special-rules/close-order": {
+    "ko": [
+      "이 규칙을 가진 모델로 구성된 유닛은 클로즈 오더 포메이션을 사용할 수 있습니다."
+    ],
+    "en": [
+      "A unit made up of models with this rule may adopt a Close Order formation."
+    ],
+    "source": "https://tow.whfb.app/special-rules/close-order"
+  },
+  "special-rules/open-order": {
+    "ko": [
+      "이 규칙을 가진 모델로 구성된 유닛은 오픈 오더 포메이션을 사용할 수 있습니다."
+    ],
+    "en": [
+      "A unit made up of models with this rule may adopt an Open Order formation."
+    ],
+    "source": "https://tow.whfb.app/special-rules/open-order"
+  },
+  "special-rules/warband": {
+    "ko": [
+      "플리 중이 아니면 현재 랭크 보너스만큼 리더십(Ld)이 올라가며, 최대 10입니다. 리스트레인트·임페추어스 차지 테스트에는 이 보정을 쓰지 않습니다.",
+      "과반수가 워밴드이면 차지 굴림을 재굴림할 수 있습니다.",
+      "워밴드가 없는 캐릭터의 Ld는 보정하지 않습니다. 유닛 자신의 보정 Ld·워밴드 캐릭터의 보정 Ld·일반 캐릭터의 원래 Ld 중 가장 높은 값을 사용합니다."
+    ],
+    "en": [
+      "While not fleeing, add the current Rank Bonus to Leadership, to a maximum of 10. Do not apply this bonus to Restraint or Impetuous charge tests.",
+      "A Warband majority allows the unit to re-roll its Charge roll.",
+      "Do not modify a non-Warband character's Leadership. Use the highest of the unit's modified Leadership, a Warband character's modified Leadership, or another character's unmodified Leadership."
+    ],
+    "source": "https://tow.whfb.app/special-rules/warband"
+  },
+  "special-rules/veteran": {
+    "ko": [
+      "유닛의 과반수가 베테랑이면 실패한 리더십 테스트를 재굴림할 수 있습니다.",
+      "브레이크 테스트는 리더십 테스트가 아니므로 이 재굴림을 적용하지 않습니다."
+    ],
+    "en": [
+      "If a majority of the unit has Veteran, re-roll failed Leadership tests.",
+      "Break tests are not Leadership tests and do not receive this re-roll."
+    ],
+    "source": "https://tow.whfb.app/special-rules/veteran"
+  },
+  "special-rules/stubborn": {
+    "ko": [
+      "처음 브레이크 테스트를 해야 할 때, 테스트 대신 자동으로 폴 백 인 굿 오더를 선택할 수 있습니다. 승리 측 유닛 스트렝스가 두 배를 넘더라도 가능합니다.",
+      "스터번 캐릭터의 합류만으로 일반 유닛이 스터번이 되지는 않으며, 그 캐릭터도 해당 유닛 안에서는 이 규칙을 쓰지 못합니다."
+    ],
+    "en": [
+      "The first time a Break test is required, choose to Fall Back in Good Order automatically instead, even when the winners have more than twice the losers' Unit Strength.",
+      "A Stubborn character does not grant Stubborn to another unit and cannot use it while in a non-Stubborn unit."
+    ],
+    "source": "https://tow.whfb.app/special-rules/stubborn"
+  },
+  "special-rules/unbreakable": {
+    "ko": [
+      "컴뱃에서 패배해도 브레이크 테스트를 하지 않고, 자동으로 기브 그라운드합니다.",
+      "언브레이커블 캐릭터와 이 규칙이 없는 유닛은 서로 합류할 수 없습니다."
+    ],
+    "en": [
+      "After losing combat, automatically Give Ground instead of taking a Break test.",
+      "Unbreakable characters and non-Unbreakable units cannot join each other."
+    ],
+    "source": "https://tow.whfb.app/special-rules/unbreakable"
+  },
+  "special-rules/fear": {
+    "ko": [
+      "유닛 스트렝스가 더 높은 피어 유닛에 차지하려면 먼저 Ld 테스트. 실패하면 이동하지 않고 차지 실패로 취급합니다.",
+      "더 강한 피어 유닛과의 컴뱃을 선택할 때도 Ld 테스트. 실패하면 그 적을 향한 투 힛에 -1이 적용됩니다. 피어 테스트는 턴당 한 번만 합니다.",
+      "피어 모델은 피어에 면역이지만, 피어 캐릭터의 합류만으로 유닛 전체가 면역이 되지는 않습니다."
+    ],
+    "en": [
+      "Before charging a Fear-causing unit with higher Unit Strength, pass a Leadership test or stay still and count as failing the charge.",
+      "When fighting such an enemy, fail a Leadership test and suffer -1 To Hit against it. Take only one Fear test per turn.",
+      "Fear-causing models are immune to Fear, but a Fear-causing character does not make the whole unit immune."
+    ],
+    "source": "https://tow.whfb.app/special-rules/fear"
+  },
+  "special-rules/terror": {
+    "ko": [
+      "테러 유닛이 차지를 선언하면 대상은 즉시 Ld 테스트를 하며, 실패하면 플리합니다. 플리를 선택할 수 없는 대상은 이 테스트를 하지 않습니다.",
+      "컴뱃 승리 측에 테러 유닛이 있으면 패배 측 각 유닛의 브레이크 테스트 Ld에 -1이 적용됩니다.",
+      "테러는 피어도 유발합니다. 테러 모델은 테러에 면역이지만, 캐릭터의 합류만으로 유닛 전체에 면역을 주지는 않습니다."
+    ],
+    "en": [
+      "When a Terror unit declares a charge, its target immediately tests Leadership and must Flee on failure. Targets unable to choose Flee do not take this test.",
+      "If the winning side includes Terror, each losing unit suffers -1 Leadership for its Break test.",
+      "Terror also causes Fear. Terror models are immune to Terror, but a character does not grant that immunity to its unit."
+    ],
+    "source": "https://tow.whfb.app/special-rules/terror"
+  },
+  "special-rules/regeneration": {
+    "ko": [
+      "운드를 잃은 직후, W가 0인 모델을 제거하기 전에 D6을 굴려 표기된 {x} 이상이면 잃은 운드를 회복합니다.",
+      "회복한 운드도 컴뱃 결과 계산에는 포함됩니다. 별도 명시가 없으면 아머 수치에 대한 규칙은 리제너레이션 수치를 바꾸지 않습니다."
+    ],
+    "en": [
+      "Immediately after losing a Wound, before removing a model at zero Wounds, roll D6; meet the listed {x} threshold to recover that Wound.",
+      "Recovered wounds still count towards the combat result. Armour-value rules do not change Regeneration values unless stated."
+    ],
+    "source": "https://tow.whfb.app/special-rules/regeneration"
+  },
+  "special-rules/magic-resistance": {
+    "ko": [
+      "이 규칙을 가진 모델이 포함된 유닛을 대상으로 하는 적 스펠의 캐스팅 굴림에 표기된 {x} 보정을 적용합니다. 바운드 스펠도 포함합니다.",
+      "중첩하지 않습니다. 유닛 안에 여러 수치가 있으면 가장 강한 보정 하나만 적용합니다."
+    ],
+    "en": [
+      "Apply the listed {x} modifier to enemy Casting rolls targeting a unit containing this rule, including Bound spells.",
+      "The modifiers do not stack; use only the strongest one in the unit."
+    ],
+    "source": "https://tow.whfb.app/special-rules/magic-resistance"
+  },
+  "special-rules/impact-hits": {
+    "ko": [
+      "3인치 이상 차지 이동하고 적과 베이스 접촉한 모델만 임팩트 힛 {x}회를 가합니다.",
+      "컴뱃 선택 단계 1.1에서 챌린지 전에 차지 대상을 상대로 해결합니다. 자동 명중하며 모델의 보정 전 스트렝스(S)를 사용합니다."
+    ],
+    "en": [
+      "A model must charge at least 3 inches and be in base contact to cause {x} Impact Hits.",
+      "Resolve against the charged unit at combat selection, Step 1.1, before challenges. Hits are automatic and use unmodified Strength."
+    ],
+    "source": "https://tow.whfb.app/special-rules/impact-hits"
+  },
+  "special-rules/stomp-attacks": {
+    "ko": [
+      "적과 베이스 접촉한 모델이 스톰프 어택 {x}회를 가합니다.",
+      "이니셔티브 1의 공격을 포함해 다른 모든 공격이 끝난 뒤 해결합니다. 자동 명중하며 모델의 보정 전 스트렝스(S)를 사용합니다."
+    ],
+    "en": [
+      "A model in base contact makes {x} Stomp Attacks.",
+      "Resolve after all other attacks, including Initiative 1 attacks. They hit automatically and use unmodified Strength."
+    ],
+    "source": "https://tow.whfb.app/special-rules/stomp-attacks"
+  },
+  "special-rules/poisoned-attacks": {
+    "ko": [
+      "투 힛(To Hit)에서 보정 전 주사위가 6이면 그 힛의 투 운드에 +2를 적용할 수 있습니다. 사격·컴뱃 모두 적용하며 자동 운드를 주는 규칙은 아닙니다.",
+      "스펠·마법 무기 공격에는 적용하지 않습니다. 명중에 7+가 필요하거나 자동 명중하는 공격에도 적용하지 않습니다."
+    ],
+    "en": [
+      "A natural 6 To Hit allows +2 to that hit's To Wound roll, in shooting or combat. This is not an automatic wound.",
+      "Does not affect spells, magic-weapon attacks, attacks needing 7+ To Hit, or automatic hits."
+    ],
+    "source": "https://tow.whfb.app/special-rules/poisoned-attacks"
+  },
+  "special-rules/multiple-wounds": {
+    "ko": [
+      "세이브되지 않은 운드 하나마다 대상이 잃는 운드를 {x}배로 만듭니다. 주사위로 수치를 정하면 세이브되지 않은 운드마다 따로 굴립니다.",
+      "한 모델을 초과한 운드는 다른 모델로 넘어가지 않습니다. 캐릭터에게 가한 초과 운드는 오버킬 계산에 포함됩니다."
+    ],
+    "en": [
+      "Each unsaved wound causes {x} Wounds lost. If the multiplier is random, roll separately for each unsaved wound.",
+      "Excess wounds do not spill onto other models; excess wounds against a character count for Overkill."
+    ],
+    "source": "https://tow.whfb.app/special-rules/multiple-wounds"
+  },
+  "special-rules/killing-blow": {
+    "ko": [
+      "컴뱃 공격의 투 운드에서 보정 전 6이면, 인팬트리·캐벌리 대상은 아머·리제너레이션 세이브를 할 수 없습니다. 와드 세이브는 가능합니다.",
+      "그 운드가 세이브되지 않으면 대상은 남은 운드를 전부 잃습니다. 자동 운드 공격에는 발동하지 않습니다."
+    ],
+    "en": [
+      "A natural 6 To Wound in combat denies armour and Regeneration saves to infantry or cavalry; Ward saves remain allowed.",
+      "If that wound is unsaved, the target loses all remaining Wounds. Automatic wounds cannot trigger Killing Blow."
+    ],
+    "source": "https://tow.whfb.app/special-rules/killing-blow"
+  },
+  "special-rules/monster-slayer": {
+    "ko": [
+      "컴뱃 공격의 투 운드에서 보정 전 6이면, 몬스터 대상은 아머·리제너레이션 세이브를 할 수 없습니다. 와드 세이브는 가능합니다.",
+      "그 운드가 세이브되지 않으면 대상은 남은 운드를 전부 잃습니다. 자동 운드 공격에는 발동하지 않습니다."
+    ],
+    "en": [
+      "A natural 6 To Wound in combat denies armour and Regeneration saves to monsters; Ward saves remain allowed.",
+      "If that wound is unsaved, the monster loses all remaining Wounds. Automatic wounds cannot trigger this rule."
+    ],
+    "source": "https://tow.whfb.app/special-rules/monster-slayer"
+  },
+  "special-rules/hatred": {
+    "ko": [
+      "컴뱃 첫 라운드에, 규칙명 괄호에 명시된 적을 향한 실패한 투 힛 굴림을 재굴림할 수 있습니다.",
+      "‘모든 적’으로 명시된 경우 모든 적 모델을 대상으로 적용합니다."
+    ],
+    "en": [
+      "In the first round of combat, re-roll failed To Hit rolls against the enemies named in brackets.",
+      "If the rule names 'all enemies', it applies against every enemy model."
+    ],
+    "source": "https://tow.whfb.app/special-rules/hatred"
+  },
+  "special-rules/stupidity": {
+    "ko": [
+      "자신의 스타트 오브 턴에 플리·교전 중이 아니면 Ld 테스트를 합니다. 실패하면 다음 자신의 스타트 오브 턴까지 스튜피디티에 빠집니다.",
+      "그동안 플리 외 이동·사격·스펠 시전·위저들리 디스펠 불가, 차지를 받으면 홀드해야 합니다.",
+      "이 규칙이 있는 캐릭터가 합류하거나 타면, 원래 규칙이 없던 유닛·탈것도 영향을 받습니다."
+    ],
+    "en": [
+      "At each own Start of Turn, test Leadership unless fleeing or engaged. Failure causes Stupidity until the next own Start of Turn.",
+      "While affected, no movement except fleeing, shooting, spellcasting or Wizardly dispelling; Hold if charged.",
+      "A character with Stupidity also subjects a joined unit or ridden mount to it."
+    ],
+    "source": "https://tow.whfb.app/special-rules/stupidity"
+  },
+  "special-rules/skirmishers": {
+    "ko": [
+      "이 규칙을 가진 모델로 구성된 유닛은 스커미시 포메이션을 사용할 수 있습니다."
+    ],
+    "en": [
+      "A unit made up of models with this rule may adopt a Skirmish formation."
+    ],
+    "source": "https://tow.whfb.app/special-rules/skirmishers"
+  },
+  "special-rules/move-through-cover": {
+    "ko": [
+      "어렵거나 위험한 지형을 통과해도 이동력(M) 보정을 받지 않습니다.",
+      "데인저러스 터레인 테스트에서 나온 1을 재굴림할 수 있습니다. 위험 지형 테스트 자체를 면제하지는 않습니다."
+    ],
+    "en": [
+      "Ignore Movement-characteristic modifiers for difficult or dangerous terrain.",
+      "Re-roll rolls of 1 on Dangerous Terrain tests; the tests themselves are still required."
+    ],
+    "source": "https://tow.whfb.app/special-rules/move-through-cover"
+  },
+  "special-rules/scouts": {
+    "ko": [
+      "양쪽의 일반 배치가 끝난 뒤, 모든 적 모델로부터 12인치보다 먼 전장 위치에 배치할 수 있습니다. 이렇게 배치하면 자신의 첫 턴에 차지를 선언할 수 없습니다.",
+      "양쪽 모두 스카우트가 있으면 롤 오프 승자부터 유닛을 하나씩 번갈아 배치합니다."
+    ],
+    "en": [
+      "Deploy after other units, anywhere more than 12 inches from every enemy model. Scouts deployed this way cannot declare a charge in their first turn.",
+      "If both sides have Scouts, the roll-off winner starts and players alternate deploying one Scout unit at a time."
+    ],
+    "source": "https://tow.whfb.app/special-rules/scouts"
+  },
+  "special-rules/vanguard": {
+    "ko": [
+      "배치 후 기본 이동 규칙에 따라 뱅가드 이동을 할 수 있습니다. 정상 기동은 가능하지만 마치는 불가하며, 이동한 유닛은 자신의 첫 턴에 차지를 선언할 수 없습니다.",
+      "양쪽 모두 뱅가드가 있으면 롤 오프 승자부터 유닛을 하나씩 번갈아 이동합니다."
+    ],
+    "en": [
+      "After deployment, make a Vanguard move using Basic Movement: manoeuvres allowed, marching forbidden. A unit that moves cannot declare a charge in its first turn.",
+      "If both sides have Vanguard, the roll-off winner starts and players alternate moving one unit at a time."
+    ],
+    "source": "https://tow.whfb.app/special-rules/vanguard"
+  },
+  "special-rules/ambushers": {
+    "ko": [
+      "시작 배치 대신 리저브에 둘 수 있습니다. 2라운드부터 자신의 스타트 오브 턴마다 유닛별 D6: 4+면 도착, 1–3이면 지연됩니다. 5라운드 시작까지 남아 있으면 자동 도착합니다.",
+      "컴펄서리 무브에서 리인포스먼트로 진입합니다. 원하는 전장 가장자리를 쓰되 적 모델 8인치 이내에는 배치할 수 없습니다."
+    ],
+    "en": [
+      "May start in reserve. From round two, roll D6 for each unit at each own Start of Turn: arrive on 4+, delay on 1–3. Any still in reserve at the start of round five arrive automatically.",
+      "Enter as reinforcements in Compulsory Moves, from a chosen battlefield edge and not within 8 inches of an enemy model."
+    ],
+    "source": "https://tow.whfb.app/special-rules/ambushers"
+  },
+  "special-rules/flammable": {
+    "ko": [
+      "플레이밍 어택으로 받은 운드에는 리제너레이션 세이브를 할 수 없습니다."
+    ],
+    "en": [
+      "Cannot make Regeneration saves against wounds caused by Flaming attacks."
+    ],
+    "source": "https://tow.whfb.app/special-rules/flammable"
+  },
+  "special-rules/flaming-attacks": {
+    "ko": [
+      "이 모델의 공격·힛 또는 이 규칙이 있는 무기·스펠의 공격은 플레이밍 어택입니다. 이 규칙이 있는 모델은 워 비스트·스웜에게 피어도 유발합니다.",
+      "일반적으로 사격·컴뱃 모두 적용합니다. 다만 모델의 규칙만으로 시전 스펠이나 마법 무기 공격까지 플레이밍이 되지는 않습니다."
+    ],
+    "en": [
+      "This model's attacks or hits, or attacks using a weapon or spell with this rule, are Flaming. The model also causes Fear in war beasts and swarms.",
+      "Normally applies in shooting and combat, but a model's rule does not make its spells or magic-weapon attacks Flaming unless stated."
+    ],
+    "source": "https://tow.whfb.app/special-rules/flaming-attacks"
+  },
+  "special-rules/immune-to-psychology": {
+    "ko": [
+      "과반수가 이 규칙을 가지면 피어·패닉·테러 테스트에 자동 성공합니다.",
+      "그 대신 차지 반응으로 플리를 선택할 수 없습니다. 다른 종류의 Ld 테스트까지 면역이 되는 것은 아닙니다."
+    ],
+    "en": [
+      "A majority with this rule automatically passes Fear, Panic and Terror tests.",
+      "The unit cannot choose Flee as a charge reaction. Other Leadership tests are not covered."
+    ],
+    "source": "https://tow.whfb.app/special-rules/immune-to-psychology"
+  },
+  "special-rules/large-target": {
+    "ko": [
+      "라지 타겟은 부분·완전 엄폐 혜택을 받지 못합니다.",
+      "다른 라지 타겟이 아닌 유닛 너머로 라지 타겟을 볼 수 있고, 라지 타겟도 그 너머를 볼 수 있습니다.",
+      "라지 타겟을 사격하는 유닛은 한 랭크를 추가해 사격할 수 있습니다."
+    ],
+    "en": [
+      "Large Targets receive no partial or full cover benefit.",
+      "Units can see to and from a Large Target over or through another unit that is not itself a Large Target.",
+      "A unit shooting at a Large Target may fire with one additional rank."
+    ],
+    "source": "https://tow.whfb.app/special-rules/large-target"
+  },
+  "special-rules/drilled": {
+    "ko": [
+      "플리 중이 아니면 이동 직전에 리드레스 더 랭크스 기동을 무료로 하고 정상 이동할 수 있습니다.",
+      "적 8인치 이내에서도 Ld 테스트 없이 마치할 수 있습니다. 합류한 캐릭터도 드릴드로 취급합니다."
+    ],
+    "en": [
+      "While not fleeing, freely redress the ranks immediately before moving, then move normally.",
+      "March within 8 inches of enemies without a Leadership test. Joined characters also count as Drilled."
+    ],
+    "source": "https://tow.whfb.app/special-rules/drilled"
+  },
+  "special-rules/rallying-cry": {
+    "ko": [
+      "자신의 커맨드 하위 단계에, 교전 중이 아닌 캐릭터가 커맨드 레인지 내 아군 플리 유닛 하나를 골라 즉시 랠리 테스트를 시킵니다.",
+      "실패해도 이후 랠리 하위 단계에서 정상적으로 다시 랠리를 시도할 수 있습니다."
+    ],
+    "en": [
+      "In the own Command sub-phase, an unengaged character chooses one fleeing friendly unit in Command range to immediately take a Rally test.",
+      "If it fails, that unit can still attempt its normal Rally test in the Rally sub-phase."
+    ],
+    "source": "https://tow.whfb.app/special-rules/rallying-cry"
+  },
+  "special-rules/armoured-hide": {
+    "ko": [
+      "모델과 라이더의 아머 수치를 규칙명에 표시된 {x}만큼 개선합니다.",
+      "이처럼 아머를 개선하는 규칙을 계산할 때, 아머가 없는 모델의 기본 수치는 7+로 취급합니다."
+    ],
+    "en": [
+      "Improve the model's and its rider's armour value by the listed {x}.",
+      "For armour-improving rules, an unarmoured model starts from an armour value of 7+."
+    ],
+    "source": "https://tow.whfb.app/special-rules/armoured-hide"
+  },
+  "special-rules/random-movement": {
+    "ko": [
+      "컴펄서리 무브에서 표기된 주사위를 굴려 최대 이동 거리를 정합니다. 마치·차지 선언은 불가하며, 기동은 휠만 가능합니다.",
+      "컴펄서리 무브나 퍼슈트 중 적과 접촉할 수 있으면 접촉하고 정렬한 뒤 멈추며 차지한 것으로 취급합니다. 대상은 홀드해야 합니다.",
+      "전원이 이 규칙을 가지면 유닛당 한 번 굴립니다. 서로 다른 랜덤 무브먼트 수치가 섞여 있으면 각각 굴린 결과 중 가장 낮은 값을 씁니다."
+    ],
+    "en": [
+      "In Compulsory Moves, roll the listed dice for maximum movement. No marching or charge declaration; wheeling is the only manoeuvre allowed.",
+      "Contact an enemy during Compulsory Moves or pursuit to align, stop and count as charging; the target must Hold.",
+      "Roll once for an all-Random Movement unit. If different Random Movement values are present, roll each and use the lowest result."
+    ],
+    "source": "https://tow.whfb.app/special-rules/random-movement"
+  },
+  "special-rules/random-attacks": {
+    "ko": [
+      "컴뱃에서 공격할 때마다 표기된 주사위를 굴려 어택(A) 횟수를 정한 뒤 정상적으로 투 힛을 굴립니다.",
+      "파이팅 랭크에 해당 모델이 여러 개면, 별도 명시가 없는 한 모델마다 따로 굴립니다."
+    ],
+    "en": [
+      "Each time the model attacks in combat, roll the listed dice for its number of Attacks, then roll To Hit normally.",
+      "Roll separately for each affected model in a fighting rank unless specified otherwise."
+    ],
+    "source": "https://tow.whfb.app/special-rules/random-attacks"
+  },
+  "special-rules/impetuous": {
+    "ko": [
+      "자신의 차지 선언 하위 단계에, 임페추어스 모델이 하나라도 있는 유닛이 차지할 수 있으면 Ld 테스트를 합니다.",
+      "실패하면 차지를 선언해야 하며, 성공하면 정상적으로 행동할 수 있습니다."
+    ],
+    "en": [
+      "In the own Declare Charges sub-phase, a unit containing any Impetuous model tests Leadership if it can declare a charge.",
+      "Failure requires a charge declaration; success allows normal choices."
+    ],
+    "source": "https://tow.whfb.app/special-rules/impetuous"
+  },
+  "special-rules/shieldwall": {
+    "ko": [
+      "게임당 한 번, 차지를 받은 턴에 폴 백 인 굿 오더 대신 기브 그라운드를 선택할 수 있습니다.",
+      "클로즈 오더 포메이션이며, 실드를 장비하고 실제로 사용 중이어야 합니다."
+    ],
+    "en": [
+      "Once per game, in a turn the unit was charged, choose Give Ground instead of Fall Back in Good Order.",
+      "Requires Close Order formation and shields that are both equipped and being used."
+    ],
+    "source": "https://tow.whfb.app/special-rules/shieldwall"
+  },
+  "special-rules/levies": {
+    "ko": [
+      "제너럴의 인스파이어링 프레즌스와 배틀 스탠더드의 홀드 유어 그라운드를 사용할 수 없습니다.",
+      "아군 레비 유닛이 컴뱃에서 브레이크해 플리해도, 레비가 아닌 아군 유닛은 그로 인한 패닉 테스트를 하지 않습니다."
+    ],
+    "en": [
+      "Cannot use the General's Inspiring Presence or the Battle Standard's Hold your Ground.",
+      "Non-Levy friendly units do not take Panic tests when a friendly Levy unit Breaks and flees from combat."
+    ],
+    "source": "https://tow.whfb.app/special-rules/levies"
+  },
+  "special-rules/reserve-move": {
+    "ko": [
+      "과반수가 이 규칙을 가지고, 이번 무브먼트 페이즈에 차지·마치·플리하지 않은 유닛은 모든 사격이 끝난 슈팅 페이즈 마지막에 추가 이동할 수 있습니다.",
+      "기본 이동과 정상 기동을 사용하되 마치는 할 수 없습니다."
+    ],
+    "en": [
+      "After all shooting in the own Shooting phase, a majority-Reserve Move unit may move if it did not charge, march or flee in the Movement phase.",
+      "Use Basic Movement with normal manoeuvres, but no marching."
+    ],
+    "source": "https://tow.whfb.app/special-rules/reserve-move"
+  },
+  "special-rules/ethereal": {
+    "ko": [
+      "이동할 때 모든 지형을 오픈 그라운드로 취급합니다. 통과 불가 지형도 지나갈 수 있지만 그 안에서 이동을 끝낼 수는 없습니다.",
+      "매지컬 어택으로만 운드를 입습니다. 에테리얼 캐릭터와 이 규칙이 없는 유닛은 서로 합류할 수 없습니다."
+    ],
+    "en": [
+      "Treat all terrain as open ground for movement; pass through impassable terrain but do not finish inside it.",
+      "Only Magical attacks can wound the model. Ethereal characters and non-Ethereal units cannot join each other."
+    ],
+    "source": "https://tow.whfb.app/special-rules/ethereal"
+  },
+  "special-rules/martial-prowess": {
+    "ko": [
+      "컴뱃 첫 라운드에 웨폰 스킬(WS) +1을 얻습니다.",
+      "서포팅 어택을 정면뿐 아니라 측면·후면으로도 할 수 있습니다."
+    ],
+    "en": [
+      "Gain +1 Weapon Skill in the first round of combat.",
+      "Make supporting attacks to the flank or rear as well as the front."
+    ],
+    "source": "https://tow.whfb.app/special-rules/martial-prowess"
+  },
+  "the-shooting-phase/ward-saves": {
+    "ko": [
+      "D6을 굴려 아이템·스펠·특수 규칙에 표시된 와드 수치 이상이면 와드 세이브에 성공합니다.",
+      "별도 명시가 없으면 아머 수치를 바꾸는 규칙은 와드 수치를 바꾸지 않습니다."
+    ],
+    "en": [
+      "Roll D6 and meet or exceed the Warding value given by the item, spell or special rule.",
+      "Rules affecting armour values do not change Warding values unless stated otherwise."
+    ],
+    "source": "https://tow.whfb.app/the-shooting-phase/ward-saves"
+  },
+  "weapons-of-war/lance": {
+    "ko": [
+      "컴뱃 무기: S+2, AP -2, 아머 베인 (1). 캐벌리·몬스터만 사용할 수 있습니다.",
+      "사용자가 차지한 턴에만 사용합니다. S·AP 보정은 이번 턴 사용자가 차지한 적 모델에게만 적용합니다."
+    ],
+    "en": [
+      "Combat weapon: S+2, AP -2, Armour Bane (1); cavalry and monsters only.",
+      "Use only in a turn the wielder charged. Strength and AP modifiers apply only against enemy models the wielder charged that turn."
+    ],
+    "source": "https://tow.whfb.app/weapons-of-war/lance"
+  },
+  "weapons-of-war/great-weapon": {
+    "ko": [
+      "컴뱃 무기: S+2, AP -2, 아머 베인 (1).",
+      "리콰이어즈 투 핸즈와 스트라이크 라스트 적용: 컴뱃 중 실드를 함께 쓸 수 없으며, 다른 보정 전 I는 1입니다. 스트라이크 퍼스트가 있으면 상쇄됩니다."
+    ],
+    "en": [
+      "Combat weapon: S+2, AP -2, Armour Bane (1).",
+      "Requires Two Hands and Strike Last: no shield alongside it in combat; Initiative becomes 1 before modifiers. Strike First cancels Strike Last."
+    ],
+    "source": "https://tow.whfb.app/weapons-of-war/great-weapon"
+  },
+  "weapons-of-war/shield": {
+    "ko": [
+      "실드는 아머 수치를 1만큼 개선합니다. 예: 라이트 아머 6+ → 실드와 함께 5+.",
+      "컴뱃에서 리콰이어즈 투 핸즈 무기를 사용하는 동안에는 실드를 함께 사용할 수 없습니다."
+    ],
+    "en": [
+      "Improve armour value by 1; for example, light armour 6+ becomes 5+ with a shield.",
+      "Cannot be used alongside a Requires Two Hands weapon in combat."
+    ],
+    "source": "https://tow.whfb.app/weapons-of-war/shield"
+  },
+  "weapons-of-war/light-armour": {
+    "ko": [
+      "기본 아머 수치는 6+입니다."
+    ],
+    "en": [
+      "Provides a base armour value of 6+."
+    ],
+    "source": "https://tow.whfb.app/weapons-of-war/light-armour"
+  },
+  "weapons-of-war/heavy-armour": {
+    "ko": [
+      "기본 아머 수치는 5+입니다."
+    ],
+    "en": [
+      "Provides a base armour value of 5+."
+    ],
+    "source": "https://tow.whfb.app/weapons-of-war/heavy-armour"
+  },
+  "weapons-of-war/full-plate-armour": {
+    "ko": [
+      "기본 아머 수치는 4+입니다."
+    ],
+    "en": [
+      "Provides a base armour value of 4+."
+    ],
+    "source": "https://tow.whfb.app/weapons-of-war/full-plate-armour"
+  },
+  "weapons-of-war/hand-weapon": {
+    "ko": [
+      "컴뱃 무기: 사용자의 S를 사용하며 AP 보정은 없습니다.",
+      "별도 명시가 없으면 모든 모델은 핸드 웨폰을 장비한 것으로 취급합니다."
+    ],
+    "en": [
+      "Combat weapon: uses the wielder's Strength, with no AP modifier.",
+      "All models are assumed to have a hand weapon unless stated otherwise."
+    ],
+    "source": "https://tow.whfb.app/weapons-of-war/hand-weapon"
+  },
+  "magic/casting-spells": {
+    "ko": [
+      "인챈트먼트·헥스: 자신의 스트래티지 페이즈 컨저레이션. 컨베이언스: 자신의 무브먼트 페이즈 리메이닝 무브 중 언제든지.",
+      "매직 미사일·매지컬 보텍스: 자신의 슈팅 페이즈에 위저드를 선택할 때. 어세일먼트: 어느 쪽 컴뱃 페이즈든 위저드가 싸울 때.",
+      "턴당 위저드 레벨만큼 시전을 시도하며, 각 스펠은 턴당 한 번만 시도합니다. 교전 중에는 별도 명시가 없는 한 어세일먼트·사거리 셀프 스펠만 가능. 시전할 스펠과 필요한 대상을 먼저 선언합니다."
+    ],
+    "en": [
+      "Enchantment and Hex: own Strategy phase, Conjuration. Conveyance: at any point in own Movement phase, Remaining Moves.",
+      "Magic Missiles and Magical Vortex: when choosing the Wizard in own Shooting phase. Assailment: when the Wizard fights in either Combat phase.",
+      "Attempt up to the Wizard's level of spells per turn, each spell at most once. While engaged, only Assailment or range Self spells unless stated otherwise. Declare the spell and any required target first."
+    ],
+    "source": "https://tow.whfb.app/magic/casting-spells"
+  },
+  "weapons-of-war/flail": {
+    "ko": [
+      "컴뱃 무기: S+2, AP -2, 아머 베인 (1), 리콰이어즈 투 핸즈.",
+      "S+2와 아머 베인 (1)은 이번 턴 사용자가 차지한 적 모델을 상대로만 적용합니다. 컴뱃에서는 실드를 함께 사용할 수 없습니다."
+    ],
+    "en": [
+      "Combat weapon: S+2, AP -2, Armour Bane (1), Requires Two Hands.",
+      "The Strength bonus and Armour Bane (1) apply only against enemy models charged by the wielder this turn. No shield alongside it in combat."
+    ],
+    "source": "https://tow.whfb.app/weapons-of-war/flail"
+  }
+}

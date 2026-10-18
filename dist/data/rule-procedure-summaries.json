@@ -1,0 +1,389 @@
+{
+  "general-principles/natural-rolls": {
+    "ko": [
+      "‘자연 눈’은 수정치를 적용하기 전, 주사위에 실제로 나온 숫자입니다."
+    ],
+    "en": [
+      "A natural roll uses the number on the dice before modifiers."
+    ],
+    "source": "https://tow.whfb.app/general-principles/natural-rolls"
+  },
+  "general-principles/re-rolls": {
+    "ko": [
+      "리롤 결과는 처음보다 나빠도 그대로 사용하며, 같은 주사위는 한 번만 리롤할 수 있습니다.",
+      "여러 주사위를 함께 굴린 판정은 별도 지시가 없으면 전부 다시 굴립니다."
+    ],
+    "en": [
+      "Keep the new result even if it is worse; each die can be re-rolled only once.",
+      "Re-roll every die in a multi-dice roll unless the granting rule says otherwise."
+    ],
+    "source": "https://tow.whfb.app/general-principles/re-rolls"
+  },
+  "model-profiles/characteristic-tests": {
+    "ko": [
+      "D6 결과가 해당 능력치 이하면 성공합니다. 능력치가 여러 개면 가장 높은 값을 씁니다.",
+      "자연 1은 성공, 자연 6은 실패입니다. 단, 능력치가 0 또는 ‘–’이면 자동 실패합니다."
+    ],
+    "en": [
+      "Pass by rolling at or below the characteristic on D6; use the highest available value.",
+      "Natural 1 passes and natural 6 fails; a value of 0 or “–” instead fails automatically."
+    ],
+    "source": "https://tow.whfb.app/model-profiles/characteristic-tests"
+  },
+  "model-profiles/leadership-tests": {
+    "ko": [
+      "2D6 합이 리더십(Ld) 이하면 성공합니다. 유닛 안에서는 가장 높은 Ld를 씁니다.",
+      "수정치와 관계없이 자연 더블 1은 성공, 자연 더블 6은 실패입니다."
+    ],
+    "en": [
+      "Roll 2D6 at or below Leadership; a unit uses its highest Ld.",
+      "Natural double 1 passes and natural double 6 fails, irrespective of modifiers."
+    ],
+    "source": "https://tow.whfb.app/model-profiles/leadership-tests"
+  },
+  "the-turn-sequence/the-turn-sequence": {
+    "ko": [
+      "한 플레이어의 턴은 스트래티지 → 무브먼트 → 슈팅 → 컴뱃 순서입니다.",
+      "컴뱃 단계에서 모든 전투를 처리하면 그 플레이어의 턴이 끝납니다."
+    ],
+    "en": [
+      "A player turn proceeds Strategy → Movement → Shooting → Combat.",
+      "The active player’s turn ends after every combat has been resolved."
+    ],
+    "source": "https://tow.whfb.app/the-turn-sequence/the-turn-sequence"
+  },
+  "the-strategy-phase/the-strategy-phase-sequence": {
+    "ko": [
+      "턴 시작 행동·판정 → 커맨드 → 컨저레이션 → 도주 유닛 랠리 순서입니다.",
+      "인챈트먼트와 헥스 주문은 컨저레이션에서 시전합니다. 하위 단계를 끝낸 뒤 다음으로 갑니다."
+    ],
+    "en": [
+      "Resolve Start of Turn → Command → Conjuration → Rally Fleeing Troops.",
+      "Cast Enchantment and Hex spells during Conjuration; finish each sub-phase before advancing."
+    ],
+    "source": "https://tow.whfb.app/the-strategy-phase/the-strategy-phase-sequence"
+  },
+  "the-movement-phase/the-movement-phase-sequence": {
+    "ko": [
+      "돌격 선언·반응 → 돌격 이동 → 강제 이동 → 나머지 이동 순서입니다.",
+      "모든 돌격 선언을 마친 뒤 상대가 반응을 선언·해결합니다. 하위 단계 안에서 유닛 처리 순서를 고릅니다."
+    ],
+    "en": [
+      "Resolve charge declarations/reactions → Charge Moves → Compulsory Moves → Remaining Moves.",
+      "Declare all charges before the opponent declares and resolves reactions; choose unit order within each sub-phase."
+    ],
+    "source": "https://tow.whfb.app/the-movement-phase/the-movement-phase-sequence"
+  },
+  "the-shooting-phase/the-shooting-phase-sequence": {
+    "ko": [
+      "유닛 하나씩 목표 선언 → 투 히트 → 투 운드·세이브 → 사상자·패닉까지 전부 처리합니다.",
+      "해당 유닛의 처리를 끝낸 뒤 다음 사격 유닛을 고릅니다."
+    ],
+    "en": [
+      "For one unit, resolve target declaration → hits → wounds/saves → casualties/Panic.",
+      "Complete that unit’s whole sequence before selecting the next shooter."
+    ],
+    "source": "https://tow.whfb.app/the-shooting-phase/the-shooting-phase-sequence"
+  },
+  "the-combat-phase/the-combat-phase-sequence": {
+    "ko": [
+      "전투 하나씩 공격 → 컴뱃 리절트 → 브레이크 테스트 → 후속 이동·추격 순서로 처리합니다.",
+      "기본적으로 이니셔티브(I)가 높은 모델부터 공격하며, 패배한 각 유닛이 브레이크 테스트를 합니다."
+    ],
+    "en": [
+      "Resolve each combat through fighting → combat result → Break tests → follow up/pursuit.",
+      "Models normally fight from highest Initiative down; each losing unit makes its Break test."
+    ],
+    "source": "https://tow.whfb.app/the-combat-phase/the-combat-phase-sequence"
+  },
+  "the-movement-phase/determine-charge-range": {
+    "ko": [
+      "돌격 거리는 무브먼트(M) + D6 두 개 중 높은 눈입니다. 두 주사위를 합산하지 않습니다.",
+      "이 거리로 실제 돌격 이동을 완료하지 못하면 실패한 돌격을 합니다."
+    ],
+    "en": [
+      "Charge range is Movement plus the higher of two D6, not their sum.",
+      "If this movement cannot complete the charge, resolve a failed charge."
+    ],
+    "source": "https://tow.whfb.app/the-movement-phase/determine-charge-range"
+  },
+  "the-movement-phase/failed-charge": {
+    "ko": [
+      "목표 쪽으로 돌격 주사위의 결과만큼 이동합니다. M은 더하지 않으며 필요하면 휠합니다."
+    ],
+    "en": [
+      "Move toward the target by the Charge roll alone, without adding M, wheeling if required."
+    ],
+    "source": "https://tow.whfb.app/the-movement-phase/failed-charge"
+  },
+  "the-movement-phase/stand-and-shoot": {
+    "ko": [
+      "사격 무기와 돌격 유닛을 보는 시야가 있어야 합니다. 거리가 돌격자의 M보다 짧으면 사용할 수 없습니다.",
+      "허용되면 무기 사거리 밖에서도 사격한 뒤 홀드합니다. 도주 중이거나 이미 교전 중인 유닛은 사용할 수 없습니다.",
+      "이 반응으로 사격당한 돌격 유닛은 패닉 테스트를 하지 않습니다."
+    ],
+    "en": [
+      "Requires missile weapons and line of sight; unavailable when the chargers are closer than their M.",
+      "If eligible, shoot even from beyond weapon range, then Hold. Fleeing or already engaged units cannot use it.",
+      "The charging unit does not take Panic tests from this reaction."
+    ],
+    "source": "https://tow.whfb.app/the-movement-phase/stand-and-shoot"
+  },
+  "the-shooting-phase/roll-to-hit-shooting": {
+    "ko": [
+      "각 사격 모델의 D6에 수정치를 적용해 BS 명중값 이상이면 명중합니다.",
+      "BS 1/2/3/4/5의 기본 명중값은 6+/5+/4+/3+/2+입니다. 자연 1은 항상 실패합니다."
+    ],
+    "en": [
+      "For each shooter, roll D6 with applicable modifiers and meet its BS-based To Hit value.",
+      "BS 1/2/3/4/5 normally needs 6+/5+/4+/3+/2+; natural 1 always misses."
+    ],
+    "source": "https://tow.whfb.app/the-shooting-phase/roll-to-hit-shooting"
+  },
+  "the-combat-phase/roll-to-hit-combat": {
+    "ko": [
+      "모델의 어택스(A)만큼 D6을 굴려 공격자와 대상의 WS를 명중표에서 비교합니다.",
+      "수정치 적용 후 요구값 이상이면 명중합니다. 자연 1은 실패, 자연 6은 성공입니다."
+    ],
+    "en": [
+      "Roll one D6 per Attack and compare attacker WS with defender WS on the To Hit chart.",
+      "Meet the required value after modifiers; natural 1 misses and natural 6 hits."
+    ],
+    "source": "https://tow.whfb.app/the-combat-phase/roll-to-hit-combat"
+  },
+  "the-shooting-phase/roll-to-wound-shooting": {
+    "ko": [
+      "명중한 공격마다 D6을 굴려 무기의 스트렝스(S)와 대상의 터프니스(T)를 운드 표에서 비교합니다.",
+      "수정치 적용 후 요구값 이상이면 운드를 입힙니다. 자연 1은 실패하며, 서로 다른 공격 묶음은 계속 구분합니다."
+    ],
+    "en": [
+      "For each hit, roll D6 using weapon Strength against target Toughness on the To Wound chart.",
+      "Meet the required value after modifiers; natural 1 fails. Keep different attack batches separate."
+    ],
+    "source": "https://tow.whfb.app/the-shooting-phase/roll-to-wound-shooting"
+  },
+  "the-combat-phase/roll-to-wound-combat": {
+    "ko": [
+      "명중한 공격마다 D6을 굴려 무기의 스트렝스(S)와 대상의 터프니스(T)를 운드 표에서 비교합니다.",
+      "수정치 적용 후 요구값 이상이면 운드를 입힙니다. 자연 1은 실패하며, 서로 다른 공격 묶음은 계속 구분합니다."
+    ],
+    "en": [
+      "For each hit, roll D6 using weapon Strength against target Toughness on the To Wound chart.",
+      "Meet the required value after modifiers; natural 1 fails. Keep different attack batches separate."
+    ],
+    "source": "https://tow.whfb.app/the-combat-phase/roll-to-wound-combat"
+  },
+  "the-shooting-phase/make-armour-saves-shooting": {
+    "ko": [
+      "입은 운드마다 D6을 굴립니다. 수정 후 결과가 아머 값 이상이면 그 운드를 막습니다.",
+      "자연 1은 수정치와 관계없이 세이브에 실패합니다."
+    ],
+    "en": [
+      "For each wound, roll D6; a modified result meeting the armour value prevents that wound.",
+      "Natural 1 fails the save regardless of modifiers."
+    ],
+    "source": "https://tow.whfb.app/the-shooting-phase/make-armour-saves-shooting"
+  },
+  "the-shooting-phase/armour-piercing": {
+    "ko": [
+      "무기의 AP는 아머 세이브 주사위에 적용하는 음수 수정치입니다.",
+      "예: 아머 5+에 AP −1 공격을 받으면 주사위 6이 필요합니다."
+    ],
+    "en": [
+      "Weapon AP is a negative modifier to the Armour Save roll.",
+      "Example: an armour value of 5+ against AP −1 requires a roll of 6."
+    ],
+    "source": "https://tow.whfb.app/the-shooting-phase/armour-piercing"
+  },
+  "the-shooting-phase/ward-saves": {
+    "ko": [
+      "D6을 굴려 부여된 워드 값 이상이면 해당 운드를 막습니다.",
+      "아머 값에 영향을 주는 규칙은 별도 언급이 없으면 워드 값에 영향을 주지 않습니다."
+    ],
+    "en": [
+      "Roll D6 and meet the granted Warding value to prevent the wound.",
+      "Rules affecting armour values do not alter Warding values unless specifically stated."
+    ],
+    "source": "https://tow.whfb.app/the-shooting-phase/ward-saves"
+  },
+  "the-shooting-phase/more-than-one-save": {
+    "ko": [
+      "아머 세이브를 먼저 합니다. 실패하거나 AP 때문에 성공할 수 없으면 워드 세이브를 합니다.",
+      "워드는 운드당 한 번만 시도합니다. 여러 워드가 있으면 합치지 않고 가장 좋은 것 하나를 씁니다."
+    ],
+    "en": [
+      "Try armour first; if it fails or cannot succeed, try the Ward save.",
+      "Attempt only one Ward save per wound, using the best available value without combining them."
+    ],
+    "source": "https://tow.whfb.app/the-shooting-phase/more-than-one-save"
+  },
+  "the-shooting-phase/make-panic-tests": {
+    "ko": [
+      "한 슈팅 단계 동안, 그 단계 시작 모델 수의 25%를 초과해 잃으면 즉시 패닉 테스트를 합니다.",
+      "유닛의 리더십으로 판정하며, 성공하면 패닉에 빠지지 않습니다."
+    ],
+    "en": [
+      "Immediately test for Panic after losing more than 25% of the models present at the start of that Shooting phase.",
+      "Test against the unit’s Leadership; a pass avoids Panic."
+    ],
+    "source": "https://tow.whfb.app/the-shooting-phase/make-panic-tests"
+  },
+  "the-combat-phase/combat-result-score": {
+    "ko": [
+      "방어하지 못한 운드마다 1점에 해당 대열·깃발·군기·위치·기타 보너스를 더합니다.",
+      "표의 기본 보너스: 깃발 +1, 군기 +1, 측면 +1, 후면 +2, 고지 +1. 각 보너스의 적용 조건도 확인합니다."
+    ],
+    "en": [
+      "Score one point per unsaved wound, then add eligible ranks, standards, position and other bonuses.",
+      "Listed bonuses include standard +1, battle standard +1, flank +1, rear +2 and high ground +1; check their eligibility rules."
+    ],
+    "source": "https://tow.whfb.app/the-combat-phase/combat-result-score"
+  },
+  "the-combat-phase/break-test": {
+    "ko": [
+      "패배한 각 유닛은 2D6에 패배 점수 차이를 더해 Ld와 비교합니다.",
+      "자연 합이 Ld 초과면 패주합니다. 자연 합은 Ld 이하인데 수정 합만 초과하면 폴 백 인 굿 오더입니다.",
+      "수정 합도 Ld 이하이거나 자연 더블 1이면 기브 그라운드입니다."
+    ],
+    "en": [
+      "Each losing unit rolls 2D6, adds the losing margin and compares against Ld.",
+      "Natural total above Ld: break and flee. Natural total within Ld but modified total above it: Fall Back in Good Order.",
+      "Modified total within Ld, or natural double 1: Give Ground."
+    ],
+    "source": "https://tow.whfb.app/the-combat-phase/break-test"
+  },
+  "the-combat-phase/charging-units": {
+    "ko": [
+      "돌격한 턴의 컴뱃 단계에 접촉 전 이동한 온전한 1인치마다 I +1을 받습니다.",
+      "정면 돌격은 최대 +3, 측면·후면은 최대 +4이며 최종 I는 10을 넘지 않습니다."
+    ],
+    "en": [
+      "In the Combat phase of a charging turn, gain +1 Initiative per full inch moved before contact.",
+      "Cap the bonus at +3 into the front or +4 into a flank/rear; total Initiative cannot exceed 10."
+    ],
+    "source": "https://tow.whfb.app/the-combat-phase/charging-units"
+  },
+  "magic/casting-spells": {
+    "ko": [
+      "인챈트먼트·헥스는 스트래티지의 컨저레이션, 컨베이언스는 무브먼트의 리메이닝 무브에서 시전합니다.",
+      "매직 미사일·매지컬 볼텍스는 자기 슈팅 단계, 어세일먼트는 마법사가 싸우는 컴뱃 단계에 시전합니다.",
+      "턴당 마법사 레벨만큼 시도하되 같은 주문은 한 번만 시도합니다. 교전 중에는 보통 어세일먼트 또는 사거리 Self 주문만 가능합니다."
+    ],
+    "en": [
+      "Cast Enchantment/Hex in Strategy’s Conjuration; cast Conveyance during Remaining Moves.",
+      "Cast Magic Missile/Vortex in your Shooting phase and Assailment when the Wizard fights in a Combat phase.",
+      "Attempt up to Wizard Level spells per turn, each once. Engaged Wizards normally cast only Assailment or range Self spells."
+    ],
+    "source": "https://tow.whfb.app/magic/casting-spells"
+  },
+  "magic/casting-roll-casting-result-and-casting-value": {
+    "ko": [
+      "시전 결과 = 2D6 + 마법사 레벨의 절반(올림)입니다.",
+      "주문의 시전값 이상이면 성공하지만 상대가 디스펠할 수 있습니다. 주사위는 디스펠 판정까지 그대로 둡니다."
+    ],
+    "en": [
+      "Casting result = 2D6 + half the Wizard’s Level, rounded up.",
+      "Meet the casting value to succeed, subject to dispelling; keep the dice until the dispel attempt."
+    ],
+    "source": "https://tow.whfb.app/magic/casting-roll-casting-result-and-casting-value"
+  },
+  "magic/dispel-roll-and-dispel-result": {
+    "ko": [
+      "위저들리 디스펠은 2D6 + 마법사 레벨의 절반(올림), 페이티드 디스펠은 2D6만 사용합니다.",
+      "디스펠 결과가 시전 결과보다 높아야 성공합니다. 동점이면 실패합니다."
+    ],
+    "en": [
+      "Wizardly dispel uses 2D6 + half Wizard Level, rounded up; Fated dispel uses unmodified 2D6.",
+      "Exceed the casting result to dispel; a tie fails."
+    ],
+    "source": "https://tow.whfb.app/magic/dispel-roll-and-dispel-result"
+  },
+  "magic/perfect-invocations": {
+    "ko": [
+      "시전 주사위가 자연 더블 6이면 시전값·수정치와 관계없이 성공하고 디스펠할 수 없습니다."
+    ],
+    "en": [
+      "Natural double 6 on the Casting roll succeeds regardless of casting value or modifiers and cannot be dispelled."
+    ],
+    "source": "https://tow.whfb.app/magic/perfect-invocations"
+  },
+  "magic/miscast": {
+    "ko": [
+      "시전 주사위의 자연 더블 1은 미스캐스트입니다. 즉시 미스캐스트 표에 2D6을 굴립니다.",
+      "일반적으로 주문은 실패하지만 표의 일부 결과는 주문을 시전하게 하므로 해당 결과를 적용합니다."
+    ],
+    "en": [
+      "Natural double 1 on the Casting roll causes a miscast; immediately roll 2D6 on the Miscast table.",
+      "The spell normally fails, but some table results cast it instead, so apply the rolled outcome."
+    ],
+    "source": "https://tow.whfb.app/magic/miscast"
+  },
+  "weapons-of-war/hand-weapon": {
+    "ko": [
+      "근접 무기: 사용자 S, AP ‘–’, 무기 자체의 특수 규칙은 없습니다.",
+      "별도 언급이 없으면 모든 모델은 핸드 웨폰을 가진 것으로 봅니다."
+    ],
+    "en": [
+      "Combat profile: user Strength, AP “–”, with no listed weapon special rules.",
+      "Models are assumed to carry a hand weapon unless stated otherwise."
+    ],
+    "source": "https://tow.whfb.app/weapons-of-war/hand-weapon"
+  },
+  "weapons-of-war/great-weapon": {
+    "ko": [
+      "근접 무기: S +2, AP −2, 아머 베인(1).",
+      "리콰이어즈 투 핸즈와 스트라이크 라스트가 적용됩니다."
+    ],
+    "en": [
+      "Combat profile: S +2, AP −2 and Armour Bane (1).",
+      "Also has Requires Two Hands and Strike Last."
+    ],
+    "source": "https://tow.whfb.app/weapons-of-war/great-weapon"
+  },
+  "weapons-of-war/lance": {
+    "ko": [
+      "카발리·몬스터 전용 근접 무기: S +2, AP −2, 아머 베인(1).",
+      "소유자가 돌격한 턴에만 사용합니다. S·AP 보너스는 그 턴에 돌격한 적 모델에게만 적용됩니다."
+    ],
+    "en": [
+      "Cavalry/monster combat weapon: S +2, AP −2 and Armour Bane (1).",
+      "Use only in a turn the wielder charged; the S/AP modifiers apply only against models charged that turn."
+    ],
+    "source": "https://tow.whfb.app/weapons-of-war/lance"
+  },
+  "weapons-of-war/shield": {
+    "ko": [
+      "실드는 아머 값을 1 개선합니다. 예: 6+ → 5+.",
+      "컴뱃에서 리콰이어즈 투 핸즈 무기를 사용하면 실드를 함께 사용할 수 없습니다."
+    ],
+    "en": [
+      "A shield improves the armour value by 1, such as 6+ → 5+.",
+      "It cannot be used alongside a Requires Two Hands weapon in combat."
+    ],
+    "source": "https://tow.whfb.app/weapons-of-war/shield"
+  },
+  "spell/fireball": {
+    "ko": [
+      "매직 미사일 · 시전값 8+ · 사거리 24인치.",
+      "대상 적 유닛에 S4, AP ‘–’의 2D6 히트를 주며 플레이밍 어택스가 적용됩니다."
+    ],
+    "en": [
+      "Magic Missile · casting value 8+ · range 24 inches.",
+      "Inflicts 2D6 S4 hits with AP “–” on the enemy target; has Flaming Attacks."
+    ],
+    "source": "https://tow.whfb.app/spell/fireball"
+  },
+  "magic-item/sword-of-the-quest": {
+    "ko": [
+      "각 컴뱃 라운드 시작에 한손·양손 프로필 중 하나를 고릅니다.",
+      "한손: S +1, AP −1, 매지컬 어택스, 스트라이크 퍼스트.",
+      "양손: S +2, AP −2, 매지컬 어택스, 멀티플 운즈(2), 리콰이어즈 투 핸즈, 스트라이크 라스트."
+    ],
+    "en": [
+      "Choose its one-handed or two-handed profile at the start of each combat round.",
+      "One-handed: S +1, AP −1, Magical Attacks and Strike First.",
+      "Two-handed: S +2, AP −2, Magical Attacks, Multiple Wounds (2), Requires Two Hands and Strike Last."
+    ],
+    "source": "https://tow.whfb.app/magic-item/sword-of-the-quest"
+  }
+}
