@@ -19,6 +19,8 @@ rosters belong to each origin's browser storage. Update the existing origin in
 place; any future move needs a working data transfer flow before redirecting it.
 Do not clear storage or ask the user to uninstall the app to apply an update.
 Keep `update.html` available from the network so a legacy worker can load it.
+When releasing application changes, bump both the worker cache version and the
+minimum `targetVersion` in `update.html` to wait for that release completely.
 This same-origin update entry waits for the complete current cache and preserves
 rosters while opening the updated app; it must not force navigation of other tabs.
 Sites redirects HTML files to canonical URLs. Verify the worker's complete-cache

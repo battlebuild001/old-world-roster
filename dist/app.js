@@ -264,7 +264,7 @@ function playRuleButton(name,url=null){
   if(url)try{const path=new URL(url,'https://tow.whfb.app/');if(path.hostname==='tow.whfb.app')button.dataset.rulePath=path.pathname;}catch{}
   return button;
 }
-function renderPlayProfiles(model,unit){
+function renderPlayProfiles(model,unit,rows=window.TOWPlayProfiles.displayRows(model)){
   const table=node('table','','playProfileTable');table.setAttribute('aria-label',playText(`${unit.name} 전체 능력치`,`${unit.name} complete profiles`));
   const head=document.createElement('thead'),headers=node('tr','');for(const key of model.keys||['M','WS','BS','S','T','W','I','A','Ld']){const th=annotateStatHeader(node('th',key),key);th.scope='col';headers.append(th);}head.append(headers);table.append(head);
   const body=document.createElement('tbody');
@@ -278,11 +278,7 @@ function renderPlayProfiles(model,unit){
     heading.append(title);body.append(heading);
     const row=node('tr','',extra?'playProfileValues playVariantValues':'playProfileValues');for(const key of model.keys||['M','WS','BS','S','T','W','I','A','Ld'])row.append(playStatCell(profile,key,extra));body.append(row);
   };
-  for(const profile of model.profiles||[]){
-    appendRow(profile);
-    const variants=[...(model.weapons||[]),...(model.effects||[])].filter(effect=>(Object.keys(effect.modifiers||{}).length||Object.keys(effect.fixed||{}).length)&&effect.profileIds?.includes(profile.id));
-    for(const variant of variants)appendRow(profile,variant);
-  }
+  for(const {profile,extra} of rows)appendRow(profile,extra);
   table.append(body);return table;
 }
 function renderPlay(){
@@ -302,7 +298,7 @@ function renderPlay(){
   $('playHelpLabel').textContent=label('스탯 표시 안내','Reading the profiles');$('playStatLegend').replaceChildren(statKeyLegend());
   const date=snapshot?.confirmedAt?new Date(snapshot.confirmedAt):null,stamp=date&&!Number.isNaN(date.getTime())?date.toLocaleString(language==='en'?'en-GB':'ko-KR',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}):'';
   notice.textContent=!army?label('현재 로스터의 유닛과 선택 옵션을 확정하면 모든 프로필을 한 화면에서 볼 수 있습니다.','Confirm the units and options in your current roster to see every profile together.'):changed?label('편성이 변경되었습니다. 아래 표는 이전에 확정한 로스터입니다. 현재 로스터로 다시 확정하면 갱신됩니다.','Your draft has changed. The reference below uses your last confirmed roster. Confirm the current roster to update it.'):label(`확정 로스터${stamp?` · ${stamp}`:''}`,`Confirmed roster${stamp?` · ${stamp}`:''}`);
-  $('playLegend').textContent=army?label('기본 수치 + 옵션 보너스. 무기·돌격 등 조건부 보너스는 조건이 적힌 별도 행에 표시됩니다.','Base value + option bonus. Weapon and other conditional bonuses have separate labelled rows.'):'';
+  $('playLegend').textContent=army?label('선택한 무장별로 기본 수치 + 옵션 보너스를 표시합니다. 돌격 등 적용 조건을 함께 확인하세요.','Selected weapon profiles show base values + option bonuses. Check each profile’s conditions, such as charging.'):'';
   const search=$('playSearch').value.trim().toLowerCase(),host=$('playUnits');host.replaceChildren();
   $('playSearch').disabled=!army;
   const summary=$('playSummary');summary.replaceChildren();
@@ -316,10 +312,13 @@ function renderPlay(){
     const head=node('div','','playCardHead');const title=node('span','','playCardTitle');title.append(sourceName('strong',unit.name),node('small',`${unit.count} ${label('모델','models')} · ${label(categoryKo[unit.category]||unit.category,CATEGORY_LABELS[unit.category]||unit.category)}${unit.label?` · ${unit.label}`:''}`));head.append(title,node('b',`${fmt(unit.points)} pts`));card.append(head);
     const body=node('div','','playCardBody');
     const model=window.TOWPlayProfiles?.create({source,unit,ruleInfo,optionModel:OPT,weaponProfiles:playWeaponProfiles,composition:unit.sourceComposition||source?._optionComposition||army.composition});
-    if(model?.profiles?.length){body.append(renderPlayProfiles(model,unit));const sources=node('div','','playBonusSources');for(const profile of model.profiles){const bonuses=new Map();for(const [key,values] of Object.entries(profile.modifiers||{}))for(const effect of values){const list=bonuses.get(effect.source)||[];list.push(`${key} ${Number(effect.value)>0?'+':''}${effect.value}`);bonuses.set(effect.source,list);}for(const [name,values] of bonuses)sources.append(node('p',`${pairedName(profile.name)} · ${pairedName(name)}: ${values.join(' · ')}`));}if(sources.childElementCount)body.append(sources);}
+    const profileRows=model?window.TOWPlayProfiles.displayRows(model):[];
+    if(model?.profiles?.length){body.append(renderPlayProfiles(model,unit,profileRows));const sources=node('div','','playBonusSources');for(const profile of model.profiles){const bonuses=new Map();for(const [key,values] of Object.entries(profile.modifiers||{}))for(const effect of values){const list=bonuses.get(effect.source)||[];list.push(`${key} ${Number(effect.value)>0?'+':''}${effect.value}`);bonuses.set(effect.source,list);}for(const [name,values] of bonuses)sources.append(node('p',`${pairedName(profile.name)} · ${pairedName(name)}: ${values.join(' · ')}`));}if(sources.childElementCount)body.append(sources);}
     else body.append(node('p',Object.keys(rulesIndex).length?label('이 유닛의 능력치 자료가 없습니다. 유닛 원문을 확인하세요.','No profile data is available for this unit. Check its source entry.'):label('능력치 자료를 불러오는 중…','Loading profiles…'),'playMeta'));
     if(model?.defences?.length){const defences=node('div','','playDefences');for(const defence of model.defences){const condition=language==='en'?defence.conditionEn:defence.conditionKo||defence.conditionEn;defences.append(node('span',`${pairedName(defence.name)}${defence.value?` ${defence.value}`:''}${condition?` · ${condition}`:''}`));}body.append(defences);}
-    if(model?.weapons?.length){const weapons=node('div','','playWeapons');weapons.append(node('h3',label('무장 스펙','Weapon profiles')));for(const weapon of model.weapons){const row=node('div','','playWeaponRow');row.append(playRuleButton(weapon.name,weapon.url),node('span',`${label('사거리','Range')} ${weapon.range||'–'} · S ${weapon.strength||'–'} · AP ${weapon.armourPiercing||'–'}`));if(weapon.rules?.length){const rulesRow=node('div','','playChips');for(const rule of weapon.rules)rulesRow.append(ruleChip(rule));row.append(rulesRow);}const condition=language==='en'?weapon.conditionEn:weapon.conditionKo||weapon.conditionEn;if(condition)row.append(node('small',condition,'playWeaponCondition'));if(weapon.notes)row.append(node('small',Array.isArray(weapon.notes)?weapon.notes.join(' '):String(weapon.notes),'playWeaponCondition'));weapons.append(row);}body.append(weapons);}
+    const displayedWeapons=new Set(profileRows.map(row=>row.extra));
+    const activeWeapons=(model?.weapons||[]).filter(weapon=>!weapon.profileIds?.length||displayedWeapons.has(weapon));
+    if(activeWeapons.length){const weapons=node('div','','playWeapons');weapons.append(node('h3',label('무장 스펙','Weapon profiles')));for(const weapon of activeWeapons){const row=node('div','','playWeaponRow');row.append(playRuleButton(weapon.name,weapon.url),node('span',`${label('사거리','Range')} ${weapon.range||'–'} · S ${weapon.strength||'–'} · AP ${weapon.armourPiercing||'–'}`));if(weapon.rules?.length){const rulesRow=node('div','','playChips');for(const rule of weapon.rules)rulesRow.append(ruleChip(rule));row.append(rulesRow);}const condition=language==='en'?weapon.conditionEn:weapon.conditionKo||weapon.conditionEn;if(condition)row.append(node('small',condition,'playWeaponCondition'));if(weapon.notes)row.append(node('small',Array.isArray(weapon.notes)?weapon.notes.join(' '):String(weapon.notes),'playWeaponCondition'));weapons.append(row);}body.append(weapons);}
     const reference=document.createElement('details');reference.className='playReferenceDetails';reference.append(node('summary',label('선택 장비·특수 규칙 보기','Selected equipment and special rules')));const referenceBody=node('div','','playReferenceBody');
     if(choices.length){referenceBody.append(node('h3',label('선택 장비·옵션','Selected equipment and options')));const options=node('div','','playChips');for(const choice of choices){const parts=splitRuleNames(choice.replace(/^\d+×\s*/,'')),known=parts.filter(part=>ruleInfo(part));if(known.length){for(const part of known)options.append(ruleChip(part));}else options.append(node('span',choice,'playPlain'));}referenceBody.append(options);}
     if(rules.length){referenceBody.append(node('h3',label('특수 규칙','Special rules')));const row=node('div','','playChips');for(const rule of rules)row.append(ruleChip(rule));referenceBody.append(row);}

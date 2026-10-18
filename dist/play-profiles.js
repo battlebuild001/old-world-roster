@@ -79,6 +79,31 @@ window.TOWPlayProfiles = (() => {
     return null;
   }
 
+  function displayRows(model) {
+    const rows=[];
+    for(const profile of model.profiles||[]){
+      const applicable=(model.weapons||[]).filter(weapon=>weapon.profileIds?.includes(profile.id));
+      const melee=weapon=>/^combat\b/i.test(String(weapon.range||'Combat'));
+      const complete=weapon=>!weapon.sharedAllocation;
+      const handWeapon=weapon=>(weaponAliases[normal(weapon.ruleName||weapon.name)]||normal(weapon.ruleName||weapon.name))==='hand weapon';
+      const magicMelee=applicable.filter(weapon=>melee(weapon)&&complete(weapon)&&['weapon','weapon-runes'].includes(weapon.itemType));
+      const primaryMelee=applicable.filter(weapon=>melee(weapon)&&complete(weapon)&&!handWeapon(weapon));
+      const selected=applicable.filter(weapon=>{
+        if(!melee(weapon)||!complete(weapon))return true;
+        if(magicMelee.length)return magicMelee.includes(weapon);
+        return !primaryMelee.length||!handWeapon(weapon);
+      });
+      // A selected melee weapon supplies the wielder's full stat line. Keep a
+      // base row for mounts, missing weapons, shooting-only and partial units.
+      if(!selected.some(weapon=>melee(weapon)&&complete(weapon)))rows.push({profile,extra:null});
+      for(const weapon of selected)rows.push({profile,extra:weapon});
+      for(const effect of model.effects||[]){
+        if(effect.profileIds?.includes(profile.id)&&(Object.keys(effect.modifiers||{}).length||Object.keys(effect.fixed||{}).length))rows.push({profile,extra:effect});
+      }
+    }
+    return rows;
+  }
+
   function create({source,unit={},ruleInfo=()=>null,optionModel=window.BTHTOWOptions,composition='',weaponProfiles={}}={}) {
     const result={keys:[...keys],profiles:[],weapons:[],gear:[],effects:[],defences:[],notes:[],unresolved:[]};
     const hasManual=keys.some(key=>unit.manualStats?.[key]!==undefined&&!['','-'].includes(String(unit.manualStats[key]).trim()));
@@ -171,6 +196,7 @@ window.TOWPlayProfiles = (() => {
       }));
       let key=normal(name);key=weaponAliases[key]||key;
       const appendWeapon=entry=>{
+        if(from.itemType)entry.itemType=from.itemType;
         if(from.affectedCount){
           entry.affectedCount=from.affectedCount;entry.selectionPath=from.selectionPath;entry.sharedAllocation=true;
           entry.conditionKo=`유닛 전체에서 선택한 ${from.affectedCount} 모델에만 적용. ${entry.conditionKo||''}`;
@@ -231,6 +257,7 @@ window.TOWPlayProfiles = (() => {
         let entry=original;
         const ids=entry.profileIds.filter(id=>targets.some(target=>target.id===id));
         if(ids.length!==entry.profileIds.length){entry={...original,profileIds:ids,rules:[...original.rules]};original.profileIds=original.profileIds.filter(id=>!ids.includes(id));result.weapons.push(entry);}
+        entry.itemType='weapon-runes';
         affected.push(entry);
       }
       return affected;
@@ -238,7 +265,7 @@ window.TOWPlayProfiles = (() => {
     for(const item of itemGroups.values()){
       const name=item.name,key=normal(name),targets=scope(item),url=ruleInfo(name)?.url||sourceUrl(name),from={name,url};
       result.gear.push({name,kind:'item',type:item.type,url,count:item.count,slot:item.slot});
-      if(addWeapon(name,{kind:'item',url},targets))continue;
+      if(addWeapon(name,{kind:'item',itemType:item.type,url},targets))continue;
       if(item.type==='weapon-runes'||['rune of might','rune of fury','rune of striking','rune of speed','rune of cleaving'].includes(key)){
         for(const entry of scopedRunicWeapons(targets))entry.rules=[...new Set([...entry.rules,'Magical Attacks'])];
       }
@@ -306,5 +333,5 @@ window.TOWPlayProfiles = (() => {
     if(result.unresolved.length)result.notes.push({ko:'일부 아이템의 조건부 효과는 자동 합산하지 않습니다. 아래 아이템 이름을 눌러 규칙을 확인하세요.',en:'Some item effects are not calculated automatically. Tap their names below to check their conditions.'});
     return result;
   }
-  return Object.freeze({keys,create,lookup});
+  return Object.freeze({keys,create,lookup,displayRows});
 })();
