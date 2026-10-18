@@ -190,7 +190,7 @@ function renderHome() {
     homeLinkTutorial:['처음 배우기','Learn to play'],homeLinkTutorialDesc:['도식으로 따라가는 튜토리얼','A visual guide'],
     homeLinkPlay:['플레이 모드','Play mode'],homeLinkPlayDesc:['탁상에서 로스터·규칙 참조','Quick tableside reference'],
     topBrandName:['올드 월드 빌더','Old World Builder'],navBrandName:['올드 월드 로스터 빌더','The Old World Roster Builder'],navHome:['홈','Home'],navArmy:['군세','Army'],navLibrary:['규칙','Rules'],navPlay:['플레이','Play'],navSaved:['보관함','Saved'],
-    tabFactions:['진영','Factions'],tabReference:['유닛 자료','Unit reference'],tabForge:['편성','Build'],tabRoster:['로스터','Roster'],
+    tabFactions:['진영','Factions'],tabReference:['유닛 선택','Units'],tabForge:['설정','Settings'],tabRoster:['로스터','Roster'],
     tabRules:['룰북','Rules'],tabQuick:['퀵시트','Quick sheet'],tabTutorial:['처음 배우기','Tutorial']
   };
   for(const [id,names] of Object.entries(labels))$(id).textContent=label(...names);
@@ -432,25 +432,54 @@ function renderFactions() {
   else if(!armies.length)grid.append(node('p','검색 결과가 없습니다.','viewHint'));
 }
 function renderReference() {
-  $('referenceTitle').textContent='유닛 자료';
-  document.querySelector('#referenceScreen .eyebrow').textContent=`${armyName()} · Army Reference`;
-  const grid=$('referenceGrid');grid.replaceChildren();
+  const categoryKo={all:'전체',characters:'캐릭터',core:'코어',special:'스페셜',rare:'레어',mercenaries:'용병'};
+  const categoryLabel=key=>playText(categoryKo[key],key==='all'?'All':CATEGORY_LABELS[key]);
+  $('referenceTitle').textContent=playText('유닛 선택','Units');
+  $('referenceFaction').textContent=pairedName(armyName());
+  $('referenceSettings').textContent=playText('설정','Settings');
+  $('referenceReset').textContent=playText('초기화','Reset');
+  $('referenceSearch').setAttribute('aria-label',playText('유닛 또는 규칙 검색','Search units or rules'));
+  $('referenceHint').textContent=playText('포인트는 모델당 기본 비용입니다. 선택을 누르면 모든 장비·옵션을 고를 수 있습니다.','Points are the base cost per model. Select a unit to choose its equipment and options.');
+  const grid=$('referenceGrid'),expandedRules=new Set([...grid.querySelectorAll('.pickerRules[open]')].map(details=>details.closest('[data-catalog-key]').dataset.catalogKey));
+  grid.replaceChildren();
   const query=$('referenceSearch').value.trim().toLowerCase(),category=$('referenceCategory').value;
-  let shown=0;
-  for (const [key,unit] of catalog) {
-    if (category!=='all' && unit.category!==category) continue;
-    if (query && !`${labelOf(unit)} ${unit.id} ${keywords(unit).join(' ')} ${window.TOWI18n?.display(labelOf(unit),'ko')||''} ${keywords(unit).map(value=>window.TOWI18n?.ruleLabel(value,'ko')||'').join(' ')}`.toLowerCase().includes(query)) continue;
-    const card=node('article','','referenceCard');card.dataset.catalogKey=key;
-    card.append(node('span',CATEGORY_LABELS[unit.category],'cardKicker'),sourceName('strong',labelOf(unit),'cardTitle'),node('span',`${fmt(Number(unit.points) || 0)} pts/모델 · 최소 ${fmt(Math.max(1,Number(unit.minimum)||1))} 모델${unit.category==='mercenaries'&&unit._sourceFaction?` · ${metadata?.armies?.find(item=>item.id===unit._sourceFaction)?.name_en||unit._sourceFaction}`:''}`,'cardMeta'));
-    const ruleList=keywords(unit);
-    if(ruleList.length){const pills=node('div','','rulePills');for(const rule of ruleList.slice(0,3))pills.append(ruleChip(rule));if(ruleList.length>3)pills.append(node('span',`+${ruleList.length-3}개 규칙`,'ruleMore'));card.append(pills);}
-    const actions=node('div','','referenceActions');
-    for(const [action,label,className] of [['details','규칙 · 옵션 보기','secondary'],['quickadd','옵션 선택 · 추가','primary']]){const button=node('button',label,className);button.type='button';button.dataset.referenceAction=action;button.dataset.catalogKey=key;actions.append(button);}
-    card.append(actions);
-    grid.append(card);shown++;
+  const candidates=[...catalog].filter(([,unit])=>!query||`${labelOf(unit)} ${unit.id} ${keywords(unit).join(' ')} ${window.TOWI18n?.display(labelOf(unit),'ko')||''} ${keywords(unit).map(value=>window.TOWI18n?.ruleLabel(value,'ko')||'').join(' ')}`.toLowerCase().includes(query));
+  const filters=$('referenceFilters'),filterScroll=filters.scrollLeft,counts={all:candidates.length};
+  for(const [,unit] of candidates)counts[unit.category]=(counts[unit.category]||0)+1;
+  filters.replaceChildren();filters.setAttribute('aria-label',playText('유닛 구분','Unit categories'));
+  for(const key of ['all',...CATEGORY_KEYS]){
+    if(!counts[key]&&key!=='all'&&key!==category)continue;
+    const button=node('button','','pickerFilter');button.type='button';button.dataset.referenceCategory=key;button.setAttribute('aria-pressed',String(key===category));
+    button.append(node('span',categoryLabel(key)),node('b',String(counts[key]||0)));filters.append(button);
   }
-  $('referenceSummary').replaceChildren(node('span',`${shown} / ${catalog.size} 유닛 표시`),node('b',`${fmt(CORE.totalPoints(state))} / ${fmt(state.limit)} pts · ${state.units.length} 유닛`));
-  if (!shown) grid.append(node('p',armyData?'검색 결과가 없습니다.':'진영 데이터를 불러오는 중…','viewHint'));
+  filters.scrollLeft=filterScroll;
+  $('referenceReset').classList.toggle('hidden',!query&&category==='all');
+  const matches=candidates.filter(([,unit])=>category==='all'||unit.category===category);
+  for(const key of CATEGORY_KEYS){
+    const entries=matches.filter(([,unit])=>unit.category===key);if(!entries.length)continue;
+    const group=node('section','','referenceGroup'),head=node('div','','referenceGroupHead'),list=node('div','','referenceGroupList');
+    head.append(node('h3',categoryLabel(key)),node('span',String(entries.length)));group.append(head,list);
+    for(const [key,unit] of entries){
+      const card=node('article','','referenceCard pickerUnit');card.dataset.catalogKey=key;
+      const main=node('div','','pickerUnitMain'),name=node('button','','pickerUnitName');name.type='button';name.dataset.referenceAction='details';name.dataset.catalogKey=key;name.title=playText('상세 자료·규칙 보기','View full details and rules');name.append(sourceName('strong',labelOf(unit)));
+      const minimum=Math.max(1,Number(unit.minimum)||1),price=fmt(Number(unit.points)||0);
+      const meta=node('span',`${price} pts · ${playText('모델당','per model')} · ${playText('최소','Min')} ${minimum}`,'pickerUnitMeta');main.append(name,meta);
+      if(unit.category==='mercenaries'&&unit._sourceFaction)meta.append(document.createTextNode(' · '+pairedName(metadata?.armies?.find(item=>item.id===unit._sourceFaction)?.name_en||slugTitle(unit._sourceFaction))));
+      const selected=state.units.filter(item=>item.sourceId===unit.id&&(item.sourceFaction||state.faction)===(unit._sourceFaction||state.faction)).length;
+      if(selected)main.append(node('span',`${selected} ${playText('추가됨','added')}`,'pickerSelected'));
+      const ruleList=keywords(unit);
+      if(ruleList.length){const details=document.createElement('details');details.className='pickerRules';details.open=expandedRules.has(key);details.append(node('summary',playText(`규칙 ${ruleList.length}`,`${ruleList.length} rules`)));const pills=node('div','','rulePills');for(const rule of ruleList)pills.append(ruleChip(rule));details.append(pills);main.append(details);}
+      const select=node('button',`${playText('선택','Select')} +`,'primary pickerSelect');select.type='button';select.dataset.referenceAction='quickadd';select.dataset.catalogKey=key;select.title=playText('장비·마법 아이템 등 옵션을 선택합니다.','Choose equipment, magic items and other options.');
+      card.append(main,select);list.append(card);
+    }
+    grid.append(group);
+  }
+  const total=CORE.totalPoints(state),remaining=state.limit-total,numbers=node('div','','pickerRosterNumbers');
+  numbers.append(node('strong',`${fmt(total)} / ${fmt(state.limit)} pts`),node('small',`${state.units.length} ${playText('유닛','units')} · ${fmt(Math.abs(remaining))} pts ${playText(remaining<0?'초과':'남음',remaining<0?'over':'left')}`));
+  const review=node('button',`${playText('로스터 보기','View roster')} →`,'primary');review.type='button';review.id='referenceReview';review.dataset.referenceAction='roster';
+  $('referenceSummary').replaceChildren(numbers,review);$('referenceSummary').classList.toggle('over',remaining<0);
+  $('referenceCount').textContent=`${matches.length} / ${catalog.size} ${playText('유닛','units')}`;
+  if(!matches.length)grid.append(node('p',armyData?playText('검색 결과가 없습니다. 검색어나 분류를 바꾸거나 초기화를 눌러주세요.','No matches. Change your search or category, or press Reset.'):playText('유닛을 불러오는 중…','Loading units…'),'viewHint'));
 }
 function renderSaved() {
   const grid=$('savedGrid');grid.replaceChildren();
@@ -849,6 +878,7 @@ $('factionGrid').addEventListener('click',event => {const button=event.target.cl
 $('factionSearch').addEventListener('input',renderFactions);
 $('referenceSearch').addEventListener('input',renderReference);
 $('referenceCategory').addEventListener('change',renderReference);
+$('referenceFilters').addEventListener('click',event=>{const button=event.target.closest('[data-reference-category]');if(!button)return;const key=button.dataset.referenceCategory,offset=$('referenceFilters').scrollLeft;$('referenceCategory').value=key;renderReference();$('referenceFilters').scrollLeft=offset;$('referenceFilters').querySelector(`[data-reference-category="${key}"]`)?.focus({preventScroll:true});});
 $('playSearch').addEventListener('input',renderPlay);
 $('confirmRoster').addEventListener('click',confirmRosterForPlay);
 $('playConfirm').addEventListener('click',confirmRosterForPlay);
@@ -860,9 +890,12 @@ $('playUnits').addEventListener('click',event=>{
   const detail=event.target.closest('[data-play-details]');if(!detail)return;
   const army=CORE.loadPlayRoster(state.faction)?.army,unit=army?.units.find(item=>item.id===detail.dataset.playDetails),source=unit&&rosterSource(unit,army);if(source)openUnitDetail(source);
 });
-$('referenceGrid').addEventListener('click',event => {
+$('referenceScreen').addEventListener('click',event => {
   const rule=event.target.closest('[data-rule]');if(rule){openRule(rule.dataset.rule);return;}
   const button=event.target.closest('[data-reference-action]');if(!button)return;
+  if(button.dataset.referenceAction==='settings'){showScreen('forge');return;}
+  if(button.dataset.referenceAction==='roster'){showScreen('roster');return;}
+  if(button.dataset.referenceAction==='reset'){$('referenceSearch').value='';$('referenceCategory').value='all';renderReference();return;}
   const unit=catalog.get(button.dataset.catalogKey);if(!unit)return;
   if(button.dataset.referenceAction==='quickadd')quickAdd(unit);else openUnitDetail(unit);
 });
@@ -929,7 +962,8 @@ $('configSave').addEventListener('click',()=>{
   const old=state.units.find(unit=>unit.id===configured.id);
   const record=normalizeUnit({...old,name:labelOf(source),category:source.category,count,points:OPT.price(source,count,selections,magicItems,optionComposition(source)),label:$('configLabel').value.trim(),options:$('configNotes').value.trim(),sourceId:source.id,sourceFaction:source._sourceFaction||state.faction,sourceComposition:optionComposition(source),isDetachment:$('configDetachment').checked,manualStats:readManualStats('config'),basePoints:source.points,selections,magicItems,lore:source.lores?.length ? configured.lore : '',pointsOverride:false});
   if(old)state.units[state.units.indexOf(old)]=record;else state.units.push(record);
-  closeConfig();update();showScreen('roster');toast(old?'유닛 옵션을 저장했습니다.':'유닛을 로스터에 추가했습니다.');
+  const keepChoosing=!old&&screen==='reference';
+  closeConfig();update();if(!keepChoosing)showScreen('roster');toast(old?'유닛 옵션을 저장했습니다.':'유닛을 로스터에 추가했습니다.');
 });
 $('closeDetail').addEventListener('click',closeUnitDetail);
 $('detailBackdrop').addEventListener('click',event=>{if(event.target===$('detailBackdrop'))closeUnitDetail();});

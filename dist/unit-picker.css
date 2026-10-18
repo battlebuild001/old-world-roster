@@ -1,0 +1,88 @@
+/* Unit selection keeps the names, price and next action in the foreground. */
+#referenceScreen .pickerIntro{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 12px}
+.pickerIntro>div{min-width:0}
+.pickerIntro .eyebrow{display:block;font-size:10px;line-height:1.5;letter-spacing:.08em;overflow-wrap:anywhere}
+.pickerIntro h2{margin:3px 0 0;font-size:28px;line-height:1.3}
+#referenceSettings{width:auto;flex:none;min-height:44px;padding:8px 12px;font-size:12px}
+#referenceScreen .referenceToolbar{display:block;top:52px;padding:6px 0 8px;margin:0 0 8px;background:var(--color-canvas)}
+.pickerSearchRow{display:flex;align-items:stretch;gap:8px;min-width:0}
+.pickerSearchRow #referenceSearch{flex:1;width:0;min-width:0;margin:0;min-height:44px}
+.pickerSearchRow #referenceReset{flex:none;width:auto;min-width:44px;min-height:44px;padding:8px 12px;font-size:12px}
+.pickerFilters{display:flex;gap:6px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:var(--color-border) transparent;padding:4px 0;margin:0;-webkit-overflow-scrolling:touch}
+.pickerFilter{display:inline-flex;align-items:center;justify-content:center;gap:7px;flex:0 0 auto;min-height:44px;max-width:100%;padding:7px 11px;border:1px solid transparent;border-radius:6px;background:transparent;color:var(--color-text-muted);font-size:12px;line-height:1.3;white-space:nowrap}
+.pickerFilter span{min-width:0}
+.pickerFilter b{display:inline-grid;place-items:center;min-width:20px;min-height:20px;padding:1px 4px;border-radius:4px;background:var(--color-surface);color:var(--color-text-muted);font-size:10px;font-weight:650}
+.pickerFilter:hover{background:var(--color-surface)}
+.pickerFilter[aria-pressed=true]{border-color:var(--color-border);background:var(--color-surface-muted);color:var(--color-text)}
+.pickerFilter[aria-pressed=true] b{background:var(--color-action);color:var(--color-canvas)}
+#referenceScreen #referenceCategory{display:none}
+#referenceScreen .referenceSummary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;margin:0;padding:7px 10px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:7px}
+.pickerRosterNumbers{display:grid;gap:2px;min-width:0;line-height:1.35}
+.pickerRosterNumbers strong{color:var(--color-text);font-size:14px;font-weight:750;overflow-wrap:anywhere}
+.pickerRosterNumbers small{color:var(--color-text-muted);font-size:11px;overflow-wrap:anywhere}
+#referenceScreen .referenceSummary.over{border-color:var(--color-danger)}
+.referenceSummary.over .pickerRosterNumbers strong,.referenceSummary.over .pickerRosterNumbers small{color:var(--color-danger)}
+#referenceReview{flex:none;width:auto;min-height:44px;padding:8px 13px;font-size:12px}
+.pickerListHeading{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+#referenceScreen #referenceGrid{display:grid;grid-template-columns:minmax(0,1fr);gap:19px}
+.referenceGroup{min-width:0}
+.referenceGroupHead{display:flex;align-items:center;gap:8px;min-height:24px;margin:0 0 5px}
+.referenceGroupHead h3{margin:0;color:var(--color-action);font-size:12px;line-height:1.45;font-weight:750;letter-spacing:.025em}
+.referenceGroupHead>span{color:var(--color-text-muted);font-size:11px;white-space:nowrap}
+.referenceGroupHead:after{content:'';height:1px;min-width:16px;flex:1;background:var(--color-border);opacity:.65}
+.referenceGroupList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;align-items:start}
+#referenceScreen .referenceCard.pickerUnit{display:grid;grid-template-columns:minmax(0,1fr) 86px;column-gap:12px;row-gap:2px;align-content:start;align-items:start;min-width:0;margin:0;padding:11px 13px;border:1px solid var(--color-border);border-radius:8px;background:var(--color-surface);box-shadow:none}
+.referenceCard.pickerUnit:hover{background:var(--color-surface);border-color:var(--color-border);box-shadow:none}
+/* Contents let the optional rule list occupy the whole card width. */
+.pickerUnitMain{display:contents}
+.pickerUnitName{grid-column:1;grid-row:1;display:flex;align-items:center;min-width:0;min-height:44px;width:100%;margin:0;padding:0;border:0;border-radius:3px;background:transparent;color:var(--color-text);text-align:left;line-height:1.45}
+.pickerUnitName strong,.pickerUnitName .cardTitle{display:block;margin:0;font-family:inherit;font-size:15px;font-weight:750;line-height:1.45;letter-spacing:-.02em;overflow-wrap:anywhere;word-break:normal}
+.pickerUnitName:hover{color:var(--color-link);text-decoration:underline;text-underline-offset:3px}
+.pickerUnitName:hover strong{color:inherit}
+.pickerUnitMeta{grid-column:1;grid-row:2;min-width:0;color:var(--color-text-muted);font-size:11px;line-height:1.45;overflow-wrap:anywhere}
+.pickerSelected{grid-column:1;grid-row:3;justify-self:start;max-width:100%;margin-top:3px;padding:3px 6px;border-radius:4px;background:var(--color-surface-muted);color:var(--color-link);font-size:10px;font-weight:650;line-height:1.4;overflow-wrap:anywhere}
+.pickerRules{grid-column:1/-1;grid-row:4;min-width:0;margin:1px 0 -3px}
+.pickerRules>summary{display:flex;align-items:center;gap:6px;min-height:36px;max-width:100%;padding:4px 0;list-style:none;cursor:pointer;color:var(--color-text-muted);font-size:11px;line-height:1.4}
+.pickerRules>summary::-webkit-details-marker{display:none}
+.pickerRules>summary:after{content:'⌄';margin-left:1px;color:var(--color-link);font-size:15px}
+.pickerRules[open]>summary:after{content:'⌃'}
+.pickerRules[open]{margin-top:5px;border-top:1px solid var(--color-border)}
+.pickerRules .rulePills{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:2px 0 8px}
+.pickerRules .rulePill{min-height:44px;padding:7px 10px;font-size:11px;line-height:1.4;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+#referenceScreen .pickerSelect{grid-column:2;grid-row:1/span 2;align-self:center;min-width:0;width:100%;min-height:44px;margin:0;padding:8px 7px;font-size:12px;line-height:1.35;white-space:normal;overflow-wrap:anywhere}
+
+@media(max-width:880px){
+  .referenceGroupList{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:680px){
+  #referenceScreen .pickerIntro{gap:8px;margin-bottom:8px}
+  .pickerIntro h2{font-size:25px}
+  .pickerIntro .eyebrow{font-size:9px;letter-spacing:.06em}
+  #referenceSettings{max-width:106px;padding:8px 9px;font-size:11px;line-height:1.4}
+  #referenceScreen .referenceToolbar{top:50px;padding-top:0;padding-bottom:4px;margin-bottom:4px}
+  .pickerSearchRow{gap:6px}
+  .pickerSearchRow #referenceSearch{font-size:16px;padding:9px 10px}
+  .pickerSearchRow #referenceReset{padding:8px 10px;font-size:11px}
+  .pickerFilters{gap:3px;padding:0;scrollbar-width:none}
+  .pickerFilters::-webkit-scrollbar{display:none}
+  .pickerFilter{gap:5px;padding:7px 9px;font-size:11px}
+  .pickerFilter b{font-size:10px;min-width:18px;min-height:18px}
+  #referenceScreen .referenceSummary{gap:8px;min-height:52px;padding:5px 8px}
+  .pickerRosterNumbers strong{font-size:13px}
+  .pickerRosterNumbers small{font-size:10px;line-height:1.4}
+  #referenceReview{max-width:116px;padding:7px 9px;font-size:11px}
+  #referenceScreen #referenceGrid{gap:16px}
+  .referenceGroupList{gap:8px}
+  #referenceScreen .referenceCard.pickerUnit{grid-template-columns:minmax(0,1fr) 80px;column-gap:10px;padding:10px 12px}
+  .pickerUnitName strong,.pickerUnitName .cardTitle{font-size:15px}
+}
+@media(max-width:359px){
+  #referenceSettings{max-width:91px;font-size:10px;padding:7px}
+  .pickerIntro h2{font-size:23px}
+  .pickerRosterNumbers strong{font-size:12px}
+  #referenceReview{max-width:101px;font-size:10px;padding:7px}
+  #referenceScreen .referenceCard.pickerUnit{grid-template-columns:minmax(0,1fr) 66px;column-gap:8px;padding:10px}
+  #referenceScreen .pickerSelect{font-size:11px;padding:7px 4px}
+  .pickerUnitName strong,.pickerUnitName .cardTitle{font-size:14px}
+}
+@media print{#referenceScreen{display:none!important}}
