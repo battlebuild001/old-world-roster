@@ -21,6 +21,9 @@ Do not clear storage or ask the user to uninstall the app to apply an update.
 Keep `update.html` available from the network so a legacy worker can load it.
 This same-origin update entry waits for the complete current cache and preserves
 rosters while opening the updated app; it must not force navigation of other tabs.
+Sites redirects HTML files to canonical URLs. Verify the worker's complete-cache
+status and active controller; a partially populated cache is not a successful
+installation. Preserve tested canonical HTML redirect handling in the worker.
 
 Check play navigation, roster confirmation, and existing roster preservation on
 the actual deployment target. Distinguish browser history tests from real system
