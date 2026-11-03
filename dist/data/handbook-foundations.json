@@ -1,0 +1,2921 @@
+{
+  "version": 1,
+  "checkedAt": "2026-11-03",
+  "chapters": [
+    {
+      "id": "foundation-dice",
+      "title": {
+        "ko": "주사위와 능력치 판정",
+        "en": "Dice and characteristic tests"
+      },
+      "description": {
+        "ko": "주사위 표기·수정 순서·리롤과 기본 테스트를 구분합니다.",
+        "en": "Read dice notation, apply modifiers and distinguish basic tests."
+      },
+      "entries": [
+        {
+          "id": "foundation-d3",
+          "title": {
+            "ko": "D3 굴리기",
+            "en": "D3"
+          },
+          "aliases": [
+            "D3 굴리기",
+            "D3"
+          ],
+          "path": "/general-principles/d6",
+          "summary": {
+            "ko": "D6을 절반으로 나누고 올림해 1~3의 결과를 만듭니다.",
+            "en": "Halve a D6 result and round up to generate a result from 1 to 3."
+          },
+          "timing": {
+            "ko": "D3를 요구하는 효과.",
+            "en": "An effect that calls for a D3."
+          },
+          "steps": [
+            {
+              "ko": "D6 하나를 굴립니다.",
+              "en": "Roll one D6."
+            },
+            {
+              "ko": "결과를 2로 나누고 소수점을 올립니다.",
+              "en": "Divide by two and round fractions up."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "효과가 다른 변환 방식을 명시하면 해당 지시를 따릅니다.",
+              "en": "Follow any alternative conversion specified by the effect."
+            }
+          ],
+          "example": {
+            "ko": "D6이 5이면 5÷2=2.5를 올려 D3 결과는 3입니다.",
+            "en": "A D6 result of 5 becomes a D3 result of 3."
+          },
+          "quick": {
+            "ko": "D3: D6 1·2→1 / 3·4→2 / 5·6→3.",
+            "en": "D3: D6 1–2→1, 3–4→2, 5–6→3."
+          },
+          "sources": [
+            {
+              "title": "D3",
+              "path": "/general-principles/d6"
+            }
+          ],
+          "table": {
+            "caption": {
+              "ko": "D6에서 D3로 변환",
+              "en": "Converting D6 to D3"
+            },
+            "columns": [
+              {
+                "ko": "D6 눈",
+                "en": "D6 face"
+              },
+              {
+                "ko": "D3 결과",
+                "en": "D3 result"
+              }
+            ],
+            "rows": [
+              [
+                "1–2",
+                "1"
+              ],
+              [
+                "3–4",
+                "2"
+              ],
+              [
+                "5–6",
+                "3"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "foundation-dice-modifiers",
+          "title": {
+            "ko": "주사위 수정치 순서",
+            "en": "Modifying Dice Rolls"
+          },
+          "aliases": [
+            "주사위 수정치 순서",
+            "Modifying Dice Rolls"
+          ],
+          "path": "/general-principles/modifying-dice-rolls",
+          "summary": {
+            "ko": "곱셈·나눗셈을 먼저 처리한 뒤 더하기·빼기를 적용합니다.",
+            "en": "Resolve multiplication or division before additive or subtractive modifiers."
+          },
+          "timing": {
+            "ko": "여러 계산이 있는 주사위 결과를 처리할 때.",
+            "en": "When a roll has different kinds of modifiers."
+          },
+          "steps": [
+            {
+              "ko": "주사위를 굴리고 곱셈·나눗셈을 계산합니다.",
+              "en": "Roll the dice and resolve multiplication or division."
+            },
+            {
+              "ko": "나눈 소수는 올림한 뒤 더하기·빼기를 적용합니다.",
+              "en": "Round divided fractions up, then add or subtract."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "규칙이 다른 반올림 방식을 지정하면 그 지시를 적용합니다.",
+              "en": "Use another rounding method only if specified."
+            }
+          ],
+          "example": {
+            "ko": "5를 절반으로 나눈 뒤 +1이면 3+1=4입니다.",
+            "en": "Halving 5 then adding 1 gives 3+1=4 after rounding."
+          },
+          "quick": {
+            "ko": "곱하기·나누기 → 올림 → 더하기·빼기.",
+            "en": "Multiply/divide → round up → add/subtract."
+          },
+          "sources": [
+            {
+              "title": "Modifying Dice Rolls",
+              "path": "/general-principles/modifying-dice-rolls"
+            }
+          ]
+        },
+        {
+          "id": "foundation-natural-rolls",
+          "title": {
+            "ko": "자연 눈과 수정 결과",
+            "en": "Natural Rolls"
+          },
+          "aliases": [
+            "자연 눈과 수정 결과",
+            "Natural Rolls"
+          ],
+          "path": "/general-principles/natural-rolls",
+          "summary": {
+            "ko": "자연 눈은 수정 전 주사위에 실제 표시된 숫자입니다.",
+            "en": "A natural result is the face showing before modifiers."
+          },
+          "timing": {
+            "ko": "자연 눈을 조건으로 하는 효과를 확인할 때.",
+            "en": "When checking an effect triggered by a natural result."
+          },
+          "steps": [
+            {
+              "ko": "수정 전 주사위 숫자를 먼저 확인합니다.",
+              "en": "Identify the unmodified faces first."
+            },
+            {
+              "ko": "수정 결과를 별도로 계산해 각 조건에 필요한 값을 비교합니다.",
+              "en": "Calculate the modified result separately and use the value each condition requires."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "수정 결과가 6이어도 자연 6으로 바뀌지 않습니다.",
+              "en": "A modified result of 6 is not a natural 6."
+            }
+          ],
+          "example": {
+            "ko": "주사위 5에 +1이면 결과는 6, 자연 눈은 5입니다.",
+            "en": "A die showing 5 with +1 has result 6 but natural result 5."
+          },
+          "quick": {
+            "ko": "자연 눈 = 수정 전 숫자.",
+            "en": "Natural result = before modifiers."
+          },
+          "sources": [
+            {
+              "title": "Natural Rolls",
+              "path": "/general-principles/natural-rolls"
+            }
+          ]
+        },
+        {
+          "id": "foundation-roll-off",
+          "title": {
+            "ko": "롤 오프",
+            "en": "Rolling Off"
+          },
+          "aliases": [
+            "롤 오프",
+            "Rolling Off"
+          ],
+          "path": "/general-principles/rolling-off",
+          "summary": {
+            "ko": "각 플레이어가 굴려 높은 값이 이기며 동점이면 다시 굴립니다.",
+            "en": "Each player rolls; the higher result wins and ties are rolled again."
+          },
+          "timing": {
+            "ko": "규칙이 롤 오프를 요구할 때.",
+            "en": "When a rule calls for a roll-off."
+          },
+          "steps": [
+            {
+              "ko": "지정된 주사위를 각자 굴립니다. 보통 D6 하나입니다.",
+              "en": "Each player rolls the specified dice, usually one D6."
+            },
+            {
+              "ko": "높은 결과를 선택하고 동점이면 롤 오프를 반복합니다.",
+              "en": "Determine the higher result and repeat the roll-off on a tie."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "승자가 받는 선택권과 별도 동점 처리 지시를 확인합니다.",
+              "en": "Check the choice awarded to the winner and any different tie procedure."
+            }
+          ],
+          "example": {
+            "ko": "양쪽이 4이면 다시 굴립니다.",
+            "en": "If both players roll 4, roll off again."
+          },
+          "quick": {
+            "ko": "높은 값 승리, 동점 재굴림.",
+            "en": "Higher wins; ties are rolled again."
+          },
+          "sources": [
+            {
+              "title": "Rolling Off",
+              "path": "/general-principles/rolling-off"
+            }
+          ]
+        },
+        {
+          "id": "foundation-rerolls",
+          "title": {
+            "ko": "리롤",
+            "en": "Re-rolls"
+          },
+          "aliases": [
+            "리롤",
+            "Re-rolls"
+          ],
+          "path": "/general-principles/re-rolls",
+          "summary": {
+            "ko": "리롤은 첫 결과를 버리고 새 결과를 사용하며 같은 주사위는 한 번만 다시 굴립니다.",
+            "en": "A re-roll replaces the original result; a die cannot be re-rolled twice."
+          },
+          "timing": {
+            "ko": "효과가 리롤을 허용할 때.",
+            "en": "When an effect permits a re-roll."
+          },
+          "steps": [
+            {
+              "ko": "다시 굴릴 수 있는 주사위나 판정의 범위를 확인합니다.",
+              "en": "Check which dice or roll may be re-rolled."
+            },
+            {
+              "ko": "허용된 주사위를 다시 굴리고 새 결과를 사용합니다.",
+              "en": "Re-roll the permitted dice and use the new result."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "새 결과가 더 나빠도 반드시 사용합니다.",
+              "en": "Keep the new result even if worse."
+            },
+            {
+              "ko": "복수 주사위 굴림은 별도 지시가 없으면 전부 리롤합니다.",
+              "en": "For a multiple-dice roll, re-roll all dice unless instructed otherwise."
+            }
+          ],
+          "example": {
+            "ko": "2D6의 2+5=7을 리롤해 1+3=4가 나오면 최종 결과는 4입니다.",
+            "en": "Re-rolling 2+5=7 into 1+3=4 makes 4 final."
+          },
+          "quick": {
+            "ko": "주사위당 리롤1회, 새 결과 필수, 복수 주사위는 기본 전부.",
+            "en": "One re-roll per die; keep it; multiple-dice rolls normally re-roll all dice."
+          },
+          "sources": [
+            {
+              "title": "Re-rolls",
+              "path": "/general-principles/re-rolls"
+            }
+          ]
+        },
+        {
+          "id": "foundation-characteristic-test",
+          "title": {
+            "ko": "능력치 테스트",
+            "en": "Characteristic Tests"
+          },
+          "aliases": [
+            "능력치 테스트",
+            "Characteristic Tests"
+          ],
+          "path": "/model-profiles/characteristic-tests",
+          "summary": {
+            "ko": "D6이 시험하는 능력치 이하이면 성공합니다.",
+            "en": "Pass if a D6 is equal to or below the tested characteristic."
+          },
+          "timing": {
+            "ko": "터프니스(T) 등 능력치 테스트를 요구할 때.",
+            "en": "When a characteristic test such as Toughness is required."
+          },
+          "steps": [
+            {
+              "ko": "사용할 능력치와 수정치를 확인하며, 같은 능력치가 여러 값이면 가장 높은 값을 사용합니다.",
+              "en": "Determine the characteristic and modifiers; use the highest value where there is more than one."
+            },
+            {
+              "ko": "D6을 굴려 비교하고 자동 성공·실패 조건을 적용합니다.",
+              "en": "Roll a D6, compare it and apply automatic results."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "자연1은 성공, 자연6은 실패입니다.",
+              "en": "A natural 1 passes and a natural 6 fails."
+            },
+            {
+              "ko": "능력치0 또는 ‘–’는 자동 실패합니다.",
+              "en": "A characteristic of 0 or ‘–’ automatically fails."
+            }
+          ],
+          "example": {
+            "ko": "T4 테스트의 4는 성공·5는 실패이며, T7도 자연6은 실패합니다.",
+            "en": "A T4 test passes on 4 and fails on 5; even T7 fails on a natural 6."
+          },
+          "quick": {
+            "ko": "D6≤능력치. 자연1 성공·자연6 실패, 0/– 자동실패.",
+            "en": "D6≤characteristic; natural 1 passes, natural 6 fails, 0/– fails."
+          },
+          "sources": [
+            {
+              "title": "Characteristic Tests",
+              "path": "/model-profiles/characteristic-tests"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "foundation-leadership",
+      "title": {
+        "ko": "리더십과 지휘",
+        "en": "Leadership and command"
+      },
+      "description": {
+        "ko": "리더십 테스트와 제너럴·배틀 스탠더드 지원을 구분합니다.",
+        "en": "Distinguish Leadership tests and General or Battle Standard support."
+      },
+      "entries": [
+        {
+          "id": "foundation-leadership-test",
+          "title": {
+            "ko": "리더십 테스트",
+            "en": "Leadership Tests"
+          },
+          "aliases": [
+            "리더십 테스트",
+            "Leadership Tests"
+          ],
+          "path": "/model-profiles/leadership-tests",
+          "summary": {
+            "ko": "2D6 합이 적용 리더십(Ld) 이하이면 성공합니다.",
+            "en": "Pass if 2D6 is equal to or below the applicable Leadership."
+          },
+          "timing": {
+            "ko": "패닉·랠리 등 리더십 테스트.",
+            "en": "Leadership tests including Panic and Rally."
+          },
+          "steps": [
+            {
+              "ko": "유닛 안에서 가장 높은 Ld와 사용 가능한 지휘 효과를 확인합니다.",
+              "en": "Find the highest Leadership in the unit and available command effects."
+            },
+            {
+              "ko": "2D6을 굴려 수정치를 반영한 뒤 Ld와 비교합니다.",
+              "en": "Roll 2D6, apply relevant modifiers and compare with Leadership."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "자연 더블1은 성공, 자연 더블6은 실패입니다.",
+              "en": "Natural double 1 passes and natural double 6 fails."
+            },
+            {
+              "ko": "브레이크 테스트는 별도 절차를 사용합니다.",
+              "en": "Break tests use their own resolution procedure."
+            }
+          ],
+          "example": {
+            "ko": "Ld8에서 3+5=8은 성공, 4+5=9는 실패입니다.",
+            "en": "At Ld 8, 3+5=8 passes and 4+5=9 fails."
+          },
+          "quick": {
+            "ko": "2D6≤Ld. 자연2 성공, 자연12 실패.",
+            "en": "2D6≤Ld; natural 2 passes, natural 12 fails."
+          },
+          "sources": [
+            {
+              "title": "Leadership Tests",
+              "path": "/model-profiles/leadership-tests"
+            }
+          ]
+        },
+        {
+          "id": "foundation-command-range",
+          "title": {
+            "ko": "커맨드 레인지",
+            "en": "Command Range"
+          },
+          "aliases": [
+            "커맨드 레인지",
+            "Command Range"
+          ],
+          "path": "/characters/command-range",
+          "summary": {
+            "ko": "캐릭터의 커맨드 레인지는 그 캐릭터의 Ld만큼 인치입니다.",
+            "en": "A character's Command range in inches equals their Leadership."
+          },
+          "timing": {
+            "ko": "커맨드 레인지 효과를 적용할 때.",
+            "en": "When applying an effect within Command range."
+          },
+          "steps": [
+            {
+              "ko": "효과를 제공하는 캐릭터의 Ld를 확인합니다.",
+              "en": "Check the Leadership of the character providing the effect."
+            },
+            {
+              "ko": "해당 인치 거리 안인지 측정합니다.",
+              "en": "Measure whether the recipient is within that distance in inches."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "사거리 안이어도 특수 규칙의 자격·도주 제한을 별도로 확인합니다.",
+              "en": "Range does not override an effect's eligibility or fleeing restrictions."
+            }
+          ],
+          "example": {
+            "ko": "Ld9 캐릭터의 기본 커맨드 레인지는 9인치입니다.",
+            "en": "A Leadership 9 character has a basic Command range of 9 inches."
+          },
+          "quick": {
+            "ko": "커맨드 레인지=캐릭터 Ld인치.",
+            "en": "Command range=the character's Leadership in inches."
+          },
+          "sources": [
+            {
+              "title": "Command Range",
+              "path": "/characters/command-range"
+            }
+          ]
+        },
+        {
+          "id": "foundation-inspiring-presence",
+          "title": {
+            "ko": "인스파이어링 프레즌스",
+            "en": "Inspiring Presence"
+          },
+          "aliases": [
+            "인스파이어링 프레즌스",
+            "Inspiring Presence"
+          ],
+          "path": "/characters/inspiring-presence",
+          "summary": {
+            "ko": "비도주 제너럴의 커맨드 레인지 안 아군은 제너럴의 Ld를 사용할 수 있습니다.",
+            "en": "Friendly units within a non-fleeing General's Command range may use the General's Leadership."
+          },
+          "timing": {
+            "ko": "사거리 안 아군이 리더십을 사용할 때.",
+            "en": "When a friendly unit in range uses Leadership."
+          },
+          "steps": [
+            {
+              "ko": "제너럴의 도주 여부와 커맨드 레인지를 확인합니다.",
+              "en": "Check whether the General is fleeing and measure Command range."
+            },
+            {
+              "ko": "유닛이 자신의 Ld 대신 제너럴의 Ld를 사용할지 정합니다.",
+              "en": "Choose whether the unit uses the General's Leadership instead of its own."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "도주 중인 제너럴은 효과를 제공하지 않습니다.",
+              "en": "A fleeing General does not provide this benefit."
+            }
+          ],
+          "example": {
+            "ko": "Ld7 유닛이 Ld9 제너럴의 9인치 안에 있으면 Ld9 사용이 가능합니다.",
+            "en": "An Ld 7 unit within 9 inches of an Ld 9 General may use Ld 9."
+          },
+          "quick": {
+            "ko": "비도주 제너럴 사거리 안: 제너럴 Ld 사용 가능.",
+            "en": "In range of a non-fleeing General: may use their Leadership."
+          },
+          "sources": [
+            {
+              "title": "Inspiring Presence",
+              "path": "/characters/inspiring-presence"
+            }
+          ]
+        },
+        {
+          "id": "foundation-bsb-reroll",
+          "title": {
+            "ko": "홀드 유어 그라운드",
+            "en": "Hold Your Ground"
+          },
+          "aliases": [
+            "홀드 유어 그라운드",
+            "Hold Your Ground"
+          ],
+          "path": "/characters/hold-your-ground",
+          "summary": {
+            "ko": "비도주 BSB의 사거리 안 아군은 실패 패닉·랠리와 브레이크의2D6을 리롤할 수 있습니다.",
+            "en": "A non-fleeing BSB permits re-rolls of failed Panic or Rally tests and the 2D6 of Break tests within Command range."
+          },
+          "timing": {
+            "ko": "허용된 판정에서 리롤을 결정할 때.",
+            "en": "When choosing a re-roll for an eligible test."
+          },
+          "steps": [
+            {
+              "ko": "BSB가 도주 중이 아니고 유닛이 커맨드 레인지 안인지 확인합니다.",
+              "en": "Check that the BSB is not fleeing and the unit is in Command range."
+            },
+            {
+              "ko": "허용된 판정이나2D6을 리롤하고 새 결과를 적용합니다.",
+              "en": "Re-roll the eligible test or 2D6 and apply the new result."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "모든 리더십 판정을 리롤하는 효과는 아닙니다.",
+              "en": "This is not a re-roll for every Leadership test."
+            },
+            {
+              "ko": "새 결과가 더 나빠도 사용합니다.",
+              "en": "Keep the second result even if worse."
+            }
+          ],
+          "example": {
+            "ko": "패닉10에 실패해 리롤로11이 나와도 새11을 사용합니다.",
+            "en": "If a failed Panic roll of 10 becomes 11 on the re-roll, use 11."
+          },
+          "quick": {
+            "ko": "BSB: 실패 패닉·랠리, 브레이크2D6 리롤; 비도주·사거리 확인.",
+            "en": "BSB: failed Panic/Rally and Break 2D6 re-rolls; check range and fleeing."
+          },
+          "sources": [
+            {
+              "title": "Hold Your Ground",
+              "path": "/characters/hold-your-ground"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "foundation-prebattle",
+      "title": {
+        "ko": "게임 준비와 군대 구성",
+        "en": "Preparing a game and army"
+      },
+      "description": {
+        "ko": "배치·선턴·종료 시점과 매치드 플레이의 편성 조건을 확인합니다.",
+        "en": "Check deployment, first turn, game length and matched-play composition."
+      },
+      "entries": [
+        {
+          "id": "foundation-minimum-units",
+          "title": {
+            "ko": "최소 유닛 수",
+            "en": "Minimum Three Units"
+          },
+          "aliases": [
+            "최소 유닛 수",
+            "Minimum Three Units"
+          ],
+          "path": "/warhammer-armies/minimum-three-units",
+          "summary": {
+            "ko": "군대는 자격을 갖춘 비캐릭터 유닛을 최소3개 포함해야 합니다.",
+            "en": "An army must contain at least three eligible non-character units."
+          },
+          "timing": {
+            "ko": "군대 편성의 합법성을 확인할 때.",
+            "en": "When checking army composition before play."
+          },
+          "steps": [
+            {
+              "ko": "캐릭터를 제외한 유닛을 셉니다.",
+              "en": "Count non-character units."
+            },
+            {
+              "ko": "스웜·워 비스트·워 머신을 제외하고 남은 수가3이상인지 확인합니다.",
+              "en": "Exclude swarms, war beasts and war machines, then check at least three remain."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "로스터 카드가3개 있다고 자동으로 충족되지는 않습니다.",
+              "en": "Having three roster entries alone does not necessarily satisfy the requirement."
+            }
+          ],
+          "example": {
+            "ko": "인팬트리2유닛과 워 머신1개만 있으면 인정되는 유닛은2개입니다.",
+            "en": "Two infantry units and one war machine provide only two eligible units."
+          },
+          "quick": {
+            "ko": "최소3 비캐릭터 유닛; 스웜·워 비스트·워 머신 제외.",
+            "en": "Minimum three non-character units, excluding swarms, war beasts and war machines."
+          },
+          "sources": [
+            {
+              "title": "Minimum Three Units",
+              "path": "/warhammer-armies/minimum-three-units"
+            }
+          ]
+        },
+        {
+          "id": "foundation-alternating-deployment",
+          "title": {
+            "ko": "교대 배치",
+            "en": "Alternating Units"
+          },
+          "aliases": [
+            "교대 배치",
+            "Alternating Units"
+          ],
+          "path": "/warhammer-battles/alternating-units",
+          "summary": {
+            "ko": "교대 배치에서는 롤 오프 승자가 첫 배치 플레이어를 고르고 비캐릭터 유닛을 번갈아 놓습니다.",
+            "en": "In alternating deployment, the roll-off winner chooses who places first; players alternate non-character units."
+          },
+          "timing": {
+            "ko": "시나리오가 교대 배치를 지시할 때.",
+            "en": "When the scenario instructs alternating deployment."
+          },
+          "steps": [
+            {
+              "ko": "롤 오프 후 승자가 첫 배치 플레이어를 정합니다.",
+              "en": "Roll off and let the winner choose who deploys first."
+            },
+            {
+              "ko": "비캐릭터 유닛을 번갈아 배치한 뒤 캐릭터를 마지막에 한꺼번에 놓습니다.",
+              "en": "Alternate non-character units, then deploy all characters together last."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "자기 워 머신은 한 배치 차례에 모두 놓지만 다른 위치에 놓을 수 있습니다.",
+              "en": "All of a player's war machines deploy together but may occupy different positions."
+            },
+            {
+              "ko": "시나리오의 다른 배치 절차가 있으면 해당 지시를 따릅니다.",
+              "en": "Follow any alternative scenario deployment procedure."
+            }
+          ],
+          "example": {
+            "ko": "워 머신2개는 각각 다른 배치 차례가 아니라 같은 차례에 놓습니다.",
+            "en": "Two war machines deploy on the same deployment turn, not separate turns."
+          },
+          "quick": {
+            "ko": "교대 배치: 워 머신 일괄, 캐릭터 마지막 일괄.",
+            "en": "Alternate deployment: war machines together, characters together last."
+          },
+          "sources": [
+            {
+              "title": "Alternating Units",
+              "path": "/warhammer-battles/alternating-units"
+            }
+          ]
+        },
+        {
+          "id": "foundation-first-turn",
+          "title": {
+            "ko": "선턴 결정",
+            "en": "First Turn"
+          },
+          "aliases": [
+            "선턴 결정",
+            "First Turn"
+          ],
+          "path": "/warhammer-battles/first-turn",
+          "summary": {
+            "ko": "선턴을 결정하는 방식은 시나리오에 적혀 있습니다.",
+            "en": "The chosen scenario specifies how first turn is decided."
+          },
+          "timing": {
+            "ko": "배치 후 게임 시작 직전.",
+            "en": "After deployment, before the first turn."
+          },
+          "steps": [
+            {
+              "ko": "시나리오의 선턴 항목과 수정치를 읽습니다.",
+              "en": "Read the scenario's first-turn procedure and modifiers."
+            },
+            {
+              "ko": "요구한 롤 오프나 선택을 해결하고 선턴 플레이어를 표시합니다.",
+              "en": "Resolve the required roll-off or choice and mark who goes first."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "대부분 롤 오프 승자가 선택하지만 모든 시나리오의 고정 절차는 아닙니다.",
+              "en": "Most scenarios let the roll-off winner choose, but this is not universal."
+            }
+          ],
+          "example": {
+            "ko": "일반 롤 오프를 쓰는 시나리오에서5대3이면5를 굴린 쪽이 선턴 플레이어를 고릅니다.",
+            "en": "Under a normal scenario roll-off, a 5 against 3 lets the winner choose who goes first."
+          },
+          "quick": {
+            "ko": "선턴은 시나리오 확인; 보통 롤 오프 승자가 선택.",
+            "en": "Check the scenario; usually the roll-off winner chooses first turn."
+          },
+          "sources": [
+            {
+              "title": "First Turn",
+              "path": "/warhammer-battles/first-turn"
+            }
+          ]
+        },
+        {
+          "id": "foundation-game-length",
+          "title": {
+            "ko": "게임 길이",
+            "en": "Game Length"
+          },
+          "aliases": [
+            "게임 길이",
+            "Game Length"
+          ],
+          "path": "/warhammer-battles/game-length-warhammer-battles",
+          "summary": {
+            "ko": "대부분6라운드이며, 가변 길이는 시나리오가 정합니다.",
+            "en": "Most games last six rounds; the scenario specifies variable lengths."
+          },
+          "timing": {
+            "ko": "시작 전에 종료 조건을 확인하고 매 라운드를 기록할 때.",
+            "en": "Before play and when tracking each round."
+          },
+          "steps": [
+            {
+              "ko": "시나리오의 라운드 수와 종료 조건을 확인합니다.",
+              "en": "Check the scenario's round limit and ending conditions."
+            },
+            {
+              "ko": "현재 라운드를 기록하고 지정된 종료 시점에 승점을 계산합니다.",
+              "en": "Track the round and score the result at the specified endpoint."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "플레이어 턴 하나와 양쪽이 행동한 라운드 하나를 구분합니다.",
+              "en": "Distinguish one player's turn from a round."
+            }
+          ],
+          "example": {
+            "ko": "일반적인6라운드는 양쪽 플레이어가 각각6턴씩 행동합니다.",
+            "en": "A typical six-round game gives each player six turns."
+          },
+          "quick": {
+            "ko": "보통6라운드; 가변·조기 종료는 시나리오 우선.",
+            "en": "Usually six rounds; scenario-specific endings take priority."
+          },
+          "sources": [
+            {
+              "title": "Game Length",
+              "path": "/warhammer-battles/game-length-warhammer-battles"
+            }
+          ]
+        },
+        {
+          "id": "foundation-combined-arms",
+          "title": {
+            "ko": "콤바인드 암즈 구성",
+            "en": "Combined Arms"
+          },
+          "aliases": [
+            "콤바인드 암즈 구성",
+            "Combined Arms"
+          ],
+          "path": "/matched-play/combined-arms",
+          "summary": {
+            "ko": "아미 리스트에서 본래 제한하지 않은 동일 선택에 추가 상한을 적용합니다.",
+            "en": "Additional caps apply to repeated selections not already restricted by the army list."
+          },
+          "timing": {
+            "ko": "콤바인드 암즈 머스터 리스트 작성.",
+            "en": "When writing a Combined Arms muster list."
+          },
+          "steps": [
+            {
+              "ko": "기존 아미 리스트 제한이 있는 선택인지 먼저 확인합니다.",
+              "en": "First identify choices already restricted by the composition list."
+            },
+            {
+              "ko": "그 외 동일 선택에 캐릭터3·코어4·스페셜3·레어/용병2 상한을 적용합니다.",
+              "en": "For other repeated choices, cap Characters at 3, Core at 4, Special at 3 and Rare/Mercenaries at 2."
+            },
+            {
+              "ko": "2,000점 초과의 완전1,000점마다 각 상한을1늘립니다.",
+              "en": "Increase each cap by one for every full 1,000 points above 2,000."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "디태치먼트와 네임드 캐릭터는 이 추가 상한에서 제외합니다.",
+              "en": "Detachments and named characters are excluded from these additional caps."
+            },
+            {
+              "ko": "용병은 허용되며 얼라이는 주최자 재량입니다.",
+              "en": "Mercenaries are permitted; allied contingents are at the organiser's discretion."
+            }
+          ],
+          "example": {
+            "ko": "3,000점에서는 별도 제한 없는 코어 선택의 상한이4에서5로 늘어납니다.",
+            "en": "At 3,000 points, an otherwise unrestricted Core choice rises from a cap of 4 to 5."
+          },
+          "quick": {
+            "ko": "CA:3/4/3/2, 2천점 초과 완전1천점마다+1. 기존 제한 유지.",
+            "en": "Combined Arms:3/4/3/2; +1 per full 1,000 above 2,000; preserve existing limits."
+          },
+          "sources": [
+            {
+              "title": "Combined Arms",
+              "path": "/matched-play/combined-arms"
+            }
+          ]
+        },
+        {
+          "id": "foundation-grand-melee",
+          "title": {
+            "ko": "그랜드 멜리 구성",
+            "en": "Grand Melee"
+          },
+          "aliases": [
+            "그랜드 멜리 구성",
+            "Grand Melee"
+          ],
+          "path": "/matched-play/grand-melee",
+          "summary": {
+            "ko": "단일 선택의 포인트·모델 비중과 고레벨 위저드 수를 제한합니다.",
+            "en": "Grand Melee limits single-choice points, model concentration and higher-level Wizards."
+          },
+          "timing": {
+            "ko": "그랜드 멜리 리스트 작성.",
+            "en": "When writing an army for Grand Melee."
+          },
+          "steps": [
+            {
+              "ko": "단일 캐릭터/유닛이 전체 포인트의25%를 넘지 않는지 확인합니다.",
+              "en": "Check that no single character or unit costs more than 25% of army points."
+            },
+            {
+              "ko": "L3는1,000점당0–1, L4는2,000점당0–1인지 확인합니다.",
+              "en": "Allow at most one Level 3 per 1,000 points and one Level 4 per 2,000 points."
+            },
+            {
+              "ko": "한 유닛이 전체 모델 수의50%를 넘지 않는지 확인합니다.",
+              "en": "Check that no unit contains more than 50% of the army's models."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "이 모드 제한은 네임드 캐릭터에 적용하지 않습니다.",
+              "en": "These limitations do not apply to named characters."
+            },
+            {
+              "ko": "L1·L2에 추가 수량 상한이 없고 용병은 허용됩니다.",
+              "en": "The mode adds no count cap for Level 1 or 2 Wizards; mercenaries are permitted."
+            }
+          ],
+          "example": {
+            "ko": "2,000점에서 단일 선택 상한은500점입니다.80모델 군대의 한 유닛은40모델까지입니다.",
+            "en": "At 2,000 points the single-choice cap is 500; an 80-model army allows 40 in one unit."
+          },
+          "quick": {
+            "ko": "GM: 선택당≤25%점수, 유닛당≤50%모델. L3/1천·L4/2천 각0–1.",
+            "en": "Grand Melee:≤25% points per choice,≤50% models per unit; L3/1,000 andL4/2,000."
+          },
+          "sources": [
+            {
+              "title": "Grand Melee",
+              "path": "/matched-play/grand-melee"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "foundation-turn",
+      "title": {
+        "ko": "턴과 단계 진행",
+        "en": "Turn and phase sequence"
+      },
+      "description": {
+        "ko": "행동 순서를 고정해 시점 누락을 줄입니다.",
+        "en": "Follow the sequence to avoid missing timing windows."
+      },
+      "entries": [
+        {
+          "id": "foundation-turn-sequence",
+          "title": {
+            "ko": "턴 순서",
+            "en": "The Turn Sequence"
+          },
+          "aliases": [
+            "턴 순서",
+            "The Turn Sequence"
+          ],
+          "path": "/the-turn-sequence/the-turn-sequence",
+          "summary": {
+            "ko": "한 플레이어 턴은 스트래티지→무브먼트→슈팅→컴뱃 순서입니다.",
+            "en": "A player's turn follows Strategy, Movement, Shooting and Combat."
+          },
+          "timing": {
+            "ko": "각 플레이어 턴 전체.",
+            "en": "Throughout each player's turn."
+          },
+          "steps": [
+            {
+              "ko": "현재 단계와 하위 단계를 표시하고 요구된 행동을 해결합니다.",
+              "en": "Track the current phase and sub-phase and resolve required actions."
+            },
+            {
+              "ko": "앞 단계를 끝낸 뒤 다음 단계로 이동하며, 모든 컴뱃 해결 후 턴을 마칩니다.",
+              "en": "Finish the current phase before advancing; the turn ends after all combats."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "스펠은 종류에 따라 서로 다른 단계에 시전합니다.",
+              "en": "Spell types have different casting windows."
+            }
+          ],
+          "example": {
+            "ko": "1번째 스트래티지의 랠리를 끝낸 뒤2번째 무브먼트로 갑니다.",
+            "en": "Resolve rallying in phase 1, Strategy, before phase 2, Movement."
+          },
+          "quick": {
+            "ko": "스트래티지→무브먼트→슈팅→컴뱃.",
+            "en": "Strategy→Movement→Shooting→Combat."
+          },
+          "sources": [
+            {
+              "title": "The Turn Sequence",
+              "path": "/the-turn-sequence/the-turn-sequence"
+            }
+          ]
+        },
+        {
+          "id": "foundation-strategy-sequence",
+          "title": {
+            "ko": "스트래티지 하위 단계",
+            "en": "The Strategy Phase Sequence"
+          },
+          "aliases": [
+            "스트래티지 하위 단계",
+            "The Strategy Phase Sequence"
+          ],
+          "path": "/the-strategy-phase/the-strategy-phase-sequence",
+          "summary": {
+            "ko": "턴 시작→커맨드→컨저레이션→도주 유닛 랠리 순서입니다.",
+            "en": "Resolve Start of Turn, Command, Conjuration and Rally Fleeing Units in order."
+          },
+          "timing": {
+            "ko": "자기 스트래티지 페이즈.",
+            "en": "During your Strategy phase."
+          },
+          "steps": [
+            {
+              "ko": "턴 시작 효과와 커맨드 능력을 각 시점에 해결합니다.",
+              "en": "Resolve start-of-turn effects and Command abilities in their windows."
+            },
+            {
+              "ko": "컨저레이션 스펠을 해결한 뒤 도주 유닛의 랠리를 시도합니다.",
+              "en": "Resolve Conjuration spells, then attempt to rally fleeing units."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "하위 단계 안의 행동 순서는 선택할 수 있지만 서로 다른 하위 단계를 섞지 않습니다.",
+              "en": "Choose action order within a sub-phase, but do not mix separate sub-phases."
+            }
+          ],
+          "example": {
+            "ko": "Rallying Cry는2번째 커맨드에서, 정상 랠리는4번째 하위 단계에서 처리합니다.",
+            "en": "Rallying Cry occurs in sub-phase 2, Command; normal rallying is sub-phase 4."
+          },
+          "quick": {
+            "ko": "턴 시작→커맨드→컨저레이션→랠리.",
+            "en": "Start of Turn→Command→Conjuration→Rally."
+          },
+          "sources": [
+            {
+              "title": "The Strategy Phase Sequence",
+              "path": "/the-strategy-phase/the-strategy-phase-sequence"
+            }
+          ]
+        },
+        {
+          "id": "foundation-movement-sequence",
+          "title": {
+            "ko": "무브먼트 하위 단계",
+            "en": "The Movement Phase Sequence"
+          },
+          "aliases": [
+            "무브먼트 하위 단계",
+            "The Movement Phase Sequence"
+          ],
+          "path": "/the-movement-phase/the-movement-phase-sequence",
+          "summary": {
+            "ko": "차지 선언·반응→차지 이동→강제 이동→남은 이동 순서입니다.",
+            "en": "Resolve charge declarations and reactions, Charge Moves, Compulsory Moves and Remaining Moves."
+          },
+          "timing": {
+            "ko": "자기 무브먼트 페이즈.",
+            "en": "During your Movement phase."
+          },
+          "steps": [
+            {
+              "ko": "모든 차지를 먼저 선언한 뒤 상대가 차지 반응을 선언·해결합니다.",
+              "en": "Declare all charges before the opponent declares and resolves charge reactions."
+            },
+            {
+              "ko": "차지 이동 후 강제 이동, 마지막으로 남은 이동을 처리합니다.",
+              "en": "Complete charging moves, then compulsory moves, then remaining movement."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "같은 하위 단계의 유닛 순서는 선택해도 다음 하위 단계로 먼저 건너갈 수 없습니다.",
+              "en": "Choose unit order within a sub-phase, but complete it before advancing."
+            }
+          ],
+          "example": {
+            "ko": "차지할 유닛이2개면 두 선언을 끝낸 뒤 반응과 차지 이동을 처리합니다.",
+            "en": "With two charging units, declare both before reactions and charge movement."
+          },
+          "quick": {
+            "ko": "모든 차지 선언→반응→차지 이동→강제→남은 이동.",
+            "en": "All charges→reactions→charge moves→compulsory→remaining moves."
+          },
+          "sources": [
+            {
+              "title": "The Movement Phase Sequence",
+              "path": "/the-movement-phase/the-movement-phase-sequence"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "foundation-movement",
+      "title": {
+        "ko": "이동·차지·후퇴",
+        "en": "Movement, charges and retreats"
+      },
+      "description": {
+        "ko": "차지 주사위와 마치 제한, 서로 다른 후퇴 이동을 구분합니다.",
+        "en": "Distinguish charge dice, marching restrictions and retreat moves."
+      },
+      "entries": [
+        {
+          "id": "foundation-charge-distance",
+          "title": {
+            "ko": "차지 거리",
+            "en": "Determine Charge Range"
+          },
+          "aliases": [
+            "차지 거리",
+            "Determine Charge Range"
+          ],
+          "path": "/the-movement-phase/determine-charge-range",
+          "summary": {
+            "ko": "차지 거리는 M에 D6 두 개 중 높은 값 하나를 더합니다.",
+            "en": "Charge range is Movement plus the higher of two D6."
+          },
+          "timing": {
+            "ko": "차지 이동을 해결할 때.",
+            "en": "When resolving a charge move."
+          },
+          "steps": [
+            {
+              "ko": "적용 M과 차지 수정치를 확인합니다.",
+              "en": "Check Movement and applicable charge modifiers."
+            },
+            {
+              "ko": "D6 두 개를 굴려 낮은 값을 버리고 높은 값에 M을 더합니다.",
+              "en": "Roll two D6, discard the lower and add Movement to the higher."
+            },
+            {
+              "ko": "실제 차지 경로와 정렬을 완료할 수 있는지 확인합니다.",
+              "en": "Check whether the actual charge movement and alignment can be completed."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "두 주사위를 합산하지 않습니다. 같은 값이면 아무 하나를 버립니다.",
+              "en": "Do not add both dice; on a tie discard either."
+            },
+            {
+              "ko": "거리가 부족하면 실패한 차지 이동을 합니다.",
+              "en": "If the movement is insufficient, resolve a failed charge."
+            }
+          ],
+          "example": {
+            "ko": "M4에서1과5이면 차지 거리는4+5=9인치입니다.",
+            "en": "At M4, rolls of 1 and 5 give a charge range of 4+5=9 inches."
+          },
+          "quick": {
+            "ko": "기본 차지=M+max(D6,D6).",
+            "en": "Basic charge=M+max(D6,D6)."
+          },
+          "sources": [
+            {
+              "title": "Determine Charge Range",
+              "path": "/the-movement-phase/determine-charge-range"
+            }
+          ]
+        },
+        {
+          "id": "foundation-failed-charge",
+          "title": {
+            "ko": "실패한 차지",
+            "en": "Failed Charge"
+          },
+          "aliases": [
+            "실패한 차지",
+            "Failed Charge"
+          ],
+          "path": "/the-movement-phase/failed-charge",
+          "summary": {
+            "ko": "차지 실패 시 M을 제외한 Charge 굴림 결과만큼 목표를 향해 움직입니다.",
+            "en": "A failed charge moves towards the target by the Charge roll result without adding Movement."
+          },
+          "timing": {
+            "ko": "선언한 차지를 완료하지 못했을 때.",
+            "en": "When a declared charge cannot be completed."
+          },
+          "steps": [
+            {
+              "ko": "차지에 사용한 Charge 굴림 결과를 확인합니다.",
+              "en": "Keep the result of the Charge roll."
+            },
+            {
+              "ko": "목표를 향해 그 거리만큼 이동하고 필요한 휠을 합니다.",
+              "en": "Move that distance directly towards the target, wheeling as required."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "실패 이동에 M을 다시 더하지 않습니다.",
+              "en": "Do not add Movement to the failed-charge distance."
+            }
+          ],
+          "example": {
+            "ko": "M4에서 주사위1·5로 차지에 실패했다면5인치 이동합니다.",
+            "en": "At M4 with dice 1 and 5, a failed charge moves 5 inches."
+          },
+          "quick": {
+            "ko": "실패한 차지=Charge 굴림만큼, M 제외.",
+            "en": "Failed charge=Charge roll only, without Movement."
+          },
+          "sources": [
+            {
+              "title": "Failed Charge",
+              "path": "/the-movement-phase/failed-charge"
+            }
+          ]
+        },
+        {
+          "id": "foundation-marching",
+          "title": {
+            "ko": "마치 이동",
+            "en": "Marching"
+          },
+          "aliases": [
+            "마치 이동",
+            "Marching"
+          ],
+          "path": "/movement-in-detail/marching",
+          "summary": {
+            "ko": "기본 마치는 M을 두 배로 사용하지만 기동과 사격을 제한합니다.",
+            "en": "A normal march doubles Movement but restricts manoeuvres and shooting."
+          },
+          "timing": {
+            "ko": "남은 이동에서 마치를 선택할 때.",
+            "en": "When choosing to march during Remaining Moves."
+          },
+          "steps": [
+            {
+              "ko": "적 근접 여부와 마치 가능 여부를 확인합니다.",
+              "en": "Check nearby enemies and whether the unit may march."
+            },
+            {
+              "ko": "기본2M 이내로 이동하며 방향 변경은 허용된 휠로 처리합니다.",
+              "en": "Move up to 2M and use wheeling for permitted direction changes."
+            },
+            {
+              "ko": "마치한 유닛을 표시해 슈팅 제한을 기억합니다.",
+              "en": "Mark the unit as having marched for shooting restrictions."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "마치 중 휠 외 다른 기동은 할 수 없습니다.",
+              "en": "A marching unit cannot perform manoeuvres other than wheels."
+            },
+            {
+              "ko": "마치한 턴에는 사격과 Magic Missile·Magical Vortex 시전이 불가합니다.",
+              "en": "A unit that marched cannot shoot or cast Magic Missile or Magical Vortex spells that turn."
+            },
+            {
+              "ko": "Close Order의 Marching Column은 마치 시3M입니다.",
+              "en": "A Close Order Marching Column can march at 3M."
+            }
+          ],
+          "example": {
+            "ko": "M4 유닛의 기본 마치는8인치이며 해당 컬럼은12인치입니다.",
+            "en": "An M4 unit normally marches 8 inches, or 12 in the applicable column."
+          },
+          "quick": {
+            "ko": "기본 마치2M; 컬럼3M. 휠만, 해당 턴 사격 불가.",
+            "en": "March 2M, applicable column 3M; wheels only and no shooting that turn."
+          },
+          "sources": [
+            {
+              "title": "Marching",
+              "path": "/movement-in-detail/marching"
+            }
+          ]
+        },
+        {
+          "id": "foundation-enemy-sighted",
+          "title": {
+            "ko": "에너미 사이티드",
+            "en": "Enemy Sighted"
+          },
+          "aliases": [
+            "에너미 사이티드",
+            "Enemy Sighted"
+          ],
+          "path": "/movement-in-detail/enemy-sighted",
+          "summary": {
+            "ko": "적8인치 이내에서 마치를 시작하려면 먼저 리더십 테스트를 합니다.",
+            "en": "Pass a Leadership test before beginning a march within 8 inches of an enemy."
+          },
+          "timing": {
+            "ko": "마치 시작 시.",
+            "en": "At the start of a march move."
+          },
+          "steps": [
+            {
+              "ko": "도주 중이 아닌 적 유닛이8인치 이내인지 확인합니다.",
+              "en": "Check for non-fleeing enemies within 8 inches."
+            },
+            {
+              "ko": "필요하면 Ld 테스트를 합니다. 성공하면 마치, 실패하면 일반 이동만 가능합니다.",
+              "en": "If required, test Leadership; pass to march, fail to move normally only."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "도주 중인 적은 이 확인에서 무시합니다.",
+              "en": "Ignore fleeing enemy units."
+            },
+            {
+              "ko": "실패하면 전혀 움직이지 않아도 마치한 것으로 취급합니다.",
+              "en": "On failure the unit counts as having marched even if it stays still."
+            }
+          ],
+          "example": {
+            "ko": "적이7인치에 있고 Ld8 유닛이9를 굴리면 마치 불가이며 사격상 마치한 것으로 취급됩니다.",
+            "en": "An Ld 8 unit rolling 9 with an enemy 7 inches away cannot march and still counts as having marched."
+          },
+          "quick": {
+            "ko": "적≤8인치: 마치 전Ld. 실패도 마치한 것으로 취급.",
+            "en": "Enemy within 8 inches: test before marching; failure still counts as marched."
+          },
+          "sources": [
+            {
+              "title": "Enemy Sighted",
+              "path": "/movement-in-detail/enemy-sighted"
+            }
+          ]
+        },
+        {
+          "id": "foundation-flee-move",
+          "title": {
+            "ko": "플리 이동",
+            "en": "The Flee Move"
+          },
+          "aliases": [
+            "플리 이동",
+            "The Flee Move"
+          ],
+          "path": "/movement-in-detail/the-flee-move",
+          "summary": {
+            "ko": "도주 거리는2D6 합이며 굴린 거리 전부를 이동합니다.",
+            "en": "A fleeing unit moves the full 2D6 distance rolled."
+          },
+          "timing": {
+            "ko": "도주 이동을 해야 할 때.",
+            "en": "When resolving a flee move."
+          },
+          "steps": [
+            {
+              "ko": "필요한 방향 전환 후2D6을 굴립니다.",
+              "en": "Determine the required facing, then roll 2D6."
+            },
+            {
+              "ko": "향한 방향으로 굴린 거리 전부를 직선 이동합니다.",
+              "en": "Move straight ahead the full distance rolled."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "전장 밖으로 나가더라도 전 거리를 이동합니다.",
+              "en": "Move the full distance even if it takes the unit off the battlefield."
+            },
+            {
+              "ko": "통과 불가 지형을 우회할 때 필요한 피벗만 허용됩니다.",
+              "en": "Pivot only when required to move around impassable terrain."
+            }
+          ],
+          "example": {
+            "ko": "2D6이3+4이면7인치 도주합니다. 전장 경계가5인치 앞이면 경계를 넘습니다.",
+            "en": "A3+4 roll flees 7 inches; if the edge is 5 inches ahead, the unit crosses it."
+          },
+          "quick": {
+            "ko": "플리=2D6 전 거리, 방향 직진.",
+            "en": "Flee=full 2D6 distance straight ahead."
+          },
+          "sources": [
+            {
+              "title": "The Flee Move",
+              "path": "/movement-in-detail/the-flee-move"
+            }
+          ]
+        },
+        {
+          "id": "foundation-give-ground",
+          "title": {
+            "ko": "기브 그라운드",
+            "en": "Give Ground"
+          },
+          "aliases": [
+            "기브 그라운드",
+            "Give Ground"
+          ],
+          "path": "/movement-in-detail/give-ground",
+          "summary": {
+            "ko": "방향을 바꾸지 않고 원인이 된 적에게서2인치 물러납니다.",
+            "en": "Move 2 inches directly away from the enemy without changing facing."
+          },
+          "timing": {
+            "ko": "기브 그라운드 결과를 적용할 때.",
+            "en": "When resolving a Give Ground result."
+          },
+          "steps": [
+            {
+              "ko": "후퇴를 유발한 적을 기준으로 뒤로 갈 방향을 정합니다.",
+              "en": "Identify the direction directly away from the enemy causing the retreat."
+            },
+            {
+              "ko": "터닝·피벗 없이 최대2인치 이동합니다.",
+              "en": "Move up to 2 inches without turning or pivoting."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "다른 유닛·지형에 닿거나 적1인치 이내가 될 상황이면 즉시 정지합니다.",
+              "en": "Stop upon contact with a unit or terrain, or before coming within 1 inch of an enemy."
+            }
+          ],
+          "example": {
+            "ko": "뒤1인치에 지형이 있으면2인치를 채우지 않고 접촉 시 정지합니다.",
+            "en": "If terrain lies 1 inch behind, stop at contact rather than completing 2 inches."
+          },
+          "quick": {
+            "ko": "기브 그라운드2인치, 방향 유지, 접촉/적1인치 전 정지.",
+            "en": "Give Ground 2 inches, keep facing, stop at contact or enemy proximity."
+          },
+          "sources": [
+            {
+              "title": "Give Ground",
+              "path": "/movement-in-detail/give-ground"
+            }
+          ]
+        },
+        {
+          "id": "foundation-fbigo",
+          "title": {
+            "ko": "폴 백 인 굿 오더",
+            "en": "Fall Back in Good Order"
+          },
+          "aliases": [
+            "폴 백 인 굿 오더",
+            "Fall Back in Good Order"
+          ],
+          "path": "/movement-in-detail/fall-back-in-good-order",
+          "summary": {
+            "ko": "도주처럼 이동하지만 거리는 D6 두 개 중 높은 값이며 끝나면 자동 랠리합니다.",
+            "en": "Move as a fleeing unit, but use the higher of two D6 and automatically rally afterwards."
+          },
+          "timing": {
+            "ko": "폴 백 인 굿 오더 결과를 적용할 때.",
+            "en": "When resolving a Fall Back in Good Order result."
+          },
+          "steps": [
+            {
+              "ko": "도주 이동의 방향과 경로를 정합니다.",
+              "en": "Determine direction and path using flee-move rules."
+            },
+            {
+              "ko": "D6 두 개 중 낮은 값을 버리고 높은 값만큼 이동합니다.",
+              "en": "Discard the lower of two D6 and move by the higher."
+            },
+            {
+              "ko": "이동이 끝나면 자동 랠리합니다.",
+              "en": "Automatically rally at the end of the move."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "일반 도주의2D6 합과 혼동하지 않습니다.",
+              "en": "Do not use the sum of 2D6 as for normal fleeing."
+            },
+            {
+              "ko": "두 눈이 같으면 어느 하나를 버립니다.",
+              "en": "If the dice tie, discard either."
+            }
+          ],
+          "example": {
+            "ko": "2와5를 굴리면7인치가 아니라5인치 후퇴한 뒤 자동 랠리합니다.",
+            "en": "Rolling 2 and 5 moves 5 inches, not 7, then the unit automatically rallies."
+          },
+          "quick": {
+            "ko": "FBIGO=max(D6,D6), 끝나면 자동 랠리.",
+            "en": "FBIGO=max(D6,D6), then automatically rally."
+          },
+          "sources": [
+            {
+              "title": "Fall Back in Good Order",
+              "path": "/movement-in-detail/fall-back-in-good-order"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "foundation-terrain",
+      "title": {
+        "ko": "지형과 지원군",
+        "en": "Terrain and reinforcements"
+      },
+      "description": {
+        "ko": "이동 지형 수정치·위험 테스트·전장 진입을 확인합니다.",
+        "en": "Check terrain modifiers, Dangerous Terrain tests and entering play."
+      },
+      "entries": [
+        {
+          "id": "foundation-difficult-terrain",
+          "title": {
+            "ko": "디피컬트 터레인 이동",
+            "en": "Difficult Terrain (Movement)"
+          },
+          "aliases": [
+            "디피컬트 터레인 이동",
+            "Difficult Terrain (Movement)"
+          ],
+          "path": "/movement-in-detail/difficult-terrain-movement",
+          "summary": {
+            "ko": "유닛 일부라도 어려운 지형을 만나면 그 이동에 M−1을 적용하며 최소M1입니다.",
+            "en": "A unit touching difficult terrain during its move suffers M−1, to a minimum of 1."
+          },
+          "timing": {
+            "ko": "해당 지형에서 시작·통과·종료하는 이동.",
+            "en": "A move beginning in, passing through or ending in difficult terrain."
+          },
+          "steps": [
+            {
+              "ko": "유닛 일부가 지형을 만나는지 확인합니다.",
+              "en": "Check whether any part of the unit encounters the terrain."
+            },
+            {
+              "ko": "M에−1을 적용하고 최소1을 유지합니다.",
+              "en": "Apply−1 to Movement, to a minimum of 1."
+            },
+            {
+              "ko": "종료 시 모델25%이상이 지형 안이면 Disrupted를 표시합니다.",
+              "en": "At the end, mark the unit Disrupted if at least 25% of its models are in the terrain."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "이동 시작·중간·끝 중 어느 시점에 만나도 수정치를 적용합니다.",
+              "en": "The modifier applies whether the terrain is met at the start, during or at the end."
+            }
+          ],
+          "example": {
+            "ko": "M4는3이 되며20모델 중5모델이 지형 안에서 끝나면 Disrupted입니다.",
+            "en": "M4 becomes 3; a 20-model unit ending with 5 inside is Disrupted."
+          },
+          "quick": {
+            "ko": "디피컬트: M−1(최소1), 종료 시25%이상 내부면 Disrupted.",
+            "en": "Difficult: M−1(min 1); ending 25% or more inside causes Disruption."
+          },
+          "sources": [
+            {
+              "title": "Difficult Terrain (Movement)",
+              "path": "/movement-in-detail/difficult-terrain-movement"
+            }
+          ]
+        },
+        {
+          "id": "foundation-dangerous-terrain",
+          "title": {
+            "ko": "데인저러스 터레인 테스트",
+            "en": "Dangerous Terrain (Movement)"
+          },
+          "aliases": [
+            "데인저러스 터레인 테스트",
+            "Dangerous Terrain (Movement)"
+          ],
+          "path": "/movement-in-detail/dangerous-terrain-movement",
+          "summary": {
+            "ko": "위험 지형을 만나는 모델마다 D6을 굴려1이면 운드1을 잃습니다.",
+            "en": "Each model encountering dangerous terrain rolls a D6 and loses one Wound on 1."
+          },
+          "timing": {
+            "ko": "위험 지형에서 이동을 시작·통과·종료할 때.",
+            "en": "When movement begins in, passes through or ends in dangerous terrain."
+          },
+          "steps": [
+            {
+              "ko": "해당 이동에서 지형을 만나는 모델을 확인합니다.",
+              "en": "Identify models encountering the feature during the move."
+            },
+            {
+              "ko": "각 모델마다 D6을 굴립니다.2+는 무사,1은W1손실입니다.",
+              "en": "Roll a D6 for each;2+is safe and 1 loses one Wound."
+            },
+            {
+              "ko": "서로 다른 위험 지형을 또 만나면 해당 지형마다 다시 테스트합니다.",
+              "en": "Test again for each separate dangerous feature encountered."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "위험 지형은 이동을 어려운 지형처럼 방해합니다.",
+              "en": "Dangerous terrain also hinders movement as difficult terrain."
+            },
+            {
+              "ko": "한 이동에서 서로 다른 지형 두 개를 만나면 각각 판정합니다.",
+              "en": "Two separate features in one move require separate tests."
+            }
+          ],
+          "example": {
+            "ko": "3모델이 지형을 지나고 주사위1·2·6이면1을 굴린 모델이W1을 잃습니다.",
+            "en": "Three models rolling 1,2 and 6 lose one Wound on the model that rolled 1."
+          },
+          "quick": {
+            "ko": "모델마다D6:1이면W1손실,2+무사. 지형마다 별도.",
+            "en": "D6 per model:1 loses 1W,2+safe; test each feature separately."
+          },
+          "sources": [
+            {
+              "title": "Dangerous Terrain (Movement)",
+              "path": "/movement-in-detail/dangerous-terrain-movement"
+            }
+          ]
+        },
+        {
+          "id": "foundation-low-obstacles",
+          "title": {
+            "ko": "낮은 선형 장애물 이동",
+            "en": "Low Linear Obstacles (Movement)"
+          },
+          "aliases": [
+            "낮은 선형 장애물 이동",
+            "Low Linear Obstacles (Movement)"
+          ],
+          "path": "/movement-in-detail/low-linear-obstacles-movement",
+          "summary": {
+            "ko": "2인치 미만의 낮은 선형 장애물은 이동상 어려운 지형입니다.",
+            "en": "A low linear obstacle under 2 inches high counts as difficult terrain for movement."
+          },
+          "timing": {
+            "ko": "벽·울타리 등 낮은 장애물을 넘어 이동할 때.",
+            "en": "When moving across a low wall, hedge or similar obstacle."
+          },
+          "steps": [
+            {
+              "ko": "지형의 높이와 사전 분류를 확인합니다.",
+              "en": "Check the feature's height and agreed classification."
+            },
+            {
+              "ko": "낮은 선형 장애물이면 어려운 지형의 이동 절차를 적용합니다.",
+              "en": "If it is a low linear obstacle, apply difficult-terrain movement."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "컴뱃의 방어된 장애물 효과는 별도 규칙으로 확인합니다.",
+              "en": "Defended-obstacle combat effects are resolved separately."
+            }
+          ],
+          "example": {
+            "ko": "높이1.5인치의 울타리는 이동상 어려운 지형으로 처리합니다.",
+            "en": "A1.5-inch hedge is treated as difficult terrain for movement."
+          },
+          "quick": {
+            "ko": "낮은 장애물(<2인치)=이동상 디피컬트 터레인.",
+            "en": "Low obstacle(<2 inches)=difficult terrain for movement."
+          },
+          "sources": [
+            {
+              "title": "Low Linear Obstacles (Movement)",
+              "path": "/movement-in-detail/low-linear-obstacles-movement"
+            }
+          ]
+        },
+        {
+          "id": "foundation-reinforcements",
+          "title": {
+            "ko": "리인포스먼트 진입",
+            "en": "Reinforcements"
+          },
+          "aliases": [
+            "리인포스먼트 진입",
+            "Reinforcements"
+          ],
+          "path": "/movement-in-detail/reinforcements",
+          "summary": {
+            "ko": "지원군은 강제 이동 단계에 전장 가장자리에 놓이며 그 턴 마치할 수 없습니다.",
+            "en": "Reinforcements enter during Compulsory Moves at a battlefield edge and cannot march that turn."
+          },
+          "timing": {
+            "ko": "지원군 도착 효과를 해결할 때.",
+            "en": "When an arriving unit enters as reinforcements."
+          },
+          "steps": [
+            {
+              "ko": "도착 효과가 지정한 가장자리·위치에 후면 전체를 붙이고 중앙을 향하게 놓습니다.",
+              "en": "Place the rear arc in full contact with the specified edge, facing the battlefield centre."
+            },
+            {
+              "ko": "남은 이동에서 일반 이동이 가능하며 사격상 이동한 것으로 표시합니다.",
+              "en": "The unit may move normally in Remaining Moves and counts as having moved for shooting."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "해당 턴 마치는 불가합니다.",
+              "en": "The unit cannot march that turn."
+            },
+            {
+              "ko": "어느 가장자리와 위치를 쓸지는 도착을 유발한 규칙을 따릅니다.",
+              "en": "The arrival rule determines the edge and position."
+            }
+          ],
+          "example": {
+            "ko": "M4 지원군은 진입 후 남은 이동에서 일반4인치 이동이 가능하지만8인치 마치는 불가합니다.",
+            "en": "An M4 reinforcement may normally move 4 inches afterwards, but cannot march 8."
+          },
+          "quick": {
+            "ko": "강제 이동에 가장자리 진입, 마치 불가, 사격상 이동.",
+            "en": "Enter at the edge in Compulsory Moves; no march, counts as moved."
+          },
+          "sources": [
+            {
+              "title": "Reinforcements",
+              "path": "/movement-in-detail/reinforcements"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "foundation-rally",
+      "title": {
+        "ko": "랠리와 뮤지션 지원",
+        "en": "Rallying and musician support"
+      },
+      "description": {
+        "ko": "도주 유닛의 복귀와 손실 비율·뮤지션 수정치를 확인합니다.",
+        "en": "Check recovery from fleeing, casualty thresholds and musician modifiers."
+      },
+      "entries": [
+        {
+          "id": "foundation-rally-test",
+          "title": {
+            "ko": "랠리 테스트",
+            "en": "Rally Fleeing Units"
+          },
+          "aliases": [
+            "랠리 테스트",
+            "Rally Fleeing Units"
+          ],
+          "path": "/the-strategy-phase/rally-fleeing-units",
+          "summary": {
+            "ko": "자기 랠리 하위 단계에 도주 유닛마다 리더십 테스트를 합니다.",
+            "en": "Make a Leadership test for each fleeing unit in your Rally sub-phase."
+          },
+          "timing": {
+            "ko": "스트래티지의 랠리 하위 단계.",
+            "en": "The Rally sub-phase of Strategy."
+          },
+          "steps": [
+            {
+              "ko": "도주 중인 유닛 하나를 선택하고 적용 Ld와 손실 수정치를 확인합니다.",
+              "en": "Choose a fleeing unit and determine Leadership and casualty modifiers."
+            },
+            {
+              "ko": "리더십 테스트를 합니다. 성공하면 랠리하고 실패하면 도주 상태를 유지합니다.",
+              "en": "Test Leadership; pass to rally or fail to remain fleeing."
+            },
+            {
+              "ko": "다른 도주 유닛도 같은 방식으로 모두 처리합니다.",
+              "en": "Repeat for the other fleeing units."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "일반 랠리 시도와 별도 능력이 부여하는 추가 시도를 구분합니다.",
+              "en": "Distinguish the normal attempt from extra attempts granted by abilities."
+            }
+          ],
+          "example": {
+            "ko": "수정 후Ld7에서2D6=6이면 랠리하며8이면 도주 상태입니다.",
+            "en": "At modified Ld 7,2D6=6 rallies while 8 leaves the unit fleeing."
+          },
+          "quick": {
+            "ko": "도주 유닛마다Ld 테스트: 성공 랠리, 실패 도주 유지.",
+            "en": "Each fleeing unit tests Leadership: pass rallies; failure stays fleeing."
+          },
+          "sources": [
+            {
+              "title": "Rally Fleeing Units",
+              "path": "/the-strategy-phase/rally-fleeing-units"
+            }
+          ]
+        },
+        {
+          "id": "foundation-rallied-unit",
+          "title": {
+            "ko": "랠리 성공 후 행동",
+            "en": "Rallied Units"
+          },
+          "aliases": [
+            "랠리 성공 후 행동",
+            "Rallied Units"
+          ],
+          "path": "/the-strategy-phase/rallied-units",
+          "summary": {
+            "ko": "랠리한 유닛은 무료 리폼을 할 수 있고, 그 턴 차지할 수 없습니다.",
+            "en": "A rallied unit may make a free reform but cannot charge that turn."
+          },
+          "timing": {
+            "ko": "유닛이 랠리에 성공한 직후와 그 턴 남은 행동.",
+            "en": "Immediately after rallying and during the rest of that turn."
+          },
+          "steps": [
+            {
+              "ko": "원하면 즉시 무료 리폼을 합니다.",
+              "en": "Immediately make a free reform if desired."
+            },
+            {
+              "ko": "그 턴 차지 불가와 사격상 이동 상태를 표시합니다.",
+              "en": "Mark the unit unable to charge and as having moved for shooting."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "이 제한 외에는 정상적으로 행동할 수 있습니다.",
+              "en": "It can otherwise act normally."
+            }
+          ],
+          "example": {
+            "ko": "4모델 폭의 유닛은 랠리 직후 무료 리폼을 할 수 있지만 그 턴 차지는 선언하지 못합니다.",
+            "en": "A unit four models wide may reform for free on rallying, but may not charge that turn."
+          },
+          "quick": {
+            "ko": "랠리 후 무료 리폼, 차지 불가, 사격상 이동.",
+            "en": "After rallying: free reform, no charge, counts as moved for shooting."
+          },
+          "sources": [
+            {
+              "title": "Rallied Units",
+              "path": "/the-strategy-phase/rallied-units"
+            }
+          ]
+        },
+        {
+          "id": "foundation-rally-losses",
+          "title": {
+            "ko": "랠리 손실 비율",
+            "en": "Insurmountable Losses"
+          },
+          "aliases": [
+            "랠리 손실 비율",
+            "Insurmountable Losses"
+          ],
+          "path": "/the-strategy-phase/insurmountable-losses",
+          "summary": {
+            "ko": "시작 모델 수의50%미만이면 랠리Ld−1,25%미만이면 자연 더블1만 랠리합니다.",
+            "en": "Below 50% of starting models, rally at Ld−1; below 25%, only natural double 1 passes."
+          },
+          "timing": {
+            "ko": "랠리 테스트 전 남은 모델을 셀 때.",
+            "en": "When checking remaining models before a Rally test."
+          },
+          "steps": [
+            {
+              "ko": "게임 시작 모델 수와 현재 모델 수를 비교합니다.",
+              "en": "Compare current models with the number at the start of the battle."
+            },
+            {
+              "ko": "50%미만이면Ld−1을 적용하고25%미만이면 자연 더블1 조건을 사용합니다.",
+              "en": "Apply Ld−1 below 50%, and the natural double 1 requirement below 25%."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "‘미만’이므로 정확히50%는Ld−1대상이 아니고, 정확히25%는 더블1전용 대상이 아닙니다.",
+              "en": "These are strict thresholds: exactly 50% avoids Ld−1 and exactly 25% avoids the double 1-only condition."
+            }
+          ],
+          "example": {
+            "ko": "시작20모델이면9모델은Ld−1,4모델은 더블1만,5모델은25%미만이 아닙니다.",
+            "en": "From 20 models,9 rally at Ld−1,4 need double 1, and 5 are not below 25%."
+          },
+          "quick": {
+            "ko": "랠리: 잔존<50% Ld−1 / 잔존<25% 자연더블1만.",
+            "en": "Rally: remaining<50%Ld−1; remaining<25% natural double 1 only."
+          },
+          "sources": [
+            {
+              "title": "Insurmountable Losses",
+              "path": "/the-strategy-phase/insurmountable-losses"
+            }
+          ],
+          "table": {
+            "caption": {
+              "ko": "시작20모델 유닛의 랠리 경계값",
+              "en": "Rally thresholds for a unit starting with 20 models"
+            },
+            "columns": [
+              {
+                "ko": "현재 모델",
+                "en": "Current models"
+              },
+              {
+                "ko": "처리",
+                "en": "Resolution"
+              }
+            ],
+            "rows": [
+              [
+                "10–20",
+                {
+                  "ko": "손실에 의한Ld−1없음",
+                  "en": "No casualty-based Ld−1"
+                }
+              ],
+              [
+                "5–9",
+                {
+                  "ko": "랠리Ld−1",
+                  "en": "Rally at Ld−1"
+                }
+              ],
+              [
+                "1–4",
+                {
+                  "ko": "자연 더블 1만 랠리 성공",
+                  "en": "Only natural double 1 rallies"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "id": "foundation-musician-rally",
+          "title": {
+            "ko": "스테딩 리듬",
+            "en": "Steadying Rhythm"
+          },
+          "aliases": [
+            "스테딩 리듬",
+            "Steadying Rhythm"
+          ],
+          "path": "/command-groups/steadying-rhythm",
+          "summary": {
+            "ko": "도주 유닛에 뮤지션이 있으면 랠리할 때Ld+1을 적용할 수 있으며 최대10입니다.",
+            "en": "A fleeing unit with a musician may add 1 to Leadership when rallying, to a maximum of 10."
+          },
+          "timing": {
+            "ko": "뮤지션을 포함한 도주 유닛의 랠리 테스트.",
+            "en": "A Rally test by a fleeing unit containing a musician."
+          },
+          "steps": [
+            {
+              "ko": "현재 유닛에 뮤지션이 남아 있는지 확인합니다.",
+              "en": "Check that the unit still contains a musician."
+            },
+            {
+              "ko": "랠리용Ld에+1을 적용하되10을 넘기지 않습니다.",
+              "en": "Add 1 to rallying Leadership without exceeding 10."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "이 효과는 랠리에 적용하며 다른 테스트까지 자동 확장하지 않습니다.",
+              "en": "This bonus applies to rallying, not automatically to other tests."
+            },
+            {
+              "ko": "손실 비율에 따른 랠리 제한은 별도로 확인합니다.",
+              "en": "Check casualty-based rally restrictions separately."
+            }
+          ],
+          "example": {
+            "ko": "기본Ld7인 유닛은 뮤지션으로 랠리Ld8을 사용할 수 있습니다.",
+            "en": "An Ld 7 unit with a musician may rally using Ld 8."
+          },
+          "quick": {
+            "ko": "뮤지션 랠리Ld+1, 최대10.",
+            "en": "Musician: rally Leadership+1, maximum 10."
+          },
+          "sources": [
+            {
+              "title": "Steadying Rhythm",
+              "path": "/command-groups/steadying-rhythm"
+            }
+          ]
+        },
+        {
+          "id": "foundation-musician-march",
+          "title": {
+            "ko": "퀵 타임",
+            "en": "Quick Time"
+          },
+          "aliases": [
+            "퀵 타임",
+            "Quick Time"
+          ],
+          "path": "/command-groups/quick-time",
+          "summary": {
+            "ko": "뮤지션이 있는 유닛은 적8인치 이내 마치 테스트에Ld+1을 적용할 수 있습니다.",
+            "en": "A unit with a musician may add 1 to Leadership for the test to march within 8 inches of an enemy."
+          },
+          "timing": {
+            "ko": "에너미 사이티드 테스트를 할 때.",
+            "en": "When making an Enemy Sighted test."
+          },
+          "steps": [
+            {
+              "ko": "뮤지션이 있는지와 적8인치 이내에서 마치하려는지 확인합니다.",
+              "en": "Check for a musician and an intended march within 8 inches of an enemy."
+            },
+            {
+              "ko": "해당 테스트에Ld+1을 적용하되 최대10으로 제한합니다.",
+              "en": "Apply Leadership+1 to that test, to a maximum of 10."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "테스트 실패 시에도 마치한 것으로 취급하는 기본 제한은 유지됩니다.",
+              "en": "Failure still counts as having marched under the normal rule."
+            }
+          ],
+          "example": {
+            "ko": "Ld7 유닛이 뮤지션을 포함하면 테스트에Ld8을 사용할 수 있습니다.",
+            "en": "An Ld 7 unit with a musician may test using Ld 8."
+          },
+          "quick": {
+            "ko": "뮤지션: 적8인치 마치 테스트Ld+1, 최대10.",
+            "en": "Musician: Enemy Sighted Leadership+1, maximum 10."
+          },
+          "sources": [
+            {
+              "title": "Quick Time",
+              "path": "/command-groups/quick-time"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "foundation-panic",
+      "title": {
+        "ko": "패닉 원인과 결과",
+        "en": "Panic triggers and consequences"
+      },
+      "description": {
+        "ko": "손실 기준과 패닉 연쇄, 면제 시점을 구분합니다.",
+        "en": "Distinguish casualty thresholds, chain reactions and exemptions."
+      },
+      "entries": [
+        {
+          "id": "foundation-panic-test",
+          "title": {
+            "ko": "패닉 테스트와 실패 결과",
+            "en": "Panic Tests"
+          },
+          "aliases": [
+            "패닉 테스트와 실패 결과",
+            "Panic Tests"
+          ],
+          "path": "/the-psychology-of-war/panic-tests",
+          "summary": {
+            "ko": "패닉은Ld 테스트이며 실패 후퇴 방식은 게임 시작 모델 수의 잔존 비율로 정합니다.",
+            "en": "Panic uses a Leadership test; the failed result depends on models remaining from the battle's start."
+          },
+          "timing": {
+            "ko": "패닉 원인이 발생했을 때.",
+            "en": "When a Panic trigger occurs."
+          },
+          "steps": [
+            {
+              "ko": "유닛의 적용Ld로 패닉 테스트를 합니다.",
+              "en": "Take a Panic test using the unit's applicable Leadership."
+            },
+            {
+              "ko": "성공하면 유지합니다. 실패하면 시작 모델의50%초과 잔존은FBIGO,50%이하는Flee입니다.",
+              "en": "On success stand firm; on failure, more than 50% remaining gives FBIGO and 50% or fewer gives Flee."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "동시에 여러 유닛이 테스트하면 조종 플레이어가 순서를 정합니다.",
+              "en": "The controlling player chooses the order of simultaneous tests."
+            },
+            {
+              "ko": "잔존 비율은 해당 페이즈 시작이 아닌 게임 시작 모델 수 기준입니다.",
+              "en": "Use models at the start of the battle, not at the start of the phase."
+            }
+          ],
+          "example": {
+            "ko": "시작20모델이면11모델은 실패 시FBIGO,10모델은Flee입니다.",
+            "en": "From 20 models,11 remaining means FBIGO on failure;10 means Flee."
+          },
+          "quick": {
+            "ko": "패닉Ld; 실패 시 잔존>50% FBIGO / ≤50% Flee.",
+            "en": "Panic: Leadership; failure with>50% remaining=FBIGO,≤50%=Flee."
+          },
+          "sources": [
+            {
+              "title": "Panic Tests",
+              "path": "/the-psychology-of-war/panic-tests"
+            }
+          ],
+          "table": {
+            "caption": {
+              "ko": "시작20모델 유닛의 패닉 실패",
+              "en": "Failed Panic for a unit starting with 20 models"
+            },
+            "columns": [
+              {
+                "ko": "현재 모델",
+                "en": "Current models"
+              },
+              {
+                "ko": "실패 결과",
+                "en": "Failure result"
+              }
+            ],
+            "rows": [
+              [
+                "11–20",
+                "Fall Back in Good Order"
+              ],
+              [
+                "1–10",
+                "Flee"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "foundation-panic-heavy-losses",
+          "title": {
+            "ko": "헤비 캐주얼티 패닉",
+            "en": "Heavy Casualties"
+          },
+          "aliases": [
+            "헤비 캐주얼티 패닉",
+            "Heavy Casualties"
+          ],
+          "path": "/the-psychology-of-war/heavy-casualties",
+          "summary": {
+            "ko": "컴뱃 외 한 페이즈에 그 페이즈 시작 모델의25%를 초과해 잃으면 패닉합니다.",
+            "en": "Losing more than 25% of phase-start models in a single non-Combat phase triggers Panic."
+          },
+          "timing": {
+            "ko": "컴뱃이 아닌 각 페이즈 중 손실 발생 시.",
+            "en": "As casualties occur in any phase other than Combat."
+          },
+          "steps": [
+            {
+              "ko": "해당 페이즈 시작 모델 수와 그 페이즈 누적 손실을 기록합니다.",
+              "en": "Track models at phase start and casualties during that phase."
+            },
+            {
+              "ko": "손실이25%를 초과하면 패닉 테스트를 합니다.",
+              "en": "Take a Panic test once losses exceed 25%."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "컴뱃 손실은 이 패닉을 유발하지 않습니다.",
+              "en": "Combat casualties do not trigger this Panic cause."
+            },
+            {
+              "ko": "적이 아닌 원인의 손실이면 가장 가까운 비도주 적을 기준으로 후퇴합니다.",
+              "en": "If no enemy caused the losses, retreat away from the nearest non-fleeing enemy."
+            }
+          ],
+          "example": {
+            "ko": "페이즈 시작20모델이면5손실은 정확히25%여서 미발동,6손실은 발동합니다.",
+            "en": "From 20 phase-start models,5 losses are exactly 25% and do not trigger it;6 do."
+          },
+          "quick": {
+            "ko": "비컴뱃 페이즈 손실>25%(페이즈 시작 모델 기준).",
+            "en": "Non-Combat phase casualties>25% of models at phase start."
+          },
+          "sources": [
+            {
+              "title": "Heavy Casualties",
+              "path": "/the-psychology-of-war/heavy-casualties"
+            }
+          ]
+        },
+        {
+          "id": "foundation-panic-destroyed-friend",
+          "title": {
+            "ko": "아군 파괴 패닉",
+            "en": "Nearby Friend Destroyed"
+          },
+          "aliases": [
+            "아군 파괴 패닉",
+            "Nearby Friend Destroyed"
+          ],
+          "path": "/the-psychology-of-war/nearby-friend-destroyed",
+          "summary": {
+            "ko": "US5이상 아군이 파괴되면6인치 안 아군이 즉시 패닉합니다.",
+            "en": "When a friendly unit of Unit Strength 5 or more is destroyed, friends within 6 inches immediately test Panic."
+          },
+          "timing": {
+            "ko": "해당 아군 유닛 파괴 시.",
+            "en": "When the qualifying friendly unit is destroyed."
+          },
+          "steps": [
+            {
+              "ko": "파괴된 유닛의US를 확인하고 측정을 위해 잠시 제자리에 둡니다.",
+              "en": "Check its Unit Strength and leave it in place while measuring."
+            },
+            {
+              "ko": "6인치 안 아군의 패닉을 해결한 뒤 파괴 유닛을 치웁니다.",
+              "en": "Resolve Panic for friendly units within 6 inches, then remove the destroyed unit."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "실패한 유닛은 가장 가까운 비도주 적에게서 물러납니다.",
+              "en": "Failed units retreat away from the nearest non-fleeing enemy."
+            },
+            {
+              "ko": "일반 패닉 면제와 페이즈당 횟수 제한을 확인합니다.",
+              "en": "Check ordinary Panic exemptions and the per-phase limit."
+            }
+          ],
+          "example": {
+            "ko": "US5아군이 파괴되면5인치 떨어진 아군은 범위 안입니다.",
+            "en": "If a US5 friend is destroyed, a friendly unit 5 inches away is in range."
+          },
+          "quick": {
+            "ko": "US≥5아군 파괴→6인치 안 아군 패닉.",
+            "en": "Destroyed friendly US≥5→Panic within 6 inches."
+          },
+          "sources": [
+            {
+              "title": "Nearby Friend Destroyed",
+              "path": "/the-psychology-of-war/nearby-friend-destroyed"
+            }
+          ]
+        },
+        {
+          "id": "foundation-panic-friend-retreat",
+          "title": {
+            "ko": "아군 전투 후퇴 패닉",
+            "en": "Nearby Friend Flees Combat"
+          },
+          "aliases": [
+            "아군 전투 후퇴 패닉",
+            "Nearby Friend Flees Combat"
+          ],
+          "path": "/the-psychology-of-war/nearby-friend-flees-combat",
+          "summary": {
+            "ko": "US5이상 아군이 전투 패배 후Flee 또는FBIGO하면6인치 안 아군이 패닉합니다.",
+            "en": "A friendly unit of US5 or more fleeing or falling back in good order after defeat triggers Panic within 6 inches."
+          },
+          "timing": {
+            "ko": "전투 패배 유닛의 브레이크 결과가 결정되었을 때.",
+            "en": "When a defeated unit's Break outcome is determined."
+          },
+          "steps": [
+            {
+              "ko": "원인 유닛의US와Flee/FBIGO 결과를 확인합니다.",
+              "en": "Check its Unit Strength and Flee or FBIGO result."
+            },
+            {
+              "ko": "측정을 위해 유닛을 제자리에 둔 채6인치 안 아군 패닉을 해결합니다.",
+              "en": "Leave it in place while resolving Panic within 6 inches."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "FBIGO도 원인이며 단순Give Ground와 구분합니다.",
+              "en": "FBIGO also triggers this; distinguish it from Give Ground."
+            },
+            {
+              "ko": "실패 유닛은 가장 가까운 비도주 적에게서 물러납니다.",
+              "en": "Failed units retreat from the nearest non-fleeing enemy."
+            }
+          ],
+          "example": {
+            "ko": "US6아군이FBIGO하면4인치 안의 아군도 이 원인의 패닉 대상입니다.",
+            "en": "A US6 friend falling back in good order can trigger Panic in friends 4 inches away."
+          },
+          "quick": {
+            "ko": "US≥5아군 전투Flee/FBIGO→6인치 아군 패닉.",
+            "en": "Friendly US≥5 Flee/FBIGO from combat→Panic within 6 inches."
+          },
+          "sources": [
+            {
+              "title": "Nearby Friend Flees Combat",
+              "path": "/the-psychology-of-war/nearby-friend-flees-combat"
+            }
+          ]
+        },
+        {
+          "id": "foundation-panic-fled-through",
+          "title": {
+            "ko": "플레드 스루",
+            "en": "Fled Through"
+          },
+          "aliases": [
+            "플레드 스루",
+            "Fled Through"
+          ],
+          "path": "/the-psychology-of-war/fled-through",
+          "summary": {
+            "ko": "도주·FBIGO하는 아군이 다른 아군을 통과하면 통과당한 유닛이 패닉합니다.",
+            "en": "A friendly unit passed through by fleeing or FBIGO friends must test Panic."
+          },
+          "timing": {
+            "ko": "도주 또는FBIGO 이동이 아군 유닛을 통과한 뒤.",
+            "en": "After fleeing or FBIGO movement passes through a friendly unit."
+          },
+          "steps": [
+            {
+              "ko": "도주 유닛의 이동을 먼저 끝냅니다.",
+              "en": "Finish the fleeing unit's movement first."
+            },
+            {
+              "ko": "통과당한 아군의 패닉을 해결하고 실패하면 가장 가까운 비도주 적에게서 후퇴합니다.",
+              "en": "Resolve Panic for the unit passed through; on failure retreat from the nearest non-fleeing enemy."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "패닉 후퇴가 다른 유닛을 통과하면 연쇄가 생길 수 있습니다.",
+              "en": "A resulting retreat through another unit can create a chain reaction."
+            },
+            {
+              "ko": "일반 면제와페이즈당1회 제한을 확인합니다.",
+              "en": "Check ordinary exemptions and the one-per-phase limit."
+            }
+          ],
+          "example": {
+            "ko": "도주 유닛이 아군 2개를 순서대로 통과했다면, 이동을 끝낸 뒤 각 유닛에 생긴 패닉 원인을 확인합니다.",
+            "en": "If a fleeing unit passes through two friendly units, finish its move, then check the Panic trigger for each unit."
+          },
+          "quick": {
+            "ko": "아군Flee/FBIGO 관통→이동 완료 후 패닉.",
+            "en": "Friendly Flee/FBIGO passes through→Panic after completing movement."
+          },
+          "sources": [
+            {
+              "title": "Fled Through",
+              "path": "/the-psychology-of-war/fled-through"
+            }
+          ]
+        },
+        {
+          "id": "foundation-panic-exemptions",
+          "title": {
+            "ko": "패닉 면제와 횟수",
+            "en": "No Need for Hysterics"
+          },
+          "aliases": [
+            "패닉 면제와 횟수",
+            "No Need for Hysterics"
+          ],
+          "path": "/the-psychology-of-war/no-need-for-hysterics-psychology",
+          "summary": {
+            "ko": "한 유닛은 한 페이즈에 패닉 테스트를 한 번만 합니다.",
+            "en": "A unit takes at most one Panic test in each phase."
+          },
+          "timing": {
+            "ko": "패닉 테스트를 요구받을 때마다.",
+            "en": "Whenever a Panic test is triggered."
+          },
+          "steps": [
+            {
+              "ko": "현재 페이즈에 이미 패닉 테스트를 했는지 확인합니다.",
+              "en": "Check whether the unit already tested Panic this phase."
+            },
+            {
+              "ko": "차지 이동 중·교전 중·이미 도주 중이면 면제인지 확인하고 나머지만 판정합니다.",
+              "en": "Check exemptions for charging, engaged or already fleeing units before testing."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "여러 원인이 있어도 같은 페이즈의 추가 패닉 테스트는 하지 않습니다.",
+              "en": "Multiple triggers do not add more tests in the same phase."
+            }
+          ],
+          "example": {
+            "ko": "슈팅 페이즈에 1번째 패닉 테스트를 했다면 같은 페이즈의 2번째 원인으로 다시 굴리지 않습니다.",
+            "en": "After taking the first Panic test in Shooting, a second trigger in that phase does not require another roll."
+          },
+          "quick": {
+            "ko": "패닉 페이즈당1회. 차지 이동·교전·이미도주 면제.",
+            "en": "Panic once per phase; charging, engaged and already-fleeing units are exempt."
+          },
+          "sources": [
+            {
+              "title": "No Need for Hysterics",
+              "path": "/the-psychology-of-war/no-need-for-hysterics-psychology"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "foundation-characters",
+      "title": {
+        "ko": "캐릭터 보호와 챌린지",
+        "en": "Character protection and challenges"
+      },
+      "description": {
+        "ko": "사격 표적 보호·대신 맞기·챌린지 자격과 결과를 확인합니다.",
+        "en": "Check targeting protection, redirected hits and challenge eligibility."
+      },
+      "entries": [
+        {
+          "id": "foundation-look-out-sir",
+          "title": {
+            "ko": "룩 아웃 서",
+            "en": "Look Out, Sir!"
+          },
+          "aliases": [
+            "룩 아웃 서",
+            "Look Out, Sir!"
+          ],
+          "path": "/characters/look-out-sir-characters",
+          "summary": {
+            "ko": "같은 병종의 일반병5명 이상과 있는 캐릭터가 사격에 맞으면2+로 일반병이 대신 맞습니다.",
+            "en": "A character hit by shooting may redirect it on 2+with at least five rank-and-file models of the same troop type in the unit."
+          },
+          "timing": {
+            "ko": "캐릭터가 사격 공격에 명중당했을 때.",
+            "en": "When a character is hit by a shooting attack."
+          },
+          "steps": [
+            {
+              "ko": "같은troop type의 일반병이5명 이상인지 확인합니다.",
+              "en": "Check for at least five rank-and-file models of the same troop type."
+            },
+            {
+              "ko": "D6을 굴립니다.2+면 유닛에 명중을 해결하고1이면 캐릭터가 맞습니다.",
+              "en": "Roll a D6; on 2+resolve against the unit, while 1 hits the character."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "일반병 수와 병종 자격을 확인하며 모든 캐릭터에 자동 허용하지 않습니다.",
+              "en": "Check rank-and-file count and troop type; not every character automatically qualifies."
+            }
+          ],
+          "example": {
+            "ko": "일반병5명이 남아 있고D6=2이면 명중을 유닛에 해결합니다.",
+            "en": "With five eligible rank-and-file models, a D6 result of 2 redirects the hit to the unit."
+          },
+          "quick": {
+            "ko": "사격 명중: 같은병종 일반병5+ → 룩 아웃 서2+.",
+            "en": "Shooting hit: five same-type rank-and-file models permit Look Out, Sir!2+."
+          },
+          "sources": [
+            {
+              "title": "Look Out, Sir!",
+              "path": "/characters/look-out-sir-characters"
+            }
+          ]
+        },
+        {
+          "id": "foundation-lone-targeting",
+          "title": {
+            "ko": "론 캐릭터 표적 보호",
+            "en": "Targeting Lone Characters"
+          },
+          "aliases": [
+            "론 캐릭터 표적 보호",
+            "Targeting Lone Characters"
+          ],
+          "path": "/characters/targeting-lone-characters",
+          "summary": {
+            "ko": "같은 병종의 비도주 아군5모델 이상 유닛3인치 안의 론 캐릭터는 일정한 표적 보호를 받습니다.",
+            "en": "A Lone character within 3 inches of a non-fleeing friendly unit of five same-type models receives targeting protection."
+          },
+          "timing": {
+            "ko": "적이 사격 또는 스펠 목표를 선택할 때.",
+            "en": "When an enemy selects a shooting or spell target."
+          },
+          "steps": [
+            {
+              "ko": "보호하는 아군이 비도주·같은troop type·5모델 이상인지 확인합니다.",
+              "en": "Check that the friendly unit is non-fleeing, of the same troop type and has at least five models."
+            },
+            {
+              "ko": "캐릭터가3인치 안이면 적 사격·스펠의 목표로 고를 수 없는지 적용합니다.",
+              "en": "If the character is within 3 inches, apply the restriction on enemy shooting or spell targeting."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "론 캐릭터가 가장 가까운 표적이면 이 보호로 막지 못합니다.",
+              "en": "The protection does not prevent targeting if the Lone character is the closest target."
+            }
+          ],
+          "example": {
+            "ko": "캐릭터가 같은병종6모델 유닛2인치 안에 있어도 가장 가까운 표적이면 목표로 고를 수 있습니다.",
+            "en": "A character 2 inches from six same-type friends can still be targeted if it is the closest target."
+          },
+          "quick": {
+            "ko": "론 캐릭터: 같은병종5+비도주 유닛3인치 보호, 가장가까운표적 예외.",
+            "en": "Lone character:3-inch protection near five same-type non-fleeing friends; closest-target exception."
+          },
+          "sources": [
+            {
+              "title": "Targeting Lone Characters",
+              "path": "/characters/targeting-lone-characters"
+            }
+          ]
+        },
+        {
+          "id": "foundation-accept-challenge",
+          "title": {
+            "ko": "챌린지 수락",
+            "en": "Accepting a Challenge"
+          },
+          "aliases": [
+            "챌린지 수락",
+            "Accepting a Challenge"
+          ],
+          "path": "/characters/accepting-a-challenge",
+          "summary": {
+            "ko": "파이팅 랭크 안 또는 인접한 적격 캐릭터·챔피언이 챌린지를 수락합니다.",
+            "en": "An eligible character or champion within or adjacent to the fighting rank may accept a challenge."
+          },
+          "timing": {
+            "ko": "상대가 챌린지를 발행한 뒤.",
+            "en": "After an opponent issues a challenge."
+          },
+          "steps": [
+            {
+              "ko": "수락 가능한 캐릭터·챔피언과 위치를 확인합니다.",
+              "en": "Identify eligible characters or champions and their positions."
+            },
+            {
+              "ko": "적격 모델 하나를 지명해 수락합니다.",
+              "en": "Nominate one eligible model to accept."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "적격 모델이 없으면 수락할 수 없습니다.",
+              "en": "A challenge cannot be accepted without an eligible model."
+            },
+            {
+              "ko": "적 유닛에 캐릭터·챔피언이 없으면 발행한 챌린지는 응답 없이 남습니다.",
+              "en": "A challenge goes unanswered if the enemy unit has no characters or champions."
+            }
+          ],
+          "example": {
+            "ko": "적격 캐릭터1명과 챔피언1명이 있다면 둘 중1명을 골라 수락합니다.",
+            "en": "If one character and one champion qualify, choose one of them to accept."
+          },
+          "quick": {
+            "ko": "파이팅 랭크 안/인접의 적격 캐릭터·챔피언1명 수락.",
+            "en": "One eligible character or champion within/adjacent to the fighting rank accepts."
+          },
+          "sources": [
+            {
+              "title": "Accepting a Challenge",
+              "path": "/characters/accepting-a-challenge"
+            }
+          ]
+        },
+        {
+          "id": "foundation-refuse-challenge",
+          "title": {
+            "ko": "챌린지 거부",
+            "en": "Refusing a Challenge"
+          },
+          "aliases": [
+            "챌린지 거부",
+            "Refusing a Challenge"
+          ],
+          "path": "/characters/refusing-a-challenge",
+          "summary": {
+            "ko": "거부하면 발행 플레이어가 수락 가능했던 캐릭터·챔피언 하나를 골라 전투에서 물러나게 합니다.",
+            "en": "On refusal, the issuer chooses one model that could have accepted to retire from combat."
+          },
+          "timing": {
+            "ko": "챌린지 수락을 거부했을 때.",
+            "en": "When a player refuses a challenge."
+          },
+          "steps": [
+            {
+              "ko": "발행 플레이어가 수락 자격이 있었던 캐릭터·챔피언을 지명합니다.",
+              "en": "The issuer nominates a character or champion that could have accepted."
+            },
+            {
+              "ko": "지명 모델을 파이팅 랭크 밖으로 이동하고 공격·피격·유닛 지원을 중지합니다.",
+              "en": "Move it away from the fighting rank and stop its attacks, incoming attacks and benefits to the unit."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "물러난 모델은Ld·특수 규칙·그 밖의 혜택을 유닛에 주지 않습니다.",
+              "en": "The retired model provides no Leadership, special-rule or other benefits."
+            },
+            {
+              "ko": "발행 모델과 유닛이 계속 교전하는 동안 파이팅 랭크로 복귀하지 못합니다.",
+              "en": "It cannot return to the fighting rank while its unit remains engaged with the issuer."
+            }
+          ],
+          "example": {
+            "ko": "수락 가능했던 캐릭터2명 중 발행자가1명을 지명하면 그 모델이 물러납니다.",
+            "en": "If two characters could accept, the issuer chooses one of them to retire."
+          },
+          "quick": {
+            "ko": "거부: 발행자가 적격모델1명 후퇴 지정, 공격·Ld·특수규칙 지원 중단.",
+            "en": "Refusal: issuer retires one eligible model; no attacks or unit benefits."
+          },
+          "sources": [
+            {
+              "title": "Refusing a Challenge",
+              "path": "/characters/refusing-a-challenge"
+            }
+          ]
+        },
+        {
+          "id": "foundation-challenge-overkill",
+          "title": {
+            "ko": "챌린지 오버킬",
+            "en": "Overkill"
+          },
+          "aliases": [
+            "챌린지 오버킬",
+            "Overkill"
+          ],
+          "path": "/characters/overkill-characters",
+          "summary": {
+            "ko": "챌린지에서 상대의 남은 W를 초과한 세이브되지 않은 운드는 추가 컴뱃 리절트를 줍니다.",
+            "en": "In a challenge, unsaved wounds beyond the opponent's remaining Wounds grant extra combat result."
+          },
+          "timing": {
+            "ko": "챌린지 공격의 운드를 해결한 뒤 컴뱃 리절트 계산.",
+            "en": "After challenge wounds are resolved, when calculating combat result."
+          },
+          "steps": [
+            {
+              "ko": "상대를 죽인 공격의 세이브되지 않은 운드와 상대의 남은 W를 비교합니다.",
+              "en": "Compare unsaved wounds inflicted with the opponent's Wounds remaining."
+            },
+            {
+              "ko": "초과 운드당 컴뱃 리절트 +1을 더하되 오버킬 보너스는 최대 +5입니다.",
+              "en": "Add +1 combat result per excess wound, to a maximum overkill bonus of +5."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "일반 공격의 운드 계산과 구분하는 챌린지 예외입니다.",
+              "en": "This is a challenge-specific exception to normal wound scoring."
+            }
+          ],
+          "example": {
+            "ko": "남은 W2 상대에게 운드 5를 가하면 초과 3으로 오버킬 +3입니다.",
+            "en": "Inflicting five wounds on an opponent with two remaining gives three excess wounds and +3 overkill."
+          },
+          "quick": {
+            "ko": "오버킬: 초과 운드당 CR +1, 최대 +5.",
+            "en": "Overkill: +1 CR per excess wound, maximum +5."
+          },
+          "sources": [
+            {
+              "title": "Overkill",
+              "path": "/characters/overkill-characters"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "foundation-victory",
+      "title": {
+        "ko": "승점과 게임 종료",
+        "en": "Victory points and the end of battle"
+      },
+      "description": {
+        "ko": "제거·도주·손실 비율·깃발·제너럴 보너스를 구분합니다.",
+        "en": "Distinguish destruction, fleeing, casualty thresholds, standards and General bonuses."
+      },
+      "entries": [
+        {
+          "id": "foundation-dead-or-fled",
+          "title": {
+            "ko": "데드 오어 플레드 승점",
+            "en": "Dead or Fled"
+          },
+          "aliases": [
+            "데드 오어 플레드 승점",
+            "Dead or Fled"
+          ],
+          "path": "/warhammer-battles/dead-or-fled-warhammer-battles",
+          "summary": {
+            "ko": "파괴·전장 밖 도주·종료 시 도주·심한전력손실에 따라 유닛의 승점을 얻습니다.",
+            "en": "Score unit Victory Points for destruction, fleeing off-table, fleeing at the end or severe strength reduction."
+          },
+          "timing": {
+            "ko": "게임 종료 시 해당 시나리오의 승점 계산.",
+            "en": "At the end of the battle under the scenario's scoring rules."
+          },
+          "steps": [
+            {
+              "ko": "파괴되거나 전장 밖으로 도주한 적 유닛은원래 포인트100%를 계산합니다.",
+              "en": "Score 100% of the cost for enemy units destroyed or fled off the battlefield."
+            },
+            {
+              "ko": "종료 시도주 중인 적은50%올림을 계산합니다.",
+              "en": "Score 50% rounded up for enemies fleeing at the end."
+            },
+            {
+              "ko": "시작US의25%이하로 줄어든 적도50%올림 조건을 확인합니다.",
+              "en": "Also check the 50%-rounded-up condition for enemies at 25% or less of starting Unit Strength."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "US가시작W와 같은 모델은 남은W가시작W의25%이하인지 확인합니다.",
+              "en": "For models whose US equals starting Wounds, check remaining Wounds at 25% or less."
+            },
+            {
+              "ko": "시나리오가 정한별도 승점조건을 먼저 확인합니다.",
+              "en": "Check scenario-specific scoring conditions."
+            }
+          ],
+          "example": {
+            "ko": "351점유닛의50%승점은175.5를올린176점입니다.",
+            "en": "Half of a 351-point unit rounds up from 175.5 to 176VP."
+          },
+          "quick": {
+            "ko": "전멸/전장밖100%, 종료도주 또는시작US/W≤25%는50%올림.",
+            "en": "Destroyed/off-table 100%; end-fleeing or≤25% starting US/W gives 50% rounded up."
+          },
+          "sources": [
+            {
+              "title": "Dead or Fled",
+              "path": "/warhammer-battles/dead-or-fled-warhammer-battles"
+            }
+          ]
+        },
+        {
+          "id": "foundation-general-vp",
+          "title": {
+            "ko": "제너럴 제거 보너스",
+            "en": "The King is Dead"
+          },
+          "aliases": [
+            "제너럴 제거 보너스",
+            "The King is Dead"
+          ],
+          "path": "/warhammer-battles/the-king-is-dead-warhammer-battles",
+          "summary": {
+            "ko": "적 제너럴이 죽거나 전장 밖으로 도주하거나 종료 시 도주 중이면 추가 100VP를 얻습니다.",
+            "en": "Gain 100 bonus VP if the enemy General is slain, flees off the battlefield or is fleeing when the game ends."
+          },
+          "timing": {
+            "ko": "게임 종료 승점 계산.",
+            "en": "When calculating final Victory Points."
+          },
+          "steps": [
+            {
+              "ko": "적 제너럴의 게임 종료 상태를 확인합니다.",
+              "en": "Check the enemy General's state at the end of the battle."
+            },
+            {
+              "ko": "조건에 해당하면 유닛 자체 승점과 구분해 추가 100VP를 기록합니다.",
+              "en": "If eligible, record 100 bonus VP separately from the unit's own value."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "매치드 플레이에서는 얼라이드 컨틴전트의 제너럴에게 이 보너스를 주지 않습니다.",
+              "en": "In matched play, this bonus does not apply to an allied contingent's General."
+            }
+          ],
+          "example": {
+            "ko": "200점 제너럴이 파괴되어 자체 200VP를 얻었다면 보너스 100을 더해 합계 300VP입니다.",
+            "en": "A destroyed 200-point General can yield 200 unit VP plus the 100 bonus, for 300 VP."
+          },
+          "quick": {
+            "ko": "적 제너럴 사망·전장 밖 도주·종료 시 도주: +100VP.",
+            "en": "Enemy General slain, off-table or fleeing at the end: +100 VP."
+          },
+          "sources": [
+            {
+              "title": "The King is Dead",
+              "path": "/warhammer-battles/the-king-is-dead-warhammer-battles"
+            },
+            {
+              "title": "The King is Dead (Matched Play)",
+              "path": "/matched-play/the-king-is-dead-matched-play"
+            }
+          ]
+        },
+        {
+          "id": "foundation-standard-vp",
+          "title": {
+            "ko": "트로피즈 오브 워",
+            "en": "Trophies of War"
+          },
+          "aliases": [
+            "트로피즈 오브 워",
+            "Trophies of War"
+          ],
+          "path": "/warhammer-battles/trophies-of-war-warhammer-battles",
+          "summary": {
+            "ko": "획득한 적 스탠더드마다 50VP, 적 BSB의 특정 종료 상태에 추가 50VP를 얻습니다.",
+            "en": "Gain 50 VP per captured enemy standard and another 50 for the enemy BSB's qualifying final state."
+          },
+          "timing": {
+            "ko": "게임 종료 승점 계산.",
+            "en": "When calculating final Victory Points."
+          },
+          "steps": [
+            {
+              "ko": "트로피로 획득한 적 스탠더드를 세고 각각 50VP를 더합니다.",
+              "en": "Count enemy standards claimed as trophies and add 50 VP each."
+            },
+            {
+              "ko": "적 BSB가 사망·전장 밖 도주·종료 시 도주 상태면 추가 50VP를 계산합니다.",
+              "en": "Add another 50 VP if the enemy BSB is slain, off-table or fleeing at the end."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "스탠더드가 있는 유닛과 싸웠다는 이유만으로 트로피를 얻은 것은 아닙니다.",
+              "en": "Fighting a unit with a standard does not by itself mean the standard was captured."
+            }
+          ],
+          "example": {
+            "ko": "스탠더드 2개 획득은 100VP이며 적 BSB 보너스까지 해당하면 50VP가 추가됩니다.",
+            "en": "Two captured standards give 100 VP; a qualifying BSB adds another 50 VP."
+          },
+          "quick": {
+            "ko": "획득 스탠더드당 +50VP, 적 BSB 조건 충족 시 추가 +50VP.",
+            "en": "+50 VP per captured standard; a qualifying enemy BSB adds another +50 VP."
+          },
+          "sources": [
+            {
+              "title": "Trophies of War",
+              "path": "/warhammer-battles/trophies-of-war-warhammer-battles"
+            }
+          ]
+        },
+        {
+          "id": "foundation-basic-victory",
+          "title": {
+            "ko": "기본 승패 판정",
+            "en": "Victory Points"
+          },
+          "aliases": [
+            "기본 승패 판정",
+            "Victory Points"
+          ],
+          "path": "/warhammer-battles/victory-points-warhammer-battles",
+          "summary": {
+            "ko": "기본 승점 방식에서는 상대보다 100VP 이상 많아야 승리하며, 상대의 2배면 크러싱 빅토리입니다.",
+            "en": "Under basic VP scoring, win by at least 100 VP; twice the opponent's VP is a crushing victory."
+          },
+          "timing": {
+            "ko": "게임 종료 후 양쪽 승점을 계산한 뒤.",
+            "en": "After both final VP totals have been calculated."
+          },
+          "steps": [
+            {
+              "ko": "유닛·보너스·시나리오 목표의 승점을 각각 합산합니다.",
+              "en": "Total unit points, bonuses and scenario objectives for each side."
+            },
+            {
+              "ko": "양쪽 차이를 비교해 100VP 이상 우세인지 확인하고 크러싱 빅토리 조건도 확인합니다.",
+              "en": "Check a lead of at least 100 VP and whether the crushing-victory condition applies."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "다른 결과는 무승부이며 시나리오의 특별한 승패 지시가 있으면 해당 지시를 적용합니다.",
+              "en": "Other results are draws; apply any scenario-specific victory instructions."
+            }
+          ],
+          "example": {
+            "ko": "700 대 650은 차이 50으로 무승부, 800 대 600은 승리, 1,200 대 600은 크러싱 빅토리입니다.",
+            "en": "700–650 draws, 800–600 wins, and 1,200–600 is a crushing victory."
+          },
+          "quick": {
+            "ko": "기본: 100VP 이상 차이로 승리, 상대 2배면 크러싱. 시나리오 우선.",
+            "en": "Basic: lead by 100 VP to win; double for crushing; scenario rules take priority."
+          },
+          "sources": [
+            {
+              "title": "Victory Points",
+              "path": "/warhammer-battles/victory-points-warhammer-battles"
+            }
+          ]
+        },
+        {
+          "id": "foundation-matched-vp",
+          "title": {
+            "ko": "매치드 플레이 승점 구분",
+            "en": "Victory Points (Matched Play)"
+          },
+          "aliases": [
+            "매치드 플레이 승점 구분",
+            "Victory Points (Matched Play)"
+          ],
+          "path": "/matched-play/victory-points-matched-play",
+          "summary": {
+            "ko": "매치드 플레이 승점은 커먼 오브젝티브와 세컨더리 오브젝티브를 구분해 계산합니다.",
+            "en": "Matched-play scoring distinguishes Common objectives from Secondary objectives."
+          },
+          "timing": {
+            "ko": "매치드 플레이 게임 준비와 종료 점수 확인.",
+            "en": "During matched-play preparation and final scoring."
+          },
+          "steps": [
+            {
+              "ko": "사용할 시나리오·커먼·세컨더리 목표의 조건을 확인합니다.",
+              "en": "Check the scenario's Common and Secondary objective conditions."
+            },
+            {
+              "ko": "각 목표에서 얻은 VP를 항목별로 기록하고 이벤트의 승패·타이브레이커를 적용합니다.",
+              "en": "Record VP for each objective and apply the event's victory and tiebreaker rules."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "기본 전투의 100VP 차이 기준을 모든 이벤트 점수표에 자동 적용하지 않습니다.",
+              "en": "Do not automatically apply the basic battle's 100 VP threshold to every event scoring system."
+            },
+            {
+              "ko": "세컨더리 목표의 사용 여부와 조건은 시나리오·이벤트 설정을 확인합니다.",
+              "en": "Check scenario or event rules for using Secondary objectives."
+            }
+          ],
+          "example": {
+            "ko": "가령 두 목표의 보상이 각각 100VP와 50VP로 정해졌다면, 둘을 달성한 소계는 150VP입니다.",
+            "en": "If two hypothetical objective awards are 100 and 50 VP, completing both gives a 150 VP subtotal."
+          },
+          "quick": {
+            "ko": "매치드: 커먼·세컨더리 분리 기록, 시나리오·이벤트 점수 규칙 확인.",
+            "en": "Matched: track Common and Secondary separately; check scenario and event scoring."
+          },
+          "sources": [
+            {
+              "title": "Victory Points (Matched Play)",
+              "path": "/matched-play/victory-points-matched-play"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

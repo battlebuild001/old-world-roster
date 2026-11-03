@@ -1,5 +1,5 @@
 'use strict';
-// Table of contents from tow.whfb.app, 2026-10-11. Full articles load from the source on demand.
+// Table of contents from tow.whfb.app, 2026-11-03. Full articles load from the source on demand.
 (() => {
   const $=id=>document.getElementById(id);
   const esc=value=>String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -14,11 +14,11 @@
   function title(item){return lang()==='en'?item.en:koreanTitle(item);}
   function chapterTitle(section){return tr(section.ko,section.en);}
   function refresh(){
-    $('rulesTitle').textContent=tr('전체 룰 설명집','Complete rules library');
+    $('rulesTitle').textContent=tr('원문 규칙 색인','Original rules index');
     $('rulesIntro').textContent=tr('장별 목차를 탐색하거나 규칙 이름을 검색하세요. 항목을 누르면 앱 안에서 본문을 읽을 수 있습니다.','Browse by chapter or search rule titles. Tap an entry to read the full article in the app.');
     $('rulesSearch').placeholder=tr('규칙 이름 검색','Search rule titles');
     document.querySelector('#sectionNav button[data-screen="rules"]').textContent=tr('룰북','Rules');
-    $('rulesAttribution').innerHTML=`${esc(tr('목차 출처: The Old World Online Rules Index (2026-10-11 확인). 본문은 원문 사이트에서 열 때 불러옵니다. 원본의 최신 정오표를 함께 확인하세요.','Contents: The Old World Online Rules Index (checked 2026-10-11). Article text loads from the source when opened. Check current errata as well.'))} <a href="https://tow.whfb.app/" target="_blank" rel="noopener">${esc(tr('원문 색인 ↗','Source index ↗'))}</a> · <a href="https://tow.whfb.app/errata" target="_blank" rel="noopener">${esc(tr('정오표 ↗','Errata ↗'))}</a>`;
+    $('rulesAttribution').innerHTML=`${esc(tr('목차 출처: The Old World Online Rules Index (2026-11-03 확인). 본문은 원문 사이트에서 열 때 불러옵니다. 원본의 최신 정오표를 함께 확인하세요.','Contents: The Old World Online Rules Index (checked 2026-11-03). Article text loads from the source when opened. Check current errata as well.'))} <a href="https://tow.whfb.app/" target="_blank" rel="noopener">${esc(tr('원문 색인 ↗','Source index ↗'))}</a> · <a href="https://tow.whfb.app/errata" target="_blank" rel="noopener">${esc(tr('정오표 ↗','Errata ↗'))}</a>`;
     if(!catalog)return;
     const selected=catalog.chapters.find(s=>s.id===chapter)||catalog.chapters[0];
     $('rulesChapterSelect').innerHTML=catalog.chapters.map(s=>`<option value="${esc(s.id)}" ${s.id===chapter?'selected':''}>${esc(chapterTitle(s))} (${s.items.length})</option>`).join('');

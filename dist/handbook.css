@@ -1,0 +1,147 @@
+/* Detailed rulebook and play reference: the existing Old World theme tokens. */
+.handbookTools{display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,280px);gap:12px;margin:20px 0 10px}
+.handbookTools>div,.handbookLayout>*{min-width:0}
+.handbookTools label{display:block;margin:0 0 6px;color:var(--color-text-muted);font-size:12px;font-weight:700}
+.handbookTools input,.handbookTools select{width:100%;min-width:0;min-height:48px;font-size:16px}
+.handbookStatus{min-height:24px;margin:10px 0 18px;color:var(--color-text-muted);font-size:12px}
+.handbookLayout{display:grid;grid-template-columns:minmax(210px,270px) minmax(0,1fr);gap:22px;align-items:start}
+.handbookSidebar{position:sticky;top:78px;max-height:calc(100dvh - 110px);overflow:auto;border:1px solid var(--color-border);border-radius:8px;background:var(--color-surface);scrollbar-width:thin;scrollbar-color:var(--color-border) transparent}
+.handbookSidebar summary{display:flex;align-items:center;justify-content:space-between;min-height:48px;padding:14px 15px;cursor:pointer;color:var(--color-link);font-size:13px;font-weight:750;list-style:none}
+.handbookSidebar summary::-webkit-details-marker{display:none}
+.handbookSidebar summary:after{content:'+';font-size:20px;font-weight:400}
+.handbookSidebar details[open]>summary:after{content:'−'}
+.handbookListChapter{padding:14px 14px 7px;margin:0;border-top:1px solid var(--color-border);color:var(--color-text-muted);font-size:11px;font-weight:750;line-height:1.6}
+.handbookListEntry{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:48px;border:0;border-bottom:1px solid var(--color-border);border-radius:0;padding:11px 14px;text-align:left;background:transparent;color:var(--color-text);font:inherit;font-size:13px;line-height:1.5;cursor:pointer}
+.handbookListEntry>span:first-child{min-width:0;overflow-wrap:anywhere}
+.handbookListEntry>span:last-child{color:var(--color-text-muted);font-size:22px}
+.handbookListEntry.active{background:var(--color-surface-muted);box-shadow:inset 3px 0 var(--color-action)}
+.handbookListEntry:hover{background:var(--color-surface-muted)}
+.handbookTitleOriginal{display:block;margin-top:4px;color:var(--color-text-muted);font:400 12px/1.5 system-ui,-apple-system,sans-serif;letter-spacing:0}
+.handbookSidebar #handbookMore{width:calc(100% - 20px);margin:10px;font-size:12px}
+.handbookArticle{min-width:0;border:1px solid var(--color-border);border-radius:8px;background:var(--color-surface);padding:26px 28px;color:var(--color-text);font-size:16px;line-height:1.85;overflow-wrap:anywhere}
+.handbookArticleHead{margin:0 0 20px;padding:0 0 20px;border-bottom:1px solid var(--color-border)}
+.handbookBreadcrumb{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:10px;color:var(--color-text-muted);font-size:11px;line-height:1.5}
+.handbookBreadcrumb>span:first-child{min-width:0}
+.handbookBreadcrumb>span:last-child{flex:none;font-variant-numeric:tabular-nums}
+.handbookArticle h3{margin:0 0 14px;font:650 clamp(23px,2.7vw,30px)/1.4 Georgia,"Noto Serif KR",serif;scroll-margin-top:80px;color:var(--color-text)}
+.handbookArticle h3 .handbookTitleOriginal{font-size:14px;line-height:1.55;margin-top:7px}
+.handbookLead{margin:0;font-size:16px;line-height:1.8}
+.handbookTiming{margin:20px 0;padding:14px 16px;border-left:3px solid var(--color-action);border-radius:0 6px 6px 0;background:var(--color-surface-muted)}
+.handbookTiming strong{display:block;color:var(--color-link);font-size:12px;line-height:1.5}
+.handbookTiming p{margin:6px 0 0}
+.handbookSection{margin:25px 0}
+.handbookArticle h4{margin:0 0 13px;color:var(--color-text);font-size:14px;font-weight:750;line-height:1.6}
+.handbookFlow{list-style:none;counter-reset:handbook-step;padding:0;margin:0}
+.handbookFlow>li{position:relative;counter-increment:handbook-step;min-height:46px;margin:0;padding:0 0 16px 43px}
+.handbookFlow>li:before{content:counter(handbook-step);position:absolute;left:0;top:3px;width:28px;height:28px;border:1px solid var(--color-border);border-radius:50%;display:grid;place-items:center;background:var(--color-surface-muted);color:var(--color-link);font-size:12px;font-weight:750;line-height:1}
+.handbookFlow>li:not(:last-child):after{content:'';position:absolute;left:14px;top:35px;bottom:4px;border-left:1px solid var(--color-border)}
+.handbookFlow>li>div{min-width:0;padding:9px 13px;border:1px solid var(--color-border);border-radius:6px;background:var(--color-surface-muted);line-height:1.8}
+.handbookOriginal{display:block;margin-top:7px;color:var(--color-text-muted);font-size:13px;line-height:1.75}
+.handbookExceptions{padding:16px 18px;border:1px solid var(--color-border);border-radius:6px}
+.handbookExceptions ul{margin:0;padding-left:20px}
+.handbookExceptions li+li{margin-top:10px}
+.handbookExceptions li::marker{color:var(--color-action)}
+.handbookExample{margin:22px 0;padding:18px;border:1px solid var(--color-border);border-left:3px solid var(--color-brass,var(--color-text-muted));border-radius:6px;background:var(--color-surface-muted)}
+.handbookExample h4{color:var(--color-link);font-size:12px}
+.handbookExample p{margin:0}
+.handbookReferences{margin:24px 0;padding-top:18px;border-top:1px solid var(--color-border)}
+.handbookReferences h4{font-size:12px;color:var(--color-text-muted)}
+.handbookReferences>div{display:flex;flex-wrap:wrap;gap:8px}
+.handbookReferences button{max-width:100%;min-height:44px;padding:9px 12px;text-align:left;font-size:12px;line-height:1.6;white-space:normal;overflow-wrap:anywhere}
+.handbookPageNav{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:25px;padding-top:20px;border-top:1px solid var(--color-border)}
+.handbookPageButton{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:5px;min-height:68px;min-width:0;max-width:100%;padding:11px 12px;font-size:12px;line-height:1.5;text-align:left;white-space:normal;overflow-wrap:anywhere}
+.handbookPageButton:last-child{align-items:flex-end;text-align:right}
+.handbookPageDirection{font-size:11px;color:var(--color-text-muted)}
+.handbookMuted{margin:14px;color:var(--color-text-muted);font-size:13px;line-height:1.7}
+.handbookError{margin:14px 0;padding:16px;border:1px solid var(--color-border);border-radius:8px;background:var(--color-surface-muted)}
+.handbookError p{margin:0 0 10px;line-height:1.7}
+.handbookTableWrap{max-width:100%;margin:22px 0;overflow:auto;border:1px solid var(--color-border);border-radius:6px;scrollbar-width:thin;scrollbar-color:var(--color-action) transparent}
+.handbookTable{width:100%;border-collapse:collapse;font-size:13px;line-height:1.65;font-variant-numeric:tabular-nums}
+.handbookTable caption{padding:12px;text-align:left;color:var(--color-text-muted);font-size:12px;font-weight:700;background:var(--color-surface-muted)}
+.handbookTable th,.handbookTable td{border:1px solid var(--color-border);padding:10px 12px;vertical-align:top;text-align:left;min-width:65px}
+.handbookTable thead th{background:var(--color-surface-muted);color:var(--color-text);font-weight:750}
+.handbookTable tbody th{background:var(--color-surface-muted);font-weight:650}
+.handbookTable .handbookOriginal{font-size:11px;line-height:1.6}
+#handbookAttribution{margin-top:20px;line-height:1.75}
+.rulesViewTabs{display:flex;flex-wrap:wrap;gap:8px}
+.rulesViewTabs button{min-height:44px;max-width:100%;white-space:normal}
+.quickTools{min-width:0}
+#quickTabs{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:8px;align-items:center;width:100%;overflow:visible}
+#quickTabs button{min-height:44px;padding:9px 13px;white-space:normal;font-size:13px}
+#quickChapterFilter{min-width:0;width:100%;min-height:44px;font-size:14px}
+.quickFilterField{min-width:0}
+.quickFilterField label{display:block;margin-bottom:5px;color:var(--color-text-muted);font-size:11px;font-weight:700}
+.quickFilterField select{width:100%}
+.quickCount{margin:12px 0 16px;color:var(--color-text-muted);font-size:12px;line-height:1.6}
+.quickChapterHead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
+.quickChapterHead h3{margin:0}
+.quickChapterHead>span{color:var(--color-text-muted);font-size:11px;flex:none}
+.quickRule{padding:17px 0;border-top:1px solid var(--color-border);overflow-wrap:anywhere}
+.quickRule:first-of-type{border-top:0}
+.quickRule h4{margin:0 0 8px;color:var(--color-text);font-size:15px;line-height:1.6}
+.quickRule h4 .handbookTitleOriginal{font-size:12px}
+.quickRuleSummary{margin:0;font-size:16px;line-height:1.85}
+.quickRuleTiming{margin:8px 0;color:var(--color-text-muted);font-size:12px;line-height:1.7}
+.quickRuleTiming>strong{color:var(--color-link);font-size:11px}
+.quickRuleExceptions{margin:9px 0}
+.quickRuleExceptions summary{display:flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;color:var(--color-link);font-size:12px;font-weight:700;list-style:none}
+.quickRuleExceptions summary::-webkit-details-marker{display:none}
+.quickRuleExceptions summary:before{content:'+';font-size:17px;font-weight:400}
+.quickRuleExceptions[open]>summary:before{content:'−'}
+.quickRuleExceptions ul{margin:0 0 12px;padding-left:20px;font-size:13px;line-height:1.85}
+.quickRuleExceptions li+li{margin-top:7px}
+.quickRuleActions{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
+.quickRuleActions button{min-height:44px;max-width:100%;padding:9px 12px;font-size:12px;line-height:1.6;white-space:normal}
+.quickShowMore{width:100%;min-height:48px;margin:0 0 18px}
+.quickChartAxes{margin:8px 0 12px;color:var(--color-text-muted);font-size:12px;line-height:1.7}
+.quickTable caption{padding:12px;text-align:left;font-size:12px;color:var(--color-text-muted);background:var(--color-surface-muted)}
+.quickTable th:first-child{position:sticky;left:0;z-index:1}
+.quickTable thead th:first-child{z-index:2}
+.quickTableScroll{max-width:100%;overflow-x:auto}
+.quickTableScroll th,.quickTableScroll td{min-width:42px;font-variant-numeric:tabular-nums}
+@media(max-width:1100px){.handbookLayout{grid-template-columns:minmax(190px,230px) minmax(0,1fr);gap:16px}.handbookArticle{padding:22px}}
+@media(max-width:880px){
+  .handbookLayout{grid-template-columns:minmax(0,1fr);gap:16px}
+  .handbookSidebar{position:static;max-height:none}
+  #handbookList{max-height:360px;overflow:auto;overscroll-behavior:contain}
+  .handbookTools{grid-template-columns:minmax(0,1fr);gap:12px}
+  .handbookTools input,.handbookTools select{font-size:16px}
+  .handbookArticle{padding:20px}
+  .handbookArticle h3{scroll-margin-top:75px}
+  .handbookSidebar summary{padding:13px 16px}
+}
+@media(max-width:680px){
+  .handbookTools{margin-top:16px}
+  .handbookStatus{margin-bottom:12px}
+  .handbookArticle{padding:18px 16px;font-size:16px;line-height:1.85}
+  .handbookLead{font-size:16px}
+  .handbookFlow>li{padding-left:34px;padding-bottom:13px}
+  .handbookFlow>li:before{width:25px;height:25px;font-size:11px}
+  .handbookFlow>li:not(:last-child):after{left:12px;top:32px}
+  .handbookFlow>li>div{padding:10px 11px}
+  .handbookExceptions{padding:14px}
+  .handbookTiming{padding:13px 14px}
+  .handbookExample{padding:15px}
+  .handbookPageNav{gap:8px}
+  .handbookPageButton{padding:10px;font-size:11px}
+  .handbookTable th,.handbookTable td{padding:9px;font-size:12px}
+  .rulesViewTabs{gap:6px}
+  .rulesViewTabs button{flex:1 1 auto;font-size:12px;padding:9px 11px}
+  #quickTabs{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  #quickTabs .quickFilterField{grid-column:1/-1}
+  #quickTabs button{font-size:13px}
+  #quickChapterFilter{font-size:16px}
+  .quickRule{padding:16px 0}
+  .quickRuleSummary{font-size:16px}
+  .quickRuleExceptions ul{font-size:15px}
+  .quickChapterHead h3{font-size:18px}
+  .quickRuleActions button{flex:1 1 auto}
+}
+@media(prefers-reduced-motion:reduce){.handbookArticle *{scroll-behavior:auto!important}}
+@media print{
+  .rulesViewTabs,.handbookTools,.handbookSidebar,.handbookPageNav,.handbookReferences button,.quickTools,.quickRuleActions,.quickShowMore{display:none!important}
+  .handbookLayout{display:block}
+  .handbookArticle{padding:0;border:0}
+  .handbookFlow>li,.handbookExample,.quickRule{break-inside:avoid}
+  .handbookTableWrap,.quickTableScroll{overflow:visible}
+}

@@ -1,0 +1,4116 @@
+{
+  "version": 1,
+  "checkedAt": "2026-11-03",
+  "chapters": [
+    {
+      "id": "battle-magic",
+      "title": {
+        "ko": "마법 기본 판정",
+        "en": "Core magic resolution"
+      },
+      "description": {
+        "ko": "스펠 유형부터 캐스팅·디스펠·지속 효과까지 실제 처리 순서로 확인합니다.",
+        "en": "Resolve spell timing, casting, dispelling and persistent effects in order."
+      },
+      "entries": [
+        {
+          "id": "battle-spell-timing",
+          "title": {
+            "ko": "스펠 유형과 시전 시점",
+            "en": "Spell categories and timing"
+          },
+          "aliases": [
+            "스펠 유형과 시전 시점",
+            "Spell categories and timing"
+          ],
+          "path": "/magic/casting-spells",
+          "summary": {
+            "ko": "스펠 유형에 맞는 단계에서 시도하며, 한 위저드의 턴당 시도 횟수는 레벨만큼입니다.",
+            "en": "Use each spell in its permitted phase; a Wizard has casting attempts equal to their level per turn."
+          },
+          "timing": {
+            "ko": "각 스펠에 지정된 단계",
+            "en": "At the phase specified by the spell category"
+          },
+          "steps": [
+            {
+              "ko": "인챈트먼트·헥스는 자기 스트래티지의 컨저레이션, 컨베이언스는 자기 리메이닝 무브 중 시도합니다.",
+              "en": "Attempt Enchantment and Hex spells in your Conjuration sub-phase, and Conveyance spells during your Remaining Moves."
+            },
+            {
+              "ko": "매직 미사일·매지컬 보텍스는 자기 슈팅, 어세일먼트는 어느 쪽 컴뱃이든 위저드가 싸울 때 시도합니다.",
+              "en": "Attempt Magic Missiles and Magical Vortexes in your Shooting phase, and Assailments when the Wizard fights in either player's Combat phase."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "동일 위저드는 각 스펠을 턴당 한 번만 시도합니다. 실패한 시도도 횟수에 포함합니다.",
+              "en": "The same Wizard may attempt each spell only once per turn; failed attempts still use an attempt."
+            },
+            {
+              "ko": "교전 중인 위저드는 별도 허용이 없으면 어세일먼트 또는 사거리 Self 스펠만 시도합니다.",
+              "en": "An engaged Wizard normally casts only Assailment or range Self spells."
+            }
+          ],
+          "example": {
+            "ko": "레벨 2 위저드는 서로 다른 스펠을 최대 2개 시도할 수 있습니다.",
+            "en": "A Level 2 Wizard may attempt up to two different spells."
+          },
+          "quick": {
+            "ko": "유형별 시점 확인 → 레벨만큼 시도 → 같은 스펠은 턴당 1회.",
+            "en": "Check category timing; attempts equal level; each spell once per turn."
+          },
+          "sources": [
+            {
+              "title": "Spell categories and timing",
+              "path": "/magic/casting-spells"
+            },
+            {
+              "title": "Magic Missiles",
+              "path": "/magic/magic-missiles"
+            },
+            {
+              "title": "Magical Vortex",
+              "path": "/magic/magical-vortex"
+            },
+            {
+              "title": "Assailment",
+              "path": "/magic/assailment"
+            }
+          ],
+          "table": {
+            "caption": {
+              "ko": "스펠 유형별 처리",
+              "en": "Spell category reference"
+            },
+            "columns": [
+              {
+                "ko": "유형",
+                "en": "Category"
+              },
+              {
+                "ko": "시점·대상",
+                "en": "Timing and targets"
+              }
+            ],
+            "rows": [
+              [
+                {
+                  "ko": "인챈트먼트",
+                  "en": "Enchantment"
+                },
+                {
+                  "ko": "컨저레이션·아군",
+                  "en": "Conjuration; friendly target"
+                }
+              ],
+              [
+                {
+                  "ko": "헥스",
+                  "en": "Hex"
+                },
+                {
+                  "ko": "컨저레이션·적",
+                  "en": "Conjuration; enemy target"
+                }
+              ],
+              [
+                {
+                  "ko": "컨베이언스",
+                  "en": "Conveyance"
+                },
+                {
+                  "ko": "리메이닝 무브·아군",
+                  "en": "Remaining Moves; friendly target"
+                }
+              ],
+              [
+                {
+                  "ko": "매직 미사일",
+                  "en": "Magic Missile"
+                },
+                {
+                  "ko": "슈팅·시야가 있는 적·자동 명중",
+                  "en": "Shooting; visible enemy; automatic hits"
+                }
+              ],
+              [
+                {
+                  "ko": "매지컬 보텍스",
+                  "en": "Magical Vortex"
+                },
+                {
+                  "ko": "슈팅·유닛을 지정하지 않고 템플릿 배치",
+                  "en": "Shooting; place a template without targeting a unit"
+                }
+              ],
+              [
+                {
+                  "ko": "어세일먼트",
+                  "en": "Assailment"
+                },
+                {
+                  "ko": "위저드가 싸울 때·교전 상대·자동 명중",
+                  "en": "When the Wizard fights; engaged enemy; automatic hits"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "id": "battle-spell-target",
+          "title": {
+            "ko": "스펠 대상·시야·중첩",
+            "en": "Spell targets, vision and stacking"
+          },
+          "aliases": [
+            "스펠 대상·시야·중첩",
+            "Spell targets, vision and stacking"
+          ],
+          "path": "/magic/choosing-a-target",
+          "summary": {
+            "ko": "기본적으로 대상은 시야각·사거리 안에 있어야 하며, 직접 시선은 유형이 요구할 때 확인합니다.",
+            "en": "Normally the target must be in the vision arc and range; a direct line of sight is required only when the category or spell demands it."
+          },
+          "timing": {
+            "ko": "시전 주사위를 굴리기 전",
+            "en": "Before rolling to cast"
+          },
+          "steps": [
+            {
+              "ko": "시전할 스펠과 대상을 먼저 선언하고 사거리·시야각을 확인합니다.",
+              "en": "Declare the spell and target, then check range and vision arc."
+            },
+            {
+              "ko": "대상 유형과 교전 여부를 확인한 뒤 해당 스펠의 예외를 적용합니다.",
+              "en": "Check target type and engagement, then apply the spell's specific exceptions."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "기본적으로 교전 중인 유닛을 대상으로 삼을 수 없습니다. Self는 대상을 요구하지 않습니다.",
+              "en": "Normally an engaged unit cannot be targeted; range Self spells do not require a target."
+            },
+            {
+              "ko": "같은 인챈트먼트·헥스의 동일 유닛 추가 시전은 그 턴 추가 효과가 없고, 같은 컨베이언스도 턴당 한 번만 적용됩니다.",
+              "en": "Repeated copies of the same Enchantment or Hex give no further effect on that unit that turn; a unit is affected by the same Conveyance only once per turn."
+            }
+          ],
+          "example": {
+            "ko": "사거리 18인치 스펠은 대상이 19인치면 시도할 수 없습니다.",
+            "en": "An 18-inch spell cannot target a unit 19 inches away."
+          },
+          "quick": {
+            "ko": "기본: 시야각 + 사거리 + 비교전 대상. 매직 미사일은 직접 시선도 필요.",
+            "en": "Default: vision arc, range and an unengaged target; Magic Missiles also require line of sight."
+          },
+          "sources": [
+            {
+              "title": "Spell targets, vision and stacking",
+              "path": "/magic/choosing-a-target"
+            },
+            {
+              "title": "Range Self Spells",
+              "path": "/magic/range-self-spells"
+            },
+            {
+              "title": "Enchantment",
+              "path": "/magic/enchantment"
+            },
+            {
+              "title": "Hex",
+              "path": "/magic/hex"
+            },
+            {
+              "title": "Conveyance",
+              "path": "/magic/conveyance"
+            }
+          ]
+        },
+        {
+          "id": "battle-casting-roll",
+          "title": {
+            "ko": "캐스팅 결과 계산",
+            "en": "Calculating the casting result"
+          },
+          "aliases": [
+            "캐스팅 결과 계산",
+            "Calculating the casting result"
+          ],
+          "path": "/magic/casting-roll-casting-result-and-casting-value",
+          "summary": {
+            "ko": "캐스팅 결과는 2D6 + 위저드 레벨의 절반을 올림한 값입니다.",
+            "en": "The casting result is 2D6 plus half the Wizard's level, rounded up."
+          },
+          "timing": {
+            "ko": "스펠·대상을 선언한 뒤",
+            "en": "After declaring the spell and target"
+          },
+          "steps": [
+            {
+              "ko": "2D6을 굴리고 레벨 1·2는 +1, 레벨 3·4는 +2와 다른 보정을 더합니다.",
+              "en": "Roll 2D6, add +1 for Level 1–2 or +2 for Level 3–4, and apply other modifiers."
+            },
+            {
+              "ko": "최종 결과가 캐스팅 값 이상이면 시전 성공이며, 상대의 디스펠 기회를 처리합니다.",
+              "en": "A result at least equal to the casting value succeeds; then resolve the opponent's dispel opportunity."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "보정 전 더블 1·더블 6은 미스캐스트·퍼펙트 인보케이션을 별도로 처리합니다.",
+              "en": "Natural double 1 and double 6 trigger the separate miscast and perfect-invocation rules."
+            },
+            {
+              "ko": "적 대상 유닛의 매직 리지스턴스는 캐스팅 굴림을 보정하며 중첩하지 않습니다. 바운드 스펠도 포함합니다.",
+              "en": "The enemy target's Magic Resistance modifies the Casting roll, is not cumulative, and also affects Bound spells."
+            }
+          ],
+          "example": {
+            "ko": "레벨 3, 주사위 합 7이면 7 + 2 = 9. 캐스팅 값 9+에 성공합니다.",
+            "en": "A Level 3 Wizard rolling 7 has a result of 9 and succeeds at a casting value of 9+."
+          },
+          "quick": {
+            "ko": "캐스팅 = 2D6 + ceil(레벨÷2) + 수정치 ≥ 캐스팅 값.",
+            "en": "Casting = 2D6 + ceil(level÷2) + modifiers ≥ casting value."
+          },
+          "sources": [
+            {
+              "title": "Calculating the casting result",
+              "path": "/magic/casting-roll-casting-result-and-casting-value"
+            },
+            {
+              "title": "Magic Resistance",
+              "path": "/magic/magic-resistance-magic"
+            }
+          ]
+        },
+        {
+          "id": "battle-dispel-roll",
+          "title": {
+            "ko": "디스펠 범위·결과",
+            "en": "Dispel range and result"
+          },
+          "aliases": [
+            "디스펠 범위·결과",
+            "Dispel range and result"
+          ],
+          "path": "/magic/dispel-roll-and-dispel-result",
+          "summary": {
+            "ko": "위저들리 디스펠은 2D6 + 레벨 절반 올림, 페이티드 디스펠은 2D6으로 시전 결과를 초과해야 합니다.",
+            "en": "Wizardly dispels use 2D6 plus half level rounded up; Fated dispels use 2D6. Beat the casting result."
+          },
+          "timing": {
+            "ko": "상대 스펠이 성공적으로 시전됐을 때",
+            "en": "After an enemy spell is successfully cast"
+          },
+          "steps": [
+            {
+              "ko": "위저들리 디스펠은 시전자와 18인치(레벨 1·2) 또는 24인치(레벨 3·4) 안의 위저드를 고릅니다.",
+              "en": "For a Wizardly dispel, select a Wizard within 18 inches of the caster at Level 1–2, or 24 inches at Level 3–4."
+            },
+            {
+              "ko": "2D6에 해당 보정을 더하고 시전 결과보다 높은지 비교합니다. 같으면 실패합니다.",
+              "en": "Add the appropriate modifier to 2D6 and compare with the casting result; a tie fails."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "도주 중이거나 전장 밖의 위저드는 선택할 수 없습니다. 교전 중이면 자신이나 자기 유닛을 대상으로 한 스펠만 디스펠합니다.",
+              "en": "Fleeing or off-table Wizards are ineligible; an engaged Wizard dispels only spells targeting them or their unit."
+            },
+            {
+              "ko": "페이티드 디스펠은 턴당 한 번입니다. 퍼펙트 인보케이션은 즉시 디스펠할 수 없습니다.",
+              "en": "A Fated dispel is available once per turn; a perfect invocation cannot be dispelled immediately."
+            }
+          ],
+          "example": {
+            "ko": "시전 결과 9를 상대로 레벨 2 위저드가 주사위 8을 굴리면 8+1=9로 실패합니다.",
+            "en": "Against casting result 9, a Level 2 Wizard rolling 8 reaches 9 and fails."
+          },
+          "quick": {
+            "ko": "위저들리: 2D6+ceil(L÷2) > 시전 결과. 페이티드: 턴당 1회, 2D6만.",
+            "en": "Wizardly: 2D6+ceil(L÷2) > casting result. Fated: once per turn, plain 2D6."
+          },
+          "sources": [
+            {
+              "title": "Dispel range and result",
+              "path": "/magic/dispel-roll-and-dispel-result"
+            },
+            {
+              "title": "Wizardly Dispel",
+              "path": "/magic/wizardly-dispel"
+            },
+            {
+              "title": "Fated Dispel",
+              "path": "/magic/fated-dispel"
+            }
+          ]
+        },
+        {
+          "id": "battle-magic-doubles",
+          "title": {
+            "ko": "마법의 더블 1·더블 6",
+            "en": "Magic double 1 and double 6"
+          },
+          "aliases": [
+            "마법의 더블 1·더블 6",
+            "Magic double 1 and double 6"
+          ],
+          "path": "/magic/miscasts-and-perfect-invocations",
+          "summary": {
+            "ko": "시전과 디스펠은 보정 전 더블 결과에 별도 규칙이 적용됩니다.",
+            "en": "Natural doubles have special effects when casting and dispelling."
+          },
+          "timing": {
+            "ko": "마법 2D6을 굴린 직후",
+            "en": "Immediately after the magic dice are rolled"
+          },
+          "steps": [
+            {
+              "ko": "캐스팅 더블 1은 기본 미스캐스트 표에 2D6, 더블 6은 퍼펙트 인보케이션으로 처리합니다.",
+              "en": "For casting, double 1 rolls 2D6 on the Miscast table; double 6 gives a perfect invocation."
+            },
+            {
+              "ko": "디스펠 더블 6은 언바인딩, 위저들리 더블 1은 아웃클래스트로 미스캐스트 표를 처리합니다.",
+              "en": "For dispelling, double 6 gives an unbinding; Wizardly double 1 is outclassed and uses the Miscast table."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "퍼펙트 인보케이션은 캐스팅 값과 수정치를 무시하고 성공하며 언바인딩으로도 즉시 제거하지 못합니다.",
+              "en": "A perfect invocation succeeds regardless of casting value or modifiers and cannot immediately be removed even by unbinding."
+            },
+            {
+              "ko": "바운드 스펠에는 미스캐스트·퍼펙트 인보케이션이 없으며, 바운드 디스펠에는 아웃클래스트 위험이 없습니다.",
+              "en": "Bound spells cannot miscast or gain a perfect invocation; dispelling them cannot cause outclassed in the art."
+            }
+          ],
+          "example": {
+            "ko": "캐스팅 주사위가 6·6이면 캐스팅 값 15+라도 퍼펙트 인보케이션입니다.",
+            "en": "A natural 6 and 6 produces a perfect invocation even at casting value 15+."
+          },
+          "quick": {
+            "ko": "시전 1·1=미스캐스트 / 6·6=퍼펙트. 위저들리 디스펠 1·1=아웃클래스트 / 디스펠 6·6=언바인딩.",
+            "en": "Casting 1–1: miscast; 6–6: perfect. Wizardly dispel 1–1: outclassed; dispel 6–6: unbinding."
+          },
+          "sources": [
+            {
+              "title": "Magic double 1 and double 6",
+              "path": "/magic/miscasts-and-perfect-invocations"
+            },
+            {
+              "title": "Miscast",
+              "path": "/magic/miscast"
+            },
+            {
+              "title": "Perfect Invocations",
+              "path": "/magic/perfect-invocations"
+            },
+            {
+              "title": "Unbinding",
+              "path": "/magic/unbinding"
+            },
+            {
+              "title": "Outclassed in the Art",
+              "path": "/magic/outclassed-in-the-art"
+            }
+          ],
+          "table": {
+            "caption": {
+              "ko": "기본 미스캐스트 2D6",
+              "en": "Core Miscast table, 2D6"
+            },
+            "columns": [
+              {
+                "ko": "결과",
+                "en": "Roll"
+              },
+              {
+                "ko": "처리",
+                "en": "Resolution"
+              }
+            ],
+            "rows": [
+              [
+                "2–4",
+                {
+                  "ko": "시전자 중심 5인치 템플릿, S10·AP -4 힛 위험.",
+                  "en": "5-inch template centred on caster; risk of S10 AP -4 hits."
+                }
+              ],
+              [
+                "5–6",
+                {
+                  "ko": "시전자 중심 3인치 템플릿, S6·AP -2 힛 위험.",
+                  "en": "3-inch template centred on caster; risk of S6 AP -2 hits."
+                }
+              ],
+              [
+                "7",
+                {
+                  "ko": "시전자에게 S4·AP -1 힛 1개.",
+                  "en": "Caster suffers one S4 AP -1 hit."
+                }
+              ],
+              [
+                "8–9",
+                {
+                  "ko": "캐스팅 값으로 시전 성공. 그 위저드는 남은 턴 시전 불가.",
+                  "en": "Spell succeeds at its casting value; that Wizard casts no more this turn."
+                }
+              ],
+              [
+                "10–12",
+                {
+                  "ko": "퍼펙트 인보케이션으로 성공. 그 플레이어는 남은 턴 시전 불가.",
+                  "en": "Spell succeeds with a perfect invocation; that player casts no more this turn."
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "id": "battle-bound-spells",
+          "title": {
+            "ko": "바운드 스펠",
+            "en": "Bound spells"
+          },
+          "aliases": [
+            "바운드 스펠",
+            "Bound spells"
+          ],
+          "path": "/magic/bound-spells",
+          "summary": {
+            "ko": "바운드 스펠은 2D6에 표기된 파워 레벨을 더하며, 일반 위저드 레벨 보너스를 대신 쓰지 않습니다.",
+            "en": "A Bound spell adds its printed Power Level to 2D6, rather than substituting the normal Wizard-level bonus."
+          },
+          "timing": {
+            "ko": "스펠 유형이 허용하는 단계",
+            "en": "In the phase permitted by its spell category"
+          },
+          "steps": [
+            {
+              "ko": "일반 스펠처럼 대상·시점을 확인한 뒤 2D6을 굴립니다.",
+              "en": "Check targeting and timing as for a normal spell, then roll 2D6."
+            },
+            {
+              "ko": "파워 레벨이 있으면 더하고, 없으면 주사위 합만으로 캐스팅 값과 비교합니다.",
+              "en": "Add the Power Level if given; otherwise compare the unmodified dice total with the casting value."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "모델은 페이즈당 바운드 스펠 하나만 시전할 수 있습니다. 소유만으로 위저드가 되지는 않습니다.",
+              "en": "A model casts only one Bound spell per phase; possessing one does not make it a Wizard."
+            },
+            {
+              "ko": "미스캐스트·퍼펙트 인보케이션·디스펠 시 아웃클래스트를 적용하지 않습니다.",
+              "en": "Do not apply miscasts, perfect invocations or outclassed in the art when dispelling a Bound spell."
+            }
+          ],
+          "example": {
+            "ko": "파워 레벨 2, 주사위 합 7이면 캐스팅 결과는 9입니다.",
+            "en": "Power Level 2 with a dice total of 7 gives casting result 9."
+          },
+          "quick": {
+            "ko": "바운드 = 2D6+표기 파워 레벨; 페이즈당 1개; 특수 더블 시전 효과 없음.",
+            "en": "Bound = 2D6+printed Power Level; one per phase; no special casting doubles."
+          },
+          "sources": [
+            {
+              "title": "Bound spells",
+              "path": "/magic/bound-spells"
+            }
+          ]
+        },
+        {
+          "id": "battle-persistent-spells",
+          "title": {
+            "ko": "리메인즈 인 플레이",
+            "en": "Remains in Play"
+          },
+          "aliases": [
+            "리메인즈 인 플레이",
+            "Remains in Play"
+          ],
+          "path": "/magic/remains-in-play",
+          "summary": {
+            "ko": "지속 스펠은 종료 조건 전까지 유지되며, 다음 자기 턴 컨저레이션에서 다시 디스펠할 수 있습니다.",
+            "en": "A persistent spell remains until an ending condition applies; later dispel attempts occur in your Conjuration sub-phase."
+          },
+          "timing": {
+            "ko": "지속 스펠이 유지 중일 때",
+            "en": "While a persistent spell remains active"
+          },
+          "steps": [
+            {
+              "ko": "시전자 사망·전장 이탈 또는 하위 단계 시작의 자발적 종료 여부를 확인합니다.",
+              "en": "Check whether the caster dies, leaves the battlefield, or voluntarily ends it at the start of a sub-phase."
+            },
+            {
+              "ko": "이후 자기 턴 컨저레이션에서 원래 굴림 대신 스펠의 최소 캐스팅 값을 초과하도록 디스펠합니다.",
+              "en": "In a subsequent friendly Conjuration, dispel by beating the spell's minimum casting value rather than the original casting result."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "시전자는 다른 스펠은 계속 시전하지만 유지 중인 동일 리메인즈 인 플레이 스펠을 다시 시전하지 않습니다.",
+              "en": "The caster may cast other spells, but not another copy of the same persistent spell while it remains active."
+            },
+            {
+              "ko": "퍼펙트 인보케이션으로 시전한 지속 스펠도 이후 턴의 컨저레이션에는 디스펠할 수 있습니다.",
+              "en": "A persistent spell cast with a perfect invocation can still be dispelled in a subsequent Conjuration."
+            }
+          ],
+          "example": {
+            "ko": "최소 값 8+, 원래 결과 12인 지속 스펠을 이후 턴에 지울 때는 디스펠 결과 9로 성공합니다.",
+            "en": "A persistent spell with minimum 8+ originally cast on 12 is dispelled by result 9 on a later turn."
+          },
+          "quick": {
+            "ko": "나중 디스펠은 원래 결과가 아닌 최소 캐스팅 값을 초과.",
+            "en": "Later dispels beat the minimum casting value, not the original result."
+          },
+          "sources": [
+            {
+              "title": "Remains in Play",
+              "path": "/magic/remains-in-play"
+            },
+            {
+              "title": "Dispelling Remains in Play Spells",
+              "path": "/magic/dispelling-remains-in-play-spells"
+            },
+            {
+              "title": "Perfect Invocations, Remains in Play",
+              "path": "/magic/perfect-invocations-remains-in-play"
+            }
+          ]
+        },
+        {
+          "id": "battle-wizard-armour",
+          "title": {
+            "ko": "위저드의 아머·실드",
+            "en": "Wizards wearing armour"
+          },
+          "aliases": [
+            "위저드의 아머·실드",
+            "Wizards wearing armour"
+          ],
+          "path": "/magic/wizards-and-armour",
+          "summary": {
+            "ko": "별도 면제가 없는 위저드는 아머나 실드를 착용하면 캐스팅·디스펠 굴림을 할 수 없습니다.",
+            "en": "Without an explicit exemption, a Wizard wearing armour or carrying a shield cannot make Casting or Dispel rolls."
+          },
+          "timing": {
+            "ko": "장비 선택 시와 마법 굴림 전",
+            "en": "When selecting equipment and before a magic roll"
+          },
+          "steps": [
+            {
+              "ko": "아머·실드 장비 여부와 해당 모델·아이템의 면제 규칙을 확인합니다.",
+              "en": "Check armour or shield equipment and any exemption on the model or item."
+            },
+            {
+              "ko": "면제가 없으면 캐스팅·디스펠 주사위를 굴리지 않습니다.",
+              "en": "Without an exemption, do not make a Casting or Dispel roll."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "마법 아머·마법 실드에도 제한이 적용됩니다.",
+              "en": "The restriction also covers magical armour and shields."
+            },
+            {
+              "ko": "탈것의 바딩은 위저드가 입은 아머가 아닙니다. 카오스 아머 등 명시적 면제는 적용합니다.",
+              "en": "A mount's barding is not worn by the Wizard; apply explicit exemptions such as Chaos Armour."
+            }
+          ],
+          "example": {
+            "ko": "일반 실드 1개를 든 위저드는 면제 규칙이 없다면 레벨 4여도 캐스팅 굴림을 할 수 없습니다.",
+            "en": "A Wizard carrying one ordinary shield cannot cast without an exemption, even at Level 4."
+          },
+          "quick": {
+            "ko": "위저드 아머·실드: 명시적 면제 없으면 캐스팅·디스펠 불가.",
+            "en": "Wizard armour or shield: no Casting or Dispel rolls without an explicit exemption."
+          },
+          "sources": [
+            {
+              "title": "Wizards wearing armour",
+              "path": "/magic/wizards-and-armour"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "battle-winds-optional",
+      "title": {
+        "ko": "선택 규칙: 윈즈 오브 매직",
+        "en": "Optional: Winds of Magic"
+      },
+      "description": {
+        "ko": "게임 전에 사용 여부를 합의하는 확장입니다. 기본 마법 판정과 구분해 적용합니다.",
+        "en": "These additions require agreement before the game and are separate from core magic."
+      },
+      "entries": [
+        {
+          "id": "battle-winds-agreement",
+          "title": {
+            "ko": "확장 선택과 재앙 미스캐스트",
+            "en": "Selecting expansions and disastrous miscasts"
+          },
+          "aliases": [
+            "확장 선택과 재앙 미스캐스트",
+            "Selecting expansions and disastrous miscasts"
+          ],
+          "path": "/magic/utilising-the-winds-of-magic",
+          "summary": {
+            "ko": "채널링·아케인 매직은 선택 규칙이며, 사용할 때는 재앙 미스캐스트 표를 씁니다.",
+            "en": "Channelling and Arcane Magic are optional; using either replaces the core Miscast table with the Disastrous Miscast table."
+          },
+          "timing": {
+            "ko": "게임 전 합의·미스캐스트 발생 시",
+            "en": "Before the game and whenever a miscast occurs"
+          },
+          "steps": [
+            {
+              "ko": "채널링 또는 아케인 매직 중 사용할 확장을 합의합니다. 소서러스 루즈는 함께 또는 단독으로 사용할 수 있습니다.",
+              "en": "Agree whether to use Channelling or Arcane Magic; Sorcerous Ruses may accompany either or be used alone."
+            },
+            {
+              "ko": "해당 확장이 있으면 미스캐스트에 2D6을 굴려 아래의 재앙 표를 사용합니다.",
+              "en": "When either expansion is in use, roll miscasts on the 2D6 Disastrous table below."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "색인은 매치드 플레이에서 채널링과 아케인 매직 중 하나만 쓰는 것을 권장합니다.",
+              "en": "The index recommends using either Channelling or Arcane Magic, rather than both, in matched play."
+            },
+            {
+              "ko": "게임 전 합의하면 다른 확장 없이 재앙 표만 사용할 수도 있습니다. 표가 명시하지 않으면 스펠은 실패합니다.",
+              "en": "By agreement, the Disastrous table can also be used alone; a miscast spell fails unless the result says otherwise."
+            }
+          ],
+          "example": {
+            "ko": "재앙 표 8은 시전자 S4·AP -1 힛과 게임 내내 캐스팅·디스펠 -1의 비윌더드입니다.",
+            "en": "A Disastrous result of 8 gives the caster an S4 AP -1 hit and Bewildered: -1 to Casting and Dispel rolls for the game."
+          },
+          "quick": {
+            "ko": "선택 확장 사용 시 기본 미스캐스트 표 대신 재앙 표.",
+            "en": "With these optional expansions, use the Disastrous rather than core Miscast table."
+          },
+          "sources": [
+            {
+              "title": "Selecting expansions and disastrous miscasts",
+              "path": "/magic/utilising-the-winds-of-magic"
+            },
+            {
+              "title": "Disastrous Miscasts",
+              "path": "/magic/disastrous-miscasts"
+            }
+          ],
+          "table": {
+            "caption": {
+              "ko": "재앙 미스캐스트 2D6",
+              "en": "Disastrous Miscast, 2D6"
+            },
+            "columns": [
+              {
+                "ko": "결과",
+                "en": "Roll"
+              },
+              {
+                "ko": "처리",
+                "en": "Resolution"
+              }
+            ],
+            "rows": [
+              [
+                "2–3",
+                {
+                  "ko": "산포 화살표면 시전자에서 화염 템플릿, Hit면 5인치 원형. 시전자 외 덮인 모델 S10·AP -4 힛 위험 후 시전자 W=0 제거.",
+                  "en": "Scatter arrow: flame template from caster; Hit: centred 5-inch blast. Other covered models risk S10 AP -4 hits; caster is then reduced to 0 Wounds and removed."
+                }
+              ],
+              [
+                "4–5",
+                {
+                  "ko": "시전자 중심 5인치, S8·AP -3 힛 위험. 해당 위저드 남은 턴 시전 불가.",
+                  "en": "Centred 5-inch blast, S8 AP -3 hit risk; that Wizard casts no more this turn."
+                }
+              ],
+              [
+                "6–7",
+                {
+                  "ko": "시전자 중심 3인치, S6·AP -2 힛 위험.",
+                  "en": "Centred 3-inch blast, S6 AP -2 hit risk."
+                }
+              ],
+              [
+                "8–9",
+                {
+                  "ko": "시전자 S4·AP -1 힛 1개, 비윌더드 -1. 반복되면 -2 등 누적.",
+                  "en": "Caster takes one S4 AP -1 hit and Bewildered -1; repeated Bewildered penalties accumulate."
+                }
+              ],
+              [
+                "10–11",
+                {
+                  "ko": "합류 유닛과 함께 최근접 적에서 기브 그라운드, 비윌더드. 이동 불가면 시전자 S6·AP -2 힛.",
+                  "en": "Caster and joined unit Give Ground from nearest enemy and become Bewildered; if unable, caster takes one S6 AP -2 hit."
+                }
+              ],
+              [
+                "12",
+                {
+                  "ko": "퍼펙트 시전. 레벨 1 감소, 해당 스펠을 잊음. 해당 플레이어 남은 턴 시전 불가.",
+                  "en": "Perfect invocation; lose 1 Wizard level and forget that spell; the player casts no more this turn."
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "id": "battle-channelling",
+          "title": {
+            "ko": "채널링 주사위",
+            "en": "Channelling dice"
+          },
+          "aliases": [
+            "채널링 주사위",
+            "Channelling dice"
+          ],
+          "path": "/magic/channelling-the-winds-of-magic",
+          "summary": {
+            "ko": "각 위저드는 게임 시작에 별도 채널링 풀을 만들고 주사위를 소비해 마법을 보강합니다.",
+            "en": "Each Wizard generates a separate pool before the game and spends its dice to enhance magic."
+          },
+          "timing": {
+            "ko": "배치·스펠 생성 전 및 개별 마법 판정 시",
+            "en": "Before deployment and spell generation, then at individual magic rolls"
+          },
+          "steps": [
+            {
+              "ko": "레벨 1은 D3, 2는 D3+1, 3은 2D3, 4는 2D3+1개로 위저드별 풀을 기록합니다.",
+              "en": "Generate D3 dice for Level 1, D3+1 for Level 2, 2D3 for Level 3 or 2D3+1 for Level 4."
+            },
+            {
+              "ko": "주사위를 소비하고 남은 수를 차감합니다. 1개로 캐스팅·위저들리 디스펠에 D6을 추가해 최저를 버리거나, 거리 증가에 사용합니다.",
+              "en": "Spend and subtract dice: one may add a D6 to Casting or Wizardly Dispel, discarding the lowest, or increase range."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "추가 주사위 중 어느 두 개라도 자연 더블 1·6이면 해당 특수 결과를 적용합니다.",
+              "en": "Natural double 1 or 6 on any two of the extra dice still triggers the relevant special result."
+            },
+            {
+              "ko": "실패한 캐스팅·디스펠 리롤은 2개를 소비하며 미스캐스트를 막기 위해 사용할 수 없습니다.",
+              "en": "Rerolling a failed Casting or Dispel roll costs two pool dice and cannot prevent a miscast."
+            }
+          ],
+          "example": {
+            "ko": "레벨 2가 풀 생성에 D3=2를 굴리면 3개를 갖습니다. 채널드 캐스팅 1회 후 2개가 남습니다.",
+            "en": "A Level 2 rolling 2 on D3 starts with three pool dice; one channelled cast leaves two."
+          },
+          "quick": {
+            "ko": "풀 L1:D3 / L2:D3+1 / L3:2D3 / L4:2D3+1. 추가 D6은 최저 버림, 더블은 모든 주사위에서 확인.",
+            "en": "Pools L1 D3; L2 D3+1; L3 2D3; L4 2D3+1. Extra D6 discards lowest; check all dice for doubles."
+          },
+          "sources": [
+            {
+              "title": "Channelling dice",
+              "path": "/magic/channelling-the-winds-of-magic"
+            }
+          ],
+          "table": {
+            "caption": {
+              "ko": "채널링 소비",
+              "en": "Spending Channelling dice"
+            },
+            "columns": [
+              {
+                "ko": "비용",
+                "en": "Cost"
+              },
+              {
+                "ko": "사용",
+                "en": "Use"
+              }
+            ],
+            "rows": [
+              [
+                "1",
+                {
+                  "ko": "스펠 생성 1개 리롤: 시그니처 교환 전에, 새 결과 수락.",
+                  "en": "Reroll one generated spell before signature exchange; accept the result."
+                }
+              ],
+              [
+                "1",
+                {
+                  "ko": "캐스팅 또는 위저들리 디스펠: 추가 D6, 최저 버림.",
+                  "en": "Casting or Wizardly Dispel: extra D6, discard lowest."
+                }
+              ],
+              [
+                "2",
+                {
+                  "ko": "실패한 캐스팅·디스펠 전체 리롤. 미스캐스트 방지는 불가.",
+                  "en": "Reroll a failed Casting or Dispel roll; cannot prevent a miscast."
+                }
+              ],
+              [
+                "1",
+                {
+                  "ko": "대상 선택/디스펠 전에 D6인치 사거리 증가.",
+                  "en": "Before targeting or dispelling, add D6 inches to spell or Dispel range."
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "id": "battle-arcane-ploys",
+          "title": {
+            "ko": "아케인 매직 플로이 생성·소비",
+            "en": "Generating and spending Arcane Magic ploys"
+          },
+          "aliases": [
+            "아케인 매직 플로이 생성·소비",
+            "Generating and spending Arcane Magic ploys"
+          ],
+          "path": "/magic/mastering-arcane-magic",
+          "summary": {
+            "ko": "각 플레이어는 스펠 생성 후 플로이 6개를 공개 생성하며 페이즈당 하나만 사용합니다.",
+            "en": "After generating spells, each player openly generates six ploys and uses at most one per phase."
+          },
+          "timing": {
+            "ko": "게임 시작·플로이가 허용하는 시점",
+            "en": "At game start and the timing allowed by each ploy"
+          },
+          "steps": [
+            {
+              "ko": "양쪽 모두 같은 방법을 택해 카드 6장 또는 2D6 표 6회를 처리합니다.",
+              "en": "Both players use the same method: draw six cards or roll six times on the 2D6 table."
+            },
+            {
+              "ko": "중복 제한을 넘긴 결과는 다시 생성하고, 사용한 플로이는 버립니다.",
+              "en": "Regenerate results beyond the duplicate limit; discard each ploy after use."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "해당 플로이가 허용하는 모델만 사용합니다. 일부 디스펠 플로이는 페이티드 디스펠에도 적용됩니다.",
+              "en": "Only eligible models use a ploy; some dispel ploys also work with a Fated dispel."
+            },
+            {
+              "ko": "플레이어당 페이즈에 하나만 사용하며, 사용한 것은 이번 게임에 재사용하지 못합니다.",
+              "en": "Each player uses only one ploy per phase and cannot reuse a spent ploy that game."
+            }
+          ],
+          "example": {
+            "ko": "표에서 2를 두 번 얻었다면 타워링 컨저레이션의 플레이어당 1개 제한 때문에 두 번째를 다시 굴립니다.",
+            "en": "Rolling 2 twice exceeds Towering Conjuration's one-per-player limit, so reroll the second."
+          },
+          "quick": {
+            "ko": "게임 시작 6개 생성 → 중복 한도 확인 → 페이즈당 1개 사용 후 버림.",
+            "en": "Generate six; enforce duplicate limits; use one per phase and discard."
+          },
+          "sources": [
+            {
+              "title": "Generating and spending Arcane Magic ploys",
+              "path": "/magic/mastering-arcane-magic"
+            }
+          ],
+          "table": {
+            "caption": {
+              "ko": "아케인 매직 2D6 생성",
+              "en": "Arcane Magic generation, 2D6"
+            },
+            "columns": [
+              {
+                "ko": "2D6",
+                "en": "2D6"
+              },
+              {
+                "ko": "플로이·플레이어당 한도",
+                "en": "Ploy and per-player limit"
+              }
+            ],
+            "rows": [
+              [
+                "2",
+                "Towering Conjuration · 1"
+              ],
+              [
+                "3",
+                "Unseen Assailment · 2"
+              ],
+              [
+                "4",
+                "Duplicitous Duplication · 4"
+              ],
+              [
+                "5",
+                "Twist of Fate"
+              ],
+              [
+                "6",
+                "Winds of Fortune"
+              ],
+              [
+                "7",
+                "Fated Conjuration"
+              ],
+              [
+                "8",
+                "Fortuitous Intervention"
+              ],
+              [
+                "9",
+                "Winds of Power"
+              ],
+              [
+                "10",
+                "Unerring Confidence · 4"
+              ],
+              [
+                "11",
+                "Dissolution · 2"
+              ],
+              [
+                "12",
+                "Absolute Power · 1"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "battle-sorcerous-ruses",
+          "title": {
+            "ko": "소서러스 루즈",
+            "en": "Sorcerous Ruses"
+          },
+          "aliases": [
+            "소서러스 루즈",
+            "Sorcerous Ruses"
+          ],
+          "path": "/magic/sorcerous-ruses",
+          "summary": {
+            "ko": "선택 확장에 동의한 게임에서 위저드는 25포인트로 루즈 표 굴림 하나를 구매할 수 있습니다.",
+            "en": "In a game using this optional expansion, a Wizard may buy one Sorcerous Ruse table roll for 25 points."
+          },
+          "timing": {
+            "ko": "로스터 구매·스펠 생성 직전·루즈별 발동 시점",
+            "en": "Roster purchase, immediately before spell generation, and each Ruse's trigger"
+          },
+          "steps": [
+            {
+              "ko": "위저드당 최대 하나를 구매하고 스펠 생성 직전에 위저드별 결과를 굴립니다.",
+              "en": "Purchase at most one per Wizard and generate each immediately before spell generation."
+            },
+            {
+              "ko": "결과와 소유 위저드를 기록하고, 해당 루즈의 시점에 사용합니다.",
+              "en": "Record the result and owning Wizard, then use it at the timing specified by that Ruse."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "양측 모두 구매했다면 서로 보이는 상태에서 번갈아 생성합니다.",
+              "en": "If both players bought Ruses, alternate generation rolls in clear view."
+            },
+            {
+              "ko": "성공 여부와 관계없이 사용한 루즈는 게임 중 한 번으로 끝납니다.",
+              "en": "A used Ruse is spent for the game whether it succeeds or fails."
+            }
+          ],
+          "example": {
+            "ko": "위저드 2명이 각각 루즈를 구매하면 총 50포인트이며, 결과를 각 위저드에게 따로 기록합니다.",
+            "en": "Two Wizards buying one Ruse each cost 50 points; record ownership separately."
+          },
+          "quick": {
+            "ko": "위저드당 0–1, +25pts, 스펠 생성 전 결정, 성공·실패와 무관하게 1회용.",
+            "en": "0–1 per Wizard, +25 points, generate before spells, one use regardless of success."
+          },
+          "sources": [
+            {
+              "title": "Sorcerous Ruses",
+              "path": "/magic/sorcerous-ruses"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "battle-shooting",
+      "title": {
+        "ko": "슈팅 판정",
+        "en": "Shooting resolution"
+      },
+      "description": {
+        "ko": "사격 가능 여부부터 명중 보정·고능력치·7+ 판정까지 순서대로 확인합니다.",
+        "en": "Check eligibility, hit modifiers, high Ballistic Skill and 7+ rolls in sequence."
+      },
+      "entries": [
+        {
+          "id": "battle-shoot-eligibility",
+          "title": {
+            "ko": "사격 가능 여부·시야·거리",
+            "en": "Shooting eligibility, sight and range"
+          },
+          "aliases": [
+            "사격 가능 여부·시야·거리",
+            "Shooting eligibility, sight and range"
+          ],
+          "path": "/the-shooting-phase/who-can-shoot",
+          "summary": {
+            "ko": "사격 무장·능력이 있어야 하며, 모델마다 시야와 사거리를 확인합니다.",
+            "en": "The unit needs a shooting weapon or ability; check sight and range for individual models."
+          },
+          "timing": {
+            "ko": "자기 슈팅에 유닛을 선택할 때",
+            "en": "When selecting a unit in your Shooting phase"
+          },
+          "steps": [
+            {
+              "ko": "앞선 무브먼트에서 차지·마치했거나, 현재 교전·도주 중이면 일반 사격을 하지 않습니다.",
+              "en": "A unit that charged or marched in the preceding Movement phase, or is engaged or fleeing, cannot normally shoot."
+            },
+            {
+              "ko": "사격할 각 모델의 직접 시선과 최대 사거리를 확인한 뒤 대상을 선언합니다.",
+              "en": "Check each shooter's line of sight and maximum range, then declare the target."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "기본적으로 앞줄만 사격합니다. 뒤쪽 대열 사격을 허용하는 규칙은 자기 파일 앞 모델의 시선을 사용합니다.",
+              "en": "Normally only the front rank shoots; permitted rear-rank shooters see what the model at the front of their file sees."
+            },
+            {
+              "ko": "스탠드 앤 슈트에서는 적이 사거리 안으로 들어온 것으로 취급하지만 별도의 반응 허용 조건을 충족해야 합니다.",
+              "en": "Stand & Shoot assumes the charger enters weapon range, but its separate reaction restrictions still apply."
+            }
+          ],
+          "example": {
+            "ko": "24인치 무기 모델 둘 중 하나만 대상과 24인치 이내라면 그 모델만 사격합니다.",
+            "en": "Of two models with 24-inch weapons, only the one within 24 inches may shoot."
+          },
+          "quick": {
+            "ko": "차지·마치·교전·도주 확인 → 모델별 시선·거리 → 대상 선언.",
+            "en": "Check charge, march, engagement and fleeing; then each model's sight and range; declare target."
+          },
+          "sources": [
+            {
+              "title": "Shooting eligibility, sight and range",
+              "path": "/the-shooting-phase/who-can-shoot"
+            },
+            {
+              "title": "Check Line of Sight",
+              "path": "/the-shooting-phase/check-line-of-sight"
+            },
+            {
+              "title": "Check Range",
+              "path": "/the-shooting-phase/check-range"
+            },
+            {
+              "title": "Declare Target",
+              "path": "/the-shooting-phase/declare-target"
+            }
+          ]
+        },
+        {
+          "id": "battle-shoot-hit",
+          "title": {
+            "ko": "BS 사격 명중",
+            "en": "Ballistic Skill shooting hits"
+          },
+          "aliases": [
+            "BS 사격 명중",
+            "Ballistic Skill shooting hits"
+          ],
+          "path": "/the-shooting-phase/roll-to-hit-shooting",
+          "summary": {
+            "ko": "사격할 공격마다 D6을 굴려 BS 기준값에 수정치를 적용한 명중 판정을 합니다.",
+            "en": "Roll a D6 per shot and apply modifiers to the target number determined by BS."
+          },
+          "timing": {
+            "ko": "사격 대상·발사 수를 정한 뒤",
+            "en": "After selecting the target and number of shots"
+          },
+          "steps": [
+            {
+              "ko": "BS 1–5의 기본값을 6+/5+/4+/3+/2+에서 찾습니다.",
+              "en": "For BS 1–5, find the basic target number: 6+/5+/4+/3+/2+."
+            },
+            {
+              "ko": "각 주사위에 적용되는 수정치를 계산하고 기준값 이상인 주사위를 힛으로 셉니다.",
+              "en": "Apply the relevant modifiers to each roll and count results meeting the target as hits."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "자연 1은 수정치와 관계없이 실패합니다.",
+              "en": "A natural 1 fails regardless of modifiers."
+            },
+            {
+              "ko": "거리·엄폐·무장·BS가 다르면 주사위를 묶음별로 구분해 처리합니다.",
+              "en": "Separate batches with different range, cover, weapons or BS."
+            }
+          ],
+          "example": {
+            "ko": "BS3 모델 5명의 기본 명중은 4+입니다. 4·4·5·2·1이면 수정치 전 3힛입니다.",
+            "en": "Five BS3 shots need 4+; rolls 4,4,5,2,1 give three hits before modifiers."
+          },
+          "quick": {
+            "ko": "BS1/2/3/4/5 → 6+/5+/4+/3+/2+. 자연 1 실패.",
+            "en": "BS1/2/3/4/5 → 6+/5+/4+/3+/2+; natural 1 fails."
+          },
+          "sources": [
+            {
+              "title": "Ballistic Skill shooting hits",
+              "path": "/the-shooting-phase/roll-to-hit-shooting"
+            }
+          ],
+          "table": {
+            "caption": {
+              "ko": "기본 사격 명중",
+              "en": "Basic shooting hits"
+            },
+            "columns": [
+              {
+                "ko": "BS",
+                "en": "BS"
+              },
+              {
+                "ko": "기본 D6",
+                "en": "Basic D6"
+              }
+            ],
+            "rows": [
+              [
+                "1",
+                "6+"
+              ],
+              [
+                "2",
+                "5+"
+              ],
+              [
+                "3",
+                "4+"
+              ],
+              [
+                "4",
+                "3+"
+              ],
+              [
+                "5",
+                "2+"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "battle-high-bs",
+          "title": {
+            "ko": "BS 6 이상 사격",
+            "en": "Shooting with BS 6 or higher"
+          },
+          "aliases": [
+            "BS 6 이상 사격",
+            "Shooting with BS 6 or higher"
+          ],
+          "path": "/the-shooting-phase/bs-of-6-or-higher",
+          "summary": {
+            "ko": "BS 6 이상 모델은 첫 명중이 실패하면 BS별 두 번째 기준값으로 리롤합니다.",
+            "en": "A model with BS 6 or higher rerolls a failed first hit roll against a second BS-specific target."
+          },
+          "timing": {
+            "ko": "BS 6 이상 모델의 사격 명중",
+            "en": "When a BS 6+ model rolls shooting hits"
+          },
+          "steps": [
+            {
+              "ko": "첫 굴림은 기본 2+에 해당 사격 수정치를 적용합니다.",
+              "en": "Apply shooting modifiers to the first roll, whose base target is 2+."
+            },
+            {
+              "ko": "첫 굴림이 실패하면 BS6/7/8/9/10은 각각 6+/5+/4+/3+/2+로 한 번 리롤합니다.",
+              "en": "On failure, BS6/7/8/9/10 rerolls need 6+/5+/4+/3+/2+ respectively."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "사격 명중 수정치는 첫 주사위에만 적용합니다.",
+              "en": "Shooting hit modifiers apply only to the first roll."
+            },
+            {
+              "ko": "리롤 결과는 받아들여야 하며 같은 주사위를 다시 리롤하지 않습니다.",
+              "en": "Accept the reroll; do not reroll the same die again."
+            }
+          ],
+          "example": {
+            "ko": "BS8이 첫 주사위 1로 실패했다면, 두 번째 주사위 4+로 명중합니다.",
+            "en": "A BS8 model rolling an initial 1 hits if its reroll is 4+."
+          },
+          "quick": {
+            "ko": "BS6–10: 첫 2+ / 실패 리롤 6+,5+,4+,3+,2+. 수정치는 첫 굴림만.",
+            "en": "BS6–10: first 2+, failed-roll targets 6+,5+,4+,3+,2+; modifiers affect the first roll only."
+          },
+          "sources": [
+            {
+              "title": "Shooting with BS 6 or higher",
+              "path": "/the-shooting-phase/bs-of-6-or-higher"
+            },
+            {
+              "title": "To Hit Modifiers",
+              "path": "/the-shooting-phase/to-hit-modifiers"
+            }
+          ],
+          "table": {
+            "caption": {
+              "ko": "고 BS 명중과 리롤",
+              "en": "High-BS hit and reroll targets"
+            },
+            "columns": [
+              {
+                "ko": "BS",
+                "en": "BS"
+              },
+              {
+                "ko": "첫 굴림 / 리롤",
+                "en": "First roll / reroll"
+              }
+            ],
+            "rows": [
+              [
+                "6",
+                "2+ / 6+"
+              ],
+              [
+                "7",
+                "2+ / 5+"
+              ],
+              [
+                "8",
+                "2+ / 4+"
+              ],
+              [
+                "9",
+                "2+ / 3+"
+              ],
+              [
+                "10",
+                "2+ / 2+"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "battle-shoot-modifiers",
+          "title": {
+            "ko": "사격 명중 수정치",
+            "en": "Shooting hit modifiers"
+          },
+          "aliases": [
+            "사격 명중 수정치",
+            "Shooting hit modifiers"
+          ],
+          "path": "/the-shooting-phase/to-hit-modifiers",
+          "summary": {
+            "ko": "이동·장거리·엄폐 등 해당 수정치는 누적하되 명시적 예외를 적용합니다.",
+            "en": "Applicable movement, range and cover penalties are cumulative, subject to explicit exceptions."
+          },
+          "timing": {
+            "ko": "사격 명중 주사위를 굴리기 전",
+            "en": "Before rolling shooting hits"
+          },
+          "steps": [
+            {
+              "ko": "이동 -1, 무기 최대 사거리 절반 초과 -1, 부분 엄폐 -1 또는 완전 엄폐 -2를 확인합니다.",
+              "en": "Check moving -1, beyond half maximum range -1, and partial cover -1 or full cover -2."
+            },
+            {
+              "ko": "해당되는 다른 무기·특수 규칙 보정까지 합하고, 서로 다른 모델은 묶음을 나눕니다.",
+              "en": "Add other weapon or special-rule modifiers; split models with different penalties into separate batches."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "스탠드 앤 슈트는 -1이지만 장거리 추가 -1을 받지 않습니다.",
+              "en": "Stand & Shoot suffers -1 but no additional long-range penalty."
+            },
+            {
+              "ko": "부분·완전 엄폐는 둘 중 해당되는 하나를 적용합니다. 이동은 랠리·리폼을 포함합니다.",
+              "en": "Use the applicable cover category, not both; moving includes rallying and reforming."
+            }
+          ],
+          "example": {
+            "ko": "BS4가 이동 후 장거리의 부분 엄폐 적에게 사격하면 -3으로, 기본 3+가 실질 6+입니다.",
+            "en": "A moving BS4 shooter firing long range at partial cover has -3, turning base 3+ into an effective 6+."
+          },
+          "quick": {
+            "ko": "이동 -1 / 장거리 -1 / 스탠드 앤 슈트 -1 / 부분 엄폐 -1 / 완전 엄폐 -2.",
+            "en": "Moving -1; long range -1; Stand & Shoot -1; partial cover -1; full cover -2."
+          },
+          "sources": [
+            {
+              "title": "Shooting hit modifiers",
+              "path": "/the-shooting-phase/to-hit-modifiers"
+            },
+            {
+              "title": "Moving and Shooting",
+              "path": "/the-shooting-phase/moving-and-shooting"
+            },
+            {
+              "title": "Firing at Long Range",
+              "path": "/the-shooting-phase/firing-at-long-range"
+            },
+            {
+              "title": "Standing and Shooting",
+              "path": "/the-shooting-phase/standing-and-shooting"
+            },
+            {
+              "title": "Partial Cover",
+              "path": "/the-shooting-phase/target-behind-partial-cover"
+            },
+            {
+              "title": "Full Cover",
+              "path": "/the-shooting-phase/target-behind-full-cover"
+            }
+          ],
+          "table": {
+            "caption": {
+              "ko": "사격 보정",
+              "en": "Shooting penalties"
+            },
+            "columns": [
+              {
+                "ko": "조건",
+                "en": "Condition"
+              },
+              {
+                "ko": "보정",
+                "en": "Modifier"
+              }
+            ],
+            "rows": [
+              [
+                {
+                  "ko": "이번 턴 이동",
+                  "en": "Moved this turn"
+                },
+                "-1"
+              ],
+              [
+                {
+                  "ko": "최대 사거리 절반 초과",
+                  "en": "Beyond half maximum range"
+                },
+                "-1"
+              ],
+              [
+                {
+                  "ko": "스탠드 앤 슈트",
+                  "en": "Stand & Shoot"
+                },
+                {
+                  "ko": "-1, 장거리 추가 없음",
+                  "en": "-1, no additional long-range penalty"
+                }
+              ],
+              [
+                {
+                  "ko": "절반 이하가 가려진 부분 엄폐",
+                  "en": "Partial cover: up to half obscured"
+                },
+                "-1"
+              ],
+              [
+                {
+                  "ko": "절반 초과가 가려진 완전 엄폐",
+                  "en": "Full cover: more than half obscured"
+                },
+                "-2"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "battle-shoot-seven-plus",
+          "title": {
+            "ko": "7+·8+·9+ 사격 명중",
+            "en": "Shooting hits requiring 7+, 8+ or 9+"
+          },
+          "aliases": [
+            "7+·8+·9+ 사격 명중",
+            "Shooting hits requiring 7+, 8+ or 9+"
+          ],
+          "path": "/the-shooting-phase/7-to-hit",
+          "summary": {
+            "ko": "필요한 눈이 7–9라면 자연 6 뒤 두 번째 굴림으로 명중할 수 있습니다.",
+            "en": "A shot needing 7–9 may still hit by rolling a natural 6 followed by a second success."
+          },
+          "timing": {
+            "ko": "수정치 때문에 D6 기준이 7 이상일 때",
+            "en": "When modifiers make the required D6 score at least 7"
+          },
+          "steps": [
+            {
+              "ko": "먼저 일반 명중 주사위를 굴려 자연 6만 남깁니다.",
+              "en": "Roll the initial hit dice and retain only natural 6s."
+            },
+            {
+              "ko": "남은 각 주사위를 다시 굴려 7+는 4+, 8+는 5+, 9+는 6을 요구합니다.",
+              "en": "Roll each retained die again: a required 7 needs 4+, an 8 needs 5+, and a 9 needs 6."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "10 이상이 필요하면 명중할 수 없습니다.",
+              "en": "A required result of 10 or more cannot hit."
+            },
+            {
+              "ko": "7+가 필요한 공격에는 포이즌드 어택을 사용할 수 없습니다.",
+              "en": "Poisoned Attacks cannot be used when 7+ To Hit is required."
+            }
+          ],
+          "example": {
+            "ko": "BS2에 -2 보정이면 필요값 7+: 자연 6 뒤 4+로 명중합니다.",
+            "en": "BS2 at -2 needs 7+: natural 6 followed by 4+ hits."
+          },
+          "quick": {
+            "ko": "7+: 6→4+ / 8+: 6→5+ / 9+: 6→6 / 10+: 불가.",
+            "en": "7+: 6 then 4+; 8+: 6 then 5+; 9+: 6 then 6; 10+: impossible."
+          },
+          "sources": [
+            {
+              "title": "Shooting hits requiring 7+, 8+ or 9+",
+              "path": "/the-shooting-phase/7-to-hit"
+            },
+            {
+              "title": "Poisoned Attacks",
+              "path": "/special-rules/poisoned-attacks"
+            }
+          ],
+          "table": {
+            "caption": {
+              "ko": "7+ 이상 명중",
+              "en": "Hits requiring 7+"
+            },
+            "columns": [
+              {
+                "ko": "필요값",
+                "en": "Required"
+              },
+              {
+                "ko": "실제 굴림",
+                "en": "Roll"
+              }
+            ],
+            "rows": [
+              [
+                "7+",
+                "6 → 4+"
+              ],
+              [
+                "8+",
+                "6 → 5+"
+              ],
+              [
+                "9+",
+                "6 → 6"
+              ],
+              [
+                "10+",
+                {
+                  "ko": "불가",
+                  "en": "Impossible"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "id": "battle-poison-resolution",
+          "title": {
+            "ko": "포이즌드 어택의 힛 전환",
+            "en": "Resolving Poisoned Attacks"
+          },
+          "aliases": [
+            "포이즌드 어택의 힛 전환",
+            "Resolving Poisoned Attacks"
+          ],
+          "path": "/special-rules/poisoned-attacks",
+          "summary": {
+            "ko": "자연 명중 6인 힛에는 운드 굴림 +2를 적용할 수 있습니다.",
+            "en": "A hit from a natural 6 To Hit may receive +2 on its To Wound roll."
+          },
+          "timing": {
+            "ko": "사격·컴뱃에서 명중한 뒤 운드 굴림 전",
+            "en": "After shooting or combat hits, before rolling wounds"
+          },
+          "steps": [
+            {
+              "ko": "보정 전 명중 6인 주사위를 다른 힛과 분리합니다.",
+              "en": "Separate natural 6 To Hit dice from other successful hits."
+            },
+            {
+              "ko": "그 힛의 운드 굴림에 +2를 적용해 운드 표 기준과 비교합니다.",
+              "en": "Apply +2 to those hits' wound rolls and compare against the wound table."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "스펠·마법 무기 공격에는 적용하지 않습니다.",
+              "en": "Spells and attacks made with magic weapons are unaffected."
+            },
+            {
+              "ko": "자동 명중하거나 7+ 명중이 필요한 공격에는 적용하지 않습니다.",
+              "en": "Automatic hits and attacks needing 7+ To Hit cannot use the rule."
+            }
+          ],
+          "example": {
+            "ko": "S3 대 T4는 보통 5+ 운드입니다. 포이즌 힛의 주사위 3은 +2로 5가 됩니다.",
+            "en": "S3 against T4 normally wounds on 5+; a poisoned hit rolling 3 becomes 5 after +2."
+          },
+          "quick": {
+            "ko": "명중 자연 6 → 그 힛 운드 +2. 별도의 운드 굴림을 합니다.",
+            "en": "Natural 6 To Hit → +2 To Wound for that hit; still roll to wound."
+          },
+          "sources": [
+            {
+              "title": "Resolving Poisoned Attacks",
+              "path": "/special-rules/poisoned-attacks"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "battle-wounds-saves",
+      "title": {
+        "ko": "운드·세이브·피해",
+        "en": "Wounds, saves and damage"
+      },
+      "description": {
+        "ko": "명중 이후 무기의 S·AP와 대상의 T·방어 수단을 차례대로 적용합니다.",
+        "en": "After hitting, apply weapon Strength and AP against Toughness and each defence in order."
+      },
+      "entries": [
+        {
+          "id": "battle-wound-table",
+          "title": {
+            "ko": "S 대 T 운드 판정표",
+            "en": "Strength versus Toughness wound chart"
+          },
+          "aliases": [
+            "S 대 T 운드 판정표",
+            "Strength versus Toughness wound chart"
+          ],
+          "path": "/the-shooting-phase/roll-to-wound-shooting",
+          "summary": {
+            "ko": "힛마다 무기의 S와 대상 T를 비교해 D6 운드 기준을 찾습니다.",
+            "en": "For each hit, compare the weapon's Strength with the target's Toughness to find the D6 wound target."
+          },
+          "timing": {
+            "ko": "사격·컴뱃 명중 후",
+            "en": "After shooting or combat hits"
+          },
+          "steps": [
+            {
+              "ko": "현재 사용하는 무기 프로필의 S를 고르고 대상 T와 표에서 교차합니다.",
+              "en": "Select the Strength of the weapon profile being used and cross-reference the target's Toughness."
+            },
+            {
+              "ko": "각 힛에 D6을 굴려 수정 후 기준값 이상이면 운드를 입힙니다.",
+              "en": "Roll a D6 for each hit; a modified result meeting the target inflicts a wound."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "자연 1은 수정치와 관계없이 실패합니다.",
+              "en": "A natural 1 fails regardless of modifiers."
+            },
+            {
+              "ko": "S가 T보다 6 이상 낮으면 운드를 입힐 수 없습니다. 자동으로 모든 6이 성공하는 판정이 아닙니다.",
+              "en": "If Strength is at least six lower than Toughness, it cannot wound; a natural 6 is not a universal success."
+            }
+          ],
+          "example": {
+            "ko": "S4 대 T3는 3+, S3 대 T4는 5+, S3 대 T9는 운드 불가입니다.",
+            "en": "S4 versus T3 wounds on 3+, S3 versus T4 on 5+, and S3 cannot wound T9."
+          },
+          "quick": {
+            "ko": "S=T:4+ / S가1높음:3+ / 2이상높음:2+ / 1낮음:5+ / 2–5낮음:6+ / 6이상낮음:불가.",
+            "en": "S=T:4+; S one higher:3+; at least two higher:2+; one lower:5+; two–five lower:6+; six lower:impossible."
+          },
+          "sources": [
+            {
+              "title": "Strength versus Toughness wound chart",
+              "path": "/the-shooting-phase/roll-to-wound-shooting"
+            },
+            {
+              "title": "Too Tough to Wound",
+              "path": "/the-shooting-phase/too-tough-to-wound"
+            }
+          ],
+          "table": {
+            "caption": {
+              "ko": "운드 표: 행 S, 열 T",
+              "en": "Wound chart: Strength rows, Toughness columns"
+            },
+            "columns": [
+              {
+                "ko": "S / T",
+                "en": "S / T"
+              },
+              {
+                "ko": "1",
+                "en": "1"
+              },
+              {
+                "ko": "2",
+                "en": "2"
+              },
+              {
+                "ko": "3",
+                "en": "3"
+              },
+              {
+                "ko": "4",
+                "en": "4"
+              },
+              {
+                "ko": "5",
+                "en": "5"
+              },
+              {
+                "ko": "6",
+                "en": "6"
+              },
+              {
+                "ko": "7",
+                "en": "7"
+              },
+              {
+                "ko": "8",
+                "en": "8"
+              },
+              {
+                "ko": "9",
+                "en": "9"
+              },
+              {
+                "ko": "10",
+                "en": "10"
+              }
+            ],
+            "rows": [
+              [
+                "1",
+                "4+",
+                "5+",
+                "6+",
+                "6+",
+                "6+",
+                "6+",
+                "—",
+                "—",
+                "—",
+                "—"
+              ],
+              [
+                "2",
+                "3+",
+                "4+",
+                "5+",
+                "6+",
+                "6+",
+                "6+",
+                "6+",
+                "—",
+                "—",
+                "—"
+              ],
+              [
+                "3",
+                "2+",
+                "3+",
+                "4+",
+                "5+",
+                "6+",
+                "6+",
+                "6+",
+                "6+",
+                "—",
+                "—"
+              ],
+              [
+                "4",
+                "2+",
+                "2+",
+                "3+",
+                "4+",
+                "5+",
+                "6+",
+                "6+",
+                "6+",
+                "6+",
+                "—"
+              ],
+              [
+                "5",
+                "2+",
+                "2+",
+                "2+",
+                "3+",
+                "4+",
+                "5+",
+                "6+",
+                "6+",
+                "6+",
+                "6+"
+              ],
+              [
+                "6",
+                "2+",
+                "2+",
+                "2+",
+                "2+",
+                "3+",
+                "4+",
+                "5+",
+                "6+",
+                "6+",
+                "6+"
+              ],
+              [
+                "7",
+                "2+",
+                "2+",
+                "2+",
+                "2+",
+                "2+",
+                "3+",
+                "4+",
+                "5+",
+                "6+",
+                "6+"
+              ],
+              [
+                "8",
+                "2+",
+                "2+",
+                "2+",
+                "2+",
+                "2+",
+                "2+",
+                "3+",
+                "4+",
+                "5+",
+                "6+"
+              ],
+              [
+                "9",
+                "2+",
+                "2+",
+                "2+",
+                "2+",
+                "2+",
+                "2+",
+                "2+",
+                "3+",
+                "4+",
+                "5+"
+              ],
+              [
+                "10",
+                "2+",
+                "2+",
+                "2+",
+                "2+",
+                "2+",
+                "2+",
+                "2+",
+                "2+",
+                "3+",
+                "4+"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "battle-armour-ap",
+          "title": {
+            "ko": "아머 세이브와 AP",
+            "en": "Armour saves and AP"
+          },
+          "aliases": [
+            "아머 세이브와 AP",
+            "Armour saves and AP"
+          ],
+          "path": "/the-shooting-phase/armour-piercing",
+          "summary": {
+            "ko": "AP는 아머 세이브 주사위에 적용하는 음수 보정입니다.",
+            "en": "AP is a negative modifier applied to the Armour Save roll."
+          },
+          "timing": {
+            "ko": "운드를 입은 뒤",
+            "en": "After a wound is inflicted"
+          },
+          "steps": [
+            {
+              "ko": "대상의 현재 아머 값을 확인하고 무기 프로필의 AP를 찾습니다.",
+              "en": "Find the model's current armour value and the weapon profile's AP."
+            },
+            {
+              "ko": "D6에 AP 등 수정치를 적용해 아머 값 이상이면 그 운드를 막습니다.",
+              "en": "Apply AP and other modifiers to D6; meeting the armour value prevents that wound."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "자연 1은 아머 세이브에 실패합니다. 보정 때문에 필요한 원래 주사위가 7 이상이면 일반 D6으로 막을 수 없습니다.",
+              "en": "A natural 1 fails an Armour Save; if modifiers require a raw 7 or more, an ordinary D6 cannot save it."
+            },
+            {
+              "ko": "무기 S와 AP는 별도 항목입니다. S에서 임의의 AP 보정을 만들어 더하지 않습니다.",
+              "en": "Strength and AP are separate profile characteristics; do not invent extra AP from Strength."
+            }
+          ],
+          "example": {
+            "ko": "아머 4+에 AP -2를 받으면 원래 D6이 6이어야 6-2=4로 성공합니다.",
+            "en": "Armour 4+ against AP -2 needs a raw 6, because 6-2=4."
+          },
+          "quick": {
+            "ko": "아머 성공: D6 + AP + 기타 보정 ≥ 아머 값. 자연 1 실패.",
+            "en": "Armour succeeds if D6 + AP + other modifiers ≥ armour value; natural 1 fails."
+          },
+          "sources": [
+            {
+              "title": "Armour saves and AP",
+              "path": "/the-shooting-phase/armour-piercing"
+            },
+            {
+              "title": "Make Armour Saves",
+              "path": "/the-shooting-phase/make-armour-saves-shooting"
+            }
+          ]
+        },
+        {
+          "id": "battle-ward-order",
+          "title": {
+            "ko": "와드 세이브·여러 방어 수단",
+            "en": "Ward saves and multiple defences"
+          },
+          "aliases": [
+            "와드 세이브·여러 방어 수단",
+            "Ward saves and multiple defences"
+          ],
+          "path": "/the-shooting-phase/more-than-one-save",
+          "summary": {
+            "ko": "아머를 먼저 시도하고 실패하거나 불가능하면 와드를 시도합니다.",
+            "en": "Attempt armour first; if it fails or cannot succeed, attempt a Ward save."
+          },
+          "timing": {
+            "ko": "아머가 운드를 막지 못했을 때",
+            "en": "When armour has not prevented a wound"
+          },
+          "steps": [
+            {
+              "ko": "아머 판정을 해결한 뒤, 보유한 와드 중 가장 좋은 값을 선택합니다.",
+              "en": "Resolve armour, then select the best available Ward value."
+            },
+            {
+              "ko": "D6을 굴려 와드 값 이상이면 해당 운드를 막습니다.",
+              "en": "Roll D6; meeting the Ward value prevents the wound."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "한 운드에 와드는 한 번만 시도하며 여러 와드를 합치지 않습니다.",
+              "en": "Attempt only one Ward save per wound; do not combine different Ward values."
+            },
+            {
+              "ko": "AP 등 아머 값을 바꾸는 규칙은 별도 명시가 없으면 와드 값을 바꾸지 않습니다.",
+              "en": "AP and other armour-related effects do not change Ward values unless explicitly stated."
+            }
+          ],
+          "example": {
+            "ko": "5+와 6+ 와드가 있으면 5+ 하나를 사용합니다. 아머 실패 뒤 와드 5로 운드를 막습니다.",
+            "en": "With 5+ and 6+ Ward saves, use the 5+ alone; after failed armour, a Ward roll of 5 saves the wound."
+          },
+          "quick": {
+            "ko": "아머 → 실패/불가 시 가장 좋은 와드 1회. AP는 일반적으로 와드에 영향 없음.",
+            "en": "Armour, then one best Ward if needed; AP normally does not affect Ward saves."
+          },
+          "sources": [
+            {
+              "title": "Ward saves and multiple defences",
+              "path": "/the-shooting-phase/more-than-one-save"
+            },
+            {
+              "title": "Ward Saves",
+              "path": "/the-shooting-phase/ward-saves"
+            }
+          ]
+        },
+        {
+          "id": "battle-regeneration",
+          "title": {
+            "ko": "리제너레이션과 컴뱃 점수",
+            "en": "Regeneration and combat score"
+          },
+          "aliases": [
+            "리제너레이션과 컴뱃 점수",
+            "Regeneration and combat score"
+          ],
+          "path": "/special-rules/regeneration",
+          "summary": {
+            "ko": "운드를 잃은 직후 제거 전에 리제너레이션을 시도하며, 회복한 운드도 컴뱃 결과에는 셉니다.",
+            "en": "Attempt Regeneration immediately after losing a Wound and before removal; recovered Wounds still count for combat results."
+          },
+          "timing": {
+            "ko": "운드 손실 직후·W=0 모델 제거 전",
+            "en": "Immediately after Wound loss and before removing a model at 0 Wounds"
+          },
+          "steps": [
+            {
+              "ko": "다른 방어와 해당 공격의 예외를 해결한 뒤 잃은 운드를 확인합니다.",
+              "en": "Resolve other defences and attack-specific exceptions, then identify the lost Wound."
+            },
+            {
+              "ko": "D6을 굴려 표기된 리제너레이션 값 이상이면 잃은 운드를 회복합니다.",
+              "en": "Roll D6; meeting the printed Regeneration value recovers the lost Wound."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "W가 0이 된 모델도 제거하기 전에 이 단계가 옵니다.",
+              "en": "This step occurs before removing even a model reduced to 0 Wounds."
+            },
+            {
+              "ko": "회복 성공은 컴뱃 결과의 운드 점수를 지우지 않습니다. 아머 보정은 별도 명시 없이 리제너레이션 값을 바꾸지 않습니다.",
+              "en": "A successful recovery does not erase the wound from combat scoring; armour modifiers do not normally change Regeneration."
+            }
+          ],
+          "example": {
+            "ko": "리제너레이션 5+ 모델이 운드 1을 잃고 5를 굴리면 W를 회복하지만 적은 컴뱃 운드 1점을 셉니다.",
+            "en": "A 5+ Regeneration model losing one Wound recovers it on a 5, but the enemy still counts one wound for combat result."
+          },
+          "quick": {
+            "ko": "운드 손실 → 제거 전 리제너레이션 → 회복해도 컴뱃 운드 점수 유지.",
+            "en": "Lose Wound, regenerate before removal; recovered wounds still score in combat."
+          },
+          "sources": [
+            {
+              "title": "Regeneration and combat score",
+              "path": "/special-rules/regeneration"
+            }
+          ]
+        },
+        {
+          "id": "battle-multiple-wounds",
+          "title": {
+            "ko": "멀티플 운즈 처리",
+            "en": "Resolving Multiple Wounds"
+          },
+          "aliases": [
+            "멀티플 운즈 처리",
+            "Resolving Multiple Wounds"
+          ],
+          "path": "/the-shooting-phase/hits-that-inflict-multiple-wounds",
+          "summary": {
+            "ko": "일반 명중·운드·방어를 처리한 뒤, 막지 못한 운드의 피해량을 늘립니다.",
+            "en": "Resolve hits, wounds and defences first, then multiply the damage from each unsaved wound."
+          },
+          "timing": {
+            "ko": "멀티플 운즈 공격의 방어가 끝난 뒤",
+            "en": "After defences against a Multiple Wounds attack"
+          },
+          "steps": [
+            {
+              "ko": "명중·운드·허용된 세이브를 일반 순서대로 해결합니다.",
+              "en": "Resolve hit, wound and permitted saves in the normal order."
+            },
+            {
+              "ko": "막지 못한 운드마다 표기된 피해량을 적용하거나 주사위를 굴려 해당 모델에 적용합니다.",
+              "en": "For each unsaved wound, apply the printed multiplier or roll its damage and apply it to that model."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "초과 운드는 일반적으로 다음 모델로 넘기지 않습니다.",
+              "en": "Excess wounds normally do not spill into the next model."
+            },
+            {
+              "ko": "자동 제거·챌린지 오버킬·리제너레이션 등은 해당 규칙의 별도 처리 시점을 확인합니다.",
+              "en": "Check separate timing for instant kills, challenge overkill and Regeneration."
+            }
+          ],
+          "example": {
+            "ko": "멀티플 운즈(2)가 W1 모델에게 운드를 입히면 모델 1개를 제거하며 피해 1을 다른 모델에 넘기지 않습니다.",
+            "en": "Multiple Wounds (2) wounding a W1 model removes that one model; the spare damage does not kill another."
+          },
+          "quick": {
+            "ko": "세이브 후 막지 못한 운드마다 피해 증가. 일반 초과 피해는 다른 모델로 넘기지 않음.",
+            "en": "Multiply each unsaved wound after saves; ordinary excess damage does not spill over."
+          },
+          "sources": [
+            {
+              "title": "Resolving Multiple Wounds",
+              "path": "/the-shooting-phase/hits-that-inflict-multiple-wounds"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "battle-combat-attacks",
+      "title": {
+        "ko": "컴뱃 공격",
+        "en": "Combat attacks"
+      },
+      "description": {
+        "ko": "싸울 모델·공격 수·이니셔티브를 정하고 WS 명중과 S/T 운드를 처리합니다.",
+        "en": "Determine eligible fighters, attack counts and Initiative, then resolve WS hits and Strength/Toughness wounds."
+      },
+      "entries": [
+        {
+          "id": "battle-fighting-ranks",
+          "title": {
+            "ko": "파이팅 랭크·서포팅 어택",
+            "en": "Fighting ranks and supporting attacks"
+          },
+          "aliases": [
+            "파이팅 랭크·서포팅 어택",
+            "Fighting ranks and supporting attacks"
+          ],
+          "path": "/the-combat-phase/the-fighting-rank",
+          "summary": {
+            "ko": "적과 접촉한 행·파일이 파이팅 랭크이며, 그 안에서도 적과 자기 M인치 이내인 모델이 싸웁니다.",
+            "en": "A row or file containing enemy contact is a fighting rank; models in it fight only within their Movement in inches of the enemy."
+          },
+          "timing": {
+            "ko": "전투 선택 후 공격 가능 모델 판정",
+            "en": "After choosing a combat, before allocating attacks"
+          },
+          "steps": [
+            {
+              "ko": "적과 베이스 접촉한 모델이 있는 대열·파일을 파이팅 랭크로 지정합니다.",
+              "en": "Identify each rank or file containing at least one model in base contact with the enemy."
+            },
+            {
+              "ko": "해당 행의 모델과, 무장이 허용하는 바로 뒤 서포팅 모델이 각각 적과 M인치 이내인지 확인합니다.",
+              "en": "Check that fighting-rank models and weapon-permitted supporting models immediately behind are within their Movement of the enemy."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "서포팅 어택은 측면·후면으로 할 수 없습니다.",
+              "en": "Supporting attacks cannot be made to the unit's flank or rear."
+            },
+            {
+              "ko": "이미 파이팅 랭크에 있는 모델이 동시에 서포팅 어택을 하지 않습니다.",
+              "en": "A model already in a fighting rank does not also make a supporting attack."
+            }
+          ],
+          "example": {
+            "ko": "M4 모델이 파이팅 랭크 끝에 있어도 적 유닛에서 5인치 떨어졌다면 싸울 수 없습니다.",
+            "en": "An M4 model at the end of the fighting rank cannot fight if it is 5 inches from the enemy unit."
+          },
+          "quick": {
+            "ko": "파이팅 랭크 + 적까지 M인치 이내. 서포팅은 허용 무장·바로 뒤·정면만.",
+            "en": "Fighting rank and within M inches; supporting needs permission, immediately behind, and the front."
+          },
+          "sources": [
+            {
+              "title": "Fighting ranks and supporting attacks",
+              "path": "/the-combat-phase/the-fighting-rank"
+            },
+            {
+              "title": "Supporting Attacks",
+              "path": "/the-combat-phase/supporting-attacks"
+            }
+          ]
+        },
+        {
+          "id": "battle-attack-count",
+          "title": {
+            "ko": "베이스 접촉과 공격 수",
+            "en": "Base contact and attack count"
+          },
+          "aliases": [
+            "베이스 접촉과 공격 수",
+            "Base contact and attack count"
+          ],
+          "path": "/the-combat-phase/how-many-attacks",
+          "summary": {
+            "ko": "베이스 접촉 모델은 A만큼, 접촉 없이 싸우는 모델은 기본적으로 공격 하나입니다.",
+            "en": "A model in base contact uses its Attacks characteristic; an eligible model without contact normally makes one attack."
+          },
+          "timing": {
+            "ko": "공격 가능한 모델을 정한 뒤",
+            "en": "After identifying eligible fighters"
+          },
+          "steps": [
+            {
+              "ko": "베이스 접촉 여부와 현재 A를 모델마다 확인합니다.",
+              "en": "Check base contact and the current Attacks characteristic for each model."
+            },
+            {
+              "ko": "접촉 모델의 전체 A와 비접촉 모델의 공격 1개를 구분해 주사위를 준비합니다.",
+              "en": "Prepare full Attacks for contacting models and one attack for each non-contacting fighter."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "A가 높아도 베이스 접촉이 없으면 이 기본 상한은 공격 1개입니다.",
+              "en": "A higher Attacks characteristic does not remove the basic one-attack limit without contact."
+            },
+            {
+              "ko": "무기·특수 규칙이 별도로 허용하는 경우에만 그 예외를 적용합니다.",
+              "en": "Apply exceptions only where a weapon or special rule explicitly permits them."
+            }
+          ],
+          "example": {
+            "ko": "A3 모델 2개 중 하나만 적과 접촉했다면 기본 합계는 3+1=4어택입니다.",
+            "en": "Two A3 models with only one in contact normally make 3+1=4 attacks."
+          },
+          "quick": {
+            "ko": "접촉: A개. 비접촉으로 싸움: 기본 1개.",
+            "en": "In contact: A attacks. Eligible without contact: normally one attack."
+          },
+          "sources": [
+            {
+              "title": "Base contact and attack count",
+              "path": "/the-combat-phase/how-many-attacks"
+            }
+          ]
+        },
+        {
+          "id": "battle-initiative-charge",
+          "title": {
+            "ko": "이니셔티브·차지 보너스",
+            "en": "Initiative and charge bonuses"
+          },
+          "aliases": [
+            "이니셔티브·차지 보너스",
+            "Initiative and charge bonuses"
+          ],
+          "path": "/the-combat-phase/charging-units",
+          "summary": {
+            "ko": "높은 I부터 공격하며, 차지한 턴에는 접촉 전 이동한 온전한 인치만큼 I 보너스를 받습니다.",
+            "en": "Attack from highest Initiative; charging grants a bonus for each full inch moved before contact that turn."
+          },
+          "timing": {
+            "ko": "컴뱃에서 공격 순서를 정할 때",
+            "en": "When determining combat attack order"
+          },
+          "steps": [
+            {
+              "ko": "현재 I에 무장·스펠·특수 규칙 보정을 반영합니다.",
+              "en": "Apply current weapon, spell and special-rule modifiers to Initiative."
+            },
+            {
+              "ko": "정면 차지는 최대 +3, 측·후면은 최대 +4를 더하되 최종 I는 10을 넘지 않습니다.",
+              "en": "Add at most +3 for a frontal charge or +4 for a flank/rear charge, to maximum Initiative 10."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "디스오더드 차지는 차지 I 보너스를 받지 않습니다.",
+              "en": "A disordered charge gains no Initiative modifier for charging."
+            },
+            {
+              "ko": "수정 후 같은 I의 공격은 동시입니다. 먼저 굴린 쪽의 사상자로 상대의 같은 I 공격을 줄이지 않습니다.",
+              "en": "Equal modified Initiative attacks are simultaneous; casualties caused by the first rolling player do not reduce the other's same-Initiative attacks."
+            }
+          ],
+          "example": {
+            "ko": "I4 모델이 정면으로 4인치를 차지해도 보너스는 +3으로 I7입니다.",
+            "en": "An I4 model charging 4 inches into a front gains only +3, for Initiative 7."
+          },
+          "quick": {
+            "ko": "차지 I: 온전한 인치당 +1, 정면 최대+3·측후면 최대+4, 최종10. 디스오더드면 없음.",
+            "en": "Charge Initiative: +1 per full inch; front max +3, flank/rear max +4, final max 10; none if disordered."
+          },
+          "sources": [
+            {
+              "title": "Initiative and charge bonuses",
+              "path": "/the-combat-phase/charging-units"
+            },
+            {
+              "title": "Disordered Charges",
+              "path": "/the-combat-phase/disordered-charges"
+            },
+            {
+              "title": "Simultaneous Combat",
+              "path": "/the-combat-phase/simultaneous-combat"
+            }
+          ]
+        },
+        {
+          "id": "battle-combat-hit",
+          "title": {
+            "ko": "WS 컴뱃 명중표",
+            "en": "Weapon Skill combat hit chart"
+          },
+          "aliases": [
+            "WS 컴뱃 명중표",
+            "Weapon Skill combat hit chart"
+          ],
+          "path": "/the-combat-phase/roll-to-hit-combat",
+          "summary": {
+            "ko": "공격자 WS와 대상 WS를 표에서 비교해 D6 명중 기준을 구합니다.",
+            "en": "Cross-reference attacker and defender Weapon Skill to find the D6 hit target."
+          },
+          "timing": {
+            "ko": "해당 I의 모델이 공격할 때",
+            "en": "When models at the relevant Initiative attack"
+          },
+          "steps": [
+            {
+              "ko": "각 공격 묶음의 공격자 WS와 대상 WS를 표에서 교차합니다.",
+              "en": "Cross-reference attacker and target WS for each attack batch."
+            },
+            {
+              "ko": "A에 따른 D6을 굴리고 수정 후 기준값 이상이면 명중합니다.",
+              "en": "Roll the appropriate attacks and count modified results meeting the target."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "자연 1은 실패, 자연 6은 성공입니다.",
+              "en": "A natural 1 fails and a natural 6 succeeds."
+            },
+            {
+              "ko": "WS 비율에 따라 기본 2+ 명중이 가능합니다. 공격자 WS가 대상의 두 배와 같을 때와 초과할 때를 구분합니다.",
+              "en": "The chart includes base 2+ hits; distinguish WS equal to twice the target from WS exceeding twice the target."
+            }
+          ],
+          "example": {
+            "ko": "WS4 대 WS2는 3+, WS5 대 WS2는 2+, WS2 대 WS5는 5+입니다.",
+            "en": "WS4 versus WS2 hits on 3+, WS5 versus WS2 on 2+, and WS2 versus WS5 on 5+."
+          },
+          "quick": {
+            "ko": "공격WS > 대상WS×2:2+ / 더 높음:3+ / 대상WS≤공격WS×2:4+ / 나머지:5+.",
+            "en": "Attacker WS > 2×defender:2+; otherwise higher:3+; defender ≤2×attacker:4+; otherwise:5+."
+          },
+          "sources": [
+            {
+              "title": "Weapon Skill combat hit chart",
+              "path": "/the-combat-phase/roll-to-hit-combat"
+            }
+          ],
+          "table": {
+            "caption": {
+              "ko": "컴뱃 명중: 행 공격자 WS, 열 대상 WS",
+              "en": "Combat hits: attacker WS rows, defender WS columns"
+            },
+            "columns": [
+              {
+                "ko": "공격 / 대상",
+                "en": "Attacker / target"
+              },
+              {
+                "ko": "1",
+                "en": "1"
+              },
+              {
+                "ko": "2",
+                "en": "2"
+              },
+              {
+                "ko": "3",
+                "en": "3"
+              },
+              {
+                "ko": "4",
+                "en": "4"
+              },
+              {
+                "ko": "5",
+                "en": "5"
+              },
+              {
+                "ko": "6",
+                "en": "6"
+              },
+              {
+                "ko": "7",
+                "en": "7"
+              },
+              {
+                "ko": "8",
+                "en": "8"
+              },
+              {
+                "ko": "9",
+                "en": "9"
+              },
+              {
+                "ko": "10",
+                "en": "10"
+              }
+            ],
+            "rows": [
+              [
+                "1",
+                "4+",
+                "4+",
+                "5+",
+                "5+",
+                "5+",
+                "5+",
+                "5+",
+                "5+",
+                "5+",
+                "5+"
+              ],
+              [
+                "2",
+                "3+",
+                "4+",
+                "4+",
+                "4+",
+                "5+",
+                "5+",
+                "5+",
+                "5+",
+                "5+",
+                "5+"
+              ],
+              [
+                "3",
+                "2+",
+                "3+",
+                "4+",
+                "4+",
+                "4+",
+                "4+",
+                "5+",
+                "5+",
+                "5+",
+                "5+"
+              ],
+              [
+                "4",
+                "2+",
+                "3+",
+                "3+",
+                "4+",
+                "4+",
+                "4+",
+                "4+",
+                "4+",
+                "5+",
+                "5+"
+              ],
+              [
+                "5",
+                "2+",
+                "2+",
+                "3+",
+                "3+",
+                "4+",
+                "4+",
+                "4+",
+                "4+",
+                "4+",
+                "4+"
+              ],
+              [
+                "6",
+                "2+",
+                "2+",
+                "3+",
+                "3+",
+                "3+",
+                "4+",
+                "4+",
+                "4+",
+                "4+",
+                "4+"
+              ],
+              [
+                "7",
+                "2+",
+                "2+",
+                "2+",
+                "3+",
+                "3+",
+                "3+",
+                "4+",
+                "4+",
+                "4+",
+                "4+"
+              ],
+              [
+                "8",
+                "2+",
+                "2+",
+                "2+",
+                "3+",
+                "3+",
+                "3+",
+                "3+",
+                "4+",
+                "4+",
+                "4+"
+              ],
+              [
+                "9",
+                "2+",
+                "2+",
+                "2+",
+                "2+",
+                "3+",
+                "3+",
+                "3+",
+                "3+",
+                "4+",
+                "4+"
+              ],
+              [
+                "10",
+                "2+",
+                "2+",
+                "2+",
+                "2+",
+                "3+",
+                "3+",
+                "3+",
+                "3+",
+                "3+",
+                "4+"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "battle-attack-allocation",
+          "title": {
+            "ko": "공격 배분·라이더와 탈것",
+            "en": "Allocating attacks and split profiles"
+          },
+          "aliases": [
+            "공격 배분·라이더와 탈것",
+            "Allocating attacks and split profiles"
+          ],
+          "path": "/the-combat-phase/dividing-attacks",
+          "summary": {
+            "ko": "명중 주사위를 굴리기 전에 공격 대상을 정하고 서로 다른 프로필을 구분합니다.",
+            "en": "Allocate targets before rolling hits and keep different profiles separate."
+          },
+          "timing": {
+            "ko": "명중 굴림 전 및 각 프로필의 I",
+            "en": "Before hit rolls and at each profile's Initiative"
+          },
+          "steps": [
+            {
+              "ko": "접촉한 적 모델이 여럿이면 공격을 배분하고 배분 수를 먼저 알립니다.",
+              "en": "If contacting several enemies, declare how attacks are divided before rolling."
+            },
+            {
+              "ko": "라이더·탈것 등 분리 프로필은 각 I·WS·S·무장으로 따로 해결합니다.",
+              "en": "Resolve rider, mount and other split profiles separately at their own Initiative, WS, Strength and weapon values."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "베이스 비접촉 모델은 가장 가까운 적 유닛을 공격하며 같은 거리면 선택합니다.",
+              "en": "A non-contacting fighter attacks the closest enemy unit; choose if equally close."
+            },
+            {
+              "ko": "분리 프로필 모델이 남은 공격 전에 사망하면 아직 하지 않은 공격은 잃습니다.",
+              "en": "If a split-profile model dies before making later attacks, those remaining attacks are lost."
+            }
+          ],
+          "example": {
+            "ko": "A3 모델이 두 적과 접촉했다면 명중 전 2어택·1어택으로 나누어 선언할 수 있습니다.",
+            "en": "An A3 model contacting two enemies may declare two attacks at one and one at the other before rolling."
+          },
+          "quick": {
+            "ko": "대상·배분 먼저 선언. 라이더·탈것·무장별 묶음과 I를 구분.",
+            "en": "Declare targets and allocation first; separate rider, mount, weapon and Initiative batches."
+          },
+          "sources": [
+            {
+              "title": "Allocating attacks and split profiles",
+              "path": "/the-combat-phase/dividing-attacks"
+            },
+            {
+              "title": "Split Profiles",
+              "path": "/the-combat-phase/split-profiles-combat"
+            },
+            {
+              "title": "Different Weapons",
+              "path": "/the-combat-phase/different-weapons"
+            }
+          ]
+        },
+        {
+          "id": "battle-combat-casualties",
+          "title": {
+            "ko": "사상자·스테핑 포워드·동시 공격",
+            "en": "Casualties, stepping forward and simultaneous attacks"
+          },
+          "aliases": [
+            "사상자·스테핑 포워드·동시 공격",
+            "Casualties, stepping forward and simultaneous attacks"
+          ],
+          "path": "/the-combat-phase/we-cant-all-fight",
+          "summary": {
+            "ko": "높은 I에서 죽은 모델의 공격은 사라지며, 뒤에서 앞으로 보충된 모델은 그 페이즈에 공격하지 못합니다.",
+            "en": "Models slain by higher-Initiative attacks lose their attacks; replacements stepping forward cannot attack that phase."
+          },
+          "timing": {
+            "ko": "각 I의 공격·운드·세이브 후",
+            "en": "After attacks, wounds and saves at each Initiative"
+          },
+          "steps": [
+            {
+              "ko": "사상자는 실제로 뒤쪽에서 제거하더라도 파이팅 랭크에서 누가 죽었는지 셉니다.",
+              "en": "Although casualties are physically removed from the rear, count slain fighters in the fighting rank."
+            },
+            {
+              "ko": "아직 남은 낮은 I 모델만 다음 공격을 처리하고, 같은 I는 동시 공격 수를 유지합니다.",
+              "en": "Resolve later attacks only for surviving lower-Initiative fighters; preserve simultaneous attacks at equal Initiative."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "이번 페이즈에 앞으로 보충된 모델은 자기 I가 아직 오지 않았어도 공격하지 못합니다.",
+              "en": "A model stepping forward cannot fight that phase even if its Initiative has not yet been reached."
+            },
+            {
+              "ko": "원래 파이팅 랭크에 남아 있던 모델이 빈자리를 좁혀 접촉하는 것은 스테핑 포워드와 구분합니다.",
+              "en": "Distinguish existing fighting-rank survivors closing in from rear-rank models stepping forward."
+            }
+          ],
+          "example": {
+            "ko": "앞줄 I3 모델 5명 중 I5 공격에 2명이 죽었다면, 뒤에서 채운 2명을 포함해 다시 5명 공격으로 계산하지 않습니다.",
+            "en": "If two of five I3 front-rank fighters die to I5 attacks, rear replacements do not restore the five-model attack total."
+          },
+          "quick": {
+            "ko": "높은 I에 죽으면 공격 소실. 앞으로 보충된 모델은 이번 페이즈 공격 불가. 같은 I는 동시.",
+            "en": "Killed before its Initiative: attacks lost; stepping forward: no attack this phase; equal Initiative: simultaneous."
+          },
+          "sources": [
+            {
+              "title": "Casualties, stepping forward and simultaneous attacks",
+              "path": "/the-combat-phase/we-cant-all-fight"
+            },
+            {
+              "title": "Stepping Forward and Closing In",
+              "path": "/the-combat-phase/stepping-forward-and-closing-in"
+            },
+            {
+              "title": "Simultaneous Combat",
+              "path": "/the-combat-phase/simultaneous-combat"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "battle-combat-results",
+      "title": {
+        "ko": "컴뱃 리절트·브레이크",
+        "en": "Combat result and Break tests"
+      },
+      "description": {
+        "ko": "운드·대형·위치 보너스를 합한 뒤, 패배한 각 유닛의 세 가지 브레이크 결과를 판정합니다.",
+        "en": "Add wounds, formation and position bonuses, then determine each losing unit's three-way Break result."
+      },
+      "entries": [
+        {
+          "id": "battle-result-score",
+          "title": {
+            "ko": "컴뱃 결과 점수표",
+            "en": "Combat result scoring"
+          },
+          "aliases": [
+            "컴뱃 결과 점수표",
+            "Combat result scoring"
+          ],
+          "path": "/the-combat-phase/combat-result-score",
+          "summary": {
+            "ko": "허용된 운드 점수와 대열·깃발·위치·특수 규칙 보너스를 양측별로 합합니다.",
+            "en": "Total wound scores and eligible rank, standard, position and special-rule bonuses for each side."
+          },
+          "timing": {
+            "ko": "해당 전투의 모든 공격을 해결한 뒤",
+            "en": "After resolving all attacks in that combat"
+          },
+          "steps": [
+            {
+              "ko": "막지 못한 운드 점수와 각 항목의 적용 조건을 확인합니다.",
+              "en": "Count unsaved-wound scores and check eligibility for each bonus."
+            },
+            {
+              "ko": "양측 합계를 비교해 높은 쪽이 승리하며 차이를 브레이크 보정으로 사용합니다.",
+              "en": "The higher total wins; use the difference as the Break-test modifier."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "리제너레이션으로 회복한 운드도 컴뱃 결과에 셉니다.",
+              "en": "Wounds recovered by Regeneration still count for combat results."
+            },
+            {
+              "ko": "같은 점수면 무승부로 접촉을 유지하며 일반 브레이크 테스트를 하지 않습니다.",
+              "en": "A tied score is a draw: units remain engaged and do not take an ordinary Break test."
+            }
+          ],
+          "example": {
+            "ko": "아군 3운드+깃발1=4, 적 1운드+대열1=2면 아군이 2점 차로 승리합니다.",
+            "en": "Three wounds plus a standard scores 4; one wound plus one rank scores 2; the first side wins by 2."
+          },
+          "quick": {
+            "ko": "운드 + 허용 보너스 비교 → 차이가 브레이크 보정. 무승부는 교전 유지.",
+            "en": "Compare wounds plus eligible bonuses; the difference modifies Break tests; a draw stays engaged."
+          },
+          "sources": [
+            {
+              "title": "Combat result scoring",
+              "path": "/the-combat-phase/combat-result-score"
+            },
+            {
+              "title": "Drawn Combat",
+              "path": "/the-combat-phase/drawn-combat"
+            },
+            {
+              "title": "Regeneration",
+              "path": "/special-rules/regeneration"
+            }
+          ],
+          "table": {
+            "caption": {
+              "ko": "기본 컴뱃 점수",
+              "en": "Core combat scores"
+            },
+            "columns": [
+              {
+                "ko": "항목",
+                "en": "Item"
+              },
+              {
+                "ko": "점수",
+                "en": "Score"
+              }
+            ],
+            "rows": [
+              [
+                {
+                  "ko": "막지 못한 운드",
+                  "en": "Unsaved wounds"
+                },
+                {
+                  "ko": "각 1",
+                  "en": "1 each"
+                }
+              ],
+              [
+                {
+                  "ko": "대열 보너스",
+                  "en": "Rank bonus"
+                },
+                {
+                  "ko": "허용 대열당 +1",
+                  "en": " +1 per eligible rank"
+                }
+              ],
+              [
+                {
+                  "ko": "스탠다드",
+                  "en": "Standard"
+                },
+                "+1"
+              ],
+              [
+                {
+                  "ko": "배틀 스탠다드",
+                  "en": "Battle Standard"
+                },
+                "+1"
+              ],
+              [
+                {
+                  "ko": "측면",
+                  "en": "Flank"
+                },
+                "+1"
+              ],
+              [
+                {
+                  "ko": "후면",
+                  "en": "Rear"
+                },
+                "+2"
+              ],
+              [
+                {
+                  "ko": "고지",
+                  "en": "High ground"
+                },
+                "+1"
+              ],
+              [
+                {
+                  "ko": "챌린지 오버킬",
+                  "en": "Challenge overkill"
+                },
+                {
+                  "ko": "초과 운드당 +1, 최대 +5",
+                  "en": "+1 per excess wound, maximum +5"
+                }
+              ],
+              [
+                {
+                  "ko": "매스트 인팬트리",
+                  "en": "Massed Infantry"
+                },
+                {
+                  "ko": "조건 충족 시 +1",
+                  "en": "+1 if eligible"
+                }
+              ],
+              [
+                {
+                  "ko": "기타",
+                  "en": "Other"
+                },
+                {
+                  "ko": "해당 규칙대로",
+                  "en": "As specified"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "id": "battle-rank-score",
+          "title": {
+            "ko": "대열 보너스와 다중 전투",
+            "en": "Rank bonus in multiple combat"
+          },
+          "aliases": [
+            "대열 보너스와 다중 전투",
+            "Rank bonus in multiple combat"
+          ],
+          "path": "/the-combat-phase/rank-bonus",
+          "summary": {
+            "ko": "첫 대열 뒤의 유효 대열마다 +1이며, 병종의 폭·최대치와 대형 조건을 따릅니다.",
+            "en": "Eligible ranks behind the first give +1 each, subject to troop-type width, cap and formation requirements."
+          },
+          "timing": {
+            "ko": "컴뱃 점수 계산",
+            "en": "When calculating combat result"
+          },
+          "steps": [
+            {
+              "ko": "병종표로 필요한 모델 폭·최대 대열 보너스를 확인합니다.",
+              "en": "Use the troop-type table to check the required rank width and maximum bonus."
+            },
+            {
+              "ko": "다중 전투라면 같은 편의 대열 보너스를 모두 합치지 않고 가장 높은 하나를 셉니다.",
+              "en": "In multiple combat, count only the highest rank bonus on that side rather than adding all units."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "뒤의 불완전 대열도 필요한 최소 모델 수가 있으면 보너스를 줄 수 있습니다.",
+              "en": "An incomplete rear rank may count if it still contains enough models."
+            },
+            {
+              "ko": "디스럽티드 유닛은 대열 보너스를 주장하지 못합니다.",
+              "en": "A Disrupted unit cannot claim a Rank Bonus."
+            }
+          ],
+          "example": {
+            "ko": "아군 두 유닛의 대열 보너스가 +1과 +2이면 그 전투에는 +2만 셉니다.",
+            "en": "If two friendly units have +1 and +2 Rank Bonuses, count only +2 for that combat."
+          },
+          "quick": {
+            "ko": "첫 대열 제외, 병종별 폭·상한 적용. 다중 전투는 가장 높은 대열 보너스 하나.",
+            "en": "Exclude the first rank; apply troop width and cap; multiple combat counts the single highest Rank Bonus."
+          },
+          "sources": [
+            {
+              "title": "Rank bonus in multiple combat",
+              "path": "/the-combat-phase/rank-bonus"
+            },
+            {
+              "title": "Rank Bonus in Multiple Combats",
+              "path": "/the-combat-phase/rank-bonus-in-multiple-combats"
+            }
+          ]
+        },
+        {
+          "id": "battle-standard-score",
+          "title": {
+            "ko": "스탠다드·오버킬 제한",
+            "en": "Standards and overkill limits"
+          },
+          "aliases": [
+            "스탠다드·오버킬 제한",
+            "Standards and overkill limits"
+          ],
+          "path": "/the-combat-phase/standards-multiple-combats",
+          "summary": {
+            "ko": "일반 스탠다드 +1과 배틀 스탠다드 +1은 함께 셀 수 있지만 같은 편의 일반 스탠다드를 중복 합산하지 않습니다.",
+            "en": "An ordinary standard's +1 and a Battle Standard's +1 may combine, but multiple ordinary standards on one side do not all score."
+          },
+          "timing": {
+            "ko": "컴뱃 점수 계산",
+            "en": "When calculating combat result"
+          },
+          "steps": [
+            {
+              "ko": "일반 스탠다드 하나를 선택하고 배틀 스탠다드 보너스를 별도로 셉니다.",
+              "en": "Choose one ordinary standard and count the Battle Standard separately."
+            },
+            {
+              "ko": "챌린지에서 상대의 남은 W를 넘긴 운드는 초과당 +1, 최대 +5의 오버킬로 셉니다.",
+              "en": "In a challenge, excess unsaved wounds beyond the opponent's remaining Wounds score +1 each, capped at +5 overkill."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "마법 깃발 등이 추가 효과를 주면 어떤 일반 스탠다드를 셀지 선택할 수 있습니다.",
+              "en": "If magical standards add effects, choose which ordinary standard to count."
+            },
+            {
+              "ko": "오버킬은 일반 병사에게 피해를 과하게 준 모든 공격에 적용하는 보너스가 아닙니다.",
+              "en": "Overkill is not a bonus for every ordinary attack that deals excess damage to rank-and-file models."
+            }
+          ],
+          "example": {
+            "ko": "일반 스탠다드 유닛 2개와 배틀 스탠다드가 한 전투에 있으면 기본 깃발 점수는 1+1=2입니다.",
+            "en": "Two units with ordinary standards and one Battle Standard in a combat give a basic standard score of 1+1=2."
+          },
+          "quick": {
+            "ko": "일반 스탠다드 1개 + 배틀 스탠다드. 챌린지 오버킬 최대+5.",
+            "en": "One ordinary standard plus Battle Standard; challenge overkill max +5."
+          },
+          "sources": [
+            {
+              "title": "Standards and overkill limits",
+              "path": "/the-combat-phase/standards-multiple-combats"
+            },
+            {
+              "title": "Standards",
+              "path": "/the-combat-phase/standards"
+            },
+            {
+              "title": "Overkill",
+              "path": "/the-combat-phase/overkill-combat"
+            }
+          ]
+        },
+        {
+          "id": "battle-position-score",
+          "title": {
+            "ko": "측후면·고지·매스트 인팬트리",
+            "en": "Flanks, high ground and Massed Infantry"
+          },
+          "aliases": [
+            "측후면·고지·매스트 인팬트리",
+            "Flanks, high ground and Massed Infantry"
+          ],
+          "path": "/the-combat-phase/flank-and-rear-attacks-multiple-combats",
+          "summary": {
+            "ko": "위치 보너스는 대상과 전투 전체의 중복 제한을 확인해 셉니다.",
+            "en": "Apply position bonuses with their per-target and whole-combat duplicate limits."
+          },
+          "timing": {
+            "ko": "컴뱃 점수 계산",
+            "en": "When calculating combat result"
+          },
+          "steps": [
+            {
+              "ko": "적 유닛의 측면 +1, 후면 +2를 적용하되 동일 대상의 같은 항목을 반복해 세지 않습니다.",
+              "en": "Score flank +1 and rear +2, without repeating the same category against the same enemy unit."
+            },
+            {
+              "ko": "가장 높은 파이팅 랭크의 고지 +1과, 매스트 인팬트리 보유 편의 US 우위 +1을 확인합니다.",
+              "en": "Check +1 for the highest fighting rank, and +1 if the higher-Unit-Strength side includes Massed Infantry."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "한 적의 양쪽 측면을 공격해도 측면 보너스는 하나지만 측면과 후면은 함께 셉니다.",
+              "en": "Attacking both flanks of one enemy gives one flank bonus; flank and rear bonuses may combine."
+            },
+            {
+              "ko": "양측 최고 높이가 같으면 고지 보너스는 상쇄됩니다. 매스트 인팬트리는 해당 규칙을 가진 유닛이 그 편에 있어야 합니다.",
+              "en": "Equal highest positions cancel high ground; Massed Infantry requires a unit with that rule on that side."
+            }
+          ],
+          "example": {
+            "ko": "같은 적의 측면·후면을 각각 공격하면 +1+2=+3입니다. 측면 두 곳만 공격하면 +1입니다.",
+            "en": "Attacking the same enemy's flank and rear gives +3; attacking both flanks gives only +1."
+          },
+          "quick": {
+            "ko": "측면+1·후면+2, 같은 적의 같은 항목은 1회. 고지+1. 매스트 인팬트리+US우위면+1.",
+            "en": "Flank +1, rear +2, once per category per enemy; high ground +1; Massed Infantry with US advantage +1."
+          },
+          "sources": [
+            {
+              "title": "Flanks, high ground and Massed Infantry",
+              "path": "/the-combat-phase/flank-and-rear-attacks-multiple-combats"
+            },
+            {
+              "title": "High Ground, Multiple Combats",
+              "path": "/the-combat-phase/the-high-ground-multiple-combats"
+            },
+            {
+              "title": "Massed Infantry",
+              "path": "/troop-types-in-detail/massed-infantry"
+            }
+          ]
+        },
+        {
+          "id": "battle-break-test",
+          "title": {
+            "ko": "브레이크 테스트 세 결과",
+            "en": "The three Break-test outcomes"
+          },
+          "aliases": [
+            "브레이크 테스트 세 결과",
+            "The three Break-test outcomes"
+          ],
+          "path": "/the-combat-phase/break-test",
+          "summary": {
+            "ko": "패배한 각 유닛은 2D6 원래 합과 패배 차이를 더한 합을 각각 Ld와 비교합니다.",
+            "en": "Each losing unit compares both its natural 2D6 total and the total plus losing margin against Leadership."
+          },
+          "timing": {
+            "ko": "전투 승패를 정한 뒤",
+            "en": "After determining the combat winner"
+          },
+          "steps": [
+            {
+              "ko": "패배 유닛마다 2D6을 굴려 원래 합을 기록하고 패배 점수 차이를 더합니다.",
+              "en": "Roll 2D6 for each losing unit, retain the natural total, then add the losing margin."
+            },
+            {
+              "ko": "아래의 우선순위대로 기브 그라운드·폴 백 인 굿 오더·브레이크를 결정합니다.",
+              "en": "Determine Give Ground, Fall Back in Good Order or Break using the outcomes below."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "유닛 안의 Ld가 다르면 가장 높은 값을 사용합니다.",
+              "en": "A unit with mixed Leadership values uses the highest."
+            },
+            {
+              "ko": "자연 더블 1은 기브 그라운드입니다. FBIGO는 상대의 US 두 배 초과 조건으로 브레이크가 될 수 있습니다.",
+              "en": "Natural double 1 gives Give Ground; FBIGO may become Break if the enemy has more than double Unit Strength."
+            }
+          ],
+          "example": {
+            "ko": "Ld8·3점 패배·주사위6이면 수정합9로 FBIGO입니다. 주사위9면 원래 합부터 Ld 초과로 브레이크입니다.",
+            "en": "Ld8 losing by 3 with natural 6 has modified 9 and FBIGO; natural 9 exceeds Ld before modifiers and Breaks."
+          },
+          "quick": {
+            "ko": "자연2:기브 그라운드 / 자연합>Ld:브레이크 / 자연합≤Ld·수정합>Ld:FBIGO / 수정합≤Ld:기브 그라운드.",
+            "en": "Natural double 1:Give Ground; natural>Ld:Break; natural≤Ld but modified>Ld:FBIGO; modified≤Ld:Give Ground."
+          },
+          "sources": [
+            {
+              "title": "The three Break-test outcomes",
+              "path": "/the-combat-phase/break-test"
+            }
+          ],
+          "table": {
+            "caption": {
+              "ko": "브레이크 결과",
+              "en": "Break-test results"
+            },
+            "columns": [
+              {
+                "ko": "비교",
+                "en": "Comparison"
+              },
+              {
+                "ko": "결과",
+                "en": "Outcome"
+              }
+            ],
+            "rows": [
+              [
+                {
+                  "ko": "자연 더블 1",
+                  "en": "Natural double 1"
+                },
+                "Give Ground"
+              ],
+              [
+                {
+                  "ko": "자연 합 > Ld",
+                  "en": "Natural total > Ld"
+                },
+                "Break & Flee"
+              ],
+              [
+                {
+                  "ko": "자연 합 ≤ Ld, 수정 합 > Ld",
+                  "en": "Natural ≤ Ld, modified > Ld"
+                },
+                "Fall Back in Good Order"
+              ],
+              [
+                {
+                  "ko": "수정 합 ≤ Ld",
+                  "en": "Modified total ≤ Ld"
+                },
+                "Give Ground"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "battle-overwhelming-strength",
+          "title": {
+            "ko": "유닛 스트렝스 두 배 초과",
+            "en": "Overwhelming Unit Strength"
+          },
+          "aliases": [
+            "유닛 스트렝스 두 배 초과",
+            "Overwhelming Unit Strength"
+          ],
+          "path": "/the-combat-phase/loser-falls-back-in-good-order",
+          "summary": {
+            "ko": "승리 편의 전투 종료 US가 패배 편의 두 배를 초과하면 FBIGO 결과는 브레이크가 됩니다.",
+            "en": "If the winning side's end-of-combat Unit Strength is more than double the losing side's, FBIGO becomes Break."
+          },
+          "timing": {
+            "ko": "브레이크 결과가 FBIGO일 때",
+            "en": "When a Break test produces FBIGO"
+          },
+          "steps": [
+            {
+              "ko": "해당 전투에 있는 양측 모든 유닛의 현재 US를 각각 합합니다.",
+              "en": "Add the current Unit Strength of every unit on each side of that combat."
+            },
+            {
+              "ko": "승리 편 US > 패배 편 US×2이면 패배 유닛의 FBIGO를 브레이크로 바꿉니다.",
+              "en": "If winner US > loser US×2, change the losing unit's FBIGO to Break."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "두 배와 정확히 같으면 이 조건을 충족하지 않습니다.",
+              "en": "Exactly twice the Unit Strength does not satisfy this condition."
+            },
+            {
+              "ko": "전투 시작 수치가 아닌 종료 시점 수치이며, 가장 큰 유닛 하나가 아니라 같은 편 전체를 합합니다.",
+              "en": "Use end-of-combat values, not starting values, and sum the whole side rather than just its largest unit."
+            }
+          ],
+          "example": {
+            "ko": "승리 US21 대 패배 US10이면 FBIGO가 브레이크로 바뀝니다. US20 대10이면 바뀌지 않습니다.",
+            "en": "Winner US21 versus loser US10 converts FBIGO to Break; US20 versus 10 does not."
+          },
+          "quick": {
+            "ko": "종료 시 총US 승자 > 패자×2이면 FBIGO → 브레이크.",
+            "en": "At combat end, winner total US > 2×loser total US converts FBIGO to Break."
+          },
+          "sources": [
+            {
+              "title": "Overwhelming Unit Strength",
+              "path": "/the-combat-phase/loser-falls-back-in-good-order"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "battle-after-combat",
+      "title": {
+        "ko": "전투 후 후퇴·추격",
+        "en": "Retreat and pursuit after combat"
+      },
+      "description": {
+        "ko": "브레이크 결과별 실제 이동과 추격 여부를 처리합니다. 주사위 합만으로 접촉을 단정하지 않습니다.",
+        "en": "Resolve the actual movement and pursuit for each Break outcome; do not infer contact from dice totals alone."
+      },
+      "entries": [
+        {
+          "id": "battle-give-ground",
+          "title": {
+            "ko": "기브 그라운드·팔로 업",
+            "en": "Give Ground and follow up"
+          },
+          "aliases": [
+            "기브 그라운드·팔로 업",
+            "Give Ground and follow up"
+          ],
+          "path": "/the-combat-phase/loser-gives-ground",
+          "summary": {
+            "ko": "패배 유닛은 방향을 바꾸지 않고 적에게서 2인치 물러나며 승자는 팔로 업으로 다시 접촉할 수 있습니다.",
+            "en": "The loser moves 2 inches directly away without changing facing; the winner may follow up back into contact."
+          },
+          "timing": {
+            "ko": "브레이크가 기브 그라운드일 때",
+            "en": "When a Break test produces Give Ground"
+          },
+          "steps": [
+            {
+              "ko": "교전 상대 모두에게서 가능한 한 직접 멀어지도록, 피벗 없이 2인치 이동합니다.",
+              "en": "Move 2 inches as directly as possible away from all engaging enemies without pivoting."
+            },
+            {
+              "ko": "승리 유닛이 팔로 업하면 다시 접촉하고 다음 플레이어 턴까지 교전 상태를 유지합니다.",
+              "en": "If the winner follows up, return it to contact and remain engaged until the next player's turn."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "다른 유닛·지형과 닿거나 다른 적 1인치 이내로 들어가려 하면 즉시 멈춥니다.",
+              "en": "Stop on contact with another unit or terrain, or before coming within 1 inch of another enemy."
+            },
+            {
+              "ko": "포위 때문에 적과 접촉을 끊을 수 없으면 멈추고 무승부처럼 계속 교전합니다.",
+              "en": "If surrounded and unable to break contact, stop and remain engaged as after a draw."
+            }
+          ],
+          "example": {
+            "ko": "패배 유닛이 뒤로 2인치 물러난 뒤 승자가 그 간격만큼 팔로 업하면 다음 턴에 전투가 이어집니다.",
+            "en": "After a 2-inch Give Ground move, the winner can follow the gap to continue combat next turn."
+          },
+          "quick": {
+            "ko": "기브 그라운드: 방향 유지 2인치 후퇴. 팔로 업: 다시 접촉, 다음 턴 교전 계속.",
+            "en": "Give Ground: 2 inches away without turning; follow up returns to contact for next turn."
+          },
+          "sources": [
+            {
+              "title": "Give Ground and follow up",
+              "path": "/the-combat-phase/loser-gives-ground"
+            },
+            {
+              "title": "Follow Up",
+              "path": "/the-combat-phase/follow-up"
+            },
+            {
+              "title": "Surrounded",
+              "path": "/the-combat-phase/surrounded"
+            }
+          ]
+        },
+        {
+          "id": "battle-fbigo-move",
+          "title": {
+            "ko": "폴 백 인 굿 오더 이동",
+            "en": "Fall Back in Good Order movement"
+          },
+          "aliases": [
+            "폴 백 인 굿 오더 이동",
+            "Fall Back in Good Order movement"
+          ],
+          "path": "/movement-in-detail/fall-back-in-good-order",
+          "summary": {
+            "ko": "FBIGO는 도주 방식으로 움직이되 2D6 중 높은 하나만 사용하고 이동 끝에 자동 랠리합니다.",
+            "en": "FBIGO moves like fleeing, but uses the higher of 2D6 and automatically rallies at the end."
+          },
+          "timing": {
+            "ko": "FBIGO 결과가 확정된 뒤",
+            "en": "After the FBIGO result is confirmed"
+          },
+          "steps": [
+            {
+              "ko": "전투 승리 편에서 US가 가장 큰 적 유닛을 기준으로 직접 멀어지는 방향을 정합니다.",
+              "en": "Move directly away from the winning enemy unit with the highest Unit Strength."
+            },
+            {
+              "ko": "D6 두 개를 굴려 낮은 하나를 버리고 남은 눈만큼 이동한 뒤 자동 랠리합니다.",
+              "en": "Roll two D6, discard the lower, move that distance and automatically rally."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "양 눈이 같으면 어느 하나를 버립니다. 두 눈의 합을 사용하지 않습니다.",
+              "en": "If tied, discard either die; do not sum the two dice."
+            },
+            {
+              "ko": "승리 편 총US가 패배 편의 두 배 초과라면 이동 전에 FBIGO를 브레이크로 바꿉니다.",
+              "en": "If winner total US is more than double loser total US, change FBIGO to Break before moving."
+            }
+          ],
+          "example": {
+            "ko": "FBIGO 주사위 2·5는 5인치 이동입니다. 일반 도주의 7인치와 구분합니다.",
+            "en": "FBIGO rolls 2 and 5 move 5 inches, rather than the 7 inches of an ordinary flee roll."
+          },
+          "quick": {
+            "ko": "FBIGO 거리 = 높은 1D6(2D6 중 낮은 것 버림), 이동 끝 자동 랠리.",
+            "en": "FBIGO = higher of 2D6; automatically rally at the end."
+          },
+          "sources": [
+            {
+              "title": "Fall Back in Good Order movement",
+              "path": "/movement-in-detail/fall-back-in-good-order"
+            },
+            {
+              "title": "Loser Falls Back in Good Order",
+              "path": "/the-combat-phase/loser-falls-back-in-good-order"
+            }
+          ]
+        },
+        {
+          "id": "battle-flee-move",
+          "title": {
+            "ko": "브레이크 도주 이동",
+            "en": "Fleeing after a Break"
+          },
+          "aliases": [
+            "브레이크 도주 이동",
+            "Fleeing after a Break"
+          ],
+          "path": "/movement-in-detail/the-flee-move",
+          "summary": {
+            "ko": "일반 도주 거리는 2D6 합이며 전장을 벗어나더라도 전체 거리를 이동합니다.",
+            "en": "An ordinary flee move is the sum of 2D6 and uses the full distance even if it takes the unit off the battlefield."
+          },
+          "timing": {
+            "ko": "브레이크·도주 결과에 따라",
+            "en": "When a rule causes a Break or flee move"
+          },
+          "steps": [
+            {
+              "ko": "전투에서는 승리 편의 US가 가장 큰 적 유닛에서 직접 멀어지도록 방향을 정합니다.",
+              "en": "From combat, face directly away from the winning enemy with the highest Unit Strength."
+            },
+            {
+              "ko": "2D6 합만큼 현재 향한 방향으로 이동하고, 통과 유닛·지형의 별도 판정을 처리합니다.",
+              "en": "Move the full 2D6 total straight ahead and resolve separate rules for crossing units or terrain."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "US가 가장 큰 적이 동률이면 어느 적에서 도주할지 무작위로 정합니다.",
+              "en": "Randomly choose between tied highest-Unit-Strength enemies."
+            },
+            {
+              "ko": "일반 도주는 자동 랠리하지 않습니다. 통과 불가 지형을 돌아야 할 때만 경로 피벗을 허용합니다.",
+              "en": "An ordinary fleeing unit does not automatically rally; pivot during the move only when required to move around impassable terrain."
+            }
+          ],
+          "example": {
+            "ko": "주사위 3·4이면 도주 거리는 7인치입니다. 전장 가장자리까지 5인치여도 5에서 멈추지 않습니다.",
+            "en": "A roll of 3 and 4 flees 7 inches; an edge 5 inches away does not let the unit stop there."
+          },
+          "quick": {
+            "ko": "도주 거리 = 2D6 합, 전체 거리 이동. FBIGO의 높은 하나와 구분.",
+            "en": "Flee = 2D6 total and full distance; distinguish FBIGO's higher single die."
+          },
+          "sources": [
+            {
+              "title": "Fleeing after a Break",
+              "path": "/movement-in-detail/the-flee-move"
+            },
+            {
+              "title": "Loser Breaks and Flees",
+              "path": "/the-combat-phase/loser-breaks-and-flees"
+            }
+          ]
+        },
+        {
+          "id": "battle-pursue-contact",
+          "title": {
+            "ko": "추격 선언·거리·접촉",
+            "en": "Declaring pursuit, moving and catching"
+          },
+          "aliases": [
+            "추격 선언·거리·접촉",
+            "Declaring pursuit, moving and catching"
+          ],
+          "path": "/the-combat-phase/pursuit",
+          "summary": {
+            "ko": "도주 주사위 전에 추격 대상을 선언하고, 패배 유닛 이동 후 추격해 실제 접촉 여부를 봅니다.",
+            "en": "Declare the pursued unit before flee rolls, then move pursuers after losers and check actual contact."
+          },
+          "timing": {
+            "ko": "브레이크 판정 후·패배 유닛 이동 전",
+            "en": "After Break tests and before the losers move"
+          },
+          "steps": [
+            {
+              "ko": "승자마다 추격할 패배 유닛 하나를 정합니다. 모든 패배 이동 후 추격 유닛을 하나씩 움직입니다.",
+              "en": "Each winner selects one losing unit; after all loser moves, move pursuers one at a time."
+            },
+            {
+              "ko": "대상을 향해 중앙 피벗 후 2D6인치 추격하고, 실제로 접촉하면 결과를 적용합니다.",
+              "en": "Pivot about the centre toward the target, move 2D6 inches and apply the catch result if actual contact occurs."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "도주 중인 적과 접촉하면 그 적을 제거합니다. FBIGO 적이면 재교전하고 다음 턴 추격자를 차지한 것으로 봅니다.",
+              "en": "Contact with a fleeing enemy removes it; contact with a FBIGO enemy locks combat and counts the pursuer as charging next turn."
+            },
+            {
+              "ko": "지형·다른 유닛·경로가 이동을 바꿀 수 있으므로 두 주사위 합만 비교해 적 제거를 선언하지 않습니다.",
+              "en": "Terrain, other units and the route can affect movement; do not declare destruction by dice totals alone."
+            }
+          ],
+          "example": {
+            "ko": "장애물 없는 직선에서 적이 5인치 물러나고 추격자가 8인치까지 닿을 수 있으면 접촉 순간 멈춰 결과를 적용합니다.",
+            "en": "On an unobstructed route, a pursuer able to reach an enemy that moved 5 inches stops on contact and resolves the catch."
+          },
+          "quick": {
+            "ko": "도주 굴림 전 대상 선언 → 적 이동 → 2D6 실제 추격 → 접촉이면 도주 제거/FBIGO 재교전.",
+            "en": "Declare before flee rolls; move losers; pursue 2D6; contact destroys fleeing foes or re-engages FBIGO foes."
+          },
+          "sources": [
+            {
+              "title": "Declaring pursuit, moving and catching",
+              "path": "/the-combat-phase/pursuit"
+            },
+            {
+              "title": "The Pursuit Move",
+              "path": "/the-combat-phase/the-pursuit-move"
+            },
+            {
+              "title": "Catching the Curs",
+              "path": "/the-combat-phase/catching-the-curs"
+            },
+            {
+              "title": "Follow Up and Pursuit",
+              "path": "/the-combat-phase/follow-up-and-pursuit"
+            }
+          ]
+        },
+        {
+          "id": "battle-restrain",
+          "title": {
+            "ko": "리스트레인트·무료 리폼",
+            "en": "Restraint and free reform"
+          },
+          "aliases": [
+            "리스트레인트·무료 리폼",
+            "Restraint and free reform"
+          ],
+          "path": "/the-combat-phase/restrain-and-reform",
+          "summary": {
+            "ko": "팔로 업·추격 대신 멈추려면 일반적으로 Ld 리스트레인트 테스트를 합니다.",
+            "en": "To hold instead of following up or pursuing, a unit normally makes a Leadership Restraint test."
+          },
+          "timing": {
+            "ko": "브레이크 후 후퇴·추격 이동 전 선택",
+            "en": "After Break tests, before retreat and pursuit moves"
+          },
+          "steps": [
+            {
+              "ko": "팔로 업·추격 대신 리스트레인 앤 리폼을 선언합니다.",
+              "en": "Declare restrain and reform instead of following up or pursuing."
+            },
+            {
+              "ko": "유닛 Ld 테스트에 성공하면 제자리에 남아 무료 리폼을 할 수 있고, 실패하면 팔로 업 또는 추격합니다.",
+              "en": "Pass the Leadership test to remain in place and optionally reform for free; fail and follow up or pursue."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "기본 테스트는 일반 Ld 판정이며 브레이크의 패배 차이를 다시 더하는 테스트가 아닙니다.",
+              "en": "This is a normal Leadership test, not another Break test with the losing margin added."
+            },
+            {
+              "ko": "특수 규칙이 선택을 강제하거나 금지하면 그 규칙을 우선 확인합니다.",
+              "en": "Check any special rule that compels or forbids the choice."
+            }
+          ],
+          "example": {
+            "ko": "Ld8 유닛이 일반 2D6에서 7을 굴리면 멈추고 무료 리폼을 선택할 수 있습니다.",
+            "en": "An Ld8 unit rolling 7 on ordinary 2D6 can hold and choose a free reform."
+          },
+          "quick": {
+            "ko": "멈추려면 Ld 테스트. 성공: 제자리+무료 리폼 가능 / 실패: 팔로 업·추격.",
+            "en": "To hold, test Leadership; pass: hold and optional free reform; fail: follow up or pursue."
+          },
+          "sources": [
+            {
+              "title": "Restraint and free reform",
+              "path": "/the-combat-phase/restrain-and-reform"
+            }
+          ]
+        },
+        {
+          "id": "battle-overrun",
+          "title": {
+            "ko": "오버런",
+            "en": "Overrun"
+          },
+          "aliases": [
+            "오버런",
+            "Overrun"
+          ],
+          "path": "/the-combat-phase/overrun",
+          "summary": {
+            "ko": "브레이크 단계 전에 상대를 완전히 파괴하면 일반 추격 거리를 정면으로 이동하는 오버런을 선택할 수 있습니다.",
+            "en": "Destroying the enemy before the Break Test sub-phase permits an overrun: a normal pursuit distance directly forward."
+          },
+          "timing": {
+            "ko": "적을 브레이크 단계 전에 전멸시켰을 때",
+            "en": "When the enemy is destroyed before the Break Test sub-phase"
+          },
+          "steps": [
+            {
+              "ko": "리스트레인 앤 리폼을 시도할지 오버런할지 결정합니다.",
+              "en": "Choose whether to attempt restrain and reform or overrun."
+            },
+            {
+              "ko": "오버런이면 2D6 추격 거리만큼 피벗 없이 직접 전진합니다.",
+              "en": "For an overrun, move the normal 2D6 pursuit distance directly forward without pivoting."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "방향을 원하는 적에게 돌리는 일반 추격 피벗을 하지 않습니다.",
+              "en": "Do not use a normal pursuit pivot to turn toward a desired enemy."
+            },
+            {
+              "ko": "다른 적과 여전히 교전 중이거나 이동을 막는 경우 등 팔로 업·추격 제한을 확인합니다.",
+              "en": "Check follow-up and pursuit restrictions, including remaining engaged with another enemy or being unable to move."
+            }
+          ],
+          "example": {
+            "ko": "적을 전멸시킨 유닛이 2D6에서 3·5를 굴렸다면 기존 정면으로 최대 8인치의 오버런 경로를 처리합니다.",
+            "en": "A unit destroying its enemy and rolling 3 and 5 resolves an 8-inch overrun route directly ahead."
+          },
+          "quick": {
+            "ko": "적 전멸(브레이크 전) → 오버런은 2D6 정면, 피벗 없음.",
+            "en": "Enemy destroyed before Break tests: overrun 2D6 directly forward, without pivoting."
+          },
+          "sources": [
+            {
+              "title": "Overrun",
+              "path": "/the-combat-phase/overrun"
+            },
+            {
+              "title": "The Pursuit Move",
+              "path": "/the-combat-phase/the-pursuit-move"
+            },
+            {
+              "title": "Unable to Follow Up or Pursue",
+              "path": "/the-combat-phase/unable-to-follow-up-or-pursue"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "battle-artillery",
+      "title": {
+        "ko": "템플릿·전쟁 기계",
+        "en": "Templates and war machines"
+      },
+      "description": {
+        "ko": "산포·포격·캐논·연사·미스파이어를 무기별 절차로 처리합니다. 개별 무기 프로필이 기본값을 대체할 수 있습니다.",
+        "en": "Resolve scatter, bombardment, cannons, multiple barrels and misfires by weapon procedure; individual profiles may override defaults."
+      },
+      "entries": [
+        {
+          "id": "battle-template-hits",
+          "title": {
+            "ko": "템플릿 명중 판정",
+            "en": "Template hit determination"
+          },
+          "aliases": [
+            "템플릿 명중 판정",
+            "Template hit determination"
+          ],
+          "path": "/general-principles/risk-of-being-hit",
+          "summary": {
+            "ko": "베이스가 템플릿에 덮인 정도에 따라 자동 명중 또는 D6 4+ 명중을 적용합니다.",
+            "en": "Full or central-hole coverage hits automatically; partial coverage hits on D6 4+."
+          },
+          "timing": {
+            "ko": "템플릿 최종 위치를 정한 뒤",
+            "en": "After determining the template's final position"
+          },
+          "steps": [
+            {
+              "ko": "베이스 전체가 덮였거나 블라스트 중앙 구멍에 일부라도 걸린 모델을 자동 명중으로 셉니다.",
+              "en": "Automatically hit models fully covered by the template or even partially covered by a blast's central hole."
+            },
+            {
+              "ko": "그 밖의 일부만 덮인 각 모델은 D6을 굴려 4+면 명중합니다.",
+              "en": "For each other partially covered model, roll D6 and hit on 4+."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "모델 조형의 무기·날개가 아니라 베이스가 덮이는지를 확인합니다.",
+              "en": "Check base coverage rather than projecting weapons or wings."
+            },
+            {
+              "ko": "중앙 구멍의 강한 피해와 자동 명중은 별개 조건입니다. 무기가 주는 중앙 피해 프로필을 따로 확인합니다.",
+              "en": "Automatic central-hole hits and stronger central damage are distinct; check the weapon's central damage profile separately."
+            }
+          ],
+          "example": {
+            "ko": "완전 덮임 3개와 부분 덮임 4개라면 3개는 자동, 나머지 4개는 각각 4+를 굴립니다.",
+            "en": "Three fully covered and four partially covered bases give three automatic hits and four separate 4+ rolls."
+          },
+          "quick": {
+            "ko": "완전 덮임/중앙 구멍: 자동. 그 외 부분 덮임: 모델마다 D6 4+.",
+            "en": "Full coverage or central hole: automatic; other partial coverage: D6 4+ per model."
+          },
+          "sources": [
+            {
+              "title": "Template hit determination",
+              "path": "/general-principles/risk-of-being-hit"
+            },
+            {
+              "title": "Templates",
+              "path": "/general-principles/templates"
+            }
+          ]
+        },
+        {
+          "id": "battle-scatter",
+          "title": {
+            "ko": "산포 주사위",
+            "en": "Scatter dice"
+          },
+          "aliases": [
+            "산포 주사위",
+            "Scatter dice"
+          ],
+          "path": "/general-principles/scatter",
+          "summary": {
+            "ko": "지정된 물체를 배치한 뒤 산포 방향과 규칙이 정한 거리로 이동합니다.",
+            "en": "Place the object, then use the Scatter die and the rule's distance dice to move it."
+          },
+          "timing": {
+            "ko": "템플릿·물체를 산포시키라는 규칙",
+            "en": "When a rule instructs an object or template to scatter"
+          },
+          "steps": [
+            {
+              "ko": "규칙이 정한 위치에 놓고 산포 주사위와 거리 주사위를 굴립니다.",
+              "en": "Place the object as instructed and roll the Scatter die plus the required distance dice."
+            },
+            {
+              "ko": "Hit면 기본적으로 제자리, 화살표면 그 방향으로 거리만큼 이동한 뒤 효과를 해결합니다.",
+              "en": "Normally a Hit leaves it in place; an arrow moves it that distance in the indicated direction before resolving the effect."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "간접 사격 등 Hit에도 이동시키는 명시적 예외는 해당 규칙을 따릅니다.",
+              "en": "Follow explicit exceptions such as indirect fire, which can still scatter on a Hit."
+            },
+            {
+              "ko": "산포 이동 중간의 지형·유닛은 별도 규정이 없으면 무시합니다.",
+              "en": "Ignore intervening terrain and units during scatter unless the rule specifies otherwise."
+            }
+          ],
+          "example": {
+            "ko": "산포 화살표와 거리 6이면 템플릿을 그 방향으로 6인치 옮깁니다.",
+            "en": "An arrow and a distance of 6 move the template 6 inches in that direction."
+          },
+          "quick": {
+            "ko": "배치 → 방향·거리 굴림 → Hit=기본 제자리, 화살표=해당 거리 이동.",
+            "en": "Place, roll direction and distance; Hit normally stays, arrow moves the rolled distance."
+          },
+          "sources": [
+            {
+              "title": "Scatter dice",
+              "path": "/general-principles/scatter"
+            }
+          ]
+        },
+        {
+          "id": "battle-bombardment",
+          "title": {
+            "ko": "밤바드먼트 포격",
+            "en": "Bombardment"
+          },
+          "aliases": [
+            "밤바드먼트 포격",
+            "Bombardment"
+          ],
+          "path": "/war-machines/bombardment",
+          "summary": {
+            "ko": "대상 중앙에 템플릿을 놓고 아틸러리·산포 주사위로 최종 위치를 정합니다.",
+            "en": "Centre the template on the target and determine its final position using Artillery and Scatter dice."
+          },
+          "timing": {
+            "ko": "밤바드먼트 무기로 사격할 때",
+            "en": "When firing a weapon with Bombardment"
+          },
+          "steps": [
+            {
+              "ko": "시선과 최소·최대 사거리 안의 적 유닛을 골라 유닛 중앙 위에 템플릿 중앙 구멍을 놓습니다.",
+              "en": "Select a visible enemy between minimum and maximum range, placing the template's hole over the unit's centre."
+            },
+            {
+              "ko": "아틸러리·산포 주사위를 굴린 뒤 최종 위치에서 템플릿 명중을 처리합니다.",
+              "en": "Roll Artillery and Scatter dice, then resolve template hits at the final location."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "아틸러리 Misfire면 먼저 해당 미스파이어 표를 처리합니다. 일반 Hit면 거리 숫자를 무시합니다.",
+              "en": "An Artillery Misfire uses the appropriate misfire table; a normal Scatter Hit ignores the distance number."
+            },
+            {
+              "ko": "중앙 구멍 아래 한 모델만 괄호의 강한 S·AP 프로필, 다른 힛은 일반 프로필을 사용합니다.",
+              "en": "Only one model under the central hole uses the bracketed higher Strength/AP profile; other hits use the normal profile."
+            }
+          ],
+          "example": {
+            "ko": "아틸러리 8과 산포 화살표라면 8인치 산포합니다. Hit와 8이면 일반 직접 포격은 제자리입니다.",
+            "en": "Artillery 8 and an arrow scatters 8 inches; Hit and 8 leaves ordinary direct bombardment in place."
+          },
+          "quick": {
+            "ko": "중앙 배치 → 아틸러리+산포 → Misfire표 / Hit제자리 / 화살표=아틸러리 인치.",
+            "en": "Centre template; Artillery+Scatter; Misfire uses table, Hit stays, arrow scatters Artillery inches."
+          },
+          "sources": [
+            {
+              "title": "Bombardment",
+              "path": "/war-machines/bombardment"
+            }
+          ]
+        },
+        {
+          "id": "battle-indirect",
+          "title": {
+            "ko": "인디렉트 파이어",
+            "en": "Indirect fire"
+          },
+          "aliases": [
+            "인디렉트 파이어",
+            "Indirect fire"
+          ],
+          "path": "/war-machines/indirect-fire",
+          "summary": {
+            "ko": "간접 포격을 선언하면 직접 시선 없이 사격하지만 산포 Hit도 아틸러리−BS만큼 벗어날 수 있습니다.",
+            "en": "Declare indirect fire to shoot without line of sight; even a Scatter Hit can move by Artillery minus crew BS."
+          },
+          "timing": {
+            "ko": "밤바드먼트 사격 전에 선언",
+            "en": "Declare before a Bombardment shot"
+          },
+          "steps": [
+            {
+              "ko": "직접 시선 대신 간접 사격을 쓰겠다고 선언하고 나머지 일반 포격 조건을 확인합니다.",
+              "en": "Declare indirect fire and check the other ordinary bombardment requirements."
+            },
+            {
+              "ko": "산포 화살표는 일반 산포, Hit는 작은 화살표 방향으로 아틸러리−크루 BS인치 이동합니다.",
+              "en": "An arrow scatters normally; a Hit uses its small arrow and moves Artillery minus crew BS inches."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "감소한 산포 거리는 최소 0입니다.",
+              "en": "The reduced scatter distance has a minimum of zero."
+            },
+            {
+              "ko": "최소·최대 사거리와 아틸러리 미스파이어는 그대로 적용합니다.",
+              "en": "Minimum/maximum range and Artillery Misfires still apply."
+            }
+          ],
+          "example": {
+            "ko": "아틸러리 8·크루 BS3·산포 Hit면 작은 화살표 방향으로 5인치 이동합니다.",
+            "en": "Artillery 8, crew BS3 and Scatter Hit moves 5 inches along the small arrow."
+          },
+          "quick": {
+            "ko": "간접 Hit 산포 = max(0, 아틸러리−크루BS), 작은 화살표 방향.",
+            "en": "Indirect Hit scatter = max(0, Artillery−crew BS), along the small arrow."
+          },
+          "sources": [
+            {
+              "title": "Indirect fire",
+              "path": "/war-machines/indirect-fire"
+            }
+          ]
+        },
+        {
+          "id": "battle-cannon",
+          "title": {
+            "ko": "캐논 발사·바운스",
+            "en": "Cannon fire and bounce"
+          },
+          "aliases": [
+            "캐논 발사·바운스",
+            "Cannon fire and bounce"
+          ],
+          "path": "/war-machines/cannon-fire",
+          "summary": {
+            "ko": "목표 지점에서 첫 아틸러리만큼 착탄점을 전진시키고 두 번째 아틸러리로 바운스를 정합니다.",
+            "en": "Advance the target point by the first Artillery roll to find the strike point, then roll again for bounce."
+          },
+          "timing": {
+            "ko": "캐논 일반 사격",
+            "en": "When firing a cannon normally"
+          },
+          "steps": [
+            {
+              "ko": "시선·최대 사거리 안의 목표 지점을 표시하고 첫 아틸러리를 굴립니다. 숫자만큼 캐논에서 멀어져 착탄점을 정합니다.",
+              "en": "Mark a point in sight and range; roll Artillery and move it that distance away from the cannon to find the strike point."
+            },
+            {
+              "ko": "두 번째 아틸러리만큼 바운스 경로를 잡고, 착탄점·경로 아래 모델의 자동 명중을 처리합니다.",
+              "en": "Roll Artillery again for the bounce and resolve automatic hits on models under the strike point or bounce path."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "첫 Misfire는 표를 굴립니다. 두 번째 Misfire는 포탄이 착탄점에 박혀 바운스하지 않는 결과입니다.",
+              "en": "The first Misfire uses the table; a second-roll Misfire buries the shot at the strike point without bouncing."
+            },
+            {
+              "ko": "대형 유닛은 정후면에서 대열당 1, 측면에서 파일당 1모델까지. 몬스트러스 크리처·베히모스 또는 언덕·통과 불가 지형·높은 장애물을 만나면 경로가 끝납니다.",
+              "en": "Against formed units, hit at most one model per rank from front/rear or per file from a flank; stop on monstrous creatures, behemoths, hills, impassable terrain or high obstacles."
+            }
+          ],
+          "example": {
+            "ko": "목표에서 첫 굴림 2로 2인치 앞에 착탄하고 두 번째 8이면 그곳에서 8인치 바운스합니다.",
+            "en": "A first roll of 2 puts the strike point 2 inches beyond the target point; a second 8 bounces 8 inches from there."
+          },
+          "quick": {
+            "ko": "목표점 → 아틸러리 착탄 → 아틸러리 바운스 → 경로 자동 명중·정지물 확인.",
+            "en": "Target point, Artillery strike, Artillery bounce, automatic path hits and stopping conditions."
+          },
+          "sources": [
+            {
+              "title": "Cannon fire and bounce",
+              "path": "/war-machines/cannon-fire"
+            }
+          ]
+        },
+        {
+          "id": "battle-grapeshot",
+          "title": {
+            "ko": "그레이프샷",
+            "en": "Grapeshot"
+          },
+          "aliases": [
+            "그레이프샷",
+            "Grapeshot"
+          ],
+          "path": "/war-machines/needs-more-nails",
+          "summary": {
+            "ko": "일반 캐논 발사 대신 사거리 12인치·S4·AP -1의 아틸러리 숫자만큼 자동 힛을 줄 수 있습니다.",
+            "en": "Instead of a normal cannon shot, grapeshot uses 12-inch range, S4, AP -1 and automatic hits equal to the Artillery result."
+          },
+          "timing": {
+            "ko": "캐논 사격 방식을 선택할 때",
+            "en": "When choosing a cannon's firing mode"
+          },
+          "steps": [
+            {
+              "ko": "그레이프샷을 선택하고 일반 방식으로 대상과 12인치 사거리를 확인합니다.",
+              "en": "Choose grapeshot and check its target and 12-inch range normally."
+            },
+            {
+              "ko": "아틸러리 숫자만큼 자동 힛을 주고 운드·세이브를 해결합니다.",
+              "en": "Inflict automatic hits equal to the Artillery number, then resolve wounds and saves."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "크루 BS로 명중 주사위를 굴리지 않습니다.",
+              "en": "Do not roll to hit using crew Ballistic Skill."
+            },
+            {
+              "ko": "Misfire는 블랙 파우더 미스파이어 표로 처리합니다.",
+              "en": "A Misfire uses the Black Powder Misfire table."
+            }
+          ],
+          "example": {
+            "ko": "아틸러리 6이면 S4·AP -1 자동 힛 6개를 처리합니다.",
+            "en": "An Artillery result of 6 inflicts six automatic S4 AP -1 hits."
+          },
+          "quick": {
+            "ko": "그레이프샷: 12인치, S4, AP-1, 아틸러리 숫자=자동 힛.",
+            "en": "Grapeshot: 12 inches, S4, AP-1; Artillery number equals automatic hits."
+          },
+          "sources": [
+            {
+              "title": "Grapeshot",
+              "path": "/war-machines/needs-more-nails"
+            },
+            {
+              "title": "Grapeshot",
+              "path": "/war-machines/grapeshot"
+            }
+          ]
+        },
+        {
+          "id": "battle-organ-gun",
+          "title": {
+            "ko": "오르간 건 멀티 배럴",
+            "en": "Organ gun multiple barrels"
+          },
+          "aliases": [
+            "오르간 건 멀티 배럴",
+            "Organ gun multiple barrels"
+          ],
+          "path": "/war-machines/multi-barrelled",
+          "summary": {
+            "ko": "아틸러리 두 개로 발사 수를 정한 뒤 크루 BS로 명중을 굴립니다.",
+            "en": "Roll two Artillery dice for shot count, then use crew BS to roll hits."
+          },
+          "timing": {
+            "ko": "오르간 건 사격",
+            "en": "When an organ gun shoots"
+          },
+          "steps": [
+            {
+              "ko": "아틸러리 두 개의 숫자 합으로 발사 수를 정합니다.",
+              "en": "Add the numeric results of two Artillery dice to determine shots."
+            },
+            {
+              "ko": "각 발사에 크루 BS와 일반 사격 수정치를 적용해 명중을 굴립니다.",
+              "en": "Roll each shot using crew BS and the usual shooting modifiers."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "Misfire 하나면 남은 숫자만큼 발사하고 이번 사격 전체에 추가 명중 -1입니다.",
+              "en": "One Misfire leaves the other die's shots and gives all those shots an additional -1 To Hit."
+            },
+            {
+              "ko": "Misfire 두 개면 발사하지 않고 해당 미스파이어 표를 굴립니다.",
+              "en": "Two Misfires fire no shots and roll on the appropriate misfire table."
+            }
+          ],
+          "example": {
+            "ko": "아틸러리 8·6이면 14발입니다. 8·Misfire면 8발에 추가 -1 To Hit입니다.",
+            "en": "Artillery 8 and 6 gives 14 shots; 8 and Misfire gives eight shots at an extra -1 To Hit."
+          },
+          "quick": {
+            "ko": "아틸러리 2개 합=발사 수. Misfire1개:-1명중 / 2개:0발+표.",
+            "en": "Two Artillery dice give shots; one Misfire: extra -1 hit; two: no shots and a table roll."
+          },
+          "sources": [
+            {
+              "title": "Organ gun multiple barrels",
+              "path": "/war-machines/multi-barrelled"
+            }
+          ]
+        },
+        {
+          "id": "battle-artillery-misfire",
+          "title": {
+            "ko": "포병 미스파이어 표",
+            "en": "Artillery misfire tables"
+          },
+          "aliases": [
+            "포병 미스파이어 표",
+            "Artillery misfire tables"
+          ],
+          "path": "/war-machines/black-powder-misfire-table",
+          "summary": {
+            "ko": "무기가 지정한 미스파이어 표에 D6을 굴리고 해당 턴·라운드 제한을 즉시 기록합니다.",
+            "en": "Roll D6 on the weapon's specified misfire table and immediately record its turn or round restrictions."
+          },
+          "timing": {
+            "ko": "무기의 절차가 미스파이어 표를 지시할 때",
+            "en": "When the weapon procedure calls for a Misfire table"
+          },
+          "steps": [
+            {
+              "ko": "블랙 파우더인지 스톤 스로어인지 해당 무기의 표를 확인합니다.",
+              "en": "Check whether the weapon calls for the Black Powder or Stone Thrower table."
+            },
+            {
+              "ko": "D6 결과에 따라 파괴·크루 운드 손실·사격 중단을 즉시 처리합니다.",
+              "en": "Apply destruction, crew Wound loss and shooting restrictions immediately according to D6."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "크루의 운드 손실을 무기 S를 사용한 일반 공격으로 바꾸어 판정하지 않습니다.",
+              "en": "Do not convert the crew Wound loss into an ordinary attack using the weapon's Strength."
+            },
+            {
+              "ko": "캐논 바운스 주사위의 Misfire처럼 표를 요구하지 않는 절차는 그 전용 결과를 사용합니다.",
+              "en": "Some results, such as a cannon bounce Misfire, have their own outcome instead of calling for this table."
+            }
+          ],
+          "example": {
+            "ko": "미스파이어 표 3이면 크루 W1을 잃고 이번 턴 사격 실패, 다음 라운드 끝까지 사격 불가를 표시합니다.",
+            "en": "A misfire-table 3 loses one crew Wound, fails this turn's shot, and cannot shoot before the end of the next round."
+          },
+          "quick": {
+            "ko": "기본 포병 Misfire D6:1 파괴 / 2–4 크루W-1+다음 라운드 끝까지 사격 불가 / 5–6 이번 턴 실패.",
+            "en": "Core artillery Misfire D6:1 destroyed; 2–4 crew W-1 and no shooting before next round ends; 5–6 this turn's shot fails."
+          },
+          "sources": [
+            {
+              "title": "Artillery misfire tables",
+              "path": "/war-machines/black-powder-misfire-table"
+            },
+            {
+              "title": "Stone Thrower Misfire Table",
+              "path": "/war-machines/stone-thrower-misfire-table"
+            }
+          ],
+          "table": {
+            "caption": {
+              "ko": "블랙 파우더·스톤 스로어 기본 결과",
+              "en": "Core Black Powder and Stone Thrower outcomes"
+            },
+            "columns": [
+              {
+                "ko": "D6",
+                "en": "D6"
+              },
+              {
+                "ko": "결과",
+                "en": "Outcome"
+              }
+            ],
+            "rows": [
+              [
+                "1",
+                {
+                  "ko": "모델 파괴·즉시 제거",
+                  "en": "Model destroyed and immediately removed"
+                }
+              ],
+              [
+                "2–4",
+                {
+                  "ko": "크루 W1 손실. 이번 턴 실패, 다음 라운드 종료 전까지 사격 불가.",
+                  "en": "Crew loses one Wound; no shot this turn or before the end of the next round."
+                }
+              ],
+              [
+                "5–6",
+                {
+                  "ko": "이번 턴 사격 실패",
+                  "en": "This turn's shot fails"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "id": "battle-bolt-through",
+          "title": {
+            "ko": "볼트 스로어 관통",
+            "en": "Bolt thrower Through and Through"
+          },
+          "aliases": [
+            "볼트 스로어 관통",
+            "Bolt thrower Through and Through"
+          ],
+          "path": "/war-machines/through-and-through",
+          "summary": {
+            "ko": "대형 유닛에 명중하면 정후면은 대열당, 측면은 파일당 힛 하나를 주며 후속 힛의 S가 감소합니다.",
+            "en": "A hit on a formed unit causes one hit per rank from front/rear or per file from a flank, with reducing Strength."
+          },
+          "timing": {
+            "ko": "볼트 스로어의 일반 명중이 성공한 뒤",
+            "en": "After a normal bolt-thrower hit succeeds"
+          },
+          "steps": [
+            {
+              "ko": "사수의 위치가 대상 정후면인지 측면인지 확인해 대열 또는 파일 수로 힛 수를 정합니다.",
+              "en": "Determine the shooter's arc and use the number of ranks or files for the hit count."
+            },
+            {
+              "ko": "첫 힛은 무기 S, 이후 매 힛마다 S -1로 운드·방어·피해를 따로 처리합니다.",
+              "en": "Use weapon Strength for the first hit, then reduce Strength by 1 for each following hit and resolve wounds, saves and damage separately."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "정후면에서는 뒤의 불완전 대열도 힛 수에 포함합니다.",
+              "en": "From front or rear, include an incomplete rear rank in the hit count."
+            },
+            {
+              "ko": "힛의 S가 0이 되면 그 힛은 효과가 없고 이후 힛도 발생하지 않습니다.",
+              "en": "A hit reduced to Strength 0 has no effect and causes no further hits."
+            }
+          ],
+          "example": {
+            "ko": "S6 볼트가 4대열 유닛의 정면에 명중하면 S6·S5·S4·S3 힛을 각각 하나씩 줍니다.",
+            "en": "An S6 bolt hitting the front of a four-rank unit causes one hit each at S6, S5, S4 and S3."
+          },
+          "quick": {
+            "ko": "정후면: 대열당1힛 / 측면: 파일당1힛. 후속 힛마다S-1, S0에서 중단.",
+            "en": "Front/rear: one hit per rank; flank: one per file; -1 Strength each subsequent hit, stop at S0."
+          },
+          "sources": [
+            {
+              "title": "Bolt thrower Through and Through",
+              "path": "/war-machines/through-and-through"
+            },
+            {
+              "title": "Bolt Throwers",
+              "path": "/war-machines/bolt-throwers"
+            }
+          ]
+        },
+        {
+          "id": "battle-bolt-rapid",
+          "title": {
+            "ko": "리피터 볼트의 래피드 파이어",
+            "en": "Repeater bolt thrower Rapid Fire"
+          },
+          "aliases": [
+            "리피터 볼트의 래피드 파이어",
+            "Repeater bolt thrower Rapid Fire"
+          ],
+          "path": "/war-machines/rapid-fire",
+          "summary": {
+            "ko": "래피드 파이어는 일반 볼트 대신 별도 48인치·S4·AP -1 프로필을 사용하며 전부 같은 대상에 발사합니다.",
+            "en": "Rapid Fire replaces the normal bolt with a separate 48-inch, S4, AP -1 profile; all shots go at the same target."
+          },
+          "timing": {
+            "ko": "리피터 볼트 스로어 사격 방식 선택",
+            "en": "When selecting a repeater bolt thrower's firing mode"
+          },
+          "steps": [
+            {
+              "ko": "일반 볼트 대신 래피드 파이어를 선언하고 해당 무기 프로필의 발사 수·특수 규칙을 확인합니다.",
+              "en": "Declare Rapid Fire instead of the normal bolt and check that weapon profile's shot count and special rules."
+            },
+            {
+              "ko": "모든 발사의 대상을 하나로 정해 명중·S4 운드·AP -1 세이브를 구분해 처리합니다.",
+              "en": "Choose one target for all shots and resolve hit rolls, S4 wound rolls and AP -1 armour modifiers."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "발사를 서로 다른 적 유닛에 나누지 않습니다.",
+              "en": "Do not split the shots between different enemy units."
+            },
+            {
+              "ko": "일반 볼트 프로필의 S·AP·특수 규칙을 래피드 파이어 프로필에 임의로 섞지 않습니다.",
+              "en": "Do not mix the normal bolt's Strength, AP or special rules into the alternate Rapid Fire profile."
+            }
+          ],
+          "example": {
+            "ko": "래피드 파이어 S4로 T3를 명중하면 3+ 운드이며, 대상 아머 5+는 AP -1 때문에 원래 주사위 6이 필요합니다.",
+            "en": "A Rapid Fire S4 hit against T3 wounds on 3+; armour 5+ needs a raw 6 against its AP -1."
+          },
+          "quick": {
+            "ko": "래피드 파이어: 별도48인치·S4·AP-1 프로필, 모든 발사는 같은 대상.",
+            "en": "Rapid Fire: separate 48-inch S4 AP-1 profile; every shot targets the same unit."
+          },
+          "sources": [
+            {
+              "title": "Repeater bolt thrower Rapid Fire",
+              "path": "/war-machines/rapid-fire"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

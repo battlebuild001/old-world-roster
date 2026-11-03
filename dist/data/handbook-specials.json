@@ -1,0 +1,3009 @@
+{
+  "version": 1,
+  "checkedAt": "2026-11-03",
+  "chapters": [
+    {
+      "id": "special-formations",
+      "title": {
+        "ko": "병종과 보병 대형",
+        "en": "Troop types and infantry formations"
+      },
+      "description": {
+        "ko": "대열 수·유닛 스트렝스와 최신 보병 규칙을 구분합니다.",
+        "en": "Separate rank requirements, Unit Strength and the current infantry rules."
+      },
+      "entries": [
+        {
+          "id": "special-formation-permission",
+          "title": {
+            "ko": "대형 선택: 클로즈·오픈·스커미시",
+            "en": "Choosing Close Order, Open Order or Skirmish"
+          },
+          "aliases": [
+            "대형 선택: 클로즈·오픈·스커미시",
+            "Choosing Close Order, Open Order or Skirmish"
+          ],
+          "path": "/special-rules/close-order",
+          "summary": {
+            "ko": "해당 대형 특수 규칙이 있는지 확인한 뒤 그 대형의 배치 규칙을 적용합니다.",
+            "en": "Check that the unit has the required formation rule before using that formation."
+          },
+          "timing": {
+            "ko": "유닛 배치·대형을 확인할 때.",
+            "en": "When deploying or checking a formation."
+          },
+          "steps": [
+            {
+              "ko": "유닛의 Close Order, Open Order, Skirmishers 규칙을 확인합니다.",
+              "en": "Read the unit’s Close Order, Open Order and Skirmishers rules."
+            },
+            {
+              "ko": "클로즈 오더는 같은 방향을 보는 모델을 베이스끼리 맞대어 대열과 열로 배치합니다. 부족한 모델은 마지막 대열에 둡니다.",
+              "en": "For Close Order, align bases in ranks and files facing the same direction; place an incomplete rank at the rear."
+            },
+            {
+              "ko": "규칙을 가진 것과 현재 그 대형으로 배치된 것은 구분합니다. 다른 효과가 요구하는 실제 대형도 확인합니다.",
+              "en": "Distinguish permission to use a formation from actually adopting it; check the formation required by each effect."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "여러 대형을 허용받았어도 각 대형의 효과를 동시에 받는 것은 아닙니다. 전환 시점은 해당 전환 규칙을 따릅니다.",
+              "en": "Permission to use several formations does not combine their benefits; follow the relevant rules for changing formation."
+            }
+          ],
+          "example": {
+            "ko": "Close Order와 Open Order가 모두 있는 유닛도 현재 선택한 대형을 기준으로 다른 규칙의 조건을 확인합니다.",
+            "en": "A unit with both Close Order and Open Order checks other effects against the formation it currently uses."
+          },
+          "quick": {
+            "ko": "대형 특수 규칙 확인 → 실제 배치 대형 확인 → 그 대형의 조건 적용.",
+            "en": "Check permission → identify current formation → apply that formation’s conditions."
+          },
+          "sources": [
+            {
+              "title": "Choosing Close Order, Open Order or Skirmish",
+              "path": "/special-rules/close-order"
+            },
+            {
+              "title": "Open Order",
+              "path": "/special-rules/open-order"
+            },
+            {
+              "title": "Skirmishers",
+              "path": "/special-rules/skirmishers"
+            },
+            {
+              "title": "Close Order Formation",
+              "path": "/forming-units/close-order-formation"
+            }
+          ]
+        },
+        {
+          "id": "special-regular-infantry",
+          "title": {
+            "ko": "레귤러 인팬트리",
+            "en": "Regular Infantry"
+          },
+          "aliases": [
+            "레귤러 인팬트리",
+            "Regular Infantry"
+          ],
+          "path": "/troop-types-in-detail/regular-infantry",
+          "summary": {
+            "ko": "대열당 5모델, 최대 랭크 보너스 +2, 모델당 US 1입니다.",
+            "en": "Five models per rank, maximum rank bonus +2 and Unit Strength 1 per model."
+          },
+          "timing": {
+            "ko": "대열 보너스·US·병종 규칙을 계산할 때.",
+            "en": "When calculating rank bonus, Unit Strength and troop-type rules."
+          },
+          "steps": [
+            {
+              "ko": "살아 있는 모델 수로 현재 US를 계산합니다.",
+              "en": "Use surviving models to calculate current Unit Strength."
+            },
+            {
+              "ko": "대열 보너스를 계산할 때 병종 표의 최소 폭 5와 최대 +2를 사용합니다.",
+              "en": "Use a width of five and the +2 cap when calculating rank bonus."
+            },
+            {
+              "ko": "Press of Battle, Massed Infantry, Parry의 개별 조건도 확인합니다.",
+              "en": "Check the separate conditions for Press of Battle, Massed Infantry and Parry."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "대열 수만으로 보너스를 확정하지 않습니다. 전투 대형·디스럽티드 등 다른 제한도 적용됩니다.",
+              "en": "Ranks alone do not guarantee the bonus; combat formation and Disrupted restrictions still matter."
+            }
+          ],
+          "example": {
+            "ko": "20모델을 5×4로 배치해도 랭크 보너스의 병종 상한은 +2이며, 현재 US는 20입니다.",
+            "en": "Twenty models arranged 5×4 have Unit Strength 20; their troop-type rank-bonus cap remains +2."
+          },
+          "quick": {
+            "ko": "레귤러 인팬트리: 대열 폭 5 / 랭크 최대 +2 / US 1.",
+            "en": "Regular Infantry: rank width 5 / rank cap +2 / US 1."
+          },
+          "sources": [
+            {
+              "title": "Regular Infantry",
+              "path": "/troop-types-in-detail/regular-infantry"
+            }
+          ]
+        },
+        {
+          "id": "special-heavy-infantry",
+          "title": {
+            "ko": "헤비 인팬트리",
+            "en": "Heavy Infantry"
+          },
+          "aliases": [
+            "헤비 인팬트리",
+            "Heavy Infantry"
+          ],
+          "path": "/troop-types-in-detail/heavy-infantry",
+          "summary": {
+            "ko": "대열당 4모델, 최대 랭크 보너스 +2, 모델당 US 1입니다.",
+            "en": "Four models per rank, maximum rank bonus +2 and Unit Strength 1 per model."
+          },
+          "timing": {
+            "ko": "보병 대열·전투 결과·측후면 교전을 확인할 때.",
+            "en": "When checking infantry ranks, combat result and flank or rear engagement."
+          },
+          "steps": [
+            {
+              "ko": "유닛의 병종 표기가 Heavy Infantry인지 확인합니다.",
+              "en": "Confirm that the unit is Heavy Infantry."
+            },
+            {
+              "ko": "대열 계산에는 폭 4와 최대 +2를 적용하고, US는 모델 수로 계산합니다.",
+              "en": "Use width four and a +2 rank cap; calculate Unit Strength from model count."
+            },
+            {
+              "ko": "측후면 적 때문에 디스럽티드가 되는지는 Steady in the Ranks를 함께 확인합니다.",
+              "en": "Use Steady in the Ranks when assessing disruption from flank or rear enemies."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "Heavy Infantry라는 이유만으로 Regular Infantry의 Press of Battle·Parry 등을 자동으로 더하지 않습니다.",
+              "en": "Heavy Infantry does not automatically gain the rules listed for Regular Infantry."
+            }
+          ],
+          "example": {
+            "ko": "12모델을 4×3으로 배치하면 US는 12이며 대열 보너스의 병종 상한은 +2입니다.",
+            "en": "Twelve models arranged 4×3 have Unit Strength 12 and a troop-type rank-bonus cap of +2."
+          },
+          "quick": {
+            "ko": "헤비 인팬트리: 대열 폭 4 / 랭크 최대 +2 / US 1; Steady 조건 확인.",
+            "en": "Heavy Infantry: rank width 4 / rank cap +2 / US 1; check Steady."
+          },
+          "sources": [
+            {
+              "title": "Heavy Infantry",
+              "path": "/troop-types-in-detail/heavy-infantry"
+            }
+          ]
+        },
+        {
+          "id": "special-press-of-battle",
+          "title": {
+            "ko": "프레스 오브 배틀",
+            "en": "Press of Battle"
+          },
+          "aliases": [
+            "프레스 오브 배틀",
+            "Press of Battle"
+          ],
+          "path": "/troop-types-in-detail/press-of-battle",
+          "summary": {
+            "ko": "컴뱃 오더에서 싸우는 대열이 두 줄 깊이가 됩니다. 차지한 턴에는 적용하지 않습니다.",
+            "en": "In combat order the fighting rank is two ranks deep, except in a turn in which the unit charged."
+          },
+          "timing": {
+            "ko": "컴뱃에서 공격할 수 있는 모델을 고를 때.",
+            "en": "When selecting models eligible to fight in combat."
+          },
+          "steps": [
+            {
+              "ko": "유닛이 이 규칙을 가지고 현재 컴뱃 오더인지 확인합니다.",
+              "en": "Check that the unit has this rule and is currently in combat order."
+            },
+            {
+              "ko": "이번 턴에 차지했다면 두 줄 효과를 적용하지 않습니다.",
+              "en": "If the unit charged this turn, do not apply the two-rank effect."
+            },
+            {
+              "ko": "실제 파이팅 랭크 모델의 바로 뒤에서 베이스 접촉한 모델도 파이팅 랭크에 포함합니다.",
+              "en": "Include models directly behind and in base contact with models in the actual fighting rank."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "모든 뒤쪽 대열이 공격하는 규칙은 아닙니다. 다른 공격 자격·사거리·무기 제한도 적용합니다.",
+              "en": "This does not allow every rear rank to fight; other eligibility, reach and weapon limits still apply."
+            }
+          ],
+          "example": {
+            "ko": "차지하지 않은 5열 폭 보병의 첫 두 대열이 조건을 만족하면 두 대열에서 파이팅 랭크 모델을 고릅니다.",
+            "en": "For infantry five files wide that did not charge, select eligible fighting-rank models from the first two ranks."
+          },
+          "quick": {
+            "ko": "컴뱃 오더 + 차지한 턴 아님 → 파이팅 랭크 두 줄.",
+            "en": "Combat order + did not charge this turn → two-deep fighting rank."
+          },
+          "sources": [
+            {
+              "title": "Press of Battle",
+              "path": "/troop-types-in-detail/press-of-battle"
+            }
+          ]
+        },
+        {
+          "id": "special-massed-infantry",
+          "title": {
+            "ko": "매스트 인팬트리",
+            "en": "Massed Infantry"
+          },
+          "aliases": [
+            "매스트 인팬트리",
+            "Massed Infantry"
+          ],
+          "path": "/troop-types-in-detail/massed-infantry",
+          "summary": {
+            "ko": "이 규칙을 가진 유닛이 포함된 편의 총 US가 더 높으면 컴뱃 결과 +1입니다.",
+            "en": "A side containing a unit with this rule gains +1 combat result if its total Unit Strength is higher."
+          },
+          "timing": {
+            "ko": "컴뱃 리절트를 합산할 때.",
+            "en": "When calculating combat result."
+          },
+          "steps": [
+            {
+              "ko": "전투에 참여한 양쪽 편의 현재 총 US를 각각 구합니다.",
+              "en": "Calculate the current total Unit Strength of each side in the combat."
+            },
+            {
+              "ko": "US가 더 높은 편에 이 규칙을 가진 유닛이 하나 이상 있는지 확인합니다.",
+              "en": "Check whether the stronger side includes at least one unit with this rule."
+            },
+            {
+              "ko": "조건을 만족한 편의 컴뱃 결과에 +1을 더합니다.",
+              "en": "Add +1 to that side’s combat result."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "같은 편에 이 규칙 유닛이 여러 개 있어도 이 조건의 보너스를 유닛마다 중복해서 더하지 않습니다. US 동점에는 적용하지 않습니다.",
+              "en": "Do not add the bonus once per qualifying unit; a tie in Unit Strength does not qualify."
+            }
+          ],
+          "example": {
+            "ko": "아군 총 US 24, 적 20이고 아군에 이 규칙 유닛이 있으면 아군 결과 +1입니다. 20 대 20이면 없습니다.",
+            "en": "Your side at US 24 against US 20 gains +1 if it has a qualifying unit; US 20 against US 20 gains none."
+          },
+          "quick": {
+            "ko": "규칙 보유 유닛 포함 + 편 전체 US 우위 → CR +1.",
+            "en": "Include a qualifying unit + higher side-wide US → CR +1."
+          },
+          "sources": [
+            {
+              "title": "Massed Infantry",
+              "path": "/troop-types-in-detail/massed-infantry"
+            }
+          ]
+        },
+        {
+          "id": "special-parry",
+          "title": {
+            "ko": "패리",
+            "en": "Parry"
+          },
+          "aliases": [
+            "패리",
+            "Parry"
+          ],
+          "path": "/troop-types-in-detail/parry",
+          "summary": {
+            "ko": "이 규칙 모델이 컴뱃에서 핸드 웨폰과 실드를 선택해 사용하면 아머를 1 개선하며, 이 효과로 3+보다 좋아지지는 않습니다.",
+            "en": "A model using a hand weapon and shield in combat improves its armour by 1, to a maximum of 3+."
+          },
+          "timing": {
+            "ko": "컴뱃의 아머 세이브를 계산할 때.",
+            "en": "When calculating armour saves in combat."
+          },
+          "steps": [
+            {
+              "ko": "모델이 Parry를 가지며 핸드 웨폰과 실드를 장비했는지 확인합니다.",
+              "en": "Check that the model has Parry, a hand weapon and a shield."
+            },
+            {
+              "ko": "해당 컴뱃에서 그 장비 조합을 실제로 선택해 쓰는지 확인합니다.",
+              "en": "Confirm that the model has actually chosen to use that combination."
+            },
+            {
+              "ko": "아머 목표값을 한 단계 낮추되 이 보너스로 얻는 최선의 값은 3+입니다. 이후 해당 공격의 AP 등을 적용합니다.",
+              "en": "Improve armour one step, capped at 3+ for this benefit; then resolve applicable AP and other modifiers."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "다른 무기를 선택했거나 실드를 사용할 수 없는 경우에는 Parry를 더하지 않습니다. 사격용 보너스로 적용하지 않습니다.",
+              "en": "Do not apply Parry when using another weapon or unable to use the shield; it is not a shooting bonus."
+            }
+          ],
+          "example": {
+            "ko": "장비를 합친 아머가 5+인 Parry 모델은 해당 컴뱃에서 4+가 됩니다. 3+를 이 효과로 2+로 만들 수는 없습니다.",
+            "en": "A qualifying model at armour 5+ becomes 4+ in combat; this effect cannot turn 3+ into 2+."
+          },
+          "quick": {
+            "ko": "컴뱃에서 핸드 웨폰+실드 실제 사용 → 아머 1 개선, 최대 3+.",
+            "en": "Use hand weapon + shield in combat → armour improves 1, capped at 3+."
+          },
+          "sources": [
+            {
+              "title": "Parry",
+              "path": "/troop-types-in-detail/parry"
+            }
+          ]
+        },
+        {
+          "id": "special-steady-in-ranks",
+          "title": {
+            "ko": "스테디 인 더 랭크스",
+            "en": "Steady in the Ranks"
+          },
+          "aliases": [
+            "스테디 인 더 랭크스",
+            "Steady in the Ranks"
+          ],
+          "path": "/troop-types-in-detail/steady-in-the-ranks",
+          "summary": {
+            "ko": "헤비 인팬트리가 클로즈·오픈 오더일 때 측후면 적에 의한 디스럽션은 적 US 10 이상부터입니다.",
+            "en": "Heavy Infantry in Close or Open Order is disrupted by a flank or rear enemy only if that enemy has Unit Strength 10 or more."
+          },
+          "timing": {
+            "ko": "측후면 교전으로 대열이 디스럽티드가 되는지 확인할 때.",
+            "en": "When checking disruption caused by flank or rear engagement."
+          },
+          "steps": [
+            {
+              "ko": "병종이 Heavy Infantry이고 현재 대형이 Close Order 또는 Open Order인지 확인합니다.",
+              "en": "Check Heavy Infantry and a current Close Order or Open Order formation."
+            },
+            {
+              "ko": "측면 또는 후면에서 교전한 해당 적 유닛의 현재 US를 확인합니다.",
+              "en": "Check the current Unit Strength of the enemy engaging the flank or rear."
+            },
+            {
+              "ko": "그 적의 US가 10 이상이면 이 보호로 디스럽션을 막지 못합니다.",
+              "en": "At enemy Unit Strength 10 or more, this protection no longer prevents that disruption."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "모든 원인의 디스럽션을 무효화하는 규칙이 아닙니다. 다른 원인은 각각 처리합니다.",
+              "en": "This does not cancel every cause of Disrupted; resolve other causes separately."
+            }
+          ],
+          "example": {
+            "ko": "적 US 9의 측면 공격만으로는 이 규칙 조건의 헤비 인팬트리를 디스럽티드로 만들지 못하지만 US 10이면 가능합니다.",
+            "en": "A US 9 flank enemy cannot disrupt qualifying Heavy Infantry by this cause; US 10 can."
+          },
+          "quick": {
+            "ko": "헤비 인팬트리 + 클로즈/오픈: 측후면 디스럽션 기준 적 US 10+.",
+            "en": "Heavy Infantry + Close/Open: flank or rear disruption requires enemy US 10+."
+          },
+          "sources": [
+            {
+              "title": "Steady in the Ranks",
+              "path": "/troop-types-in-detail/steady-in-the-ranks"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "special-mounts",
+      "title": {
+        "ko": "캐벌리·차리엇·몬스터",
+        "en": "Cavalry, chariots and monsters"
+      },
+      "description": {
+        "ko": "탑승자·탈것·승무원 프로필을 분리하고 각 공격의 S를 정확히 선택합니다.",
+        "en": "Keep rider, mount and crew profiles separate and select the correct Strength for each attack."
+      },
+      "entries": [
+        {
+          "id": "special-heavy-cavalry",
+          "title": {
+            "ko": "헤비 캐벌리",
+            "en": "Heavy Cavalry"
+          },
+          "aliases": [
+            "헤비 캐벌리",
+            "Heavy Cavalry"
+          ],
+          "path": "/troop-types-in-detail/heavy-cavalry",
+          "summary": {
+            "ko": "대열당 4모델, 랭크 보너스 최대 +1, 모델당 US 2입니다.",
+            "en": "Four models per rank, rank-bonus cap +1 and Unit Strength 2 per model."
+          },
+          "timing": {
+            "ko": "대열·US와 캐벌리의 공격을 계산할 때.",
+            "en": "When calculating ranks, Unit Strength and cavalry attacks."
+          },
+          "steps": [
+            {
+              "ko": "모델 수에 2를 곱해 현재 US를 구합니다.",
+              "en": "Multiply the surviving model count by two for current Unit Strength."
+            },
+            {
+              "ko": "대열 보너스는 폭 4와 최대 +1을 기준으로 계산합니다.",
+              "en": "Use rank width four and a +1 cap for rank bonus."
+            },
+            {
+              "ko": "Split Profile (Cavalry)와 Cavalry Support를 함께 확인합니다.",
+              "en": "Apply Split Profile (Cavalry) and Cavalry Support as relevant."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "캐벌리 모델 하나를 라이더와 탈것 두 개의 독립 모델처럼 US에 두 번 세지 않습니다.",
+              "en": "Do not count a rider and mount as two separate cavalry models for Unit Strength."
+            }
+          ],
+          "example": {
+            "ko": "헤비 캐벌리 8모델은 US 16입니다. 4×2 대형의 대열 보너스 병종 상한은 +1입니다.",
+            "en": "Eight Heavy Cavalry models have US 16; the troop-type rank cap for a 4×2 formation is +1."
+          },
+          "quick": {
+            "ko": "헤비 캐벌리: 폭 4 / 랭크 최대 +1 / US 2.",
+            "en": "Heavy Cavalry: width 4 / rank cap +1 / US 2."
+          },
+          "sources": [
+            {
+              "title": "Heavy Cavalry",
+              "path": "/troop-types-in-detail/heavy-cavalry"
+            }
+          ]
+        },
+        {
+          "id": "special-cavalry-split",
+          "title": {
+            "ko": "캐벌리 스플릿 프로필",
+            "en": "Split Profile (Cavalry)"
+          },
+          "aliases": [
+            "캐벌리 스플릿 프로필",
+            "Split Profile (Cavalry)"
+          ],
+          "path": "/troop-types-in-detail/split-profile-cavalry",
+          "summary": {
+            "ko": "라이더와 탈것은 각자의 공격 능력치·무장을 사용하며, 적의 근접 명중은 라이더 WS로 판정합니다.",
+            "en": "Rider and mount attack using their own characteristics and weapons; enemy combat hits use the rider’s WS."
+          },
+          "timing": {
+            "ko": "캐벌리 모델이 공격하거나 공격받을 때.",
+            "en": "When a cavalry model attacks or is attacked."
+          },
+          "steps": [
+            {
+              "ko": "라이더·탈것의 WS, BS, S, I, A와 무장을 나누어 공격을 해결합니다.",
+              "en": "Resolve rider and mount attacks separately with their own WS, BS, S, I, A and weapons."
+            },
+            {
+              "ko": "적의 컴뱃 투 힛은 라이더 WS, 아머 세이브는 라이더의 아머를 사용합니다.",
+              "en": "Use the rider’s WS against enemy combat attacks and the rider’s armour for armour saves."
+            },
+            {
+              "ko": "임팩트 힛·스톰프에는 탈것 S를 사용합니다. 라이더 W가 0이면 모델 전체를 제거합니다.",
+              "en": "Use the mount’s S for Impact Hits or Stomp Attacks; remove the whole model when the rider reaches zero Wounds."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "특수 규칙은 별도 명시가 없으면 구성 요소에 서로 적용되지만, 무기 효과와 Frenzy 등 명시된 제외는 그대로 따릅니다.",
+              "en": "Special rules transfer between elements unless stated otherwise; explicit weapon and Frenzy exclusions still apply."
+            }
+          ],
+          "example": {
+            "ko": "S 4 라이더의 랜스는 라이더 공격에만 사용합니다. S 3 탈것의 일반 공격을 랜스로 S 5로 바꾸지 않습니다.",
+            "en": "A S 4 rider uses its lance for rider attacks; its S 3 mount does not turn its ordinary attacks into lance attacks."
+          },
+          "quick": {
+            "ko": "라이더/탈것은 각자 공격; 방어 WS·아머는 라이더, 임팩트·스톰프 S는 탈것.",
+            "en": "Attack separately; defend with rider WS/armour; Impact/Stomp use mount S."
+          },
+          "sources": [
+            {
+              "title": "Split Profile (Cavalry)",
+              "path": "/troop-types-in-detail/split-profile-cavalry"
+            }
+          ]
+        },
+        {
+          "id": "special-cavalry-support",
+          "title": {
+            "ko": "캐벌리 서포트",
+            "en": "Cavalry Support"
+          },
+          "aliases": [
+            "캐벌리 서포트",
+            "Cavalry Support"
+          ],
+          "path": "/troop-types-in-detail/cavalry-support",
+          "summary": {
+            "ko": "서포팅 어택이 허용된 캐벌리 모델은 라이더만 공격하고 탈것은 공격하지 않습니다.",
+            "en": "When a cavalry model can make a supporting attack, only the rider attacks."
+          },
+          "timing": {
+            "ko": "뒤 대열의 서포팅 어택을 고를 때.",
+            "en": "When selecting supporting attacks from a rear rank."
+          },
+          "steps": [
+            {
+              "ko": "무장·규칙·위치가 실제로 서포팅 어택을 허용하는지 먼저 확인합니다.",
+              "en": "First check whether weapon, rule and position permit a supporting attack."
+            },
+            {
+              "ko": "허용된 모델에서는 라이더의 지원 공격만 해결합니다.",
+              "en": "Resolve only the rider’s supporting attack for each eligible model."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "이 규칙 자체가 지원 공격 자격을 새로 주지는 않습니다. 탈것의 A를 지원 공격에 더하지 않습니다.",
+              "en": "This rule does not itself grant a supporting attack; do not add the mount’s Attacks."
+            }
+          ],
+          "example": {
+            "ko": "뒤 대열 기사 4모델이 지원 공격 자격을 얻어도 그 뒤 대열 말 4마리의 공격은 더하지 않습니다.",
+            "en": "If four rear-rank knights qualify for support, do not add attacks from their four horses."
+          },
+          "quick": {
+            "ko": "캐벌리 지원 공격 = 라이더만; 탈것 제외.",
+            "en": "Cavalry support = rider only, never the mount."
+          },
+          "sources": [
+            {
+              "title": "Cavalry Support",
+              "path": "/troop-types-in-detail/cavalry-support"
+            }
+          ]
+        },
+        {
+          "id": "special-light-chariot",
+          "title": {
+            "ko": "라이트 차리엇",
+            "en": "Light Chariots"
+          },
+          "aliases": [
+            "라이트 차리엇",
+            "Light Chariots"
+          ],
+          "path": "/troop-types-in-detail/light-chariots",
+          "summary": {
+            "ko": "대열당 3모델, 랭크 보너스 최대 +1, 모델당 US 3입니다.",
+            "en": "Three models per rank, rank-bonus cap +1 and Unit Strength 3 per model."
+          },
+          "timing": {
+            "ko": "차리엇 유닛의 모델 수·대열·US를 계산할 때.",
+            "en": "When calculating a chariot unit’s model count, ranks and Unit Strength."
+          },
+          "steps": [
+            {
+              "ko": "차리엇 전체를 하나의 모델로 세고 모델당 US 3을 적용합니다.",
+              "en": "Count the complete chariot as one model and use US 3 per model."
+            },
+            {
+              "ko": "대열 보너스는 폭 3과 최대 +1을 사용합니다.",
+              "en": "Use rank width three and a +1 rank-bonus cap."
+            },
+            {
+              "ko": "승무원·짐승 공격과 차체의 특수 공격은 Split Profile (Chariots)로 구분합니다.",
+              "en": "Separate crew, beasts and chassis-based attacks using Split Profile (Chariots)."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "승무원 수나 끄는 짐승 수를 차리엇 유닛의 모델 수로 추가하지 않습니다.",
+              "en": "Do not add crew or draft beasts to the chariot unit’s model count."
+            }
+          ],
+          "example": {
+            "ko": "라이트 차리엇 6모델은 US 18이며 3×2로 배치했을 때 랭크 보너스 상한은 +1입니다.",
+            "en": "Six Light Chariots have US 18 and a rank-bonus cap of +1 when arranged 3×2."
+          },
+          "quick": {
+            "ko": "라이트 차리엇: 폭 3 / 랭크 최대 +1 / US 3.",
+            "en": "Light Chariots: width 3 / rank cap +1 / US 3."
+          },
+          "sources": [
+            {
+              "title": "Light Chariots",
+              "path": "/troop-types-in-detail/light-chariots"
+            }
+          ]
+        },
+        {
+          "id": "special-chariot-split",
+          "title": {
+            "ko": "차리엇 스플릿 프로필",
+            "en": "Split Profile (Chariots)"
+          },
+          "aliases": [
+            "차리엇 스플릿 프로필",
+            "Split Profile (Chariots)"
+          ],
+          "path": "/troop-types-in-detail/split-profile-chariots",
+          "summary": {
+            "ko": "이동은 끄는 짐승, 적의 근접 명중은 승무원 WS, 임팩트·스톰프는 차체 S를 사용합니다.",
+            "en": "Use draft-beast Movement, crew WS against enemy combat hits and chassis S for Impact Hits or Stomps."
+          },
+          "timing": {
+            "ko": "차리엇의 이동·공격·피해를 해결할 때.",
+            "en": "When resolving chariot movement, attacks and damage."
+          },
+          "steps": [
+            {
+              "ko": "끄는 짐승이 있으면 그 M을, 없으면 차체 M을 이동에 사용합니다.",
+              "en": "Use the draft beasts’ M, or the chariot’s M if it has no beasts."
+            },
+            {
+              "ko": "승무원과 짐승은 각자의 WS, BS, S, I, A와 무장으로 공격하며 적은 승무원 WS에 명중을 판정합니다.",
+              "en": "Crew and beasts attack with their own profiles and weapons; enemy combat hits are tested against crew WS."
+            },
+            {
+              "ko": "임팩트 힛·스톰프는 차체의 S로 해결합니다. 차체 W가 0이면 모델 전체를 제거합니다.",
+              "en": "Resolve Impact Hits and Stomps with chassis S; remove the entire model when the chariot reaches zero Wounds."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "승무원의 할버드나 짐승의 S를 차체 임팩트의 S로 잘못 사용하지 않습니다. 별도 특수 규칙의 제외를 우선 확인합니다.",
+              "en": "Do not use crew halberd Strength or beast Strength for chassis Impact Hits; check explicit special-rule exceptions."
+            }
+          ],
+          "example": {
+            "ko": "차체 S 5, 승무원 S 3+할버드, 짐승 S 4라면 임팩트는 S 5, 승무원은 S 4, 짐승은 S 4로 구분합니다.",
+            "en": "With chassis S 5, S 3 crew using halberds and S 4 beasts, Impact Hits use S 5 while crew and beasts each attack at S 4."
+          },
+          "quick": {
+            "ko": "차리엇: M=짐승, 방어 WS=승무원, 임팩트·스톰프 S=차체.",
+            "en": "Chariot: M=beasts, defending WS=crew, Impact/Stomp S=chassis."
+          },
+          "sources": [
+            {
+              "title": "Split Profile (Chariots)",
+              "path": "/troop-types-in-detail/split-profile-chariots"
+            }
+          ]
+        },
+        {
+          "id": "special-monster-types",
+          "title": {
+            "ko": "몬스터와 베히모스",
+            "en": "Monstrous Creatures and Behemoths"
+          },
+          "aliases": [
+            "몬스터와 베히모스",
+            "Monstrous Creatures and Behemoths"
+          ],
+          "path": "/troop-types-in-detail/monstrous-creatures",
+          "summary": {
+            "ko": "두 병종의 모델당 US는 시작 W이며, 베히모스에는 썬더스톰프도 있습니다.",
+            "en": "Both use starting Wounds for Unit Strength; Behemoths also have Thunderstomp."
+          },
+          "timing": {
+            "ko": "몬스터의 US·병종 조건·스톰프 효과를 확인할 때.",
+            "en": "When checking a monster’s Unit Strength, troop-type conditions and Stomp effects."
+          },
+          "steps": [
+            {
+              "ko": "병종이 Monstrous Creature인지 Behemoth인지 유닛 자료에서 확인합니다.",
+              "en": "Read whether the model is a Monstrous Creature or Behemoth."
+            },
+            {
+              "ko": "해당 병종 표의 시작 W를 사용해 US를 정하고, 현재 잃은 W와 혼동하지 않습니다.",
+              "en": "Use starting Wounds for the troop-type Unit Strength, rather than the Wounds currently remaining."
+            },
+            {
+              "ko": "라이더가 있으면 전체 모델은 탈것의 세부 병종으로 취급합니다. 베히모스의 스톰프에는 Thunderstomp도 확인합니다.",
+              "en": "A ridden model uses its mount’s troop sub-category; check Thunderstomp for Behemoth Stomps."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "몬스터가 한 모델이라고 해서 자동으로 스커미시 모델처럼 움직이지 않습니다. Lumbering과 해당 대형을 확인합니다.",
+              "en": "A single monster is not automatically a skirmisher; check Lumbering and formation rules."
+            }
+          ],
+          "example": {
+            "ko": "시작 W 6인 몬스터가 W 2만 남았어도 이 병종 표의 US 기준은 시작 W 6입니다.",
+            "en": "A monster starting with W 6 still uses starting Wounds 6 for this troop-type US rule after falling to W 2."
+          },
+          "quick": {
+            "ko": "몬스터 US=시작 W; 라이더가 있어도 탈것 병종으로 분류.",
+            "en": "Monster US=starting Wounds; ridden models use mount troop type."
+          },
+          "sources": [
+            {
+              "title": "Monstrous Creatures and Behemoths",
+              "path": "/troop-types-in-detail/monstrous-creatures"
+            },
+            {
+              "title": "Behemoths",
+              "path": "/troop-types-in-detail/behemoths"
+            },
+            {
+              "title": "Characters & Ridden Monsters",
+              "path": "/characters/characters-and-ridden-monsters"
+            }
+          ]
+        },
+        {
+          "id": "special-lumbering",
+          "title": {
+            "ko": "럼버링",
+            "en": "Lumbering"
+          },
+          "aliases": [
+            "럼버링",
+            "Lumbering"
+          ],
+          "path": "/troop-types-in-detail/lumbering",
+          "summary": {
+            "ko": "한 모델도 클로즈 오더처럼 취급하며, 일반 이동 후에만 중심을 기준으로 최대 90° 피벗할 수 있습니다.",
+            "en": "Even a single model follows Close Order; after an ordinary move it may pivot up to 90° about its centre."
+          },
+          "timing": {
+            "ko": "대형과 이동 종료 후 방향을 결정할 때.",
+            "en": "When determining formation and facing after movement."
+          },
+          "steps": [
+            {
+              "ko": "한 모델이어도 클로즈 오더의 관련 규칙을 적용합니다.",
+              "en": "Apply the relevant Close Order rules even to a single model."
+            },
+            {
+              "ko": "이동을 끝낸 뒤 그 이동이 차지·마치·플리였는지 확인합니다.",
+              "en": "After moving, check whether it charged, marched or fled."
+            },
+            {
+              "ko": "그 셋이 아니면 중심을 기준으로 최대 90°까지 방향을 바꿀 수 있습니다.",
+              "en": "If none applies, pivot about its centre by up to 90°."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "차지·마치·플리 후에는 이 추가 피벗을 사용할 수 없습니다. 유닛에 합류하거나 캐릭터가 합류할 수도 없습니다.",
+              "en": "This extra pivot is unavailable after charging, marching or fleeing; the model cannot join units or be joined by a character."
+            }
+          ],
+          "example": {
+            "ko": "일반 이동한 럼버링 모델은 종료 후 90°까지 돌 수 있지만 마치한 경우에는 그 피벗을 추가하지 않습니다.",
+            "en": "A Lumbering model may pivot up to 90° after a normal move, but not after a march."
+          },
+          "quick": {
+            "ko": "클로즈 오더 취급; 일반 이동 뒤 최대 90° 피벗, 차지·마치·플리 제외.",
+            "en": "Treat as Close Order; up to 90° pivot after normal movement, not charge/march/flee."
+          },
+          "sources": [
+            {
+              "title": "Lumbering",
+              "path": "/troop-types-in-detail/lumbering"
+            }
+          ]
+        },
+        {
+          "id": "special-thunderstomp",
+          "title": {
+            "ko": "썬더스톰프",
+            "en": "Thunderstomp"
+          },
+          "aliases": [
+            "썬더스톰프",
+            "Thunderstomp"
+          ],
+          "path": "/troop-types-in-detail/thunderstomp",
+          "summary": {
+            "ko": "베히모스의 스톰프 AP는 -2이지만 다른 몬스터를 상대로는 이 규칙을 사용할 수 없습니다.",
+            "en": "A Behemoth’s Stomp Attacks have AP -2, but this rule cannot be used against another monster."
+          },
+          "timing": {
+            "ko": "베히모스의 스톰프를 해결할 때.",
+            "en": "When resolving a Behemoth’s Stomp Attacks."
+          },
+          "steps": [
+            {
+              "ko": "공격이 스톰프인지와 공격자가 베히모스인지 확인합니다.",
+              "en": "Confirm that the attack is a Stomp and the attacker is a Behemoth."
+            },
+            {
+              "ko": "대상이 Monstrous Creature 또는 Behemoth가 아니라면 스톰프 AP를 -2로 적용합니다.",
+              "en": "Apply AP -2 when the target is neither a Monstrous Creature nor a Behemoth."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "이 규칙의 몬스터 대상 제외를 무시하지 않습니다. 일반 근접 공격 전체의 AP를 바꾸는 규칙도 아닙니다.",
+              "en": "Respect the monster-target exception; this does not change the AP of all ordinary combat attacks."
+            }
+          ],
+          "example": {
+            "ko": "베히모스가 보병에게 가하는 해당 스톰프는 AP -2입니다. 적 드래곤에게 같은 썬더스톰프 효과를 적용하지 않습니다.",
+            "en": "Qualifying Stomps against infantry use AP -2; do not apply the same Thunderstomp benefit against an enemy dragon."
+          },
+          "quick": {
+            "ko": "베히모스 스톰프 AP -2; 다른 몬스터 대상에는 사용 불가.",
+            "en": "Behemoth Stomp AP -2; cannot use this rule against another monster."
+          },
+          "sources": [
+            {
+              "title": "Thunderstomp",
+              "path": "/troop-types-in-detail/thunderstomp"
+            }
+          ]
+        },
+        {
+          "id": "special-fly",
+          "title": {
+            "ko": "플라이(X)",
+            "en": "Fly (X)"
+          },
+          "aliases": [
+            "플라이(X)",
+            "Fly (X)"
+          ],
+          "path": "/special-rules/fly",
+          "summary": {
+            "ko": "팔로 업·퍼슈트 외의 이동에서 지상 M 대신 표기된 플라이 M을 선택할 수 있습니다.",
+            "en": "Except for follow up and pursuit, choose the printed Fly Movement instead of ground Movement."
+          },
+          "timing": {
+            "ko": "이동 방법·행군·이동 종료 위치를 결정할 때.",
+            "en": "When choosing movement method, marching and final position."
+          },
+          "steps": [
+            {
+              "ko": "이번 이동이 팔로 업·퍼슈트가 아니라면 지상 또는 플라이 이동 중 하나를 선택합니다.",
+              "en": "For movement other than follow up or pursuit, choose ground movement or Fly movement."
+            },
+            {
+              "ko": "플라이로 움직일 때는 모델·유닛·지형 위를 지나며 적 8인치 이내에서도 마치용 리더십 테스트가 필요 없습니다.",
+              "en": "When flying, pass over models, units and terrain; marching within 8 inches of enemies needs no Leadership test."
+            },
+            {
+              "ko": "이동의 시작과 끝은 지상에 둡니다. 착지한 지형의 효과는 적용합니다.",
+              "en": "Begin and finish movement on the ground; apply the effects of landing terrain."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "다른 유닛이나 통과 불가 지형 위, 적 1인치 이내에서 끝낼 수 없습니다. 플라이 캐릭터와 플라이가 없는 유닛은 서로 합류할 수 없습니다.",
+              "en": "Do not end on another unit, on impassable terrain or within 1 inch of an enemy; flying characters and non-flying units cannot join each other."
+            }
+          ],
+          "example": {
+            "ko": "플라이(8) 모델이 비행을 선택하면 M 8을 기준으로 해당 이동을 처리하지만, 이동 끝에는 합법적인 지상 위치가 필요합니다.",
+            "en": "A model choosing Fly (8) uses Movement 8 for that move but still needs a legal ground position at its end."
+          },
+          "quick": {
+            "ko": "지상/플라이 M 선택; 시작·끝은 지상; 팔로 업·퍼슈트에는 플라이 선택 불가.",
+            "en": "Choose ground/Fly M; start/end on ground; no flying for follow up or pursuit."
+          },
+          "sources": [
+            {
+              "title": "Fly (X)",
+              "path": "/special-rules/fly"
+            }
+          ]
+        },
+        {
+          "id": "special-swiftstride",
+          "title": {
+            "ko": "스위프트스트라이드",
+            "en": "Swiftstride"
+          },
+          "aliases": [
+            "스위프트스트라이드",
+            "Swiftstride"
+          ],
+          "path": "/special-rules/swiftstride",
+          "summary": {
+            "ko": "유닛 전원이 이 규칙을 가지면 최대 가능 차지 거리가 3인치 늘고, 차지·플리·퍼슈트 굴림 전에 +D6을 선택할 수 있습니다.",
+            "en": "An entirely qualifying unit gains 3 inches of maximum possible charge range and may choose +D6 before a Charge, Flee or Pursuit roll."
+          },
+          "timing": {
+            "ko": "차지 선언 가능 거리와 차지·도주·추격 굴림 전.",
+            "en": "When checking charge-declaration reach and before Charge, Flee or Pursuit rolls."
+          },
+          "steps": [
+            {
+              "ko": "유닛의 모든 모델이 이 규칙을 가졌는지 확인합니다.",
+              "en": "Check that every model in the unit has this rule."
+            },
+            {
+              "ko": "차지 가능 여부를 위한 최대 가능 거리에는 3인치를 추가합니다.",
+              "en": "Add 3 inches when checking maximum possible charge range."
+            },
+            {
+              "ko": "차지·플리·퍼슈트를 굴리기 전에 +D6 보정을 사용할지 결정하고, 선택했다면 기본 결과에 그 D6을 더합니다.",
+              "en": "Before rolling Charge, Flee or Pursuit, choose whether to add +D6; if chosen, add it to the normal result."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "기본 굴림을 본 다음 추가 주사위 사용 여부를 정하지 않습니다. 주사위를 한꺼번에 굴려 임의로 높은 것만 고르는 방식으로 바꾸지 않습니다.",
+              "en": "Do not decide after seeing the base roll or replace the procedure by freely selecting high dice from a pool."
+            }
+          ],
+          "example": {
+            "ko": "M 7 유닛의 기본 차지 굴림 결과가 4이고 미리 선택한 추가 D6이 3이면 차지 거리는 7+4+3=14인치입니다.",
+            "en": "For M 7, a base Charge roll of 4 and a preselected extra D6 of 3 give charge range 7+4+3=14 inches."
+          },
+          "quick": {
+            "ko": "전원 보유: 최대 차지 가능 거리 +3인치; 굴림 전 선택으로 Charge/Flee/Pursuit +D6.",
+            "en": "All models: maximum possible charge +3 inches; choose +D6 before Charge/Flee/Pursuit roll."
+          },
+          "sources": [
+            {
+              "title": "Swiftstride",
+              "path": "/special-rules/swiftstride"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "special-equipment",
+      "title": {
+        "ko": "무장과 방어구",
+        "en": "Weapons and armour"
+      },
+      "description": {
+        "ko": "무기 프로필의 S·AP와 차지·양손·실드 조건을 함께 적용합니다.",
+        "en": "Apply weapon Strength and AP together with charge, two-hand and shield conditions."
+      },
+      "entries": [
+        {
+          "id": "special-hand-weapon",
+          "title": {
+            "ko": "핸드 웨폰",
+            "en": "Hand Weapon"
+          },
+          "aliases": [
+            "핸드 웨폰",
+            "Hand Weapon"
+          ],
+          "path": "/weapons-of-war/hand-weapon",
+          "summary": {
+            "ko": "컴뱃에서 사용자 S를 그대로 쓰며 무기 자체의 AP 보정은 없습니다.",
+            "en": "In combat, use the wielder’s Strength with no AP modifier from the weapon itself."
+          },
+          "timing": {
+            "ko": "컴뱃에서 사용할 무기와 공격 S·AP를 결정할 때.",
+            "en": "When selecting a combat weapon and determining Strength and AP."
+          },
+          "steps": [
+            {
+              "ko": "별도 명시가 없으면 모델은 핸드 웨폰을 장비한 것으로 봅니다.",
+              "en": "Unless specified otherwise, treat the model as equipped with a hand weapon."
+            },
+            {
+              "ko": "선택한 핸드 웨폰 공격에는 해당 공격자의 S와 AP ‘–’를 사용합니다.",
+              "en": "For the selected hand-weapon attack use that attacker’s S and AP “–”."
+            },
+            {
+              "ko": "Ensorcelled Weapons나 Parry처럼 그 무기에 적용되는 추가 규칙을 별도로 확인합니다.",
+              "en": "Check any applicable additional rules such as Ensorcelled Weapons or Parry."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "다른 무기의 S·AP 보너스를 핸드 웨폰에 그대로 합치지 않습니다.",
+              "en": "Do not combine the Strength or AP bonuses of another weapon with the hand weapon."
+            }
+          ],
+          "example": {
+            "ko": "S 4 모델이 다른 보정 없이 핸드 웨폰으로 공격하면 S 4, AP ‘–’입니다.",
+            "en": "An otherwise unmodified S 4 model attacking with a hand weapon uses S 4 and AP “–”."
+          },
+          "quick": {
+            "ko": "핸드 웨폰: 컴뱃 / S 사용자 / AP ‘–’.",
+            "en": "Hand weapon: Combat / wielder S / AP “–”."
+          },
+          "sources": [
+            {
+              "title": "Hand Weapon",
+              "path": "/weapons-of-war/hand-weapon"
+            }
+          ]
+        },
+        {
+          "id": "special-great-weapon",
+          "title": {
+            "ko": "그레이트 웨폰",
+            "en": "Great Weapon"
+          },
+          "aliases": [
+            "그레이트 웨폰",
+            "Great Weapon"
+          ],
+          "path": "/weapons-of-war/great-weapon",
+          "summary": {
+            "ko": "S+2·AP -2이며 아머 베인(1)·리콰이어즈 투 핸즈·스트라이크 라스트를 함께 적용합니다.",
+            "en": "Use S+2 and AP -2, with Armour Bane (1), Requires Two Hands and Strike Last."
+          },
+          "timing": {
+            "ko": "그레이트 웨폰으로 컴뱃 공격을 해결할 때.",
+            "en": "When resolving combat attacks with a great weapon."
+          },
+          "steps": [
+            {
+              "ko": "사용자 S에 +2를 더하고 무기 AP를 -2로 정합니다.",
+              "en": "Add +2 to the wielder’s S and use AP -2."
+            },
+            {
+              "ko": "양손 무기이므로 해당 컴뱃에서 실드를 함께 쓰지 않으며 Strike Last로 I를 먼저 1로 설정합니다.",
+              "en": "Do not use a shield alongside it in combat; set I to 1 before other modifiers for Strike Last."
+            },
+            {
+              "ko": "자연 투 운드 6에는 Armour Bane (1)로 해당 운드의 AP를 한 단계 더 개선합니다.",
+              "en": "On a natural 6 To Wound, Armour Bane (1) improves AP a further step for that wound."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "Strike First와 Strike Last가 함께 있으면 서로 상쇄됩니다. 무기 효과는 실제 그 무기로 공격하는 요소에만 적용합니다.",
+              "en": "Strike First and Strike Last cancel each other; weapon effects apply only to the element using that weapon."
+            }
+          ],
+          "example": {
+            "ko": "S 3 모델은 S 5·AP -2로 공격하고 자연 투 운드 6의 해당 운드는 AP -3이 됩니다.",
+            "en": "A S 3 wielder attacks at S 5 and AP -2; a natural 6 To Wound makes that wound AP -3."
+          },
+          "quick": {
+            "ko": "그레이트 웨폰: S+2 / AP -2 / 아머 베인(1) / 양손 / 스트라이크 라스트.",
+            "en": "Great weapon: S+2 / AP -2 / Armour Bane (1) / two hands / Strike Last."
+          },
+          "sources": [
+            {
+              "title": "Great Weapon",
+              "path": "/weapons-of-war/great-weapon"
+            }
+          ]
+        },
+        {
+          "id": "special-lance",
+          "title": {
+            "ko": "랜스",
+            "en": "Lance"
+          },
+          "aliases": [
+            "랜스",
+            "Lance"
+          ],
+          "path": "/weapons-of-war/lance",
+          "summary": {
+            "ko": "캐벌리·몬스터가 차지한 턴에만 사용하며, 차지한 적 모델에게 S+2·AP -2를 적용합니다.",
+            "en": "Cavalry or monsters may use it only in a turn they charged; S+2 and AP -2 apply only against models they charged."
+          },
+          "timing": {
+            "ko": "차지한 턴의 랜스 공격을 해결할 때.",
+            "en": "When resolving lance attacks in a turn the wielder charged."
+          },
+          "steps": [
+            {
+              "ko": "사용자의 병종이 캐벌리 또는 몬스터인지 확인합니다.",
+              "en": "Confirm the wielder’s troop type is cavalry or monster."
+            },
+            {
+              "ko": "이번 턴 실제로 차지했는지와 공격 대상이 그 차지의 적 모델인지 구분합니다.",
+              "en": "Check whether it charged this turn and whether each target is a model it charged."
+            },
+            {
+              "ko": "해당 대상에게 S+2·AP -2를 적용하고 자연 투 운드 6에는 Armour Bane (1)도 적용합니다.",
+              "en": "Against qualifying targets apply S+2 and AP -2, plus Armour Bane (1) on a natural 6 To Wound."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "다음 턴까지 랜스 보너스를 유지하지 않습니다. 같은 전투의 다른 적에게 S·AP 차지 보너스를 자동으로 적용하지 않습니다.",
+              "en": "Do not carry the lance bonus into later turns or automatically apply its S/AP modifiers to a different enemy in the combat."
+            }
+          ],
+          "example": {
+            "ko": "S 4 나이트가 차지한 적에게 랜스로 공격하면 S 6·AP -2입니다. 이후 차지하지 않은 턴에는 랜스를 사용할 수 없습니다.",
+            "en": "A S 4 knight uses S 6 and AP -2 against the enemy it charged; in a later non-charge turn it cannot use the lance."
+          },
+          "quick": {
+            "ko": "랜스: 캐벌리·몬스터 / 차지 턴만 / 차지한 대상에게 S+2·AP -2·아머 베인(1).",
+            "en": "Lance: cavalry/monster; charge turn only; charged targets get S+2/AP -2/Armour Bane (1)."
+          },
+          "sources": [
+            {
+              "title": "Lance",
+              "path": "/weapons-of-war/lance"
+            }
+          ]
+        },
+        {
+          "id": "special-cavalry-spear",
+          "title": {
+            "ko": "캐벌리 스피어",
+            "en": "Cavalry Spear"
+          },
+          "aliases": [
+            "캐벌리 스피어",
+            "Cavalry Spear"
+          ],
+          "path": "/weapons-of-war/cavalry-spear",
+          "summary": {
+            "ko": "캐벌리·몬스터·차리엇용이며 S+1·AP -1은 차지한 턴에만 적용합니다.",
+            "en": "For cavalry, monsters or chariots; its S+1 and AP -1 modifiers apply only in a turn the wielder charged."
+          },
+          "timing": {
+            "ko": "캐벌리 스피어 공격·서포팅 어택을 결정할 때.",
+            "en": "When determining cavalry-spear attacks and supporting attacks."
+          },
+          "steps": [
+            {
+              "ko": "사용자의 병종이 허용되는지 확인합니다.",
+              "en": "Check that the wielder is an allowed troop type."
+            },
+            {
+              "ko": "차지한 턴에는 S+1과 AP -1을 적용합니다. 차지하지 않았다면 그 S·AP 보정을 더하지 않습니다.",
+              "en": "Apply S+1 and AP -1 in a charge turn; otherwise do not add those modifiers."
+            },
+            {
+              "ko": "Fight in Extra Rank에 따른 지원 가능성을 확인하되, 차지한 턴에는 이 무기로 서포팅 어택을 하지 못합니다.",
+              "en": "Check support permitted by Fight in Extra Rank, but do not make a supporting attack with it in a turn the model charged."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "캐벌리 지원 공격이 허용되어도 탈것까지 지원 공격하는 것은 아닙니다.",
+              "en": "Even when cavalry support is allowed, the mount does not make a supporting attack."
+            }
+          ],
+          "example": {
+            "ko": "S 3 라이더는 차지 턴에 S 4·AP -1을 쓰지만, 그 턴 뒤 대열의 캐벌리 스피어 지원 공격은 제외합니다.",
+            "en": "A S 3 rider uses S 4 and AP -1 in a charge turn, but rear-rank cavalry-spear supporting attacks are excluded that turn."
+          },
+          "quick": {
+            "ko": "캐벌리 스피어: 차지 턴 S+1·AP -1; 차지 턴 지원 공격 불가.",
+            "en": "Cavalry spear: charge turn S+1/AP -1; no supporting attack that charge turn."
+          },
+          "sources": [
+            {
+              "title": "Cavalry Spear",
+              "path": "/weapons-of-war/cavalry-spear"
+            }
+          ]
+        },
+        {
+          "id": "special-halberd",
+          "title": {
+            "ko": "할버드",
+            "en": "Halberd"
+          },
+          "aliases": [
+            "할버드",
+            "Halberd"
+          ],
+          "path": "/weapons-of-war/halberd",
+          "summary": {
+            "ko": "S+1·기본 AP -1이며 이번 턴 차지한 적 모델에게 AP -2입니다. 양손과 아머 베인(1)을 적용합니다.",
+            "en": "Use S+1 and base AP -1, improving to AP -2 against models charged this turn; apply two hands and Armour Bane (1)."
+          },
+          "timing": {
+            "ko": "할버드로 컴뱃 공격을 해결할 때.",
+            "en": "When resolving halberd combat attacks."
+          },
+          "steps": [
+            {
+              "ko": "사용자 S에 +1을 더합니다.",
+              "en": "Add +1 to the wielder’s S."
+            },
+            {
+              "ko": "공격 대상이 이번 턴 차지한 적 모델인지 확인해 AP -2 또는 기본 -1을 고릅니다.",
+              "en": "Choose AP -2 for a model charged this turn, or the base AP -1 otherwise."
+            },
+            {
+              "ko": "Requires Two Hands로 실드를 함께 사용하지 않으며 자연 투 운드 6에는 Armour Bane (1)을 적용합니다.",
+              "en": "Do not use a shield alongside Requires Two Hands; apply Armour Bane (1) on natural 6 To Wound."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "할버드의 차지 AP -2를 전투 내 모든 대상이나 다음 턴까지 유지하지 않습니다.",
+              "en": "Do not extend the charge AP -2 to every enemy in the combat or to later turns."
+            }
+          ],
+          "example": {
+            "ko": "S 3 할버드 모델은 S 4입니다. 이번 턴 차지한 대상은 AP -2, 그 밖의 대상은 AP -1로 처리합니다.",
+            "en": "A S 3 halberd wielder attacks at S 4; use AP -2 against a target charged this turn and AP -1 otherwise."
+          },
+          "quick": {
+            "ko": "할버드: S+1 / AP -1, 이번 턴 차지 대상 -2 / 아머 베인(1) / 양손.",
+            "en": "Halberd: S+1 / AP -1, charged targets -2 / Armour Bane (1) / two hands."
+          },
+          "sources": [
+            {
+              "title": "Halberd",
+              "path": "/weapons-of-war/halberd"
+            }
+          ]
+        },
+        {
+          "id": "special-shield",
+          "title": {
+            "ko": "실드",
+            "en": "Shield"
+          },
+          "aliases": [
+            "실드",
+            "Shield"
+          ],
+          "path": "/weapons-of-war/shield",
+          "summary": {
+            "ko": "실드는 아머 수치를 1 개선하지만 컴뱃에서 양손 무기와 함께 사용할 수 없습니다.",
+            "en": "A shield improves armour by 1 but cannot be used alongside a two-handed weapon in combat."
+          },
+          "timing": {
+            "ko": "공격받은 모델의 아머 목표값을 계산할 때.",
+            "en": "When calculating the defender’s armour target."
+          },
+          "steps": [
+            {
+              "ko": "기본 아머에 실드가 실제로 사용 가능한지 확인합니다.",
+              "en": "Check whether the shield is usable with the model’s current equipment."
+            },
+            {
+              "ko": "사용 가능하면 아머 목표값을 한 단계 낮춥니다.",
+              "en": "If usable, improve the armour target by one step."
+            },
+            {
+              "ko": "컴뱃에서 선택한 무기가 Requires Two Hands라면 그 공격에 대한 실드 보너스를 제외합니다.",
+              "en": "If the selected combat weapon Requires Two Hands, omit the shield benefit in that combat."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "양손 무기를 가진 것만으로 다른 단계의 사격·마법에 대한 실드를 항상 잃는 것은 아닙니다. 단계와 실제 사용 무기를 구분합니다.",
+              "en": "Carrying a two-handed weapon does not automatically remove shield use against shooting or magic in other phases; distinguish phase and actual weapon use."
+            }
+          ],
+          "example": {
+            "ko": "라이트 아머 6+에 실드를 사용할 수 있으면 5+가 됩니다. 컴뱃에서 그레이트 웨폰을 사용하면 그 실드 보너스를 더하지 않습니다.",
+            "en": "Light armour 6+ with a usable shield becomes 5+; omit that shield benefit while using a great weapon in combat."
+          },
+          "quick": {
+            "ko": "실드: 아머 1 개선; 컴뱃 양손 무기와 동시 사용 불가.",
+            "en": "Shield: armour improves 1; cannot combine with a two-handed weapon in combat."
+          },
+          "sources": [
+            {
+              "title": "Shield",
+              "path": "/weapons-of-war/shield"
+            }
+          ]
+        },
+        {
+          "id": "special-armour-types",
+          "title": {
+            "ko": "라이트·헤비·풀 플레이트 아머",
+            "en": "Light, Heavy and Full Plate Armour"
+          },
+          "aliases": [
+            "라이트·헤비·풀 플레이트 아머",
+            "Light, Heavy and Full Plate Armour"
+          ],
+          "path": "/weapons-of-war/light-armour",
+          "summary": {
+            "ko": "기본 아머는 라이트 6+, 헤비 5+, 풀 플레이트 4+입니다.",
+            "en": "Base armour is Light 6+, Heavy 5+ and Full Plate 4+."
+          },
+          "timing": {
+            "ko": "모델의 기본 아머 프로필을 정할 때.",
+            "en": "When determining a model’s base armour profile."
+          },
+          "steps": [
+            {
+              "ko": "실제 선택한 아머 종류의 기본값을 먼저 정합니다.",
+              "en": "Start with the base value of the armour actually selected."
+            },
+            {
+              "ko": "적용 가능한 실드·기타 아머 개선을 합친 뒤 해당 공격의 AP를 적용합니다.",
+              "en": "Apply usable shield and other armour improvements, then the attack’s AP."
+            },
+            {
+              "ko": "서로 다른 아머 종류의 기본값을 누적해서 더하지 않습니다.",
+              "en": "Do not add the base values of different armour types together."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "와드나 리제너레이션은 별도 방어 방식입니다. 아머 값만 바뀌었다고 그 수치까지 바꾸지 않습니다.",
+              "en": "Ward and Regeneration saves are separate; changing armour does not by itself change those values."
+            }
+          ],
+          "example": {
+            "ko": "헤비 아머 5+와 사용 가능한 실드는 4+입니다. 풀 플레이트를 선택하면 기본값부터 4+로 시작합니다.",
+            "en": "Heavy armour 5+ with a usable shield becomes 4+; Full Plate starts at a base value of 4+ instead."
+          },
+          "quick": {
+            "ko": "기본 아머: 라이트 6+ / 헤비 5+ / 풀 플레이트 4+.",
+            "en": "Base armour: Light 6+ / Heavy 5+ / Full Plate 4+."
+          },
+          "sources": [
+            {
+              "title": "Light, Heavy and Full Plate Armour",
+              "path": "/weapons-of-war/light-armour"
+            },
+            {
+              "title": "Heavy Armour",
+              "path": "/weapons-of-war/heavy-armour"
+            },
+            {
+              "title": "Full Plate Armour",
+              "path": "/weapons-of-war/full-plate-armour"
+            }
+          ],
+          "table": {
+            "caption": {
+              "ko": "기본 방어구 값",
+              "en": "Base armour values"
+            },
+            "columns": [
+              {
+                "ko": "종류",
+                "en": "Type"
+              },
+              {
+                "ko": "아머",
+                "en": "Armour"
+              }
+            ],
+            "rows": [
+              [
+                {
+                  "ko": "라이트 아머",
+                  "en": "Light Armour"
+                },
+                "6+"
+              ],
+              [
+                {
+                  "ko": "헤비 아머",
+                  "en": "Heavy Armour"
+                },
+                "5+"
+              ],
+              [
+                {
+                  "ko": "풀 플레이트 아머",
+                  "en": "Full Plate Armour"
+                },
+                "4+"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "special-attack-effects",
+      "title": {
+        "ko": "명중·운드 특수 효과",
+        "en": "Special hit and wound effects"
+      },
+      "description": {
+        "ko": "자연 눈과 수정 결과, 효과를 받는 공격 하나와 모델 전체를 구분합니다.",
+        "en": "Distinguish natural rolls from modified results and single-attack effects from model-wide effects."
+      },
+      "entries": [
+        {
+          "id": "special-poison",
+          "title": {
+            "ko": "포이즌드 어택스",
+            "en": "Poisoned Attacks"
+          },
+          "aliases": [
+            "포이즌드 어택스",
+            "Poisoned Attacks"
+          ],
+          "path": "/special-rules/poisoned-attacks",
+          "summary": {
+            "ko": "자연 투 힛 6이 나온 해당 힛의 투 운드에 +2를 적용할 수 있습니다.",
+            "en": "A natural 6 To Hit allows +2 to the To Wound roll for that hit."
+          },
+          "timing": {
+            "ko": "사격·컴뱃 투 힛 후, 투 운드를 굴릴 때.",
+            "en": "After shooting or combat hits, when rolling To Wound."
+          },
+          "steps": [
+            {
+              "ko": "자연 투 힛 6을 다른 힛과 구분합니다.",
+              "en": "Separate natural 6s To Hit from other hits."
+            },
+            {
+              "ko": "각 해당 힛은 투 운드 굴림에 +2를 적용합니다. 자동 운드로 바꾸지 않습니다.",
+              "en": "Apply +2 to each qualifying To Wound roll rather than treating it as an automatic wound."
+            },
+            {
+              "ko": "세이브와 나머지 피해 처리 절차는 계속 진행합니다.",
+              "en": "Continue resolving saves and damage normally."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "별도 명시가 없으면 스펠과 매직 웨폰 공격에는 적용하지 않습니다. 자동 명중 또는 투 힛 7+가 필요한 공격에는 사용할 수 없습니다.",
+              "en": "Unless stated otherwise, spells and magic-weapon attacks are unaffected; automatic hits and attacks needing 7+ To Hit cannot use it."
+            }
+          ],
+          "example": {
+            "ko": "보통 투 운드 5+가 필요한 힛이 포이즌 조건을 만족하면 +2를 받아 주사위 3 이상으로 그 요구값에 도달합니다. 자연 1 실패 규칙은 여전히 적용합니다.",
+            "en": "A qualifying hit normally needing 5+ To Wound reaches that target on a die result of 3 with +2; natural-1 failure still applies."
+          },
+          "quick": {
+            "ko": "자연 To Hit 6 → 그 힛 To Wound +2; 자동 명중·7+·매직 웨폰·스펠 제외.",
+            "en": "Natural To Hit 6 → that hit’s To Wound +2; exclude auto-hits, 7+, magic weapons and spells."
+          },
+          "sources": [
+            {
+              "title": "Poisoned Attacks",
+              "path": "/special-rules/poisoned-attacks"
+            }
+          ]
+        },
+        {
+          "id": "special-armour-bane",
+          "title": {
+            "ko": "아머 베인(X)",
+            "en": "Armour Bane (X)"
+          },
+          "aliases": [
+            "아머 베인(X)",
+            "Armour Bane (X)"
+          ],
+          "path": "/special-rules/armour-bane",
+          "summary": {
+            "ko": "자연 투 운드 6인 해당 운드의 무기 AP를 X만큼 개선합니다.",
+            "en": "A natural 6 To Wound improves the weapon’s AP by X for that wound."
+          },
+          "timing": {
+            "ko": "투 운드 결과를 나누고 아머 세이브를 하기 전.",
+            "en": "When separating wound results before armour saves."
+          },
+          "steps": [
+            {
+              "ko": "규칙명에 적힌 X와 선택한 무기의 AP를 확인합니다.",
+              "en": "Read X from the rule name and identify the selected weapon’s AP."
+            },
+            {
+              "ko": "보정 전 투 운드 주사위가 6인 운드만 별도로 모읍니다.",
+              "en": "Separate wounds whose unmodified To Wound die was 6."
+            },
+            {
+              "ko": "그 운드의 AP를 X만큼 더 낮춰 해당 아머 세이브를 해결합니다.",
+              "en": "Improve AP by X for those wounds when resolving their armour saves."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "수정 후 6이 된 눈이나 자연 투 힛 6을 발동 조건으로 사용하지 않습니다. 다른 운드의 AP까지 바꾸지 않습니다.",
+              "en": "Do not trigger it from a modified 6 or a natural 6 To Hit, and do not change the AP of other wounds."
+            }
+          ],
+          "example": {
+            "ko": "AP -2 무기의 아머 베인(1) 공격에서 자연 투 운드 6이 나온 해당 운드는 AP -3입니다.",
+            "en": "For an AP -2 weapon with Armour Bane (1), the wound caused by a natural 6 To Wound has AP -3."
+          },
+          "quick": {
+            "ko": "자연 To Wound 6 → 그 운드 AP를 X만큼 개선.",
+            "en": "Natural To Wound 6 → improve that wound’s AP by X."
+          },
+          "sources": [
+            {
+              "title": "Armour Bane (X)",
+              "path": "/special-rules/armour-bane"
+            }
+          ]
+        },
+        {
+          "id": "special-ensorcelled",
+          "title": {
+            "ko": "인소셀드 웨폰즈",
+            "en": "Ensorcelled Weapons"
+          },
+          "aliases": [
+            "인소셀드 웨폰즈",
+            "Ensorcelled Weapons"
+          ],
+          "path": "/special-rules/ensorcelled-weapons",
+          "summary": {
+            "ko": "일반 핸드 웨폰 하나에 매지컬 어택스와 AP -1을 줍니다.",
+            "en": "A single non-magical hand weapon gains Magical Attacks and AP -1."
+          },
+          "timing": {
+            "ko": "무기를 선택하고 핸드 웨폰 공격 프로필을 정할 때.",
+            "en": "When selecting weapons and setting the hand-weapon profile."
+          },
+          "steps": [
+            {
+              "ko": "이 규칙을 가진 모델이 일반 핸드 웨폰 하나를 사용하는지 확인합니다.",
+              "en": "Check that the model with this rule is using one non-magical hand weapon."
+            },
+            {
+              "ko": "그 무기의 공격에 Magical Attacks와 AP -1을 적용합니다.",
+              "en": "Apply Magical Attacks and AP -1 to that weapon."
+            },
+            {
+              "ko": "다른 무기를 선택하면 이 효과가 중단되는지 다시 확인합니다.",
+              "en": "Recheck the effect when a different weapon is selected."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "탈것, 매직 웨폰, 핸드 웨폰 두 개 또는 다른 종류 무기에는 적용하지 않습니다.",
+              "en": "It does not apply to a mount, a magic weapon, two hand weapons or another weapon type."
+            }
+          ],
+          "example": {
+            "ko": "카오스 모델의 일반 핸드 웨폰은 AP -1·매지컬 어택스지만, 랜스를 골랐다면 랜스에 이 AP -1을 누적하지 않습니다.",
+            "en": "A Chaos model’s qualifying hand weapon uses AP -1 and Magical Attacks; selecting a lance does not add that AP -1 to the lance."
+          },
+          "quick": {
+            "ko": "일반 핸드 웨폰 하나만: 매지컬 어택스 + AP -1; 탈것·다른 무기 제외.",
+            "en": "One non-magical hand weapon: Magical Attacks + AP -1; exclude mount and other weapons."
+          },
+          "sources": [
+            {
+              "title": "Ensorcelled Weapons",
+              "path": "/special-rules/ensorcelled-weapons"
+            }
+          ]
+        },
+        {
+          "id": "special-strike-first",
+          "title": {
+            "ko": "스트라이크 퍼스트",
+            "en": "Strike First"
+          },
+          "aliases": [
+            "스트라이크 퍼스트",
+            "Strike First"
+          ],
+          "path": "/special-rules/strike-first",
+          "summary": {
+            "ko": "컴뱃에서 다른 수정치 전에 I를 10으로 설정합니다.",
+            "en": "In combat, set Initiative to 10 before other modifiers."
+          },
+          "timing": {
+            "ko": "컴뱃의 공격 순서를 정할 때.",
+            "en": "When determining combat attack order."
+          },
+          "steps": [
+            {
+              "ko": "해당 모델에 Strike First와 Strike Last가 함께 있는지 확인합니다.",
+              "en": "Check whether the model has both Strike First and Strike Last."
+            },
+            {
+              "ko": "Strike First만 적용하면 기본 처리값을 I 10으로 설정한 후 다른 허용 수정치를 계산합니다.",
+              "en": "If Strike First applies alone, set I to 10 before applying other permitted modifiers."
+            },
+            {
+              "ko": "최종 I와 다른 공격 시점 규칙에 맞춰 공격 순서를 정합니다.",
+              "en": "Resolve order using final Initiative and any other timing rules."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "Strike Last와 함께 있으면 두 규칙이 서로 상쇄됩니다.",
+              "en": "If Strike Last is also present, the two rules cancel each other."
+            }
+          ],
+          "example": {
+            "ko": "원래 I 3인 모델은 Strike First만 적용될 때 다른 수정치 전 I 10을 사용합니다.",
+            "en": "A model normally at I 3 uses I 10 before other modifiers when only Strike First applies."
+          },
+          "quick": {
+            "ko": "스트라이크 퍼스트: 다른 수정치 전 I 10; 스트라이크 라스트와 상쇄.",
+            "en": "Strike First: I 10 before modifiers; cancels Strike Last."
+          },
+          "sources": [
+            {
+              "title": "Strike First",
+              "path": "/special-rules/strike-first"
+            }
+          ]
+        },
+        {
+          "id": "special-strike-last",
+          "title": {
+            "ko": "스트라이크 라스트",
+            "en": "Strike Last"
+          },
+          "aliases": [
+            "스트라이크 라스트",
+            "Strike Last"
+          ],
+          "path": "/special-rules/strike-last",
+          "summary": {
+            "ko": "컴뱃에서 다른 수정치 전에 I를 1로 설정합니다.",
+            "en": "In combat, set Initiative to 1 before other modifiers."
+          },
+          "timing": {
+            "ko": "컴뱃의 공격 순서를 정할 때.",
+            "en": "When determining combat attack order."
+          },
+          "steps": [
+            {
+              "ko": "해당 모델의 Strike Last와 Strike First 보유 여부를 확인합니다.",
+              "en": "Check the model’s Strike Last and Strike First rules."
+            },
+            {
+              "ko": "Strike Last만 적용하면 I를 먼저 1로 설정합니다.",
+              "en": "If Strike Last applies alone, first set I to 1."
+            },
+            {
+              "ko": "그 뒤 차지 등 적용 가능한 다른 수정치를 계산해 최종 공격 순서를 정합니다.",
+              "en": "Then apply eligible modifiers such as a charge bonus to determine attack order."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "다른 모든 공격보다 반드시 늦는다는 식으로 처리하지 않습니다. 스톰프처럼 별도 최후 시점 규칙이 있는 공격은 그 규칙을 따릅니다.",
+              "en": "Do not interpret it as always after every other attack; attacks with a separate final timing, such as Stomps, follow their own rules."
+            }
+          ],
+          "example": {
+            "ko": "Strike Last 모델이 적용 가능한 I +2 보너스를 받으면 I를 1로 설정한 뒤 +2를 계산합니다.",
+            "en": "If a Strike Last model has an applicable +2 Initiative bonus, set I to 1 and then add +2."
+          },
+          "quick": {
+            "ko": "스트라이크 라스트: 다른 수정치 전 I 1; 스트라이크 퍼스트와 상쇄.",
+            "en": "Strike Last: I 1 before modifiers; cancels Strike First."
+          },
+          "sources": [
+            {
+              "title": "Strike Last",
+              "path": "/special-rules/strike-last"
+            }
+          ]
+        },
+        {
+          "id": "special-two-hands",
+          "title": {
+            "ko": "리콰이어즈 투 핸즈",
+            "en": "Requires Two Hands"
+          },
+          "aliases": [
+            "리콰이어즈 투 핸즈",
+            "Requires Two Hands"
+          ],
+          "path": "/special-rules/requires-two-hands",
+          "summary": {
+            "ko": "컴뱃에서 이 무기를 사용하는 동안 실드를 함께 사용할 수 없습니다.",
+            "en": "A shield cannot be used alongside this weapon during combat."
+          },
+          "timing": {
+            "ko": "단계별로 실드 사용 가능 여부를 확인할 때.",
+            "en": "When checking shield use in each phase."
+          },
+          "steps": [
+            {
+              "ko": "이번 컴뱃에서 사용하는 무기에 Requires Two Hands가 있는지 확인합니다.",
+              "en": "Check whether the weapon used in this combat Requires Two Hands."
+            },
+            {
+              "ko": "그 무기를 사용한다면 컴뱃에서 실드 효과를 제외합니다.",
+              "en": "If it does, exclude the shield’s effects during combat."
+            },
+            {
+              "ko": "다른 단계의 사격·마법 피해를 받을 때는 그 단계의 실드 사용 조건을 다시 적용합니다.",
+              "en": "For shooting or magic in another phase, reassess shield use under that phase’s conditions."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "무기를 소지했다는 이유만으로 모든 단계에서 실드가 사라지는 것은 아닙니다.",
+              "en": "Merely carrying the weapon does not remove the shield in every phase."
+            }
+          ],
+          "example": {
+            "ko": "실드와 그레이트 웨폰을 가진 모델은 그레이트 웨폰 컴뱃에서는 실드를 쓰지 않지만 다른 단계의 사격에는 사용할 수 있습니다.",
+            "en": "A model with shield and great weapon cannot combine them in great-weapon combat, but may use the shield against shooting in another phase."
+          },
+          "quick": {
+            "ko": "컴뱃에서 양손 무기 사용 → 실드 제외; 다른 단계는 별도 확인.",
+            "en": "Use two-handed weapon in combat → no shield; reassess other phases."
+          },
+          "sources": [
+            {
+              "title": "Requires Two Hands",
+              "path": "/special-rules/requires-two-hands"
+            }
+          ]
+        },
+        {
+          "id": "special-killing-blow",
+          "title": {
+            "ko": "킬링 블로",
+            "en": "Killing Blow"
+          },
+          "aliases": [
+            "킬링 블로",
+            "Killing Blow"
+          ],
+          "path": "/special-rules/killing-blow",
+          "summary": {
+            "ko": "컴뱃 자연 투 운드 6으로 인팬트리·캐벌리에 세이브되지 않은 운드를 주면 남은 W를 모두 잃게 합니다.",
+            "en": "A combat natural 6 To Wound against infantry or cavalry removes all remaining Wounds if unsaved."
+          },
+          "timing": {
+            "ko": "컴뱃 투 운드와 세이브를 해결할 때.",
+            "en": "When resolving combat wounds and saves."
+          },
+          "steps": [
+            {
+              "ko": "대상이 인팬트리 또는 캐벌리인지 병종으로 확인합니다.",
+              "en": "Check that the target is infantry or cavalry by troop type."
+            },
+            {
+              "ko": "해당 컴뱃 공격의 자연 투 운드 6을 구분합니다. 아머·리제너레이션 세이브는 허용하지 않습니다.",
+              "en": "Identify the combat natural 6 To Wound; do not allow armour or Regeneration saves against it."
+            },
+            {
+              "ko": "와드 세이브는 정상적으로 허용합니다. 막지 못한 운드가 있으면 대상의 남은 W를 모두 제거합니다.",
+              "en": "Allow Ward saves normally; an unsaved qualifying wound removes all remaining Wounds."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "자동 운드 공격에는 발동하지 않습니다. 몬스터에게 이 인팬트리·캐벌리 효과를 자동으로 확장하지 않습니다.",
+              "en": "It cannot trigger on automatic wounds; do not extend its infantry/cavalry effect to monsters."
+            }
+          ],
+          "example": {
+            "ko": "W 3 인팬트리 캐릭터가 해당 킬링 블로를 와드로 막지 못하면 W 1만 잃는 것이 아니라 남은 W 3을 모두 잃습니다.",
+            "en": "An infantry character with W 3 remaining loses all three if its Ward fails against a qualifying Killing Blow."
+          },
+          "quick": {
+            "ko": "컴뱃 자연 To Wound 6, 인팬트리·캐벌리: 아머/리젠 불가, 와드 가능, 실패 시 남은 W 전부.",
+            "en": "Combat natural wound 6 vs infantry/cavalry: no armour/regen; Ward allowed; unsaved loses all W."
+          },
+          "sources": [
+            {
+              "title": "Killing Blow",
+              "path": "/special-rules/killing-blow"
+            }
+          ]
+        },
+        {
+          "id": "special-monster-slayer",
+          "title": {
+            "ko": "몬스터 슬레이어",
+            "en": "Monster Slayer"
+          },
+          "aliases": [
+            "몬스터 슬레이어",
+            "Monster Slayer"
+          ],
+          "path": "/special-rules/monster-slayer",
+          "summary": {
+            "ko": "컴뱃 자연 투 운드 6으로 몬스터에게 세이브되지 않은 운드를 주면 남은 W를 모두 잃게 합니다.",
+            "en": "A combat natural 6 To Wound against a monster removes all remaining Wounds if unsaved."
+          },
+          "timing": {
+            "ko": "몬스터 대상의 컴뱃 투 운드·세이브를 해결할 때.",
+            "en": "When resolving combat wounds and saves against a monster."
+          },
+          "steps": [
+            {
+              "ko": "대상이 몬스터 병종인지 확인합니다.",
+              "en": "Confirm that the target’s troop type is monster."
+            },
+            {
+              "ko": "자연 투 운드 6의 해당 공격에는 아머·리제너레이션 세이브를 허용하지 않습니다.",
+              "en": "Do not allow armour or Regeneration saves against the qualifying natural 6 To Wound."
+            },
+            {
+              "ko": "정상적으로 허용되는 와드로 막지 못하면 대상의 남은 W를 전부 제거합니다.",
+              "en": "If a normally permitted Ward save does not stop the wound, remove all remaining Wounds."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "자동 운드 공격에는 사용할 수 없습니다. 단순히 큰 베이스라는 이유만으로 몬스터로 판정하지 않습니다.",
+              "en": "It cannot trigger on automatic wounds; a large base alone does not make a target a monster."
+            }
+          ],
+          "example": {
+            "ko": "W 7이 남은 몬스터도 해당 운드를 와드로 막지 못하면 남은 W 7을 모두 잃습니다.",
+            "en": "A monster with W 7 remaining loses all seven if the qualifying wound is not stopped by its Ward."
+          },
+          "quick": {
+            "ko": "컴뱃 자연 To Wound 6, 몬스터: 아머/리젠 불가, 와드 가능, 실패 시 남은 W 전부.",
+            "en": "Combat natural wound 6 vs monster: no armour/regen; Ward allowed; unsaved loses all W."
+          },
+          "sources": [
+            {
+              "title": "Monster Slayer",
+              "path": "/special-rules/monster-slayer"
+            }
+          ]
+        },
+        {
+          "id": "special-multiple-wounds",
+          "title": {
+            "ko": "멀티플 운즈(X)",
+            "en": "Multiple Wounds (X)"
+          },
+          "aliases": [
+            "멀티플 운즈(X)",
+            "Multiple Wounds (X)"
+          ],
+          "path": "/special-rules/multiple-wounds",
+          "summary": {
+            "ko": "세이브되지 않은 각 운드의 피해를 X배로 만들며, 주사위 X는 운드마다 따로 굴립니다.",
+            "en": "Multiply each unsaved wound by X; if X is random, roll separately for each unsaved wound."
+          },
+          "timing": {
+            "ko": "세이브로 막지 못한 운드의 최종 피해량을 정할 때.",
+            "en": "When determining damage from unsaved wounds."
+          },
+          "steps": [
+            {
+              "ko": "운드 판정과 허용 세이브를 먼저 마칩니다.",
+              "en": "Complete wound rolls and permitted saves first."
+            },
+            {
+              "ko": "막지 못한 각 운드에 X를 적용하며 D3·D6라면 각 운드마다 따로 굴립니다.",
+              "en": "Apply X to each unsaved wound, rolling separately for each wound if it is D3 or D6."
+            },
+            {
+              "ko": "그 대상 모델이 잃는 W를 적용하고, 캐릭터의 초과 피해는 오버킬 관련 규칙을 함께 확인합니다.",
+              "en": "Apply the lost Wounds to that model and check Overkill for excess damage to characters."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "한 모델에게 남는 초과 운드를 다음 모델로 넘기지 않습니다.",
+              "en": "Excess wounds against one model do not spill over to another model."
+            }
+          ],
+          "example": {
+            "ko": "W 2가 남은 일반 모델에게 멀티플 운즈(D3)로 3이 나와도 남는 1이 옆 모델에게 넘어가지 않습니다.",
+            "en": "If D3 damage rolls 3 against a non-character with W 2 remaining, the excess one does not transfer to the next model."
+          },
+          "quick": {
+            "ko": "세이브 실패 후 운드별 X 적용; 주사위는 각각; 초과 피해 전이 없음.",
+            "en": "After saves, apply X per unsaved wound; roll each separately; no spillover."
+          },
+          "sources": [
+            {
+              "title": "Multiple Wounds (X)",
+              "path": "/special-rules/multiple-wounds"
+            }
+          ]
+        },
+        {
+          "id": "special-hatred",
+          "title": {
+            "ko": "헤이트리드(X)",
+            "en": "Hatred (X)"
+          },
+          "aliases": [
+            "헤이트리드(X)",
+            "Hatred (X)"
+          ],
+          "path": "/special-rules/hatred",
+          "summary": {
+            "ko": "첫 컴뱃 라운드에 지정된 적을 상대로 실패한 투 힛을 리롤할 수 있습니다.",
+            "en": "In the first combat round, re-roll failed To Hit rolls against the specified hated enemy."
+          },
+          "timing": {
+            "ko": "첫 컴뱃 라운드의 투 힛을 해결할 때.",
+            "en": "When resolving To Hit rolls in the first combat round."
+          },
+          "steps": [
+            {
+              "ko": "괄호에 적힌 대상이 현재 공격 상대와 일치하는지 확인합니다.",
+              "en": "Check whether the current target matches the enemy named in parentheses."
+            },
+            {
+              "ko": "해당 컴뱃의 첫 라운드인지 확인합니다.",
+              "en": "Confirm that this is the first round of that combat."
+            },
+            {
+              "ko": "조건을 만족하는 실패한 투 힛만 리롤하고 두 번째 결과를 사용합니다.",
+              "en": "Re-roll eligible failed To Hit rolls and use the second result."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "All Enemies가 아니라면 모든 상대에게 확장하지 않습니다. 이후 컴뱃 라운드나 투 운드 리롤로 자동 적용하지 않습니다.",
+              "en": "Unless it specifies All Enemies, do not extend it to every target or automatically to later rounds or To Wound rolls."
+            }
+          ],
+          "example": {
+            "ko": "헤이트리드(엘프) 모델은 엘프와의 첫 라운드 실패 투 힛을 리롤하지만 엘프가 아닌 적에게는 그 조건의 리롤을 쓰지 않습니다.",
+            "en": "A model with Hatred (Elves) re-rolls failed hits in its first combat round against Elves, not against an unrelated foe."
+          },
+          "quick": {
+            "ko": "대상 일치 + 첫 컴뱃 라운드 → 실패 To Hit 리롤.",
+            "en": "Matching enemy + first combat round → re-roll failed To Hit."
+          },
+          "sources": [
+            {
+              "title": "Hatred (X)",
+              "path": "/special-rules/hatred"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "special-impact-defence",
+      "title": {
+        "ko": "임팩트·스톰프·특수 방어",
+        "en": "Impact, Stomp and special defences"
+      },
+      "description": {
+        "ko": "자동 명중의 시점과 리제너레이션을 막는 실제 조건을 확인합니다.",
+        "en": "Check automatic-hit timing and the exact conditions that prevent Regeneration."
+      },
+      "entries": [
+        {
+          "id": "special-impact-hits",
+          "title": {
+            "ko": "임팩트 힛(X)",
+            "en": "Impact Hits (X)"
+          },
+          "aliases": [
+            "임팩트 힛(X)",
+            "Impact Hits (X)"
+          ],
+          "path": "/special-rules/impact-hits",
+          "summary": {
+            "ko": "3인치 이상 차지 이동하고 적과 베이스 접촉한 모델이 챌린지 전에 자동 명중을 가합니다.",
+            "en": "A charging model that moved at least 3 inches and is in base contact causes automatic hits before challenges."
+          },
+          "timing": {
+            "ko": "컴뱃 선택·싸움 하위 단계 1.1, 챌린지를 선언하기 전.",
+            "en": "Step 1.1 of Choose Combat & Fight, before challenges are issued."
+          },
+          "steps": [
+            {
+              "ko": "이번 턴 차지 이동이 3인치 이상이었는지와 모델의 베이스 접촉을 확인합니다.",
+              "en": "Check a charge move of at least 3 inches and base contact with the enemy."
+            },
+            {
+              "ko": "표기된 X회 또는 X 주사위를 굴려 임팩트 힛 수를 정합니다.",
+              "en": "Use the printed X or roll its dice expression to determine the number of hits."
+            },
+            {
+              "ko": "차지한 유닛을 상대로 보정 전 S로 자동 명중을 해결합니다.",
+              "en": "Resolve automatic hits against the charged unit using unmodified Strength."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "3인치 미만 차지나 베이스 접촉이 없는 모델은 이 공격을 하지 못합니다. 차리엇은 차체 S, 캐벌리는 탈것 S라는 스플릿 프로필도 적용합니다.",
+              "en": "A move under 3 inches or no base contact does not qualify; apply split-profile rules: chassis S for chariots, mount S for cavalry."
+            }
+          ],
+          "example": {
+            "ko": "차지 이동 4인치·베이스 접촉·차체 S 5·임팩트 힛(D6)에서 3이 나오면 챌린지 전에 S 5 자동 명중 3회를 해결합니다.",
+            "en": "A contacting chariot charging 4 inches at chassis S 5 and rolling 3 for Impact Hits (D6) resolves three S 5 automatic hits before challenges."
+          },
+          "quick": {
+            "ko": "차지 3인치 이상 + 접촉 → 챌린지 전 X 자동 명중, 보정 전 S.",
+            "en": "Charge at least 3 inches + contact → X automatic hits before challenges, unmodified S."
+          },
+          "sources": [
+            {
+              "title": "Impact Hits (X)",
+              "path": "/special-rules/impact-hits"
+            }
+          ]
+        },
+        {
+          "id": "special-stomp",
+          "title": {
+            "ko": "스톰프 어택(X)",
+            "en": "Stomp Attacks (X)"
+          },
+          "aliases": [
+            "스톰프 어택(X)",
+            "Stomp Attacks (X)"
+          ],
+          "path": "/special-rules/stomp-attacks",
+          "summary": {
+            "ko": "베이스 접촉한 모델이 I 1 공격까지 모두 끝난 뒤 X회 자동 명중을 가합니다.",
+            "en": "A model in base contact causes X automatic hits after all other attacks, including Initiative 1 attacks."
+          },
+          "timing": {
+            "ko": "컴뱃의 다른 모든 공격이 끝난 뒤.",
+            "en": "After all other attacks in the combat."
+          },
+          "steps": [
+            {
+              "ko": "공격할 때 해당 모델이 적과 베이스 접촉했는지 확인합니다.",
+              "en": "Check that the model is in base contact with the enemy."
+            },
+            {
+              "ko": "규칙명에 적힌 X회 또는 주사위로 공격 수를 정합니다.",
+              "en": "Determine the number from printed X or its dice expression."
+            },
+            {
+              "ko": "I 1 공격 뒤에 보정 전 S로 자동 명중을 해결합니다.",
+              "en": "After Initiative 1 attacks, resolve automatic hits using unmodified Strength."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "서포팅 위치에 있다는 이유만으로 스톰프를 추가하지 않습니다. Thunderstomp 등 별도 대상 제한과 AP 규칙을 함께 확인합니다.",
+              "en": "A supporting position alone does not allow Stomps; check target restrictions and AP rules such as Thunderstomp."
+            }
+          ],
+          "example": {
+            "ko": "스톰프(2)·보정 전 S 6 모델이 접촉 중이면 다른 공격 뒤에 S 6 자동 명중 2회를 해결합니다.",
+            "en": "A contacting model with Stomp Attacks (2) and unmodified S 6 resolves two S 6 automatic hits after other attacks."
+          },
+          "quick": {
+            "ko": "접촉 필요; I 1 뒤 X 자동 명중; 보정 전 S.",
+            "en": "Requires contact; X automatic hits after I 1; unmodified S."
+          },
+          "sources": [
+            {
+              "title": "Stomp Attacks (X)",
+              "path": "/special-rules/stomp-attacks"
+            }
+          ]
+        },
+        {
+          "id": "special-flaming",
+          "title": {
+            "ko": "플레이밍 어택스",
+            "en": "Flaming Attacks"
+          },
+          "aliases": [
+            "플레이밍 어택스",
+            "Flaming Attacks"
+          ],
+          "path": "/special-rules/flaming-attacks",
+          "summary": {
+            "ko": "해당 모델·무기·스펠이 지정한 공격을 플레이밍 공격으로 처리합니다.",
+            "en": "Treat attacks designated by the model, weapon or spell as Flaming."
+          },
+          "timing": {
+            "ko": "공격 유형과 파이어 관련 면역·약점을 확인할 때.",
+            "en": "When checking attack type and fire-related protections or weaknesses."
+          },
+          "steps": [
+            {
+              "ko": "플레이밍 규칙이 모델 전체에 있는지, 선택한 무기나 스펠에 있는지 확인합니다.",
+              "en": "Check whether Flaming comes from the model, selected weapon or spell."
+            },
+            {
+              "ko": "모델의 일반 규칙이라면 별도 명시가 없을 때 사격·컴뱃에 적용하되 스펠·매직 웨폰 공격에는 자동 전파하지 않습니다.",
+              "en": "For the model’s general rule, apply it to shooting and combat unless stated otherwise, without automatically applying it to spells or magic-weapon attacks."
+            },
+            {
+              "ko": "플레이밍 모델은 워 비스트·스웜 병종에게 Fear를 유발하므로 필요한 해당 판정도 확인합니다.",
+              "en": "A model with the rule causes Fear in war beasts and swarms; check any required tests."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "플레이밍 공격이라는 이유만으로 모든 대상의 리제너레이션을 취소하지 않습니다. Flammable 같은 실제 대상 규칙을 확인합니다.",
+              "en": "Flaming does not by itself cancel every target’s Regeneration; check an applicable target rule such as Flammable."
+            }
+          ],
+          "example": {
+            "ko": "플레이밍 일반 공격을 가진 모델이 별도 플레이밍 표기 없는 매직 웨폰을 들면 그 무기에 효과를 자동으로 붙이지 않습니다.",
+            "en": "A model’s general Flaming rule does not automatically make a separately non-Flaming magic weapon Flaming."
+          },
+          "quick": {
+            "ko": "플레이밍의 적용 범위 확인; 스펠·매직 웨폰 자동 전파 없음; Flammable 등 대상 조건 확인.",
+            "en": "Check Flaming scope; no automatic transfer to spells/magic weapons; check target rules."
+          },
+          "sources": [
+            {
+              "title": "Flaming Attacks",
+              "path": "/special-rules/flaming-attacks"
+            }
+          ]
+        },
+        {
+          "id": "special-flammable",
+          "title": {
+            "ko": "플래머블",
+            "en": "Flammable"
+          },
+          "aliases": [
+            "플래머블",
+            "Flammable"
+          ],
+          "path": "/special-rules/flammable",
+          "summary": {
+            "ko": "플래머블 모델은 플레이밍 공격으로 잃는 운드에 리제너레이션을 시도하지 못합니다.",
+            "en": "A Flammable model cannot use Regeneration against a wound caused by a Flaming attack."
+          },
+          "timing": {
+            "ko": "플레이밍 피해의 리제너레이션 가능 여부를 확인할 때.",
+            "en": "When checking Regeneration against Flaming damage."
+          },
+          "steps": [
+            {
+              "ko": "피해를 받는 모델에 Flammable이 있는지 확인합니다.",
+              "en": "Check that the damaged model has Flammable."
+            },
+            {
+              "ko": "이번 운드가 Flaming 공격으로 발생했는지 확인합니다.",
+              "en": "Check that this wound was caused by a Flaming attack."
+            },
+            {
+              "ko": "두 조건이 맞으면 그 운드에 대한 리제너레이션을 생략합니다.",
+              "en": "If both apply, omit Regeneration for that wound."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "이 규칙을 단순 피해 2배 규칙으로 바꾸거나 다른 방어까지 자동으로 무효화하지 않습니다.",
+              "en": "Do not turn this into an automatic double-damage rule or automatically cancel unrelated defences."
+            }
+          ],
+          "example": {
+            "ko": "리제너레이션(5+)과 플래머블을 가진 모델은 일반 운드에는 해당 리젠을 시도할 수 있지만 플레이밍 운드에는 시도하지 못합니다.",
+            "en": "A model with Regeneration (5+) and Flammable may attempt that regeneration against an ordinary wound, but not against a Flaming wound."
+          },
+          "quick": {
+            "ko": "Flammable 대상 + Flaming 운드 → 그 운드 리제너레이션 불가.",
+            "en": "Flammable target + Flaming wound → no Regeneration for that wound."
+          },
+          "sources": [
+            {
+              "title": "Flammable",
+              "path": "/special-rules/flammable"
+            }
+          ]
+        },
+        {
+          "id": "special-regeneration",
+          "title": {
+            "ko": "리제너레이션(X+)",
+            "en": "Regeneration (X+)"
+          },
+          "aliases": [
+            "리제너레이션(X+)",
+            "Regeneration (X+)"
+          ],
+          "path": "/special-rules/regeneration",
+          "summary": {
+            "ko": "W를 잃은 직후 제거 전에 D6을 굴려 표기값 이상이면 회복합니다. 회복한 운드도 컴뱃 결과에는 셉니다.",
+            "en": "Immediately after losing a Wound and before removal, recover it on a D6 meeting the printed value; it still counts for combat result."
+          },
+          "timing": {
+            "ko": "운드 상실 직후, W 0 모델을 제거하기 전.",
+            "en": "Immediately after Wound loss, before removing models at zero Wounds."
+          },
+          "steps": [
+            {
+              "ko": "해당 운드에 리제너레이션을 금지하는 공격·대상 규칙이 있는지 확인합니다.",
+              "en": "Check whether an attack or target rule forbids Regeneration for the wound."
+            },
+            {
+              "ko": "허용되면 잃은 운드에 D6을 굴려 X+ 이상에서 그 운드를 회복합니다.",
+              "en": "If allowed, roll a D6 for the lost wound and recover it on X+ or higher."
+            },
+            {
+              "ko": "회복 여부와 별개로 컴뱃 결과를 계산할 때 그 운드를 포함합니다.",
+              "en": "Include that wound in combat result regardless of its recovery."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "아머를 바꾸는 규칙은 별도 명시가 없으면 리젠 수치를 바꾸지 않습니다. Flammable·Warp-spawned·Killing Blow·Unstable 등 해당 금지를 확인합니다.",
+              "en": "Armour-changing rules do not change Regeneration unless stated; check specific exclusions such as Flammable, Warp-spawned, Killing Blow or Unstable."
+            }
+          ],
+          "example": {
+            "ko": "리제너레이션(5+) 모델이 컴뱃 운드 2개를 잃고 둘 다 5+로 회복해도 그 2개는 컴뱃 결과에 계산합니다.",
+            "en": "If a Regeneration (5+) model recovers both of two combat wounds, both wounds still count for combat result."
+          },
+          "quick": {
+            "ko": "W 잃은 직후 D6≥X 회복; 제거 전; 회복해도 CR에는 계산.",
+            "en": "After Wound loss, D6≥X recovers it before removal; still counts for CR."
+          },
+          "sources": [
+            {
+              "title": "Regeneration (X+)",
+              "path": "/special-rules/regeneration"
+            }
+          ]
+        },
+        {
+          "id": "special-warp-spawned",
+          "title": {
+            "ko": "워프 스폰드",
+            "en": "Warp-spawned"
+          },
+          "aliases": [
+            "워프 스폰드",
+            "Warp-spawned"
+          ],
+          "path": "/special-rules/warp-spawned",
+          "summary": {
+            "ko": "매지컬 공격으로 잃는 운드에는 리제너레이션을 할 수 없으며 캐릭터 합류에도 같은 규칙 여부가 필요합니다.",
+            "en": "No Regeneration against Magical wounds; character joining also requires matching Warp-spawned status."
+          },
+          "timing": {
+            "ko": "매지컬 피해의 리젠과 캐릭터 합류를 확인할 때.",
+            "en": "When checking regeneration against Magical damage or character joining."
+          },
+          "steps": [
+            {
+              "ko": "대상이 Warp-spawned이고 공격이 Magical인지 확인합니다.",
+              "en": "Check Warp-spawned on the target and Magical on the attack."
+            },
+            {
+              "ko": "그 운드에 대해서는 리제너레이션을 하지 않습니다.",
+              "en": "Do not make a Regeneration save for that wound."
+            },
+            {
+              "ko": "캐릭터 합류 시에는 캐릭터와 유닛의 Warp-spawned 상태가 일치하는지 확인합니다.",
+              "en": "When joining a character, check that character and unit have matching Warp-spawned status."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "플레이밍과 매지컬은 서로 다른 공격 유형입니다. 하나만 표시되었다면 다른 하나를 자동으로 더하지 않습니다.",
+              "en": "Flaming and Magical are distinct attack types; one does not automatically imply the other."
+            }
+          ],
+          "example": {
+            "ko": "워프 스폰드·리제너레이션 모델이 매지컬 운드를 받으면 리젠을 건너뜁니다. 단순 플레이밍만으로 이 규칙이 발동하지는 않습니다.",
+            "en": "A Warp-spawned model with Regeneration skips it against a Magical wound; merely being Flaming does not trigger this rule."
+          },
+          "quick": {
+            "ko": "Warp-spawned + Magical 운드 → 리젠 불가; 합류는 양쪽 규칙 일치 필요.",
+            "en": "Warp-spawned + Magical wound → no regen; joining requires matching status."
+          },
+          "sources": [
+            {
+              "title": "Warp-spawned",
+              "path": "/special-rules/warp-spawned"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "special-psychology",
+      "title": {
+        "ko": "심리·언데드·데모닉 예외",
+        "en": "Psychology, Undead and Daemonic exceptions"
+      },
+      "description": {
+        "ko": "기본 리더십·브레이크 절차에서 무엇을 대체하고 무엇을 그대로 남기는지 확인합니다.",
+        "en": "Identify which parts replace normal Leadership and Break procedures and which still apply."
+      },
+      "entries": [
+        {
+          "id": "special-stubborn",
+          "title": {
+            "ko": "스터번",
+            "en": "Stubborn"
+          },
+          "aliases": [
+            "스터번",
+            "Stubborn"
+          ],
+          "path": "/special-rules/stubborn",
+          "summary": {
+            "ko": "처음 브레이크 테스트를 요구받을 때 굴리지 않고 자동 폴 백 인 굿 오더를 선택할 수 있습니다.",
+            "en": "At the first required Break test, the unit may choose automatic Fall Back in Good Order instead of rolling."
+          },
+          "timing": {
+            "ko": "게임 중 해당 유닛의 첫 브레이크 테스트가 요구될 때.",
+            "en": "When the unit is first required to make a Break test during the game."
+          },
+          "steps": [
+            {
+              "ko": "이 유닛이 처음 브레이크 테스트를 요구받는 상황인지 확인합니다.",
+              "en": "Check that this is the unit’s first required Break test."
+            },
+            {
+              "ko": "이 규칙을 사용하면 테스트를 생략하고 폴 백 인 굿 오더를 적용합니다.",
+              "en": "If using the rule, skip the test and apply Fall Back in Good Order."
+            },
+            {
+              "ko": "승리한 편 US가 패배한 편의 두 배를 초과해도 이 자동 결과를 적용합니다.",
+              "en": "Apply this automatic result even if the winning side’s US exceeds twice the losing side’s US."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "스터번 캐릭터가 합류해도 비스터번 유닛을 스터번으로 만들지 않습니다. 그 캐릭터도 해당 비스터번 유닛 안에서는 이 규칙을 쓸 수 없습니다.",
+              "en": "A Stubborn character does not confer Stubborn to a non-Stubborn unit and cannot use it while in that unit."
+            }
+          ],
+          "example": {
+            "ko": "첫 브레이크 요구에서 아군 US 5, 적 US 20이어도 이 규칙을 선택하면 굴리지 않고 FBIGO를 적용합니다.",
+            "en": "At the first required test, US 5 against enemy US 20 can still choose automatic FBIGO under Stubborn."
+          },
+          "quick": {
+            "ko": "첫 브레이크 요구 때 선택: 테스트 없이 FBIGO; 적 US 두 배 초과에도 적용.",
+            "en": "First required Break test: choose automatic FBIGO, even against more than double US."
+          },
+          "sources": [
+            {
+              "title": "Stubborn",
+              "path": "/special-rules/stubborn"
+            }
+          ]
+        },
+        {
+          "id": "special-unbreakable",
+          "title": {
+            "ko": "언브레이커블",
+            "en": "Unbreakable"
+          },
+          "aliases": [
+            "언브레이커블",
+            "Unbreakable"
+          ],
+          "path": "/special-rules/unbreakable",
+          "summary": {
+            "ko": "컴뱃에서 져도 브레이크 테스트 대신 자동 기브 그라운드입니다.",
+            "en": "After losing combat, automatically Give Ground instead of taking a Break test."
+          },
+          "timing": {
+            "ko": "컴뱃 결과에서 패배 측의 브레이크 절차를 처리할 때.",
+            "en": "When resolving the losing side’s Break procedure."
+          },
+          "steps": [
+            {
+              "ko": "유닛에 Unbreakable이 적용되는지 확인합니다.",
+              "en": "Check whether Unbreakable applies to the unit."
+            },
+            {
+              "ko": "전투 패배 시 일반 브레이크 굴림을 하지 않고 기브 그라운드를 적용합니다.",
+              "en": "After a loss, do not make the normal Break roll; apply Give Ground."
+            },
+            {
+              "ko": "Unstable 등 별도 패배 효과가 있다면 지정된 시점에 먼저 또는 함께 해결합니다.",
+              "en": "Resolve separate defeat effects such as Unstable at their specified timing."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "언브레이커블 캐릭터와 비언브레이커블 유닛은 서로 합류할 수 없습니다. 이 규칙이 별도 피해 효과까지 없애지는 않습니다.",
+              "en": "Characters and units with mismatched Unbreakable status cannot join each other; separate damage effects are not cancelled."
+            }
+          ],
+          "example": {
+            "ko": "언브레이커블 유닛이 전투에서 4점 차이로 져도 일반 브레이크 굴림은 하지 않습니다. Unstable도 있다면 그 4점 피해는 따로 처리합니다.",
+            "en": "An Unbreakable unit losing by four does not roll a normal Break test; if it is also Unstable, its four defeat wounds are resolved separately."
+          },
+          "quick": {
+            "ko": "패배 → 브레이크 굴림 없이 기브 그라운드; 별도 패배 피해는 유지.",
+            "en": "Lose combat → no Break roll, Give Ground; separate defeat damage still applies."
+          },
+          "sources": [
+            {
+              "title": "Unbreakable",
+              "path": "/special-rules/unbreakable"
+            }
+          ]
+        },
+        {
+          "id": "special-unstable",
+          "title": {
+            "ko": "언스테이블",
+            "en": "Unstable"
+          },
+          "aliases": [
+            "언스테이블",
+            "Unstable"
+          ],
+          "path": "/special-rules/unstable",
+          "summary": {
+            "ko": "컴뱃 패배 차이만큼 추가 W를 잃으며, 그 W는 리제너레이션으로 회복할 수 없습니다.",
+            "en": "Lose additional Wounds equal to the combat-result deficit; Regeneration cannot recover them."
+          },
+          "timing": {
+            "ko": "컴뱃 결과 계산 뒤, 브레이크 테스트 전.",
+            "en": "After combat result is calculated and before Break tests."
+          },
+          "steps": [
+            {
+              "ko": "자기 유닛이 패배한 컴뱃 결과 차이를 구합니다.",
+              "en": "Determine the combat-result margin by which the unit lost."
+            },
+            {
+              "ko": "차이 1점마다 추가 W 1을 유닛에 적용합니다.",
+              "en": "Apply one additional lost Wound per point of deficit."
+            },
+            {
+              "ko": "언스테이블 캐릭터가 포함되면 유닛 각 모델에 먼저 한 W씩 배정한 뒤, 남은 W를 유닛과 캐릭터들에게 가능한 균등하게 배분합니다.",
+              "en": "With Unstable characters present, first allocate one wound to each unit model, then divide remaining wounds as evenly as possible between the unit and character(s)."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "이 추가 W에 리제너레이션을 시도하지 않습니다. 다른 규칙의 브레이크 면제가 이 패배 피해를 자동으로 면제하지는 않습니다.",
+              "en": "Do not attempt Regeneration against these wounds; exemption from Break tests does not automatically exempt defeat damage."
+            }
+          ],
+          "example": {
+            "ko": "3점 차이로 패배한 언스테이블 유닛은 브레이크 전에 추가 W 3을 잃습니다.",
+            "en": "An Unstable unit losing by three loses three additional Wounds before Break tests."
+          },
+          "quick": {
+            "ko": "컴뱃 패배 차이 = 추가 W; 브레이크 전 적용, 리젠 불가.",
+            "en": "Combat deficit = additional lost Wounds; before Break, no regen."
+          },
+          "sources": [
+            {
+              "title": "Unstable",
+              "path": "/special-rules/unstable"
+            }
+          ]
+        },
+        {
+          "id": "special-necromantic-undead",
+          "title": {
+            "ko": "네크로맨틱 언데드",
+            "en": "Necromantic Undead"
+          },
+          "aliases": [
+            "네크로맨틱 언데드",
+            "Necromantic Undead"
+          ],
+          "path": "/special-rules/necromantic-undead",
+          "summary": {
+            "ko": "지상 마치를 할 수 없고 Fear·Immune to Psychology·Unbreakable·Unstable을 함께 가집니다.",
+            "en": "Cannot march on the ground and also has Fear, Immune to Psychology, Unbreakable and Unstable."
+          },
+          "timing": {
+            "ko": "언데드의 이동·심리·전투 패배를 처리할 때.",
+            "en": "When resolving Undead movement, psychology and combat defeat."
+          },
+          "steps": [
+            {
+              "ko": "일반 지상 이동에서는 마치를 허용하지 않습니다.",
+              "en": "Do not allow marching when moving normally on the ground."
+            },
+            {
+              "ko": "플라이가 있고 실제 비행을 선택했다면 마치 제외 조건을 적용합니다.",
+              "en": "If the model has Fly and chooses to fly, apply the exception permitting marching."
+            },
+            {
+              "ko": "심리·전투 패배에는 Fear, Immune to Psychology, Unbreakable, Unstable 각각의 조건을 적용합니다.",
+              "en": "Apply the individual conditions of Fear, Immune to Psychology, Unbreakable and Unstable."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "이 규칙이 없는 캐릭터와 유닛은 서로 합류할 수 없습니다. 진영 고유의 추가 언데드 규칙은 해당 군세 자료에서 별도로 확인합니다.",
+              "en": "Characters and units with mismatched status cannot join each other; additional faction-specific Undead rules are separate."
+            }
+          ],
+          "example": {
+            "ko": "플라이가 없는 네크로맨틱 언데드는 M 4라도 일반 마치 8인치를 하지 못합니다. 패배 시 브레이크 면제와 언스테이블 피해는 모두 처리합니다.",
+            "en": "A Necromantic Undead model without Fly cannot use an ordinary 8-inch march from M 4; defeat still combines the Break exemption with Unstable wounds."
+          },
+          "quick": {
+            "ko": "지상 마치 불가; Fear·ItP·Unbreakable·Unstable; 플라이 선택 시 마치 예외.",
+            "en": "No ground march; Fear/ItP/Unbreakable/Unstable; Fly movement permits the march exception."
+          },
+          "sources": [
+            {
+              "title": "Necromantic Undead",
+              "path": "/special-rules/necromantic-undead"
+            }
+          ]
+        },
+        {
+          "id": "special-nehekharan-undead",
+          "title": {
+            "ko": "네헤카란 언데드",
+            "en": "Nehekharan Undead"
+          },
+          "aliases": [
+            "네헤카란 언데드",
+            "Nehekharan Undead"
+          ],
+          "path": "/special-rules/nehekharan-undead",
+          "summary": {
+            "ko": "지상 마치를 할 수 없고 Fear·Immune to Psychology·Unbreakable·Unstable을 함께 가집니다.",
+            "en": "Cannot march on the ground and also has Fear, Immune to Psychology, Unbreakable and Unstable."
+          },
+          "timing": {
+            "ko": "네헤카란 언데드의 이동·심리·전투 패배를 처리할 때.",
+            "en": "When resolving Nehekharan Undead movement, psychology and defeat."
+          },
+          "steps": [
+            {
+              "ko": "지상 이동의 마치 제한을 확인합니다.",
+              "en": "Check the prohibition on ground marching."
+            },
+            {
+              "ko": "플라이로 실제 이동한다면 그 마치 예외를 적용합니다.",
+              "en": "Apply the march exception when actually choosing Fly movement."
+            },
+            {
+              "ko": "Fear·ItP와 전투 패배의 Unbreakable·Unstable을 각각 해결합니다.",
+              "en": "Resolve Fear and ItP together with Unbreakable and Unstable for combat defeat."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "이 규칙이 있는 캐릭터와 없는 유닛은 서로 합류하지 못합니다. 이름이 비슷한 다른 언데드 패키지와 합류 규칙을 임의로 통합하지 않습니다.",
+              "en": "A character and unit with mismatched status cannot join; do not merge joining permissions merely because another Undead package has a similar name."
+            }
+          ],
+          "example": {
+            "ko": "이 규칙의 유닛이 2점 차이로 패배하면 일반 브레이크 대신 해당 언브레이커블 처리를 하고 언스테이블 추가 W 2도 잃습니다.",
+            "en": "A unit with this rule losing by two uses its Unbreakable procedure instead of a normal Break test and also loses two Unstable Wounds."
+          },
+          "quick": {
+            "ko": "지상 마치 불가; Fear·ItP·Unbreakable·Unstable; 관련 진영 규칙은 별도.",
+            "en": "No ground march; Fear/ItP/Unbreakable/Unstable; faction additions are separate."
+          },
+          "sources": [
+            {
+              "title": "Nehekharan Undead",
+              "path": "/special-rules/nehekharan-undead"
+            }
+          ]
+        },
+        {
+          "id": "special-daemonic",
+          "title": {
+            "ko": "데모닉",
+            "en": "Daemonic"
+          },
+          "aliases": [
+            "데모닉",
+            "Daemonic"
+          ],
+          "path": "/special-rules/daemonic",
+          "summary": {
+            "ko": "마법이 아닌 적의 공격으로 받은 운드에 5+ 와드 세이브를 가집니다.",
+            "en": "Gain a 5+ Ward save against wounds caused by non-magical enemy attacks."
+          },
+          "timing": {
+            "ko": "데모닉 모델의 와드 가능 여부와 캐릭터 합류를 확인할 때.",
+            "en": "When checking a Daemonic model’s Ward save and character joining."
+          },
+          "steps": [
+            {
+              "ko": "피해가 적의 공격으로 발생했는지, 그 공격이 Magical인지 구분합니다.",
+              "en": "Distinguish damage from an enemy attack and whether that attack is Magical."
+            },
+            {
+              "ko": "마법이 아닌 적 공격이면 이 규칙의 5+ 와드를 적용합니다.",
+              "en": "Use the rule’s 5+ Ward against a non-magical enemy attack."
+            },
+            {
+              "ko": "함께 적힌 Fear·불안정성 등 다른 데모닉 규칙은 각자의 조건으로 별도 해결합니다.",
+              "en": "Resolve other listed Daemonic rules, such as Fear or instability, under their own conditions."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "모든 피해에 무조건 5+ 와드를 주지 않습니다. 데모닉 캐릭터와 비데모닉 유닛은 서로 합류할 수 없습니다.",
+              "en": "Do not grant this Ward against every kind of damage; Daemonic characters and non-Daemonic units cannot join each other."
+            }
+          ],
+          "example": {
+            "ko": "일반 화살 운드에는 이 5+ 와드가 가능하지만 Magical로 표시된 적 공격에는 이 데모닉 와드를 사용하지 않습니다.",
+            "en": "This 5+ Ward can protect against an ordinary arrow wound, but not an enemy attack marked Magical."
+          },
+          "quick": {
+            "ko": "비마법 적 공격 운드에 5+ 와드; 데모닉 여부가 다른 캐릭터·유닛 합류 불가.",
+            "en": "5+ Ward vs non-magical enemy-attack wounds; joining requires matching Daemonic status."
+          },
+          "sources": [
+            {
+              "title": "Daemonic",
+              "path": "/special-rules/daemonic"
+            }
+          ]
+        },
+        {
+          "id": "special-daemonic-instability",
+          "title": {
+            "ko": "데모닉 인스태빌리티",
+            "en": "Daemonic Instability"
+          },
+          "aliases": [
+            "데모닉 인스태빌리티",
+            "Daemonic Instability"
+          ],
+          "path": "/special-rules/daemonic-instability",
+          "summary": {
+            "ko": "패배 차이만큼 2D6 결과에 더해 Ld를 판정하며, 실패 차이만큼 W를 잃습니다. 자연 더블 6 실패면 유닛이 제거됩니다.",
+            "en": "Add the combat deficit to the Leadership-test result; lose Wounds by the failure margin, or remove the unit on a failed natural double 6."
+          },
+          "timing": {
+            "ko": "컴뱃 패배 뒤, 기브 그라운드를 하기 전.",
+            "en": "After combat defeat and before Giving Ground."
+          },
+          "steps": [
+            {
+              "ko": "패배한 점수 차이만큼 테스트 결과에 +1씩 더합니다.",
+              "en": "Add +1 to the test result per point of combat deficit."
+            },
+            {
+              "ko": "Ld 이하면 통과합니다. 초과하면 초과한 수만큼 W를 잃습니다.",
+              "en": "A result at or below Ld passes; otherwise lose Wounds equal to the amount over Ld."
+            },
+            {
+              "ko": "자연 더블 6으로 실패했다면 부분 W 피해 대신 유닛 전체를 즉시 제거합니다.",
+              "en": "A failed natural double 6 removes the entire unit instead of merely causing partial wounds."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "캐릭터가 있으면 먼저 유닛 각 모델에 한 W씩 배정하고 남은 것을 유닛·캐릭터에 가능한 균등하게 나눕니다. 일반 브레이크 표와 혼동하지 않습니다.",
+              "en": "With characters present, first allocate one wound per unit model, then divide the rest as evenly as possible between unit and characters; do not substitute the ordinary Break table."
+            }
+          ],
+          "example": {
+            "ko": "Ld 8 유닛이 3점 차이로 지고 2D6에 7이면 결과 10으로 2만큼 실패해 W 2를 잃습니다. 자연 12 실패라면 유닛이 제거됩니다.",
+            "en": "A Ld 8 unit losing by three and rolling 7 reaches 10, failing by two and losing two Wounds; a failed natural 12 instead removes the unit."
+          },
+          "quick": {
+            "ko": "2D6+패배 차이≤Ld 통과; 실패 차이만큼 W; 자연 더블 6 실패는 전멸.",
+            "en": "2D6+combat deficit≤Ld passes; lose failure-margin W; failed natural double 6 removes unit."
+          },
+          "sources": [
+            {
+              "title": "Daemonic Instability",
+              "path": "/special-rules/daemonic-instability"
+            }
+          ]
+        },
+        {
+          "id": "special-fear",
+          "title": {
+            "ko": "피어",
+            "en": "Fear"
+          },
+          "aliases": [
+            "피어",
+            "Fear"
+          ],
+          "path": "/special-rules/fear",
+          "summary": {
+            "ko": "피어 유닛의 US가 더 높을 때 차지 전과 컴뱃 선택 시 리더십 테스트가 필요할 수 있습니다.",
+            "en": "A stronger Fear-causing enemy can require Leadership tests before charging or when choosing combat."
+          },
+          "timing": {
+            "ko": "차지 선언 전 또는 해당 컴뱃을 선택할 때.",
+            "en": "Before declaring a charge or when the relevant combat is chosen."
+          },
+          "steps": [
+            {
+              "ko": "적이 Fear를 유발하고 자기 유닛보다 US가 높은지 확인합니다.",
+              "en": "Check that the enemy causes Fear and has higher Unit Strength than your unit."
+            },
+            {
+              "ko": "그 적에게 차지하려면 먼저 Ld 테스트를 합니다. 실패하면 움직이지 않고 실패한 차지로 취급합니다.",
+              "en": "To charge that enemy, first test Ld; failure means no movement and counts as a failed charge."
+            },
+            {
+              "ko": "컴뱃 선택 시 필요한 테스트에 실패하면 그 Fear 적에게 향하는 공격의 투 힛에 -1을 적용합니다.",
+              "en": "On a required failed test when combat is chosen, apply -1 To Hit to attacks directed at that Fear enemy."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "유닛은 턴당 Fear 테스트 한 번만 합니다. Fear 모델은 Fear에 면역이지만 Fear 캐릭터 합류만으로 일반 유닛이 면역을 얻지는 않습니다.",
+              "en": "A unit takes only one Fear test per turn; Fear models are immune to Fear, but a Fear character does not grant immunity to an ordinary unit."
+            }
+          ],
+          "example": {
+            "ko": "아군 US 8이 Fear 적 US 10에게 차지하려면 테스트가 필요합니다. 적 US도 8이면 이 US 우위 조건은 충족하지 않습니다.",
+            "en": "Your US 8 unit needs a test to charge a Fear enemy at US 10; an enemy also at US 8 does not meet this higher-US condition."
+          },
+          "quick": {
+            "ko": "Fear 적의 US가 더 높음: 차지 전 Ld실패=정지·실패차지, 컴뱃 Ld실패=그 적에게 To Hit -1.",
+            "en": "Higher-US Fear enemy: failed charge Ld=no move/failed charge; failed combat Ld=-1 To Hit against it."
+          },
+          "sources": [
+            {
+              "title": "Fear",
+              "path": "/special-rules/fear"
+            }
+          ]
+        },
+        {
+          "id": "special-terror",
+          "title": {
+            "ko": "테러",
+            "en": "Terror"
+          },
+          "aliases": [
+            "테러",
+            "Terror"
+          ],
+          "path": "/special-rules/terror",
+          "summary": {
+            "ko": "테러 차지를 받은 대상은 즉시 Ld 실패 시 플리하며, 테러가 포함된 승리 편은 패배 측 브레이크 Ld에 -1을 줍니다.",
+            "en": "A Terror charge forces immediate Ld or Flee; a winning side containing Terror gives losing units -1 Ld for Break tests."
+          },
+          "timing": {
+            "ko": "테러 유닛의 차지 선언 직후, 또는 전투 패배의 브레이크 테스트.",
+            "en": "Immediately after a Terror charge declaration, or during losing units’ Break tests."
+          },
+          "steps": [
+            {
+              "ko": "테러 차지 대상은 반응을 정하기 전에 즉시 Ld 테스트를 합니다. 실패하면 플리, 통과하면 정상 반응을 선택합니다.",
+              "en": "The charge target tests Ld before choosing its reaction; failure forces Flee, success allows a normal reaction."
+            },
+            {
+              "ko": "승리한 편에 테러 유닛이 있으면 패배한 각 유닛의 브레이크 테스트 Ld를 1 낮춥니다.",
+              "en": "If the winning side includes Terror, reduce each losing unit’s Ld by 1 for its Break test."
+            },
+            {
+              "ko": "Terror는 Fear도 유발하므로 Fear 관련 상호작용을 함께 확인합니다.",
+              "en": "Terror also causes Fear; check the relevant Fear interactions."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "플리 반응을 선택할 수 없는 대상은 이 차지 Ld 테스트를 하지 않습니다. Terror 모델은 Terror 면역이며 일반 유닛에 캐릭터가 합류해도 그 유닛이 면역을 얻지는 않습니다.",
+              "en": "A target unable to choose Flee does not take this charge test; Terror models are immune to Terror, but a joining Terror character does not confer immunity to an ordinary unit."
+            }
+          ],
+          "example": {
+            "ko": "테러 차지의 Ld 테스트를 통과한 유닛은 정상 반응을 고릅니다. 나중에 테러 편에 패배하면 별도로 브레이크용 Ld -1을 적용합니다.",
+            "en": "A unit passing the Terror-charge Ld test chooses a normal reaction; if it later loses to a side containing Terror, it separately applies -1 Ld for Break."
+          },
+          "quick": {
+            "ko": "테러 차지: 즉시 Ld, 실패 플리. 테러 편에 패배: 브레이크 Ld -1.",
+            "en": "Terror charge: immediate Ld, fail=Flee. Lose to Terror side: Break Ld -1."
+          },
+          "sources": [
+            {
+              "title": "Terror",
+              "path": "/special-rules/terror"
+            }
+          ]
+        },
+        {
+          "id": "special-stupidity",
+          "title": {
+            "ko": "스튜피디티",
+            "en": "Stupidity"
+          },
+          "aliases": [
+            "스튜피디티",
+            "Stupidity"
+          ],
+          "path": "/special-rules/stupidity",
+          "summary": {
+            "ko": "자기 턴 시작에 Ld 실패 시 다음 턴 시작까지 이동·사격·시전·위저들리 디스펠이 제한됩니다.",
+            "en": "Failing Ld at the start of your turn restricts movement, shooting, casting and Wizardly dispels until the next Start of Turn."
+          },
+          "timing": {
+            "ko": "자기 턴 Start of Turn 하위 단계.",
+            "en": "During your Start of Turn sub-phase."
+          },
+          "steps": [
+            {
+              "ko": "패주 중이거나 교전 중이 아니라면 Stupidity Ld 테스트를 합니다.",
+              "en": "Unless fleeing or engaged in combat, take the Stupidity Leadership test."
+            },
+            {
+              "ko": "실패하면 다음 자기 Start of Turn까지 플리 외 이동을 하지 못하며 사격·시전·위저들리 디스펠도 하지 못합니다.",
+              "en": "On failure, until your next Start of Turn, do not move except to flee, shoot, cast or attempt a Wizardly dispel."
+            },
+            {
+              "ko": "그 상태에서 적 차지를 받으면 Hold해야 합니다.",
+              "en": "If charged while affected, the unit must Hold."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "이 규칙 캐릭터가 합류하거나 타면 원래 규칙이 없던 유닛·탈것에도 적용됩니다.",
+              "en": "A character with the rule makes a unit or mount subject to it when joining or riding it."
+            }
+          ],
+          "example": {
+            "ko": "Ld 7 유닛이 턴 시작에 2D6 합 8로 실패하면 단순 반속도 이동을 하지 않고, 플리 외에는 움직이지 못합니다.",
+            "en": "A Ld 7 unit rolling 8 fails at Start of Turn; it does not move at half speed but instead cannot move except to flee."
+          },
+          "quick": {
+            "ko": "Start of Turn Ld실패 → 플리 외 이동·사격·시전·위저들리 디스펠 불가; 차지받으면 Hold.",
+            "en": "Start of Turn Ld fail → no move except flee, shoot, cast or Wizardly dispel; Hold if charged."
+          },
+          "sources": [
+            {
+              "title": "Stupidity",
+              "path": "/special-rules/stupidity"
+            }
+          ]
+        },
+        {
+          "id": "special-impetuous",
+          "title": {
+            "ko": "임페추어스",
+            "en": "Impetuous"
+          },
+          "aliases": [
+            "임페추어스",
+            "Impetuous"
+          ],
+          "path": "/special-rules/impetuous",
+          "summary": {
+            "ko": "차지 가능한 임페추어스 모델이 포함된 유닛은 차지 선언 단계에 Ld 테스트를 하고 실패하면 차지해야 합니다.",
+            "en": "A unit containing Impetuous models that can declare a charge tests Ld and must charge on failure."
+          },
+          "timing": {
+            "ko": "자기 턴 Declare Charges & Charge Reactions.",
+            "en": "During your Declare Charges & Charge Reactions sub-phase."
+          },
+          "steps": [
+            {
+              "ko": "유닛에 임페추어스 모델이 하나 이상 있고 합법적으로 차지를 선언할 수 있는지 확인합니다.",
+              "en": "Check for at least one Impetuous model and a legally available charge."
+            },
+            {
+              "ko": "리더십 테스트를 합니다. 통과하면 정상 행동을 선택합니다.",
+              "en": "Take a Leadership test; on success the unit may act normally."
+            },
+            {
+              "ko": "실패하면 차지를 선언해야 하므로 합법적인 차지 대상을 정합니다.",
+              "en": "On failure, declare a charge against a legal target."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "차지 자체가 불가능한 유닛에 이 조건의 테스트를 강요하지 않습니다. 현재 규칙을 임의의 D6 4+ 판정으로 바꾸지 않습니다.",
+              "en": "Do not require this test when the unit cannot charge, and do not replace the current rule with an unrelated D6 4+ check."
+            }
+          ],
+          "example": {
+            "ko": "차지 가능한 Ld 8 임페추어스 유닛이 2D6에 9를 굴리면 정상적으로 차지를 포기하는 대신 차지를 선언해야 합니다.",
+            "en": "An eligible Ld 8 Impetuous unit rolling 9 must declare a charge rather than freely declining one."
+          },
+          "quick": {
+            "ko": "차지 가능 + 임페추어스 포함 → Ld; 실패 시 차지 의무.",
+            "en": "Can charge + includes Impetuous → Ld; fail must charge."
+          },
+          "sources": [
+            {
+              "title": "Impetuous",
+              "path": "/special-rules/impetuous"
+            }
+          ]
+        },
+        {
+          "id": "special-frenzy",
+          "title": {
+            "ko": "프렌지",
+            "en": "Frenzy"
+          },
+          "aliases": [
+            "프렌지",
+            "Frenzy"
+          ],
+          "path": "/special-rules/frenzy",
+          "summary": {
+            "ko": "차지한 턴 또는 팔로 업 다음 턴에 A+1이며, 차지 의무·심리·플리 제한도 있습니다. 컴뱃 패배 시 잃습니다.",
+            "en": "Gain A+1 in a charge turn or the turn after following up, with compulsory-charge and psychology restrictions; lose it after combat defeat."
+          },
+          "timing": {
+            "ko": "차지 선언·차지 반응·컴뱃 공격·컴뱃 패배 시.",
+            "en": "During charge declarations, reactions, combat attacks and combat defeat."
+          },
+          "steps": [
+            {
+              "ko": "차지한 턴 또는 팔로 업 이동 다음 턴이면 해당 모델 A에 +1을 적용합니다.",
+              "en": "Apply A+1 in a turn it charged or the turn after it made a follow-up move."
+            },
+            {
+              "ko": "프렌지 모델이 하나 이상 있고 차지가 가능하면 유닛은 차지를 선언해야 합니다.",
+              "en": "A unit containing at least one Frenzied model must charge if able."
+            },
+            {
+              "ko": "모델 과반수가 프렌지라면 Fear·Panic·Terror를 자동 통과하고 플리 반응과 리스트레인트 테스트를 선택하지 못합니다.",
+              "en": "If a majority are Frenzied, automatically pass Fear, Panic and Terror, but do not choose Flee reactions or Restraint tests."
+            },
+            {
+              "ko": "컴뱃 라운드에서 패배한 모델은 즉시 프렌지를 잃습니다.",
+              "en": "A model losing a combat round immediately loses Frenzy."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "A+1을 캐벌리의 탈것, 차리엇의 짐승, 몬스터의 라이더에게 자동 전파하지 않습니다. 과반수 조건과 단 한 모델 조건을 구분합니다.",
+              "en": "Do not automatically transfer A+1 to a cavalry mount, chariot beasts or monster rider; distinguish majority conditions from the one-model compulsory-charge condition."
+            }
+          ],
+          "example": {
+            "ko": "프렌지 1모델만 포함되어도 차지 의무는 생길 수 있지만, 10모델 중 1모델만 프렌지라면 과반수용 심리 자동 통과는 얻지 않습니다.",
+            "en": "One Frenzied model can impose compulsory charging, but one among ten does not give the unit the majority-based automatic psychology passes."
+          },
+          "quick": {
+            "ko": "조건부 A+1; 1모델만 있어도 가능 시 차지; 과반수면 Fear/Panic/Terror통과·Flee/Restraint불가; 패배 시 상실.",
+            "en": "Conditional A+1; any model forces eligible charge; majority grants psychology passes/no Flee or Restraint; lose on defeat."
+          },
+          "sources": [
+            {
+              "title": "Frenzy",
+              "path": "/special-rules/frenzy"
+            }
+          ]
+        },
+        {
+          "id": "special-immune-psychology",
+          "title": {
+            "ko": "이뮨 투 사이콜로지",
+            "en": "Immune to Psychology"
+          },
+          "aliases": [
+            "이뮨 투 사이콜로지",
+            "Immune to Psychology"
+          ],
+          "path": "/special-rules/immune-to-psychology",
+          "summary": {
+            "ko": "유닛 모델 과반수가 이 규칙이면 Fear·Panic·Terror를 자동 통과하지만 플리 반응을 선택하지 못합니다.",
+            "en": "If a majority has this rule, automatically pass Fear, Panic and Terror but cannot choose Flee as a charge reaction."
+          },
+          "timing": {
+            "ko": "Fear·Panic·Terror 테스트 또는 차지 반응을 처리할 때.",
+            "en": "When resolving Fear, Panic, Terror or charge reactions."
+          },
+          "steps": [
+            {
+              "ko": "현재 유닛 모델 과반수가 이 규칙을 가졌는지 확인합니다.",
+              "en": "Check whether a majority of the current unit’s models has this rule."
+            },
+            {
+              "ko": "조건을 만족하면 Fear·Panic·Terror 테스트는 주사위 없이 통과시킵니다.",
+              "en": "If so, pass Fear, Panic and Terror tests without rolling."
+            },
+            {
+              "ko": "그 유닛은 플리 차지 반응을 선택하지 못합니다.",
+              "en": "That unit cannot choose Flee as a charge reaction."
+            }
+          ],
+          "exceptions": [
+            {
+              "ko": "브레이크·리스트레인트·스튜피디티 등 여기에 적히지 않은 모든 리더십 테스트까지 면역이 되는 것은 아닙니다.",
+              "en": "This is not immunity to every Leadership test, including Break, Restraint or Stupidity."
+            }
+          ],
+          "example": {
+            "ko": "10모델 중 6모델이 이뮨 투 사이콜로지면 관련 세 심리 테스트는 자동 통과하지만 일반 브레이크 판정은 따로 확인합니다.",
+            "en": "With six of ten models Immune to Psychology, the three named psychology tests pass automatically; ordinary Break rules still need checking."
+          },
+          "quick": {
+            "ko": "과반수 보유 → Fear·Panic·Terror 자동 통과, Flee 반응 불가; 모든 Ld 면역 아님.",
+            "en": "Majority → auto-pass Fear/Panic/Terror, no Flee reaction; not immunity to every Ld test."
+          },
+          "sources": [
+            {
+              "title": "Immune to Psychology",
+              "path": "/special-rules/immune-to-psychology"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
