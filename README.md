@@ -8,6 +8,8 @@ Confirm a roster to save a separate play reference. Every selected model, champi
 
 The rules area includes the complete supplied Korean document in 30 chapters and 937 sections, with 81 tables, 62 lossless figures, full text search, source notes and previous/next navigation. The bilingual ruling guide, quick sheet, original rules index and tutorial remain available. Verified document corrections retain their original wording and sources. The document body remains Korean; the reader controls follow the selected interface language.
 
+The default rules view is an authored playbook. It connects related rules into lessons with a key takeaway, a numbered resolution procedure, a worked example and explicit exceptions. The editorial contents page, learning routes and contextual diagrams support both learning and use at the table. The complete supplied document can be opened separately or expanded under the relevant lesson.
+
 ## Run locally
 
 ```sh

@@ -434,6 +434,10 @@ function initializeAppNavigation() {
       restoreAppHistoryEntry(current,scrollY,window.navigation?backwards:true);
       return;
     }
+    if(current==='rules'&&window.TOWHandbook?.view==='study'&&window.TOWStudyBook?.back?.()){
+      restoreAppHistoryEntry(current,0,window.navigation?backwards:true);
+      return;
+    }
     const destination=appHistoryEntry(event.state);
     if(!destination){installAppBackBoundary('home',0);}
     else if(destination.root){
@@ -483,7 +487,7 @@ function showScreen(next) {
     button.classList.toggle('active',button.dataset.screen===next);
     button.setAttribute('aria-pressed',String(button.dataset.screen===next));
   }
-  if(next==='rules'||next==='tutorial')document.querySelector('[data-rules-view="'+(next==='tutorial'?'tutorial':'document')+'"]')?.click();
+  if(next==='rules'||next==='tutorial')document.querySelector('[data-rules-view="'+(next==='tutorial'?'tutorial':'study')+'"]')?.click();
   if (next === 'saved') renderSaved();
   if (next === 'play') {renderPlay();loadPlaySources(CORE.loadPlayRoster(state.faction)?.army);}
   window.scrollTo(0,0);

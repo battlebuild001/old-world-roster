@@ -46,7 +46,7 @@
     const tokens=key(query).split(/\s+/).filter(Boolean);
     return (data?.entries||[]).filter(entry=>(chapterId==='all'||entry.chapterId===chapterId)&&tokens.every(token=>entry.searchText.includes(token)));
   }
-  const state={data:null,status:'loading',error:'',promise:null,view:'document',chapter:'all',query:'',selected:null,shown:60};
+  const state={data:null,status:'loading',error:'',promise:null,view:'study',chapter:'all',query:'',selected:null,shown:60};
   const language=()=>root?.TOWI18n?.language||'ko';
   const tr=(ko,en)=>language()==='en'?en:language()==='both'?ko+' / '+en:ko;
   const text=value=>{const valuePair=pair(value);return language()==='en'?valuePair.en:language()==='both'&&valuePair.ko!==valuePair.en?valuePair.ko+' / '+valuePair.en:valuePair.ko;};
@@ -83,16 +83,16 @@
     return state.promise;
   }
   function setView(view){
-    if(!['document','handbook','library','tutorial'].includes(view))return;
+    if(!['study','document','handbook','library','tutorial'].includes(view))return;
     state.view=view;
-    for(const [mode,id] of [['document','documentBookPanel'],['handbook','handbookPanel'],['library','rulesLibraryPanel'],['tutorial','tutorialPanel']])$(id)?.classList.toggle('hidden',mode!==view);
+    for(const [mode,id] of [['study','studyBookPanel'],['document','documentBookPanel'],['handbook','handbookPanel'],['library','rulesLibraryPanel'],['tutorial','tutorialPanel']])$(id)?.classList.toggle('hidden',mode!==view);
     root?.document?.querySelectorAll('[data-rules-view]').forEach(button=>{
       const active=button.dataset.rulesView===view;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));
     });
     refreshViewLabels();
   }
   function refreshViewLabels(){
-    const labels={document:['문서 룰북','Document rulebook'],handbook:['판정 가이드','Ruling guide'],library:['원문 색인','Source index'],tutorial:['처음 배우기','Learn to play']};
+    const labels={study:['룰북','Rulebook'],document:['참고 문서','Source document'],handbook:['판정 가이드','Ruling guide'],library:['원문 색인','Source index'],tutorial:['처음 배우기','Learn to play']};
     root?.document?.querySelectorAll('[data-rules-view]').forEach(button=>{const value=labels[button.dataset.rulesView];if(value)button.textContent=tr(...value);});
     $('handbookPanel')?.setAttribute('data-no-i18n','');
   }
@@ -176,7 +176,7 @@
   if(root?.document){
     root.document.querySelectorAll('[data-rules-view]').forEach(button=>button.addEventListener('click',()=>setView(button.dataset.rulesView)));
     root.document.addEventListener('tow-language-change',()=>{render();refreshViewLabels();});
-    mount();setView('document');load();
+    mount();setView('study');load();
   }
   return api;
 });

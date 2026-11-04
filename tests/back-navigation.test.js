@@ -126,6 +126,19 @@ test('Back dismisses the menu before changing screens',()=>{
   app.history.back();assert.equal(app.screen,'home');assert.equal(app.exits,0);
 });
 
+test('Back returns a playbook lesson to its contents before leaving the rules screen',()=>{
+  for(const navigationAPI of [true,false]){
+    const app=setup({navigationAPI});app.touch();app.show('rules');
+    let reading=true;
+    app.context.window.TOWHandbook={view:'study'};
+    app.context.window.TOWStudyBook={back(){if(!reading)return false;reading=false;return true;}};
+    app.dialog('ruleBackdrop');
+    app.history.back();assert.equal(reading,true,'A rule dialog closes before its underlying lesson');
+    app.history.back();assert.equal(reading,false);assert.equal(app.screen,'rules');
+    app.history.back();assert.equal(app.screen,'home');assert.equal(app.exits,0);
+  }
+});
+
 test('a restored entry with no same-document guard receives a new boundary',()=>{
   const app=setup({initial:'home',state:entry('saved')});
   assert.equal(app.screen,'saved');app.history.back();assert.equal(app.screen,'home');
