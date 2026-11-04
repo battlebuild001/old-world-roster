@@ -7,7 +7,7 @@
   const tr=(ko,en)=>lang()==='en'?en:lang()==='both'?ko+' / '+en:ko;
   const body=value=>{const p=H.pair(value);return lang()==='en'?esc(p.en):esc(p.ko)+(lang()==='both'&&p.ko!==p.en?'<span class="handbookOriginal">'+esc(p.en)+'</span>':'');};
   const woundRows=[["4+","5+","6+","6+","6+","6+","–","–","–","–"],["3+","4+","5+","6+","6+","6+","6+","–","–","–"],["2+","3+","4+","5+","6+","6+","6+","6+","–","–"],["2+","2+","3+","4+","5+","6+","6+","6+","6+","–"],["2+","2+","2+","3+","4+","5+","6+","6+","6+","6+"],["2+","2+","2+","2+","3+","4+","5+","6+","6+","6+"],["2+","2+","2+","2+","2+","3+","4+","5+","6+","6+"],["2+","2+","2+","2+","2+","2+","3+","4+","5+","6+"],["2+","2+","2+","2+","2+","2+","2+","3+","4+","5+"],["2+","2+","2+","2+","2+","2+","2+","2+","3+","4+"]],hitRows=[["4+","4+","5+","5+","5+","5+","5+","5+","5+","5+"],["3+","4+","4+","4+","5+","5+","5+","5+","5+","5+"],["2+","3+","4+","4+","4+","4+","5+","5+","5+","5+"],["2+","3+","3+","4+","4+","4+","4+","4+","5+","5+"],["2+","2+","3+","3+","4+","4+","4+","4+","4+","4+"],["2+","2+","3+","3+","3+","4+","4+","4+","4+","4+"],["2+","2+","2+","3+","3+","3+","4+","4+","4+","4+"],["2+","2+","2+","3+","3+","3+","3+","4+","4+","4+"],["2+","2+","2+","2+","3+","3+","3+","3+","4+","4+"],["2+","2+","2+","2+","3+","3+","3+","3+","3+","4+"]];
-  let active='all',shown=60;
+  let active=new URLSearchParams(window.location?.search||'').get('quickView')==='charts'?'charts':'all',shown=60;
   function chart(rows,axis,caption){
     return '<div class="quickTableScroll" role="region" tabindex="0" aria-label="'+esc(caption)+'"><table class="quickTable"><caption>'+esc(caption)+'</caption><thead><tr><th scope="col">'+esc(axis)+'</th>'+Array.from({length:10},(_,i)=>'<th scope="col">'+(i+1)+'</th>').join('')+'</tr></thead><tbody>'+rows.map((row,index)=>'<tr><th scope="row">'+(index+1)+'</th>'+row.map(value=>'<td>'+esc(value)+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
   }
@@ -38,12 +38,13 @@
     if(H.status==='loading'&&!H.entries.length){count.textContent=tr('판정 자료를 불러오고 있습니다…','Loading rulings…');$('quickSheetContent').innerHTML='<div class="quickCard"><p>'+esc(tr('잠시만 기다려 주세요.','Please wait.'))+'</p></div>';return;}
     if(H.status==='error'&&!H.entries.length){count.textContent='';$('quickSheetContent').innerHTML='<div class="handbookError"><p>'+esc(tr('퀵시트 자료를 불러오지 못했습니다. 연결을 확인하고 다시 시도하세요.','Could not load the quick sheet. Check your connection and try again.'))+'</p><button type="button" class="secondary" data-quick-retry>'+esc(tr('다시 불러오기','Try again'))+'</button></div>';return;}
     const matches=H.search(query,chapter),display=active==='charts'?[]:matches.slice(0,shown);
-    count.textContent=active==='charts'?tr('컴뱃 명중·운드 판정표','Combat hit and wound charts'):tr(matches.length+' / '+H.entries.length+'개 판정 · '+display.length+'개 표시',matches.length+' / '+H.entries.length+' rulings · '+display.length+' displayed');
+    count.textContent=active==='charts'?tr('명중·상처·랭크·전투 결과·브레이크 판정표','Hit, wound, ranks, combat result and Break charts'):tr(matches.length+' / '+H.entries.length+'개 판정 · '+display.length+'개 표시',matches.length+' / '+H.entries.length+' rulings · '+display.length+' displayed');
     const groups=H.chapters.map(item=>({chapter:item,entries:display.filter(entry=>entry.chapterId===item.id)})).filter(item=>item.entries.length);
     let cards=groups.map(group=>'<section class="quickCard quickChapter"><header class="quickChapterHead"><h3>'+H.titleHTML(group.chapter.title)+'</h3><span>'+esc(String(group.entries.length))+'</span></header>'+group.entries.map(row).join('')+'</section>').join('');
     if(active!=='charts'&&matches.length>shown)cards+='<button type="button" class="secondary quickShowMore" data-quick-more>'+esc(tr('판정 더 보기 · '+(matches.length-shown)+'개 남음','Show more rulings · '+(matches.length-shown)+' remaining'))+'</button>';
-    if(active==='charts')cards+=chartCards(query);
+    if(active==='charts')cards+=(window.TOWCombatCharts?.html(query)||'')+chartCards(query);
     $('quickSheetContent').innerHTML=cards||'<p class="quickEmpty">'+esc(tr('검색 결과가 없습니다. 검색어를 줄이거나 전체 분류를 선택하세요.','No matches. Try a shorter search or choose all categories.'))+'</p>';
+    window.TOWCombatCharts?.mount($('quickSheetContent'));
     const date=H.data?.checkedAt;
     $('quickSheetSource').innerHTML=esc(tr('상세 룰북과 같은 자료로 구성한 플레이 참조표입니다.','A play reference using the same data as the detailed handbook.'))+(date?' · '+esc(tr('원문 확인 '+date,'Sources checked '+date)):'')+' <a href="https://tow.whfb.app/quick-reference" target="_blank" rel="noopener">'+esc(tr('원문 퀵 레퍼런스 ↗','Source quick reference ↗'))+'</a> · <a href="https://tow.whfb.app/errata" target="_blank" rel="noopener">'+esc(tr('정오표 ↗','Errata ↗'))+'</a>';
   }

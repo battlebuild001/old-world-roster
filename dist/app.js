@@ -17,6 +17,24 @@ function pairedName(original) {
   return translated!==name?`${translated} · ${name}`:name;
 }
 function sourceName(tag,original,className='') {const element=node(tag,pairedName(original),className);element.dataset.noI18n='';return element;}
+function unitPhotoLink(source,record=null,army=state){
+  const photos=window.TOWUnitPhotos;if(!photos)return null;
+  const name=photos.originalName(source,record);if(!name)return null;
+  const faction=source?._sourceFaction||record?.sourceFaction||army.faction;
+  const factionName=metadata?.armies?.find(item=>item.id===faction)?.name_en||slugTitle(faction);
+  const link=node('a','','unitPhotoLink');link.href=photos.imageURL({name,faction:factionName});
+  link.target='_blank';link.rel='noopener noreferrer';link.referrerPolicy='no-referrer';link.dataset.noI18n='';
+  link.setAttribute('aria-label',playText(`${pairedName(name)} 사진 검색 · Google 이미지, 새 탭`,`${name} photos · Google Images, new tab`));
+  link.title=playText('Google 이미지에서 모델 사진을 새 탭으로 봅니다.','View model photos in Google Images in a new tab.');
+  link.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h4l2-3h4l2 3h4v13H4V7Z"/><circle cx="12" cy="13" r="4"/></svg>';
+  link.append(node('span',playText('사진 검색','Photos')));return link;
+}
+function refreshUnitPhotoLink(titleId,source,record=null){
+  const heading=$(titleId);if(!heading)return;
+  const host=heading.parentElement;host.querySelector('.unitPhotoLink')?.remove();
+  const link=unitPhotoLink(source,record);if(link){link.classList.add('unitPhotoSheet');host.append(link);}
+}
+
 const ITEM_TYPE_NAMES={
   weapon:['마법 무기','Magic Weapons'],armor:['마법 갑옷','Magic Armour'],'armor-mages':['마법사 갑옷','Wizard Armour'],talisman:['부적','Talismans'],'arcane-item':['비전 아이템','Arcane Items'],'enchanted-item':['마법 부여 아이템','Enchanted Items'],banner:['마법 깃발','Magic Banners'],
   'weapon-runes':['무기 룬','Weapon Runes'],'ranged-weapon-runes':['원거리 무기 룬','Ranged Weapon Runes'],'armor-runes':['갑옷 룬','Armour Runes'],'talismanic-runes':['부적 룬','Talismanic Runes'],'banner-runes':['깃발 룬','Banner Runes'],'engineering-runes':['공학 룬','Engineering Runes'],'runic-tattoos':['룬 문신','Runic Tattoos'],
@@ -172,6 +190,7 @@ function renderRoster() {
       if(unit.lore)detail += `\n${pairedName(slugTitle(unit.lore))}`;
       if (unit.options) detail += `\n${unit.options}`;
       const detailNode=node('div',detail,'unit-detail');detailNode.dataset.noI18n='';left.append(detailNode);
+      const photo=unitPhotoLink(source,unit);if(photo)left.append(photo);
       if(unit.magicItems?.length){const items=node('div','','unitItemNames');const seen=new Set();for(const item of unit.magicItems){const key=`${item.group}\u0000${item.name}`;if(seen.has(key))continue;seen.add(key);const copies=unit.magicItems.filter(value=>value.group===item.group&&value.name===item.name).length;const line=node('div','','unitItemName');line.append(sourceName('span',item.name));if(copies>1)line.append(node('b',`×${copies}`));items.append(line);}left.append(items);}
       if(source){const ruleList=keywords(source);if(ruleList.length){const strip=node('div','','rulePills unitRules');for(const rule of ruleList.slice(0,4))strip.append(ruleChip(rule));if(ruleList.length>4)strip.append(node('span',`+${ruleList.length-4}`,'ruleMore'));left.append(strip);}}
       const right = node('div','','unit-side');
@@ -311,7 +330,7 @@ function renderPlay(){
     const rules=source?keywords(source):[];
     if(search&&!`${unit.name} ${unit.label} ${choices.join(' ')} ${rules.join(' ')} ${pairedName(unit.name)}`.toLowerCase().includes(search))continue;
     const card=node('article','','playCard playOverviewCard');card.dataset.unitId=unit.id;
-    const head=node('div','','playCardHead');const title=node('span','','playCardTitle');title.append(sourceName('strong',unit.name),node('small',`${unit.count} ${label('모델','models')} · ${label(categoryKo[unit.category]||unit.category,CATEGORY_LABELS[unit.category]||unit.category)}${unit.label?` · ${unit.label}`:''}`));head.append(title,node('b',`${fmt(unit.points)} pts`));card.append(head);
+    const head=node('div','','playCardHead');const title=node('span','','playCardTitle');title.append(sourceName('strong',unit.name),node('small',`${unit.count} ${label('모델','models')} · ${label(categoryKo[unit.category]||unit.category,CATEGORY_LABELS[unit.category]||unit.category)}${unit.label?` · ${unit.label}`:''}`));head.append(title,node('b',`${fmt(unit.points)} pts`));card.append(head);const photo=unitPhotoLink(source,unit,army);if(photo){const photoRow=node('div','','unitPhotoPlayRow');photoRow.append(photo);card.append(photoRow);}
     const body=node('div','','playCardBody');
     const model=window.TOWPlayProfiles?.create({source,unit,ruleInfo,optionModel:OPT,weaponProfiles:playWeaponProfiles,composition:unit.sourceComposition||source?._optionComposition||army.composition});
     const profileRows=model?window.TOWPlayProfiles.displayRows(model):[];
@@ -544,7 +563,7 @@ function renderReference() {
       const ruleList=keywords(unit);
       if(ruleList.length){const details=document.createElement('details');details.className='pickerRules';details.open=expandedRules.has(key);details.append(node('summary',playText(`규칙 ${ruleList.length}`,`${ruleList.length} rules`)));const pills=node('div','','rulePills');for(const rule of ruleList)pills.append(ruleChip(rule));details.append(pills);main.append(details);}
       const select=node('button',`${playText('선택','Select')} +`,'primary pickerSelect');select.type='button';select.dataset.referenceAction='quickadd';select.dataset.catalogKey=key;select.title=playText('장비·마법 아이템 등 옵션을 선택합니다.','Choose equipment, magic items and other options.');
-      card.append(main,select);list.append(card);
+      card.append(main,select);const photo=unitPhotoLink(unit);if(photo){photo.classList.add('pickerPhotoLink');card.append(photo);}list.append(card);
     }
     grid.append(group);
   }
@@ -570,7 +589,7 @@ function renderSaved() {
 function openUnitDetail(unit) {
   detailUnit=unit;
   $('detailCategory').textContent=CATEGORY_LABELS[unit.category] || 'Unit';
-  $('detailName').textContent=pairedName(labelOf(unit));$('detailName').dataset.noI18n='';
+  $('detailName').textContent=pairedName(labelOf(unit));$('detailName').dataset.noI18n='';refreshUnitPhotoLink('detailName',unit);
   renderModelProfile(unit,'detailProfile');
   const count=Math.max(1,Number(unit.minimum)||1);
   $('detailMeta').replaceChildren(node('span',`${fmt(Number(unit.points)||0)} pts / 모델`),node('span',`최소 ${fmt(count)} 모델`),...(Number(unit.maximum)>0?[node('span',`최대 ${fmt(Number(unit.maximum))} 모델`)]:[]));
@@ -922,7 +941,7 @@ function refreshConfig() {
   $('configMagic').classList.toggle('hidden',!magicGroups(source,selections).length);
   if(magicGroups(source,selections).length)refreshMagicPicker();
 }
-function refreshOpenNames(){if(configured){$('configTitle').textContent=pairedName(labelOf(configured.source));refreshConfig();}if(detailUnit)openUnitDetail(detailUnit);}
+function refreshOpenNames(){if(configured){$('configTitle').textContent=pairedName(labelOf(configured.source));refreshUnitPhotoLink('configTitle',configured.source);refreshConfig();}if(detailUnit)openUnitDetail(detailUnit);}
 document.addEventListener('tow-language-change',refreshOpenNames);
 document.addEventListener('tow-glossary-ready',()=>{render();refreshOpenNames();});
 async function loadMagicData(){if(magicData)return;try{const response=await fetch('./data/games/the-old-world/magic-items.json');if(response.ok)magicData=await response.json();}catch{}}
@@ -932,7 +951,7 @@ function openConfig(source,existing=null,initialCount=null) {
   renderManualStats('config',existing?.manualStats||{});
   $('configDetachmentWrap').classList.toggle('hidden',!source.detachment && !existing?.isDetachment);
   $('configDetachment').checked=Boolean(existing?.isDetachment);
-  $('configTitle').textContent=pairedName(labelOf(source));$('configTitle').dataset.noI18n='';
+  $('configTitle').textContent=pairedName(labelOf(source));$('configTitle').dataset.noI18n='';refreshUnitPhotoLink('configTitle',source,existing);
   $('configCount').min=source.minimum||1;$('configCount').max=source.maximum||999;$('configCount').value=count;
   $('configLabel').value=existing?.label||'';$('configNotes').value=configured.options;
   $('configSave').textContent=existing?'변경 저장':'로스터에 추가';

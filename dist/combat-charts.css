@@ -1,0 +1,32 @@
+.combatResultChart{grid-column:1/-1;color:var(--color-text)}
+.combatResultChart .quickCardHead{flex-wrap:wrap}.combatResultChart h4{font-size:17px;color:var(--color-text);line-height:1.6;margin:25px 0 12px}
+.combatResultChart p,.combatNotes{font-size:15px;line-height:1.9;overflow-wrap:anywhere}.combatLead{margin:18px 0}
+.combatFlow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;list-style:none;padding:0;margin:24px 0}
+.combatFlow li{min-width:0;padding:14px;border:1px solid var(--color-border);border-left:3px solid var(--color-action);border-radius:4px;background:var(--color-surface-muted);font-size:14px;font-weight:650;line-height:1.7}
+.combatTables{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:26px}.combatTables>section{min-width:0}
+.combatTableScroll{max-width:100%;overflow:auto;border:1px solid var(--color-border);border-radius:6px;margin:15px 0}
+.combatTable{width:100%;border-collapse:collapse;white-space:normal;table-layout:fixed;font-size:14px;line-height:1.8;text-align:left}
+.combatTable caption{padding:12px;color:var(--color-text-muted);background:var(--color-surface-muted);font-size:13px;font-weight:650;text-align:left}
+.combatTable th,.combatTable td{padding:12px 10px;border:1px solid var(--color-border);vertical-align:top;overflow-wrap:anywhere;color:var(--color-text);font-variant-numeric:tabular-nums}
+.combatTable thead th{background:var(--color-surface-muted);font-size:13px}.combatTable tbody th{font-weight:650}
+.combatTable th:first-child{width:30%}.combatTable:not(.combatRankTable) th:nth-child(2):not(:last-child){width:20%}
+.combatOriginal{display:block;margin-top:4px;color:var(--color-text-muted);font:400 11px/1.7 system-ui,sans-serif}
+.combatNotes{padding-left:21px;color:var(--color-text-muted)}.combatNotes li+li{margin-top:12px}.combatNotes li::marker{color:var(--color-action)}
+.combatCallout{padding:15px 18px;border-left:3px solid var(--color-action);background:var(--color-surface-muted);color:var(--color-text)}
+.combatBreakSection{margin-top:28px;padding-top:4px;border-top:1px solid var(--color-border)}.combatFormula{font-weight:650;color:var(--color-link)}
+.combatCalculator,.combatOverrides{margin:22px 0;border:1px solid var(--color-border);border-radius:6px}
+.combatCalculator>summary,.combatOverrides>summary{min-height:48px;padding:13px 16px;cursor:pointer;color:var(--color-link);font-size:15px;font-weight:650;line-height:1.7}
+.combatCalculatorBody{padding:0 16px 18px}.combatCalculatorBody>p:first-child{font-size:14px}.combatOverrides>ul{margin:0;padding:0 20px 18px 38px}
+.combatFields{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:20px 0}.combatField{min-width:0}.combatField label{display:block;margin-bottom:7px;color:var(--color-text-muted);font-size:13px;line-height:1.6}
+.combatField input,.combatField select{width:100%;max-width:100%;min-width:0;min-height:48px;font-size:16px;background:var(--color-canvas);color:var(--color-text);border:1px solid var(--color-border);border-radius:5px;padding:10px}
+.combatUSField{grid-column:1/-1}.combatHelperNote{font-size:13px!important;color:var(--color-text-muted)}
+.combatBreakResult{padding:17px;margin:18px 0;border:1px solid var(--color-border);border-left:3px solid var(--color-action);background:var(--color-surface-muted);border-radius:4px}
+.combatBreakResult>strong{font-size:20px;line-height:1.5;color:var(--color-link)}.combatBreakResult p{margin:10px 0 0;font-size:15px}.combatBreakResult p:first-child{margin:0}
+.combatWorked{padding:22px;margin-top:28px;border:1px solid var(--color-border);border-radius:6px;background:var(--color-surface-muted)}.combatWorked h4{margin-top:0}
+.combatWorkedSides{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start;margin:22px 0}
+.combatRegiment{margin:0;min-width:0}.combatRanks{display:grid;gap:5px;max-width:240px}.combatRanks>div{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.combatRanks i{display:block;aspect-ratio:1.2;background:var(--color-canvas);border:1px solid var(--color-action);border-radius:2px}.combatRanks .front i{border-top:4px solid var(--color-action)}
+.combatRegiment figcaption{margin-top:10px;color:var(--color-text-muted);font-size:13px;line-height:1.7}
+.combatSources{margin-top:25px;padding-top:17px;border-top:1px solid var(--color-border);color:var(--color-text-muted);font-size:12px;line-height:1.9}.combatSources a{display:inline-flex;align-items:center;min-height:44px;color:var(--color-link);text-underline-offset:4px}
+@media(max-width:900px){.combatTables{grid-template-columns:minmax(0,1fr);gap:6px}}
+@media(max-width:680px){.combatFlow{grid-template-columns:minmax(0,1fr);gap:7px}.combatFlow li{padding:12px}.combatFields{grid-template-columns:repeat(2,minmax(0,1fr))}.combatTable th,.combatTable td{padding:10px 8px;font-size:13px}.combatTable th:first-child{width:33%}.combatWorked{padding:17px}.combatWorkedSides{gap:16px}.combatResultChart .quickCardHead h3{font-size:22px}}
+@media print{.combatCalculator{display:none}.combatTables{display:block}.combatTableScroll{overflow:visible}.combatWorked{break-inside:avoid}}

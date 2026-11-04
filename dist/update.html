@@ -28,7 +28,7 @@
   <script>
     (()=>{
       'use strict';
-      const targetVersion=51;
+      const targetVersion=52;
       const status=document.getElementById('status'),retry=document.getElementById('retry');
       let running=false;
       const pause=milliseconds=>new Promise(resolve=>setTimeout(resolve,milliseconds));
@@ -73,7 +73,9 @@
                 if(controlled?.ready&&versionOf(controlled.version)>=targetVersion){
                   say('업데이트가 준비됐습니다. 앱을 엽니다.');
                   const destination=new URL('./?updated='+targetVersion,location.href);
-                  if(new URL(location.href).searchParams.get('screen')==='rules')destination.searchParams.set('screen','rules');
+                  const requested=new URL(location.href).searchParams;
+                  if(['rules','quicksheet'].includes(requested.get('screen')))destination.searchParams.set('screen',requested.get('screen'));
+                  if(requested.get('screen')==='quicksheet'&&requested.get('quickView')==='charts')destination.searchParams.set('quickView','charts');
                   location.replace(destination);
                   return;
                 }

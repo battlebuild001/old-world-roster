@@ -10,6 +10,8 @@ The rules area includes the complete supplied Korean document in 30 chapters and
 
 The default rules view is an authored playbook. It connects related rules into lessons with a key takeaway, a numbered resolution procedure, a worked example and explicit exceptions. The editorial contents page, learning routes and contextual diagrams support both learning and use at the table. The complete supplied document can be opened separately or expanded under the relevant lesson.
 
+Quick sheet → Roll charts includes rank thresholds, combat-result scoring and the three-way Break-test table, with a helper for entered dice, Leadership, losing margin and Unit Strength comparison. Unit photo links open Google Images using canonical English unit and faction names from the roster catalogue.
+
 ## Run locally
 
 ```sh
