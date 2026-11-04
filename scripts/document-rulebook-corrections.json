@@ -1,0 +1,2111 @@
+[
+  {
+    "id": "core-miscast-table-values",
+    "blocks": [
+      "B00595",
+      "B05901"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "오시전 표의 수치와 적용 대상 정정",
+      "en": "Correct Miscast table values and scope"
+    },
+    "explanation": {
+      "ko": "현재 영문 표의 2–4는 5인치 템플릿·S10·AP −4입니다. 8–9는 디스펠 판정에서 시전값을 사용하며 해당 위저드만 추가 시전을 못 합니다. 10–12의 추가 시전 금지는 시전 플레이어 전체에 적용됩니다.",
+      "en": "The current table uses a 5-inch template, S10 and AP −4 for 2–4. Result 8–9 uses the casting value for dispel attempts and stops only that Wizard. Result 10–12 stops further casting attempts by the player."
+    },
+    "sources": [
+      {
+        "title": "The Old World Online Rules Index · Miscast Table",
+        "url": "https://tow.whfb.app/magic/miscast-table",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B00595",
+        "field": "table-cell",
+        "row": 1,
+        "column": 1,
+        "from": "차원 붕괴 (Dimensional Cascade): 소환된 마법이 폭주하여 에테르의 회오리를 만들어 냅니다. 위저드 위에 3\" 블래스트 템플릿을 놓습니다. 아군과 적군을 불문하고 베이스가 템플릿 아래에 있는 모든 모델은(95페이지의 규칙에 따라) 명중 판정을 하며, AP -4를 가진 Strength 10 명중을 1회 받습니다.",
+        "to": "차원 붕괴 (Dimensional Cascade): 소환된 마법이 폭주하여 에테르의 회오리를 만들어 냅니다. 위저드 위에 5\" 블래스트 템플릿을 놓습니다. 아군과 적군을 불문하고 베이스가 템플릿 아래에 있는 모든 모델은(95페이지의 규칙에 따라) 명중 판정을 하며, AP -4를 가진 Strength 10 명중을 1회 받습니다."
+      },
+      {
+        "blockId": "B00595",
+        "field": "table-cell",
+        "row": 4,
+        "column": 1,
+        "from": "간신히 제어된 힘 (Barely Controlled Power): 위저드는 큰 대가를 치르며 마법을 제어하는 데 성공합니다. 주문은 주문 해제 시도(Dispel Attempts) 를 위한 경우를 제외하고 시전 난이도(Casting Value) 로 시전된 것으로 간주합니다. 그러나 위저드는 이번 턴 동안 남은 주문을 더 이상 시도할 수 없습니다.",
+        "to": "간신히 제어된 힘 (Barely Controlled Power): 주문은 시전된 것으로 처리하며, 디스펠 시도에서는 해당 주문의 시전값(Casting Value)을 사용합니다. 그러나 해당 위저드는 이번 턴의 남은 기간 동안 더 이상 주문 시전을 시도할 수 없습니다."
+      },
+      {
+        "blockId": "B00595",
+        "field": "table-cell",
+        "row": 5,
+        "column": 1,
+        "from": "마력 고갈 (Power Drain): 귀를 찢는 듯한 굉음과 함께 소환된 마법이 방출되고, 부자연스러운 고요가 찾아옵니다. 해당 주문은 완벽한 영창(Perfect Invocation) 으로 시전된 것으로 간주합니다. 그러나 위저드는 이번 턴 동안 남은 주문을 더 이상 시도할 수 없습니다.",
+        "to": "마력 고갈 (Power Drain): 주문은 퍼펙트 인보케이션(Perfect Invocation)으로 시전된 것으로 처리합니다. 그러나 시전 플레이어는 이번 턴의 남은 기간 동안 더 이상 주문 시전을 시도할 수 없습니다."
+      },
+      {
+        "blockId": "B05901",
+        "field": "table-cell",
+        "row": 1,
+        "column": 1,
+        "from": "차원적 붕괴 (Dimensional Cascade): 소환된 마법이 폭발하여 에테르성 토네이도를 만든다. Wizard 위에 5\" Blast Template을 배치한다. 템플릿 아래에 베이스가 있는 모든 모델(아군 및 적군)은 적중될 위험이 있으며(95페이지에 설명된 대로), AP -4의 Strength 4 Hit 하나를 받는다.",
+        "to": "차원적 붕괴 (Dimensional Cascade): 소환된 마법이 폭발하여 에테르성 토네이도를 만든다. Wizard 위에 5\" Blast Template을 배치한다. 템플릿 아래에 베이스가 있는 모든 모델(아군 및 적군)은 적중될 위험이 있으며(95페이지에 설명된 대로), AP -4의 Strength 10 Hit 하나를 받는다."
+      },
+      {
+        "blockId": "B05901",
+        "field": "table-cell",
+        "row": 4,
+        "column": 1,
+        "from": "통제 상실 (Barely Controlled Power): Wizard가 마법을 통제하지만 엄청난 대가를 치른다. 주문은 시전된다(Dispel 시도 목적에서는 해당 주문의 Casting Value로 취급). 그러나 현재 턴의 남은 기간 동안 더 이상 주문을 시전할 수 없다.",
+        "to": "간신히 제어된 힘 (Barely Controlled Power): 주문은 시전된 것으로 처리하며, 디스펠 시도에서는 해당 주문의 시전값(Casting Value)을 사용합니다. 그러나 해당 위저드는 이번 턴의 남은 기간 동안 더 이상 주문 시전을 시도할 수 없습니다."
+      },
+      {
+        "blockId": "B05901",
+        "field": "table-cell",
+        "row": 5,
+        "column": 1,
+        "from": "힘의 고갈 (Power Drain): 귀가 찢어질 듯한 굉음과 함께 소환된 마법이 풀려나고 부자연스러운 고요가 찾아온다. 주문은 완벽한 시전으로 처리된다. 그러나 현재 턴의 남은 기간 동안 더 이상 주문을 시전할 수 없다.",
+        "to": "마력 고갈 (Power Drain): 주문은 퍼펙트 인보케이션(Perfect Invocation)으로 시전된 것으로 처리합니다. 그러나 시전 플레이어는 이번 턴의 남은 기간 동안 더 이상 주문 시전을 시도할 수 없습니다."
+      }
+    ]
+  },
+  {
+    "id": "core-wizardly-dispel-range",
+    "blocks": [
+      "B00615",
+      "B05894"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "디스펠 범위와 교전 중 위저드의 예외",
+      "en": "Dispel range and the engaged-Wizard exception"
+    },
+    "explanation": {
+      "ko": "범위는 해제를 시도하도록 지명한 위저드 자신의 레벨로 정합니다. 교전 중인 위저드도 자신이나 자신의 유닛을 대상으로 한 주문에는 위저들리 디스펠을 시도할 수 있습니다.",
+      "en": "Range belongs to the nominated dispelling Wizard. An engaged Wizard may attempt a Wizardly Dispel against spells targeting that Wizard or their unit."
+    },
+    "sources": [
+      {
+        "title": "The Old World Online Rules Index · Wizardly Dispel",
+        "url": "https://tow.whfb.app/magic/wizardly-dispel",
+        "checkedAt": "2026-11-04"
+      },
+      {
+        "title": "Official FAQ & Errata v1.5.3, p.110 entry in the online index",
+        "url": "https://tow.whfb.app/errata",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B00615",
+        "field": "text",
+        "from": "위저드식 주문 해제를 시도하려면, 주문을 시전한 위저드의 주문 해제 범위(Dispel Range) 안에 있는 자신의 위저드 한 명을 선택합니다.",
+        "to": "위저들리 디스펠(Wizardly Dispel)을 시도하려면, 주문을 시전한 위저드가 자신의 디스펠 범위(Dispel Range) 안에 들어오는 아군 위저드 한 명을 지명합니다."
+      },
+      {
+        "blockId": "B05894",
+        "field": "text",
+        "from": "전투에 참여하고 있지 않으며, Fleeing 상태가 아니고, 사거리 내에 있는 Wizard는 Wizardly Dispel을 시도할 대상으로 지정될 수 있다.",
+        "to": "전장에 있고 도주 중이 아닌 위저드는, 시전자에게 자신의 디스펠 사거리가 닿는다면 위저들리 디스펠(Wizardly Dispel)을 시도하도록 지명할 수 있다. 교전 중인 위저드는 자신 또는 자신의 유닛을 대상으로 하는 주문에 한해 지명할 수 있다."
+      }
+    ]
+  },
+  {
+    "id": "core-quick-casting-doubles",
+    "blocks": [
+      "B05884",
+      "B05886",
+      "B05887"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "캐스팅의 자연 더블과 오시전 예외",
+      "en": "Natural doubles and Miscast exceptions when casting"
+    },
+    "explanation": {
+      "ko": "2D6에서 자동 결과를 만드는 것은 주사위 하나의 6이나 1이 아니라 자연 더블 6과 더블 1입니다. 미스캐스트는 기본적으로 시전 실패지만 표의 일부 결과가 시전을 허용합니다.",
+      "en": "Automatic outcomes on 2D6 require natural double 6 or double 1. A Miscast normally does not cast the spell, but particular table results can state otherwise."
+    },
+    "sources": [
+      {
+        "title": "The Old World Online Rules Index · Perfect Invocations",
+        "url": "https://tow.whfb.app/magic/perfect-invocations",
+        "checkedAt": "2026-11-04"
+      },
+      {
+        "title": "The Old World Online Rules Index · Miscast",
+        "url": "https://tow.whfb.app/magic/miscast",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B05884",
+        "field": "text",
+        "from": "주문을 시전하려면 2D6을 굴린 후, 시전하는 Wizard의 Level을 2로 나누어(반올림하여 올림) 그 결과를 Casting 굴림에 더한다.",
+        "to": "주문을 시전하려면 2D6을 굴린 후, 시전 위저드의 마법사 레벨(Level of Wizardry)을 2로 나누고 소수점을 올림한 값을 캐스팅 굴림에 더한다."
+      },
+      {
+        "blockId": "B05886",
+        "field": "text",
+        "from": "자연 굴림 6이 나오면 Casting Value와 관계없이 주문이 시전되며 Dispell할 수 없다.",
+        "to": "자연 더블 6이 나오면 시전값(Casting Value)과 적용 수정치에 관계없이 주문이 시전되며, 디스펠할 수 없다."
+      },
+      {
+        "blockId": "B05887",
+        "field": "text",
+        "from": "자연 굴림 1이 나오면 주문은 Miscast되어 시전되지 않는다. Miscast Table을 굴린다.",
+        "to": "자연 더블 1이 나오면 미스캐스트(Miscast)한다. 기본적으로 주문은 시전되지 않지만 미스캐스트 표의 특정 결과가 달리 지시할 수 있다. 즉시 미스캐스트 표에서 굴린다."
+      }
+    ]
+  },
+  {
+    "id": "core-quick-dispel-doubles",
+    "blocks": [
+      "B05889",
+      "B05891",
+      "B05892"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "디스펠의 자연 더블과 위저들리 제한",
+      "en": "Natural doubles and the Wizardly Dispel restriction"
+    },
+    "explanation": {
+      "ko": "어느 디스펠이든 자연 더블 6은 언바인딩입니다. 자연 더블 1의 미스캐스트는 위저들리 디스펠에 적용되며, 페이티드 디스펠에 자동으로 적용되지 않습니다.",
+      "en": "Any type of dispel can unbind on natural double 6. The Miscast from natural double 1 applies to Wizardly Dispel, not automatically to Fated Dispel."
+    },
+    "sources": [
+      {
+        "title": "The Old World Online Rules Index · Unbinding",
+        "url": "https://tow.whfb.app/magic/unbinding",
+        "checkedAt": "2026-11-04"
+      },
+      {
+        "title": "The Old World Online Rules Index · Outclassed in the Art",
+        "url": "https://tow.whfb.app/magic/outclassed-in-the-art",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B05889",
+        "field": "text",
+        "from": "상대가 주문을 시전하면 Dispel을 시도할 수 있다. 주문을 해제하려면 2D6을 굴린다(Wizardly Dispel을 시도하는 경우, Wizard의 Level을 2로 나누어 반올림하여 올림한 값을 Dispel 굴림에 더한다).",
+        "to": "상대가 주문을 시전하면 디스펠을 시도할 수 있다. 2D6을 굴리며, 위저들리 디스펠을 시도하는 경우에는 해제하는 위저드의 레벨을 2로 나누고 소수점을 올림한 값을 더한다."
+      },
+      {
+        "blockId": "B05891",
+        "field": "text",
+        "from": "자연 굴림 6이 나오면 Casting 결과와 관계없이 주문이 해제된다.",
+        "to": "자연 더블 6이 나오면 캐스팅 결과와 관계없이 주문이 해제된다. 단, 퍼펙트 인보케이션(Perfect Invocation)으로 시전된 주문은 이 방법으로도 해제할 수 없다."
+      },
+      {
+        "blockId": "B05892",
+        "field": "text",
+        "from": "자연 굴림 1이 나오면 Dispel 시도가 실패한다. Miscast Table을 굴린다.",
+        "to": "위저들리 디스펠(Wizardly Dispel)에서 자연 더블 1이 나오면 즉시 미스캐스트 표를 굴린다. 표의 ‘시전’을 ‘디스펠’로, ‘퍼펙트 인보케이션’을 ‘언바인딩’으로 바꾸어 적용한다. 페이티드 디스펠의 더블 1은 이 미스캐스트를 일으키지 않는다."
+      }
+    ]
+  },
+  {
+    "id": "core-fighting-rank-movement",
+    "blocks": [
+      "B01986",
+      "B01989",
+      "B01997",
+      "B05999"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "싸울 수 있는 거리에는 공격 모델 자신의 M을 사용",
+      "en": "Use the attacking model’s own Movement for fighting reach"
+    },
+    "explanation": {
+      "ko": "전투 랭크는 자신의 유닛에서 적과 접촉하는 모델을 포함한 랭크 또는 파일입니다. 싸울 수 있는 거리와 지원 공격의 거리 기준은 적의 M이 아니라 공격 모델 자신의 M입니다.",
+      "en": "A fighting rank is a rank or file of the model’s own unit containing an enemy-contacting model. Fighting and supporting-attack reach use the attacking model’s own Movement, not the enemy’s."
+    },
+    "sources": [
+      {
+        "title": "The Old World Online Rules Index · The Fighting Rank",
+        "url": "https://tow.whfb.app/the-combat-phase/the-fighting-rank",
+        "checkedAt": "2026-11-04"
+      },
+      {
+        "title": "The Old World Online Rules Index · Supporting Attacks",
+        "url": "https://tow.whfb.app/the-combat-phase/supporting-attacks",
+        "checkedAt": "2026-11-04"
+      },
+      {
+        "title": "Official FAQ & Errata v1.5.3, p.145 entries in the online index",
+        "url": "https://tow.whfb.app/errata",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B01986",
+        "field": "text",
+        "from": "적과 베이스 접촉하고 있는 모델이 한 명 이상 포함된 모든 열(Rank) 은 전투 랭크(Fighting Rank) 입니다.",
+        "to": "적과 베이스 접촉하고 있는 모델이 한 명 이상 포함된 자신의 유닛의 모든 줄(랭크 또는 파일)은 전투 랭크(Fighting Rank)입니다."
+      },
+      {
+        "blockId": "B01989",
+        "field": "text",
+        "from": "적 유닛의 이동력(Movement)과 같거나 그 이하의 거리 안에 있는 모델도 전투할 수 있습니다.",
+        "to": "적 유닛으로부터 해당 모델 자신의 무브먼트(Movement)와 같거나 그 이하의 인치 거리에 있는 모델도 전투할 수 있습니다."
+      },
+      {
+        "blockId": "B01997",
+        "field": "text",
+        "from": "적 유닛으로부터 이동력(Movement) 이하의 거리 안에 있다면 지원 공격을 할 수 있습니다.",
+        "to": "적 유닛으로부터 해당 공격 모델 자신의 무브먼트(Movement) 이하의 인치 거리에 있다면 지원 공격을 할 수 있습니다."
+      },
+      {
+        "blockId": "B05999",
+        "field": "text",
+        "from": "적 유닛의 Fighting rank 안에 있고 그 적 유닛의 Movement와 동일한 수의 인치 이내에 있는 모든 모델은 싸울 수 있다. 단, 적 모델과 Base contact 상태가 아닌 모델은 공격 횟수와 관계없이 공격을 단 한 번만 할 수 있다.",
+        "to": "자신의 유닛의 전투 랭크(Fighting Rank)에 속하고, 적 유닛으로부터 해당 모델 자신의 무브먼트(Movement) 이하의 인치 거리에 있는 모델은 싸울 수 있다. 단, 적 모델과 베이스 접촉하지 않은 모델은 어택스(A)와 관계없이 공격을 한 번만 할 수 있다."
+      }
+    ]
+  },
+  {
+    "id": "core-break-test-modifier",
+    "blocks": [
+      "B02344",
+      "B06014",
+      "B06018"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "브레이크 판정은 패배 점수 차를 2D6에 더함",
+      "en": "Add the loss margin to a Break-test roll"
+    },
+    "explanation": {
+      "ko": "현재 규칙은 승자의 CR에서 패자의 CR을 뺀 양의 패배 점수 차를 2D6 결과에 더합니다. 자연 더블 1은 기브 그라운드 결과이며 자연 눈 하나의 1이 아닙니다.",
+      "en": "The current rule adds the positive combat-result loss margin to the 2D6 roll. The special Give Ground result requires natural double 1, not a single natural 1."
+    },
+    "sources": [
+      {
+        "title": "The Old World Online Rules Index · Break Test",
+        "url": "https://tow.whfb.app/the-combat-phase/break-test",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B02344",
+        "field": "text",
+        "from": "브레이크 테스트를 하려면 2D6을 굴린 뒤, 승자의 전투 결과 점수와 패자의 전투 결과 점수의 차이만큼 그 결과에 더하거나 뺍니다.",
+        "to": "브레이크 테스트를 하려면 2D6을 굴린 뒤, 승자의 전투 결과 점수에서 패자의 점수를 뺀 값(패배 점수 차)을 주사위 결과에 더합니다."
+      },
+      {
+        "blockId": "B06014",
+        "field": "text",
+        "from": "2D6을 굴린 후, 승자의 Combat Result 점수와 패자의 Combat Result 점수 사이의 차이를 음수 수정치로 적용한다.",
+        "to": "2D6을 굴린 후, 승자의 컴뱃 리절트(Combat Result) 점수에서 패자의 점수를 뺀 값(패배 점수 차)을 주사위 결과에 더한다."
+      },
+      {
+        "blockId": "B06018",
+        "field": "text",
+        "from": "수정된 결과가 유닛의 Leadership 이하이거나, 굴림이 자연 굴림 1이라면:\n유닛은 Gives Ground한다.",
+        "to": "수정된 결과가 유닛의 리더십(Leadership) 이하이거나, 굴림이 자연 더블 1이라면:\n유닛은 기브 그라운드(Give Ground)한다."
+      }
+    ]
+  },
+  {
+    "id": "core-outnumbering-fbigo-only",
+    "blocks": [
+      "B02368"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "수적 우세는 FBIGO 결과를 브레이크로 전환",
+      "en": "Outnumbering converts only a Fall Back in Good Order result"
+    },
+    "explanation": {
+      "ko": "승리 측 US가 패배 측의 두 배를 초과하는 경우, FBIGO를 굴린 패배 유닛이 브레이크합니다. 모든 브레이크 테스트 결과를 무조건 도주로 바꾸는 규칙이 아닙니다.",
+      "en": "When the winning side has more than twice the losing side’s Unit Strength, a loser that rolled Fall Back in Good Order Breaks instead. The rule does not replace every possible Break-test result."
+    },
+    "sources": [
+      {
+        "title": "The Old World Online Rules Index · Loser Falls Back In Good Order",
+        "url": "https://tow.whfb.app/the-combat-phase/loser-falls-back-in-good-order",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B02368",
+        "field": "text",
+        "from": "패배한 측은 브레이크 테스트를 할 때 굴린 결과가 무엇이든 관계없이 즉시 브레이크합니다.",
+        "to": "해당 브레이크 테스트에서 질서 있는 후퇴(Fall Back in Good Order) 결과를 굴린 패배 유닛은 그 대신 브레이크(Break)하여 도주합니다."
+      }
+    ]
+  },
+  {
+    "id": "core-charge-initiative-timing",
+    "blocks": [
+      "B05996"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "차지 이니셔티브 보너스의 적용 페이즈",
+      "en": "The charge Initiative bonus applies during Combat"
+    },
+    "explanation": {
+      "ko": "차지 이니셔티브 보너스는 차지한 턴의 컴뱃 페이즈에 적용하며 최종 I는 10을 넘지 않습니다.",
+      "en": "The charge Initiative bonus applies during the Combat phase of the charged turn and cannot increase Initiative above 10."
+    },
+    "sources": [
+      {
+        "title": "The Old World Online Rules Index · Charging Units",
+        "url": "https://tow.whfb.app/the-combat-phase/charging-units",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B05996",
+        "field": "text",
+        "from": "Charge한 모델은 Charge 방식에 따라 해당 턴의 나머지 기간 동안 Initiative에 보너스를 얻는다.",
+        "to": "차지한 모델은 그 턴의 컴뱃 페이즈 동안 차지 방식에 따른 이니셔티브(Initiative) 보너스를 얻는다. 최종 이니셔티브는 10을 넘을 수 없다."
+      }
+    ]
+  },
+  {
+    "id": "core-reserve-joint-roll",
+    "blocks": [
+      "B04871"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "예비대 캐릭터와 합류 유닛은 함께 한 번 굴림",
+      "en": "Joined reserve character and unit use one shared roll"
+    },
+    "explanation": {
+      "ko": "예비대의 도착 시점·위치를 주사위로 정한다면 합류 여부를 굴리기 전에 선언합니다. 합류를 선언한 캐릭터와 유닛은 각각 굴리지 않고 하나의 굴림을 공유합니다.",
+      "en": "Declare whether a reserve character joins a unit before rolling for arrival. A joined character and unit share one roll for when and where they enter."
+    },
+    "sources": [
+      {
+        "title": "The Old World Online Rules Index · Reserves",
+        "url": "https://tow.whfb.app/warhammer-battles/reserves",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B04871",
+        "field": "text",
+        "from": "캐릭터는 혼자서 전투에 참여할 수도 있고, 자신이 합류한 유닛의 일부로 전투에 참여할 수도 있습니다. 캐릭터가 언제 Reserve에서 도착할지를 결정하기 위해 주사위를 굴려야 하는 경우, 캐릭터가 주사위를 굴리기 전에 유닛에 합류했다면 캐릭터와 유닛 각각에 대해 한 번씩 굴립니다.",
+        "to": "캐릭터는 혼자 또는 자신이 합류한 유닛의 일부로 전장에 진입할 수 있습니다. 주사위로 예비대의 도착 시점이나 위치를 정한다면, 굴리기 전에 캐릭터가 유닛에 합류하는지 선언합니다. 합류한다면 캐릭터와 유닛 모두에 대해 하나의 굴림만 실시합니다."
+      }
+    ]
+  },
+  {
+    "id": "core-supporting-charge-target",
+    "blocks": [
+      "B04812"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "서포팅 차지는 연대를 차지한 적을 대상으로 함",
+      "en": "A Supporting Charge targets an enemy that charged the regiment"
+    },
+    "explanation": {
+      "ko": "분견대가 접촉해야 하는 대상은 아군 연대가 아니라 이번 턴 그 연대에 차지하여 접촉한 적 유닛 하나입니다.",
+      "en": "The detachment charges one enemy unit that charged into contact with its regimental unit that turn, not the friendly regiment itself."
+    },
+    "sources": [
+      {
+        "title": "The Old World Online Rules Index · Supporting Charge",
+        "url": "https://tow.whfb.app/warhammer-armies/supporting-charge",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B04812",
+        "field": "text",
+        "from": "돌격 이동 단계가 끝났을 때, Supporting Charge를 선언했으며 전투 중이 아니고 도망 중도 아닌 분견대는 해당 턴에 적 유닛을 향해 돌격하여 자신의 연대 유닛과 접촉할 수 있는지 여부를 확인합니다.",
+        "to": "차지 무브 하위 페이즈가 끝날 때, 서포팅 차지를 선언했으며 교전 중이거나 도주 중이 아닌 분견대는 이번 턴 자신의 연대 유닛에 차지하여 접촉한 적 유닛 하나를 대상으로 순서 밖의 차지를 실시합니다."
+      }
+    ]
+  },
+  {
+    "id": "core-victory-points-reduction",
+    "blocks": [
+      "B04885",
+      "B04886"
+    ],
+    "status": "verified",
+    "severity": "wording",
+    "title": {
+      "ko": "절반 승점은 올림하며 시작 US·W 기준을 구별",
+      "en": "Round half-points up and distinguish starting US from Wounds"
+    },
+    "explanation": {
+      "ko": "도주 중이거나 전력이 25% 이하인 유닛의 절반 승점은 소수점을 올림합니다. US를 시작 W로 정하는 병종은 잔존 W를 시작 W와 비교합니다.",
+      "en": "Half-points for fleeing or sufficiently reduced units are rounded up. Units whose Unit Strength is based on starting Wounds use their remaining versus starting Wounds for the reduction threshold."
+    },
+    "sources": [
+      {
+        "title": "The Old World Online Rules Index · Dead or Fled",
+        "url": "https://tow.whfb.app/warhammer-battles/dead-or-fled-warhammer-battles",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B04885",
+        "field": "text",
+        "from": "반올림 적용",
+        "to": "소수점은 올림"
+      },
+      {
+        "blockId": "B04886",
+        "field": "text",
+        "from": "시작 시 Unit Strength의 25%까지 감소했거나, 전투 종료 시 Unit Strength가 시작 시 Wounds의 25%까지 감소한 각각의 적 유닛은 해당 유닛 포인트 비용의 50%에 해당하는 Victory Points를 제공합니다.\n(소수점은 올림)",
+        "to": "전투 종료 시 현재 유닛 스트렝스(Unit Strength)가 시작 시의 25% 이하로 감소한 적 유닛은 포인트 비용의 50%에 해당하는 승점을 줍니다. US를 시작 운즈(Wounds)로 정하는 유닛은 남은 W가 시작 W의 25% 이하인지 비교합니다. 승점의 소수점은 올림합니다."
+      }
+    ]
+  },
+  {
+    "id": "core-leader-victory-points",
+    "blocks": [
+      "B04888",
+      "B04891"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "게임 종료 시 보드 안에서 도주 중인 지휘관도 보너스 대상",
+      "en": "Fleeing leaders still on the battlefield also grant the bonus"
+    },
+    "explanation": {
+      "ko": "제너럴과 BSB는 사망·전장 밖 도주뿐 아니라 게임 종료 시 도주 중인 경우에도 각각의 보너스를 줍니다.",
+      "en": "The General and Battle Standard Bearer grant their respective bonuses if slain, fled off the battlefield, or still fleeing when the game ends."
+    },
+    "sources": [
+      {
+        "title": "The Old World Online Rules Index · The King is Dead",
+        "url": "https://tow.whfb.app/warhammer-battles/the-king-is-dead-warhammer-battles",
+        "checkedAt": "2026-11-04"
+      },
+      {
+        "title": "The Old World Online Rules Index · Trophies of War",
+        "url": "https://tow.whfb.app/warhammer-battles/trophies-of-war-warhammer-battles",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B04888",
+        "field": "text",
+        "from": "적 General이 사망했거나 전장에서 도주한 상태로 게임이 종료되었다면, 100 Victory Points의 보너스를 획득합니다.",
+        "to": "적 제너럴(General)이 사망했거나, 전장 밖으로 도주했거나, 게임이 끝날 때 도주 중이라면 100 승점의 보너스를 획득합니다."
+      },
+      {
+        "blockId": "B04891",
+        "field": "text",
+        "from": "추가로, 적 Battle Standard Bearer가 사망했거나 전장에서 도주한 상태로 게임이 종료되었다면 추가로 50 Victory Points를 획득합니다.",
+        "to": "추가로, 적 배틀 스탠더드 베어러(Battle Standard Bearer)가 사망했거나, 전장 밖으로 도주했거나, 게임이 끝날 때 도주 중이라면 50 승점의 보너스를 더 획득합니다."
+      }
+    ]
+  },
+  {
+    "id": "core-battle-march-landmark-duration",
+    "blocks": [
+      "B05278"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "랜드마크 효과는 다음 턴 종료까지 지속",
+      "en": "Landmark effects last until the end of the next turn"
+    },
+    "explanation": {
+      "ko": "랜드마크 통제는 어느 플레이어의 턴이든 종료 시 확인합니다. 효과는 전투 종료부터 다음 턴 시작까지가 아니라, 통제가 확인된 턴 종료부터 다음 턴 종료까지 지속됩니다.",
+      "en": "Control is checked at the end of either player’s turn. A landmark’s property lasts until the end of the next turn, not from the end of the battle until the next turn starts."
+    },
+    "sources": [
+      {
+        "title": "The Old World Online Rules Index · Landmarks",
+        "url": "https://tow.whfb.app/battle-march/landmarks",
+        "checkedAt": "2026-11-04"
+      },
+      {
+        "title": "The Old World Online Rules Index · Controlling Objectives",
+        "url": "https://tow.whfb.app/battle-march/controlling-objectives",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B05278",
+        "field": "text",
+        "from": "전투가 끝났을 때 유닛이 해당 전략적 랜드마크를 통제하고 있었다면, 그 유닛은 다음 턴이 시작될 때까지 해당 랜드마크의 특이한 특성으로부터 혜택을 받는다.",
+        "to": "어느 플레이어의 턴이든 종료 시 해당 전략적 랜드마크를 통제하는 것으로 판정된 유닛은, 다음 턴이 끝날 때까지 랜드마크의 특이한 특성으로부터 혜택을 받습니다."
+      }
+    ]
+  },
+  {
+    "id": "core-historical-impetuous-erratum",
+    "blocks": [
+      "B04957"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "역사적 재현의 임페추어스도 개정된 Ld 판정 사용",
+      "en": "Historical Impetuous uses the amended Leadership test"
+    },
+    "explanation": {
+      "ko": "공식 FAQ·정오표 v1.5.3의 289페이지 개정은 이 역사적 재현 문장을 D6의 1–4가 아니라 강제 차지 여부를 판정하는 리더십 테스트의 −1 수정치로 바꿉니다.",
+      "en": "The official v1.5.3 amendment for page 289 replaces this historical-recreation sentence with a −1 Leadership modifier when testing whether an Impetuous unit must declare a charge."
+    },
+    "sources": [
+      {
+        "title": "Official FAQ & Errata v1.5.3, p.289 Historical Recreation entry in the online index",
+        "url": "https://tow.whfb.app/errata",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B04957",
+        "field": "text",
+        "from": "추가로 Impetuous 특수 규칙을 가진 모든 유닛은 일반적인 1~3이 아니라, D6에서 1~4가 나오면 반드시 돌격을 선언해야 합니다.",
+        "to": "추가로, 임페추어스(Impetuous) 특수 규칙을 가진 모든 유닛은 차지를 반드시 선언해야 하는지 판정하는 리더십(Leadership) 테스트에서 리더십에 −1 수정치를 받습니다."
+      }
+    ]
+  },
+  {
+    "id": "core-appendix-spell-generation",
+    "blocks": [
+      "B05403"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "주문 생성은 개별 주사위 결과를 사용",
+      "en": "Generate spells from individual dice"
+    },
+    "explanation": {
+      "ko": "현재 규칙은 마법사 레벨만큼 D6을 굴려 중복 결과를 재굴림하고, 각 결과에 해당하는 주문을 배정한다. 결과를 합산한다는 문구를 수정한다.",
+      "en": "The current rule uses individual D6 results and rerolls duplicates. Summing the dice can produce numbers outside the six numbered spells."
+    },
+    "sources": [
+      {
+        "title": "Spells & Spell Generation",
+        "url": "https://tow.whfb.app/the-lores-of-magic/spells-and-spell-generation",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B05403",
+        "field": "text",
+        "from": "Wizard가 알고 있는 주문을 결정하려면 Wizard의 Level of Wizardry와 동일한 수의 D6을 굴리고, 그 결과를 합산한다.",
+        "to": "위저드(Wizard)가 알고 있는 주문을 결정하려면 마법사 레벨(Level of Wizardry)과 동일한 수의 D6을 굴리고, 중복된 결과는 재굴림한다. 각 주사위 결과에 해당하는 번호의 주문을 배운다."
+      }
+    ]
+  },
+  {
+    "id": "core-appendix-soul-eater-saves",
+    "blocks": [
+      "B05527",
+      "B05528"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "소울 이터는 아머 세이브만 금지",
+      "en": "Soul Eater prohibits armour saves only"
+    },
+    "explanation": {
+      "ko": "현재 주문은 아머 세이브만 금지하며 워드 및 재생 세이브는 정상적으로 허용한다. 다음 문단의 허용 문구와 충돌하는 포괄적 세이브 금지를 수정한다.",
+      "en": "The current spell prohibits armour saves and expressly permits Ward and Regeneration saves. The general save prohibition conflicts with the following paragraph."
+    },
+    "sources": [
+      {
+        "title": "Soul Eater",
+        "url": "https://tow.whfb.app/spell/soul-eater",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B05527",
+        "field": "text",
+        "from": "**무방비(Save 불가)**",
+        "to": "아머 세이브(Armour Save) 불가"
+      }
+    ]
+  },
+  {
+    "id": "core-appendix-storm-call-scope",
+    "blocks": [
+      "B05536"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "스톰 콜의 헥스 해제 범위",
+      "en": "Limit Storm Call cancellation to its target"
+    },
+    "explanation": {
+      "ko": "현재 주문이 종료시키는 효과는 대상 유닛에게 이전에 시전된 다른 헥스의 효과이다. 대상 범위가 빠져 전장 전체의 헥스를 종료하는 것처럼 읽히는 문장을 수정한다.",
+      "en": "The current spell expires other Hex effects previously cast on the target unit. The translation omits that scope."
+    },
+    "sources": [
+      {
+        "title": "Storm Call",
+        "url": "https://tow.whfb.app/spell/storm-call",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B05536",
+        "field": "text",
+        "from": "이 주문이 시전되면, 이전에 시전되어 있던 다른 Hex 주문의 효과는 즉시 만료된다.",
+        "to": "이 주문이 시전되면, 대상 유닛에게 이전에 시전되어 있던 다른 헥스(Hex) 주문의 효과는 즉시 만료된다."
+      }
+    ]
+  },
+  {
+    "id": "core-appendix-glittering-robe-scope",
+    "blocks": [
+      "B05595"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "글리터링 로브의 인챈트먼트 해제 범위",
+      "en": "Limit Glittering Robe cancellation to affected models"
+    },
+    "explanation": {
+      "ko": "현재 주문이 종료시키는 효과는 이 주문의 영향을 받는 모델에게 이전에 시전된 다른 인챈트먼트의 효과이다. 해제 대상 범위를 명시한다.",
+      "en": "The current spell expires other Enchantments previously cast on any affected model. The translation omits that scope."
+    },
+    "sources": [
+      {
+        "title": "Glittering Robe",
+        "url": "https://tow.whfb.app/spell/glittering-robe",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B05595",
+        "field": "text",
+        "from": "이 주문이 시전되면, 이전에 시전된 다른 Enchantment 주문의 효과는 즉시 만료된다.",
+        "to": "이 주문이 시전되면, 이 주문의 영향을 받는 모델에게 이전에 시전된 다른 인챈트먼트(Enchantment) 주문의 효과는 즉시 만료된다."
+      }
+    ]
+  },
+  {
+    "id": "core-appendix-magic-standard-carrier",
+    "blocks": [
+      "B05796"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "마법 스탠다드의 캐릭터 소지 제한",
+      "en": "Magic standard restriction applies to characters"
+    },
+    "explanation": {
+      "ko": "일반 유닛의 스탠다드 베어러도 허용된 마법 스탠다드를 소지할 수 있다. 배틀 스탠다드 베어러만 가능하다는 제한은 모든 모델이 아니라 캐릭터에게 적용된다.",
+      "en": "Eligible units can purchase magic standards for their standard bearers. The Battle Standard Bearer restriction applies to characters, not all models."
+    },
+    "sources": [
+      {
+        "title": "Magic Standards",
+        "url": "https://tow.whfb.app/magic-items/magic-standards",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B05796",
+        "field": "text",
+        "from": "마법 스탠다드를 소지할 수 있는 모델은",
+        "to": "마법 스탠다드를 소지할 수 있는 캐릭터는"
+      }
+    ]
+  },
+  {
+    "id": "core-appendix-feedback-scroll-dice",
+    "blocks": [
+      "B05846"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "피드백 두루마리는 D6 두 개 사용",
+      "en": "Feedback Scroll rolls two D6"
+    },
+    "explanation": {
+      "ko": "현재 규칙은 주문 해결 후 D6 두 개를 굴려 각 4+마다 시전 위저드가 운드 하나를 잃도록 한다. 누락된 주사위 개수를 수정한다.",
+      "en": "The current rule rolls two D6 after resolving the spell, inflicting one lost Wound for each 4+. The translation gives only one D6."
+    },
+    "sources": [
+      {
+        "title": "Feedback Scroll",
+        "url": "https://tow.whfb.app/magic-item/feedback-scroll",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B05846",
+        "field": "text",
+        "from": "주문이 해결된 후 D6을 굴린다.",
+        "to": "주문이 해결된 후 D6 두 개를 굴린다."
+      }
+    ]
+  },
+  {
+    "id": "core-appendix-transmogrification-scroll",
+    "blocks": [
+      "B05849",
+      "B05850",
+      "B05852"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "변이의 두루마리 사용 시점과 판정 수정",
+      "en": "Correct Scroll of Transmogrification trigger and test"
+    },
+    "explanation": {
+      "ko": "현재 두루마리는 위저들리 디스펠 시도를 대신한다. 주문 해결 후 시전 플레이어는 D6 결과가 시전 위저드의 레벨 이하이면 변이를 피한다. 복귀 시 남는다는 Love는 규칙 상태가 아니라 물을 좋아한다는 괄호 속 묘사이다.",
+      "en": "The scroll replaces a Wizardly Dispel attempt. After resolution, the casting player avoids transformation by rolling equal to or below the casting Wizard’s Level. The return clause refers to a love of water, not a named game condition."
+    },
+    "sources": [
+      {
+        "title": "Scroll of Transmogrification*",
+        "url": "https://tow.whfb.app/magic-item/scroll-of-transmogrification",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B05849",
+        "field": "text",
+        "from": "일회용. 소지자는 주문을 시전할 때 Casting을 시도하는 대신 이 두루마리를 사용할 수 있다. 주문은 정상적으로 시전된 것으로 처리한다.",
+        "to": "일회용. 소지자는 위저들리 디스펠(Wizardly Dispel)을 시도하는 대신 이 두루마리를 사용할 수 있다. 주문은 정상적으로 시전된 것으로 처리한다."
+      },
+      {
+        "blockId": "B05850",
+        "field": "text",
+        "from": "주문이 해결된 후, 시전자는 D6을 굴려야 하며, 그 결과는 시전 Wizard의 Casting Wizard's Level 이상이어야 한다. 실패하면 Wizard는 개구리로 변한다.",
+        "to": "주문이 해결된 후, 시전 플레이어는 D6 하나를 굴려야 한다. 결과가 시전 위저드(Wizard)의 마법사 레벨(Level of Wizardry) 이하이면 성공하며, 실패하면 해당 위저드는 개구리로 변한다."
+      },
+      {
+        "blockId": "B05852",
+        "field": "text",
+        "from": "원래 모습으로 돌아오지만, Love를 하나 가진 상태로 남는다.",
+        "to": "원래 모습으로 돌아오지만, 물을 좋아하는 취향은 남는다."
+      }
+    ]
+  },
+  {
+    "id": "core-appendix-wand-of-jet",
+    "blocks": [
+      "B05855",
+      "B05856"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "제트의 완드는 더블에서 파괴",
+      "en": "Wand of Jet is destroyed on natural doubles"
+    },
+    "explanation": {
+      "ko": "현재 규칙에서 캐스팅 또는 디스펠 굴림의 자연 더블은 완드를 파괴한다. 재굴림을 요구하지 않는다. +1 수정치는 자연 더블 1의 효과를 무효화하지 않는다는 주석도 복원한다.",
+      "en": "A natural double on a Casting or Dispel roll destroys the wand. The current rule does not require a reroll. Its +1 modifier does not negate a natural double 1."
+    },
+    "sources": [
+      {
+        "title": "Wand of Jet",
+        "url": "https://tow.whfb.app/magic-item/wand-of-jet",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B05855",
+        "field": "text",
+        "from": "그러나 자연적인 더블을 굴릴 때에는 반드시 해당 굴림을 재굴림해야 하며, 재굴림된 결과는 다시 사용할 수 없다.",
+        "to": "그러나 캐스팅 또는 디스펠 굴림에서 자연 주사위 눈이 더블이면, 제트의 완드(Wand of Jet)는 파괴되어 이후 사용할 수 없다."
+      },
+      {
+        "blockId": "B05856",
+        "field": "text",
+        "from": "자연 굴림 1의 결과를 무효화하지 않는다.",
+        "to": "자연 더블 1의 결과를 무효화하지 않는다."
+      }
+    ]
+  },
+  {
+    "id": "core-appendix-bedazzling-helm-cap",
+    "blocks": [
+      "B05755"
+    ],
+    "status": "verified",
+    "severity": "wording",
+    "title": {
+      "ko": "눈부신 투구의 아머 한도는 2+",
+      "en": "Bedazzling Helm armour cap is 2+"
+    },
+    "explanation": {
+      "ko": "현재 아이템은 아머 수치를 1만큼 향상하며 최선의 수치는 2+이다. 최대 +2라는 표기를 2+로 바로잡는다.",
+      "en": "The current item improves armour value by 1 to a maximum of 2+. The document reverses the notation to +2."
+    },
+    "sources": [
+      {
+        "title": "Bedazzling Helm",
+        "url": "https://tow.whfb.app/magic-item/bedazzling-helm",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B05755",
+        "field": "text",
+        "from": "(최대 +2까지)",
+        "to": "(최대 2+까지)"
+      }
+    ]
+  },
+  {
+    "id": "special-armour-bane-example",
+    "blocks": [
+      "B02719"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "아머 베인 누적 예시",
+      "en": "Cumulative Armour Bane example"
+    },
+    "explanation": {
+      "ko": "영문 예시는 주문의 아머 베인(2)과 무기의 아머 베인(1)을 합쳐 (3)으로 계산합니다. 무기 수치를 (1)로 정정했습니다.",
+      "en": "The source example combines Armour Bane (2) from a spell with Armour Bane (1) from a weapon to produce (3). The weapon value is corrected to (1)."
+    },
+    "sources": [
+      {
+        "title": "Cumulative Special Rules",
+        "url": "https://tow.whfb.app/special-rules/cumulative-special-rules",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B02719",
+        "field": "text",
+        "from": "동시에 Armour Bane (2) 를 가진 무기를 들고 있다면,",
+        "to": "동시에 Armour Bane (1) 를 가진 무기를 들고 있다면,"
+      }
+    ]
+  },
+  {
+    "id": "special-ethereal-joining",
+    "blocks": [
+      "B02798"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "에테리얼의 합류 제한",
+      "en": "Ethereal joining restriction"
+    },
+    "explanation": {
+      "ko": "마법 공격에만 피해를 받는 규칙과 별개로, 에테리얼이 아닌 캐릭터는 에테리얼 유닛에 합류할 수 없으며 그 반대도 같습니다. 원문의 공격 방향을 뒤집은 문장을 합류 제한으로 정정했습니다.",
+      "en": "Non-Ethereal characters cannot join Ethereal units and vice versa. The supplied sentence describing immunity to outgoing attacks is replaced by the joining restriction."
+    },
+    "sources": [
+      {
+        "title": "Ethereal",
+        "url": "https://tow.whfb.app/special-rules/ethereal",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B02798",
+        "field": "text",
+        "from": "반대로, 에테리얼이 아닌 유닛은 에테리얼 생명체의 공격에 피해를 입을 수 없습니다.",
+        "to": "에테리얼(Ethereal)이 아닌 캐릭터는 에테리얼 유닛에 합류할 수 없으며, 에테리얼 캐릭터도 에테리얼이 아닌 유닛에 합류할 수 없습니다."
+      }
+    ]
+  },
+  {
+    "id": "special-poison",
+    "blocks": [
+      "B03035",
+      "B03037"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "포이즌드 어택스 개정",
+      "en": "Poisoned Attacks amendment"
+    },
+    "explanation": {
+      "ko": "룰북 정오표의 개정 문장에 따라 자연 투 힛 6은 그 명중의 투 운드에 +2를 적용합니다. 모델의 주문과 마법 무기 공격은 이 규칙의 영향을 받지 않습니다.",
+      "en": "The Rulebook amendment changes a natural 6 To Hit to +2 on that hit’s To Wound roll. Spells and attacks made with magic weapons are unaffected."
+    },
+    "sources": [
+      {
+        "title": "Poisoned Attacks",
+        "url": "https://tow.whfb.app/special-rules/poisoned-attacks",
+        "checkedAt": "2026-11-04"
+      },
+      {
+        "title": "Errata & Amendments — Rulebook p. 175",
+        "url": "https://tow.whfb.app/errata",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B03035",
+        "field": "text",
+        "from": "독 공격(Poisoned Attacks) 을 가진 모델이 명중 굴림(To Hit) 에서 자연 6을 굴렸다면, 해당 공격은 상처 굴림을 굴리는 대신 즉시 상처를 입힐 수 있습니다.",
+        "to": "포이즌드 어택스(Poisoned Attacks)를 가진 모델이 투 힛(To Hit) 굴림에서 자연 6을 굴렸다면, 해당 명중의 투 운드(To Wound) 굴림에 +2 수정치를 적용할 수 있습니다."
+      },
+      {
+        "blockId": "B03037",
+        "field": "text",
+        "from": "모델이 시전하는 주문은 자동으로 마법 공격으로 취급되며, 마법 무기를 사용한 공격 역시 마찬가지입니다.",
+        "to": "모델이 시전한 주문과 마법 무기로 수행한 공격은 이 특수 규칙의 영향을 받지 않습니다."
+      }
+    ]
+  },
+  {
+    "id": "special-shieldwall",
+    "blocks": [
+      "B03103"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "실드월의 후퇴 결과",
+      "en": "Shieldwall result"
+    },
+    "explanation": {
+      "ko": "실드월은 조건을 만족하면 게임당 한 번 FBIGO 대신 기브 그라운드를 선택하는 규칙입니다. 문서에서 바뀐 두 결과의 순서를 정정했습니다.",
+      "en": "Once per game, qualifying Shieldwall units may Give Ground rather than Fall Back in Good Order. The reversed outcomes are corrected."
+    },
+    "sources": [
+      {
+        "title": "Shieldwall",
+        "url": "https://tow.whfb.app/special-rules/shieldwall",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B03103",
+        "field": "text",
+        "from": "밀어내기(Give Ground) 대신 질서 있는 후퇴(Fall Back in Good Order) 를 할 수 있습니다.",
+        "to": "질서 있는 후퇴(Fall Back in Good Order) 대신 기브 그라운드(Give Ground)를 선택할 수 있습니다."
+      }
+    ]
+  },
+  {
+    "id": "special-feigned-title",
+    "blocks": [
+      "B02831"
+    ],
+    "status": "verified",
+    "severity": "wording",
+    "title": {
+      "ko": "페인드 플라이트 명칭",
+      "en": "Feigned Flight name"
+    },
+    "explanation": {
+      "ko": "Feigned Flight는 도주 반응 뒤 자동 랠리하는 규칙입니다. 깃털이나 비행을 뜻하는 명칭을 정정했습니다.",
+      "en": "Feigned Flight automatically rallies after the specified fleeing charge reaction. Its misleading feathered-flight title is corrected."
+    },
+    "sources": [
+      {
+        "title": "Feigned Flight",
+        "url": "https://tow.whfb.app/special-rules/feigned-flight",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B02831",
+        "field": "text",
+        "from": "■ 깃털 달린 비행 (Feigned Flight)",
+        "to": "■ 페인드 플라이트 (Feigned Flight)"
+      }
+    ]
+  },
+  {
+    "id": "special-flaming",
+    "blocks": [
+      "B02857",
+      "B02859",
+      "B02862"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "플레이밍 어택스의 적용 범위",
+      "en": "Flaming Attacks scope"
+    },
+    "explanation": {
+      "ko": "모델이 가진 규칙과 무기·주문 자체가 가진 규칙을 구분했습니다. 모델의 규칙은 주문·마법 무기에 전달되지 않으며, 피어 대상은 워 비스트와 스웜입니다.",
+      "en": "Distinguish a rule on the model from one on the weapon or spell itself. The model’s rule does not affect spells or magic weapons, and its Fear targets war beasts and swarms."
+    },
+    "sources": [
+      {
+        "title": "Flaming Attacks",
+        "url": "https://tow.whfb.app/special-rules/flaming-attacks",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B02857",
+        "field": "text",
+        "from": "이 특수 규칙을 가진 모델이 수행하는 모든 공격 또는 해당 모델이 사용하는 무기나 주문으로 발생한 명중(Hit)은 화염 공격(Flaming Attack) 으로 간주합니다.",
+        "to": "이 특수 규칙을 가진 모델이 수행한 공격 또는 발생시킨 명중, 그리고 이 특수 규칙을 가진 무기나 주문으로 수행한 공격은 플레이밍(Flaming) 공격입니다."
+      },
+      {
+        "blockId": "B02859",
+        "field": "text",
+        "from": "이 공포는 병종 유형이 ‘야수 무리(Beasts of War)’ 인 모델에게만 적용됩니다.",
+        "to": "이 피어(Fear)는 병종 유형이 워 비스트(War Beasts) 또는 스웜(Swarms)인 모델에게 적용됩니다."
+      },
+      {
+        "blockId": "B02862",
+        "field": "text",
+        "from": "마법 무기로 수행하는 공격에는 적용될 수도 있습니다.",
+        "to": "모델이 사용하는 마법 무기의 공격에도 이 규칙은 적용되지 않습니다. 별도 명시가 있다면 해당 규칙을 따릅니다."
+      }
+    ]
+  },
+  {
+    "id": "special-horde",
+    "blocks": [
+      "B02903"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "호드의 랭크 보너스",
+      "en": "Horde rank bonus"
+    },
+    "explanation": {
+      "ko": "호드는 병종 유형으로 정해지는 최대 랭크 보너스를 1 높입니다. 누락된 증가량을 명시했습니다.",
+      "en": "Horde increases the maximum Rank Bonus determined by troop type by one. The omitted amount is restored."
+    },
+    "sources": [
+      {
+        "title": "Horde",
+        "url": "https://tow.whfb.app/special-rules/horde",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B02903",
+        "field": "text",
+        "from": "이 특수 규칙을 가진 유닛은 자신이 얻을 수 있는 최대 랭크 보너스(Rank Bonus) 를 증가시킬 수 있습니다.",
+        "to": "이 특수 규칙을 가진 유닛은 자신의 병종 유형으로 정해지는 최대 랭크 보너스(Rank Bonus)를 1 증가시킬 수 있습니다."
+      }
+    ]
+  },
+  {
+    "id": "special-levies",
+    "blocks": [
+      "B02953",
+      "B02954"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "레비의 패닉 예외",
+      "en": "Levies Panic exception"
+    },
+    "explanation": {
+      "ko": "레비에 대한 기대를 설명하는 문장을 바로잡고, 패닉 예외를 아군 레비가 전투에서 브레이크하여 도주하는 경우로 한정했습니다.",
+      "en": "The narrative sentence is clarified, and the Panic exemption applies when friendly Levies Break and flee from combat."
+    },
+    "sources": [
+      {
+        "title": "Levies",
+        "url": "https://tow.whfb.app/special-rules/levies",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B02953",
+        "field": "text",
+        "from": "그러나 레비에게서 얻는 리틀(Little)은 제외됩니다.",
+        "to": "그러나 전투에서 레비(Levies)에게 거는 기대는 크지 않습니다."
+      },
+      {
+        "blockId": "B02954",
+        "field": "text",
+        "from": "따라서 이 특수 규칙을 가지지 않은 유닛은 레비가 브레이크하거나 도주하는 것을 목격했을 때 공황 테스트를 할 필요가 없습니다.",
+        "to": "따라서 레비 특수 규칙이 없는 유닛은 아군 레비 유닛이 전투에서 브레이크하여 도주하더라도 그 일로 패닉 테스트를 할 필요가 없습니다."
+      }
+    ]
+  },
+  {
+    "id": "special-strike-last",
+    "blocks": [
+      "B03119",
+      "B03121"
+    ],
+    "status": "verified",
+    "severity": "wording",
+    "title": {
+      "ko": "스트라이크 라스트 명칭",
+      "en": "Strike Last name"
+    },
+    "explanation": {
+      "ko": "이 규칙은 다른 수정치 전 이니셔티브를 1로 낮추는 스트라이크 라스트입니다. 스트라이크 퍼스트와 명칭을 구분했습니다.",
+      "en": "This is Strike Last, which sets Initiative to 1 before other modifiers. Its title is distinguished from Strike First."
+    },
+    "sources": [
+      {
+        "title": "Strike First",
+        "url": "https://tow.whfb.app/special-rules/strike-first",
+        "checkedAt": "2026-11-04"
+      },
+      {
+        "title": "Strike Last",
+        "url": "https://tow.whfb.app/special-rules/strike-last",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B03119",
+        "field": "text",
+        "from": "모델이 이 특수 규칙과 선제 타격(Strike Last) 을 모두 가지고 있다면,",
+        "to": "모델이 이 특수 규칙과 스트라이크 라스트(Strike Last)를 모두 가지고 있다면,"
+      },
+      {
+        "blockId": "B03121",
+        "field": "text",
+        "from": "■ 선제 공격 (Strike Last)",
+        "to": "■ 스트라이크 라스트 (Strike Last)"
+      }
+    ]
+  },
+  {
+    "id": "special-swiftstride",
+    "blocks": [
+      "B03145"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "스위프트스트라이드의 세 굴림",
+      "en": "Swiftstride roll types"
+    },
+    "explanation": {
+      "ko": "선택적 +D6은 차지·플리·퍼슈트 굴림 전에 선택합니다. 중복 기재된 추격 대신 누락된 플리 굴림을 명시했습니다.",
+      "en": "The optional +D6 is chosen before a Charge, Flee or Pursuit roll. The missing Flee roll replaces the duplicated pursuit wording."
+    },
+    "sources": [
+      {
+        "title": "Swiftstride",
+        "url": "https://tow.whfb.app/special-rules/swiftstride",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B03145",
+        "field": "text",
+        "from": "또한 돌격, 추격 또는 추격 후 이동(Pursuit move) 을 하기 전에, 돌격 또는 추격 거리 굴림에 + D6 수정치를 적용하도록 선택할 수 있습니다.",
+        "to": "또한 차지(Charge), 플리(Flee) 또는 퍼슈트(Pursuit) 굴림을 하기 전에, 그 굴림의 결과에 +D6 수정치를 적용하도록 선택할 수 있습니다."
+      }
+    ]
+  },
+  {
+    "id": "special-terror",
+    "blocks": [
+      "B03153",
+      "B03154",
+      "B03155"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "피어와 테러의 면역 관계",
+      "en": "Fear and Terror immunity"
+    },
+    "explanation": {
+      "ko": "피어 모델도 테러를 유발하는 모델의 피어 영향을 받습니다. 테러를 유발하는 모델만 테러에 면역이며, 캐릭터의 면역은 합류 유닛에 전달되지 않습니다.",
+      "en": "Fear models still Fear Terror-causing models. Terror-causing models are immune to Terror; joining a Terror-causing character does not grant that immunity to a unit."
+    },
+    "sources": [
+      {
+        "title": "Terror",
+        "url": "https://tow.whfb.app/special-rules/terror",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B03153",
+        "field": "text",
+        "from": "공포(Fear) 특수 규칙을 가진 모델은 공포를 유발하는 모델에게는 공포를 유발하지 않습니다.",
+        "to": "피어(Fear) 특수 규칙을 가진 모델도 테러(Terror)를 유발하는 모델에게는 피어의 영향을 받습니다."
+      },
+      {
+        "blockId": "B03154",
+        "field": "text",
+        "from": "공포를 유발하는 모델은 테러를 유발합니다.",
+        "to": "테러(Terror)를 유발하는 모델은 테러에 면역입니다."
+      },
+      {
+        "blockId": "B03155",
+        "field": "text",
+        "from": "공포를 유발하지 않는 유닛은 공포를 유발하는 캐릭터가 합류했다고 해서 테러에 면역이 되지 않습니다.",
+        "to": "테러를 유발하지 않는 유닛은 테러를 유발하는 캐릭터가 합류해도 테러에 면역이 되지 않습니다."
+      }
+    ]
+  },
+  {
+    "id": "special-fall-direction",
+    "blocks": [
+      "B03158"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "쓰러지는 방향의 선택",
+      "en": "Timmm-berrr! direction"
+    },
+    "explanation": {
+      "ko": "방향은 임의의 주사위 눈별 대응표로 정하지 않습니다. 롤 오프의 승자가 전방·측면·후방 아크 중 하나를 선택합니다.",
+      "en": "The winner of a roll-off chooses a front, flank or rear arc. There is no die-face direction table to infer."
+    },
+    "sources": [
+      {
+        "title": "Timmm Berrr",
+        "url": "https://tow.whfb.app/special-rules/timmm-berrr",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B03158",
+        "field": "text",
+        "from": "이 특수 규칙을 가진 모델의 Wounds가 0으로 감소하면, 주사위를 굴려 앞, 측면, 후면 중 어느 방향으로 쓰러질지 결정합니다.",
+        "to": "이 모델의 운즈(Wounds)가 0으로 감소하면 롤 오프(roll-off)를 합니다. 승자가 모델이 쓰러질 전방·측면·후방 아크 중 하나를 선택합니다."
+      }
+    ]
+  },
+  {
+    "id": "special-unstable-allocation",
+    "blocks": [
+      "B03172"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "언스테이블 상처 배정 순서",
+      "en": "Unstable wound allocation"
+    },
+    "explanation": {
+      "ko": "언스테이블 캐릭터가 포함된 경우 먼저 유닛의 각 모델에 상처 하나씩 배정하고, 남은 상처를 캐릭터와 유닛 사이에 가능한 한 균등하게 나눕니다.",
+      "en": "First allocate wounds to the unit until each model has been allocated one; divide remaining wounds as evenly as possible between characters and the unit."
+    },
+    "sources": [
+      {
+        "title": "Unstable",
+        "url": "https://tow.whfb.app/special-rules/unstable",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B03172",
+        "field": "text",
+        "from": "불안정한 캐릭터가 하나 이상 포함된 불안정 유닛의 경우, 각 모델에 Wound가 하나씩 할당될 때까지 캐릭터들에게 Wounds를 할당합니다.",
+        "to": "언스테이블(Unstable) 캐릭터가 포함된 언스테이블 유닛이라면, 먼저 유닛에 상처를 배정하여 각 모델에 상처 1개씩이 배정되도록 합니다."
+      }
+    ]
+  },
+  {
+    "id": "special-skirmisher-passage",
+    "blocks": [
+      "B03289"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "스커미셔 관통 이동",
+      "en": "Moving through Skirmishers"
+    },
+    "explanation": {
+      "ko": "일반 이동으로 모델 사이의 틈을 통과할 수 없지만, 다른 유닛과 마찬가지로 도주하는 유닛에게 관통될 수 있습니다.",
+      "en": "Ordinary units cannot pass through the gaps, but Skirmishers can be fled through like any other unit."
+    },
+    "sources": [
+      {
+        "title": "Moving Through Skirmishers",
+        "url": "https://tow.whfb.app/unusual-formations/moving-through-skirmishers",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B03289",
+        "field": "text",
+        "from": "그러나 스커미셔는 다른 유닛과 마찬가지로 다른 유닛을 통과하여 이동할 수 있습니다.",
+        "to": "그러나 스커미셔 유닛도 다른 유닛과 마찬가지로 도주하는 유닛에게 관통될 수 있습니다."
+      }
+    ]
+  },
+  {
+    "id": "special-parry",
+    "blocks": [
+      "B03408"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "패리의 아머 개선",
+      "en": "Parry armour improvement"
+    },
+    "explanation": {
+      "ko": "패리는 핸드 웨폰과 실드를 실제로 사용하는 모델의 아머 수치를 1 개선하며 상한은 3+입니다. +3 보너스나 아머 숫자의 증가로 읽히지 않도록 정정했습니다.",
+      "en": "Parry improves armour by one when using a hand weapon and shield, to a maximum of 3+. It does not grant a +3 bonus."
+    },
+    "sources": [
+      {
+        "title": "Parry",
+        "url": "https://tow.whfb.app/troop-types-in-detail/parry",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B03408",
+        "field": "text",
+        "from": "근접전 중 이 특수 규칙을 가진 모델이 검과 방패를 함께 사용하기로 선택했다면, 해당 모델의 방어구 수치(Armour Value)가 +1 증가합니다. 단, 최대 +3까지입니다.",
+        "to": "근접전에서 교전 중이며 핸드 웨폰(Hand Weapon)과 실드(Shield)를 장비하고 실제로 사용하기로 선택한 모델은 아머 수치를 1 개선합니다. 이 규칙으로 개선할 수 있는 상한은 3+입니다."
+      }
+    ]
+  },
+  {
+    "id": "special-cavalry-incoming-ws",
+    "blocks": [
+      "B03465"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "캐벌리의 방어 WS",
+      "en": "Cavalry defensive Weapon Skill"
+    },
+    "explanation": {
+      "ko": "라이더와 탈것은 각자 자신의 WS로 공격합니다. 라이더 WS를 사용하는 것은 적이 이 모델을 상대로 하는 투 힛 굴림입니다.",
+      "en": "Rider and mount attack with their own Weapon Skill. Enemy To Hit rolls against this model use the rider’s Weapon Skill."
+    },
+    "sources": [
+      {
+        "title": "Split Profile Cavalry",
+        "url": "https://tow.whfb.app/troop-types-in-detail/split-profile-cavalry",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B03465",
+        "field": "text",
+        "from": "전투에서 이루어지는 모든 명중 굴림(To Hit) 은 기수의 무기 숙련도를 사용합니다.",
+        "to": "근접전에서 적이 이 모델을 상대로 하는 모든 투 힛(To Hit) 굴림은 라이더의 웨폰 스킬(Weapon Skill)을 기준으로 합니다."
+      }
+    ]
+  },
+  {
+    "id": "special-chariot-incoming-ws",
+    "blocks": [
+      "B03513"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "채리엇의 방어 WS",
+      "en": "Chariot defensive Weapon Skill"
+    },
+    "explanation": {
+      "ko": "승무원과 야수는 각자의 WS로 공격하며, 적이 채리엇을 상대로 공격할 때 승무원의 WS를 사용합니다.",
+      "en": "Crew and beasts attack with their own Weapon Skill. Enemy To Hit rolls against the chariot use the crew’s Weapon Skill."
+    },
+    "sources": [
+      {
+        "title": "Split Profile Chariots",
+        "url": "https://tow.whfb.app/troop-types-in-detail/split-profile-chariots",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B03513",
+        "field": "text",
+        "from": "전투에서 이루어지는 모든 명중 굴림(To Hit) 은 승무원의 무기 숙련도를 사용합니다.",
+        "to": "근접전에서 적이 이 모델을 상대로 하는 모든 투 힛(To Hit) 굴림은 승무원의 웨폰 스킬(Weapon Skill)을 기준으로 합니다."
+      }
+    ]
+  },
+  {
+    "id": "special-musician-casualties",
+    "blocks": [
+      "B03691"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "뮤지션 제거 조건",
+      "en": "Musician casualty condition"
+    },
+    "explanation": {
+      "ko": "커맨드가 아닌 일반 모델이 남아 있으면 악기를 이어받습니다. 뮤지션·챔피언·기수만 남은 상황의 제거 순서와 양립하도록 조건을 정정했습니다.",
+      "en": "A non-command rank-and-file model retrieves the instrument while one remains. This is consistent with removing the musician first when only command models remain."
+    },
+    "sources": [
+      {
+        "title": "Musicians As Casualties",
+        "url": "https://tow.whfb.app/command-groups/musicians-as-casualties",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B03691",
+        "field": "text",
+        "from": "따라서 뮤지션은 유닛에 챔피언과 스탠다드 베어러가 남아 있는 한 사망할 수 없습니다.",
+        "to": "따라서 커맨드 그룹 모델이 아닌 랭크 앤드 파일 모델이 남아 있는 한, 유닛은 뮤지션을 잃지 않습니다."
+      }
+    ]
+  },
+  {
+    "id": "special-lone-character",
+    "blocks": [
+      "B03814",
+      "B03817"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "단독 캐릭터의 가장 가까운 표적 예외",
+      "en": "Closest-target exception for Lone characters"
+    },
+    "explanation": {
+      "ko": "3인치 보호 조건을 만족해도 그 캐릭터가 가장 가까운 표적이면 대상으로 삼을 수 있습니다. 원문 도해도 캐릭터 2와 3을 모두 사격 가능한 대상으로 설명합니다.",
+      "en": "Even within the protective 3 inches, a Lone character can be targeted if it is the closest target. The source figure permits targeting either character 2 or 3."
+    },
+    "sources": [
+      {
+        "title": "Targeting Lone Characters",
+        "url": "https://tow.whfb.app/characters/targeting-lone-characters",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B03814",
+        "field": "text",
+        "from": "이 조건을 충족하는 경우, 단독 캐릭터 대신 가장 가까운 적법한 목표가 대상이 됩니다.",
+        "to": "이 보호 조건을 만족하더라도 단독 캐릭터가 가장 가까운 표적이라면, 그 캐릭터를 대상으로 선택할 수 있습니다."
+      },
+      {
+        "blockId": "B03817",
+        "field": "text",
+        "from": "그러나 아군 유닛의 3\" 이내에 있는 캐릭터 2가 가장 가까운 대상임에도 불구하고, 캐릭터 2와 캐릭터 3 중 어느 쪽도 사격 대상으로 선택할 수 없습니다.",
+        "to": "캐릭터 2는 아군 유닛의 3인치 이내에 있지만 가장 가까운 표적입니다. 따라서 사격 유닛은 캐릭터 2 또는 캐릭터 3을 대상으로 선택할 수 있습니다."
+      }
+    ]
+  },
+  {
+    "id": "special-challenge-mount",
+    "blocks": [
+      "B03954"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "도전 중 남은 탈것 공격",
+      "en": "Unresolved attacks in challenges"
+    },
+    "explanation": {
+      "ko": "참가자가 상대나 탈것의 공격 전에 사망했다면 아직 해결하지 않은 그 공격이 소실됩니다. 도전과 탈것 정오표 문장을 반영했습니다.",
+      "en": "If a participant dies before their rival or a mount can attack, those remaining attacks are lost, as specified by the challenge amendment."
+    },
+    "sources": [
+      {
+        "title": "Challenges And Mounts",
+        "url": "https://tow.whfb.app/characters/challenges-and-mounts",
+        "checkedAt": "2026-11-04"
+      },
+      {
+        "title": "Errata & Amendments — Rulebook p. 211",
+        "url": "https://tow.whfb.app/errata",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B03954",
+        "field": "text",
+        "from": "참고: 어느 한 참가자가 자신의 Initiative가 돌아오기 전에 사망하거나, 탈것이 공격할 수 있다면 해당 공격은 소실됩니다.",
+        "to": "참고: 도전 참가자 중 한 명이 상대 참가자 또는 탈것의 아직 해결되지 않은 공격 전에 사망하면, 그 미해결 공격은 소실됩니다."
+      }
+    ]
+  },
+  {
+    "id": "special-thrusting-spear",
+    "blocks": [
+      "B04056"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "스피어 지원 공격의 차지 턴 제한",
+      "en": "Thrusting Spear supporting attacks"
+    },
+    "explanation": {
+      "ko": "지원 공격 금지는 스피어 사용자가 차지한 턴에만 적용됩니다. 차지한 턴이라는 조건을 복원하여 Fight in Extra Rank와의 상충을 해소했습니다.",
+      "en": "The supporting-attack prohibition applies only during a turn in which the spear wielder charged. The omitted timing restriction is restored."
+    },
+    "sources": [
+      {
+        "title": "Thrusting Spear",
+        "url": "https://tow.whfb.app/weapons-of-war/thrusting-spear",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B04056",
+        "field": "text",
+        "from": "찌르기용 스피어를 사용하는 모델은 지원 공격을 할 수 없습니다.",
+        "to": "찌르기용 스피어를 사용하는 모델은 자신이 차지한 턴에는 지원 공격(Supporting Attack)을 할 수 없습니다."
+      }
+    ]
+  },
+  {
+    "id": "special-armour-cap",
+    "blocks": [
+      "B04181"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "병종별 아머 상한",
+      "en": "Armour caps by troop type"
+    },
+    "explanation": {
+      "ko": "개정된 최대 아머 규칙은 보병·기병 2+, 채리엇·몬스터·워 머신 3+입니다. 추가 장비의 오래된 일괄 2+ 참고 문구를 이 병종별 상한과 일치시켰습니다.",
+      "en": "The amended maximum is 2+ for infantry/cavalry and 3+ for chariots/monsters/war machines. The older blanket equipment note is aligned with that specific cap."
+    },
+    "sources": [
+      {
+        "title": "Maximum Armour Value",
+        "url": "https://tow.whfb.app/weapons-of-war/maximum-armour-value",
+        "checkedAt": "2026-11-04"
+      },
+      {
+        "title": "Errata & Amendments — Rulebook p. 220",
+        "url": "https://tow.whfb.app/errata",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B04181",
+        "field": "text",
+        "from": "참고: 어떤 장비를 착용했는지와 관계없이 모델의 Armour Value는 2+보다 좋아질 수 없습니다. 모델의 Armour를 추가로 향상시키는 모든 보너스는 아무런 효과가 없습니다.",
+        "to": "참고: 장비와 보너스의 출처와 관계없이 병종별 최대 아머 수치를 적용합니다. 보병·기병은 2+, 채리엇·몬스터·워 머신은 3+보다 좋아질 수 없습니다. 이 상한을 넘는 추가 개선은 효과가 없습니다."
+      }
+    ]
+  },
+  {
+    "id": "special-bolt-figure",
+    "blocks": [
+      "B04233"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "볼트 스로워 도해의 파일 수",
+      "en": "Bolt thrower figure file count"
+    },
+    "explanation": {
+      "ko": "도해는 두 줄의 모델로 구성된 5개 파일입니다. 측면 명중 수는 모델 총수가 아니라 파일 수에 따라 5회입니다.",
+      "en": "The figure shows five files of two models. Five flank hits follow the file count rather than a total of five models."
+    },
+    "sources": [
+      {
+        "title": "Through And Through",
+        "url": "https://tow.whfb.app/war-machines/through-and-through",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B04233",
+        "field": "text",
+        "from": "이 유닛에는 5개의 모델이 있기 때문에 5회의 명중이 발생합니다.",
+        "to": "이 유닛은 5개의 파일(각 파일에 모델 2개)로 구성되어 있으므로, 측면을 관통하는 이 사격은 5회의 명중을 발생시킵니다."
+      }
+    ]
+  },
+  {
+    "id": "special-misfire-duration",
+    "blocks": [
+      "B04272"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "오발 후 사격 재개 시점",
+      "en": "Misfire recovery timing"
+    },
+    "explanation": {
+      "ko": "스톤 스로워와 블랙 파우더의 2~4 결과는 모두 다음 라운드가 끝나기 전까지 사격을 금지합니다. 스톤 스로워 번역에 빠진 종료 시점을 명시했습니다.",
+      "en": "Both 2–4 misfire results prevent firing before the end of the next round. The missing endpoint is restored for stone throwers."
+    },
+    "sources": [
+      {
+        "title": "Stone Thrower Misfire Table",
+        "url": "https://tow.whfb.app/war-machines/stone-thrower-misfire-table",
+        "checkedAt": "2026-11-04"
+      },
+      {
+        "title": "Black Powder Misfire Table",
+        "url": "https://tow.whfb.app/war-machines/black-powder-misfire-table",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B04272",
+        "field": "table-cell",
+        "row": 2,
+        "column": 1,
+        "from": "다음 라운드까지 사격할 수 없습니다.",
+        "to": "다음 라운드가 끝나기 전까지 사격할 수 없습니다."
+      }
+    ]
+  },
+  {
+    "id": "special-defended-fly",
+    "blocks": [
+      "B04443"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "방어 장애물의 플라이 예외",
+      "en": "Fly exception at defended obstacles"
+    },
+    "explanation": {
+      "ko": "방어된 낮은 장애물 뒤의 적에게 차지하면 디스오더드 차지입니다. 플라이(X)를 가진 차지 유닛은 이 불이익에서 제외됩니다.",
+      "en": "Charging an enemy behind a defended low obstacle is disordered unless the charging unit has Fly (X)."
+    },
+    "sources": [
+      {
+        "title": "Defended Low Linear Obstacles",
+        "url": "https://tow.whfb.app/battlefield-terrain/defended-low-linear-obstacles",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B04443",
+        "field": "text",
+        "from": "단, Fly (X) 특수 규칙을 가진 유닛은 예외입니다. 방어된 낮은 선형 장애물 뒤의 적에게 차지할 경우 Disordered Charge가 됩니다.",
+        "to": "플라이(Fly (X))가 없는 유닛이 방어된 낮은 선형 장애물 뒤의 적에게 차지하면 디스오더드 차지(Disordered Charge)가 됩니다. 플라이가 있는 유닛은 이 불이익에서 제외됩니다."
+      }
+    ]
+  },
+  {
+    "id": "special-woodland-cover",
+    "blocks": [
+      "B04452",
+      "B04453",
+      "B04454"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "숲 경계와 부분 엄폐",
+      "en": "Woodland boundaries and partial cover"
+    },
+    "explanation": {
+      "ko": "숲의 엄폐 기준은 모델 또는 유닛 모델 수의 절반 초과가 명확한 숲 경계 안에 있는지입니다. 전체 모델 또는 절반 이상이라는 번역과 부분 엄폐 누락을 정정했습니다.",
+      "en": "Partial cover applies when over half the model, or over half the unit’s models, is within the defined woodland boundary. The mistranslated thresholds are corrected."
+    },
+    "sources": [
+      {
+        "title": "Woodland Boundaries",
+        "url": "https://tow.whfb.app/battlefield-terrain/woodland-boundaries",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B04452",
+        "field": "text",
+        "from": "숲 안에 있는 개별 나무의 위치와 관계없이, 모델 또는 유닛은 다음 조건 중 하나라도 만족한다면 숲 뒤에 있는 것으로 취급합니다.",
+        "to": "숲 안의 개별 나무 위치와 관계없이 다음 기준을 만족하면 부분 엄폐(Partial Cover) 뒤에 있는 것으로 취급합니다."
+      },
+      {
+        "blockId": "B04453",
+        "field": "text",
+        "from": "모델 전체가 숲 안에 있다.",
+        "to": "모델의 절반을 초과한 부분이 숲 경계 안에 있습니다."
+      },
+      {
+        "blockId": "B04454",
+        "field": "text",
+        "from": "유닛의 모델 중 절반 이상이 숲 안에 있다.",
+        "to": "유닛의 모델 수 중 절반을 초과한 모델이 숲 경계 안에 있습니다."
+      }
+    ]
+  },
+  {
+    "id": "special-woodland-los",
+    "blocks": [
+      "B04459"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "숲 너머 시야 조건",
+      "en": "Line of sight across woods"
+    },
+    "explanation": {
+      "ko": "어느 모델도 숲 안에 있지 않다면, 숲을 통과하거나 가로지르지 않는 끊기지 않은 선을 베이스 사이에 그을 수 있어야 서로 볼 수 있습니다.",
+      "en": "When neither model is within the wood, an uninterrupted base-to-base line must avoid crossing over or through it."
+    },
+    "sources": [
+      {
+        "title": "Arboreal Gloom",
+        "url": "https://tow.whfb.app/battlefield-terrain/arboreal-gloom",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B04459",
+        "field": "text",
+        "from": "숲의 양쪽에 있는 모델 사이의 시야를 확보하려면, 숲 내부의 어느 모델 사이에도 끊기지 않은 직선이 그어질 수 있어야 합니다.",
+        "to": "두 모델 사이에 숲이 있고 어느 모델도 그 숲 안에 있지 않다면, 숲을 통과하거나 가로지르지 않는 끊기지 않은 직선을 두 베이스 사이에 그을 수 있을 때에만 서로 시야를 확보할 수 있습니다."
+      }
+    ]
+  },
+  {
+    "id": "special-hill-los",
+    "blocks": [
+      "B04471"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "언덕 너머 시야 조건",
+      "en": "Line of sight beyond a hill"
+    },
+    "explanation": {
+      "ko": "언덕을 가로지르지 않는 시선을 그을 수 있을 때만 시야가 성립합니다. 번역문에서 뒤집힌 부정을 바로잡았습니다.",
+      "en": "Line of sight exists only when an uninterrupted base-to-base line avoids crossing over or through the intervening hill. The reversed negation is corrected."
+    },
+    "sources": [
+      {
+        "title": "Beyond The Crest",
+        "url": "https://tow.whfb.app/battlefield-terrain/beyond-the-crest",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B04471",
+        "field": "text",
+        "from": "이를 나타내기 위해 두 모델 사이에 언덕이 있고 어느 모델도 언덕 위에 있지 않다면, 두 모델의 베이스 사이에 언덕을 통과하거나 넘어가지 않고 끊기지 않은 직선을 그을 수 없는 경우에만 서로 시야를 확보할 수 있습니다.",
+        "to": "두 모델 사이에 언덕이 있고 어느 모델도 그 언덕 위에 있지 않다면, 언덕을 통과하거나 가로지르지 않는 끊기지 않은 직선을 두 베이스 사이에 그을 수 있을 때에만 서로 시야를 확보할 수 있습니다."
+      }
+    ]
+  },
+  {
+    "id": "special-feature-leaving",
+    "blocks": [
+      "B04519",
+      "B04520"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "특수 지형에서 이탈하는 시점",
+      "en": "Leaving an occupied special feature"
+    },
+    "explanation": {
+      "ko": "잔여 이동, 팔로 업, 적 추격은 서로 다른 이탈 기회입니다. 팔로 업과 추격을 잔여 이동의 하위 행동처럼 읽히지 않도록 정정했습니다.",
+      "en": "Remaining Moves, a follow-up move and pursuing an enemy are separate opportunities to leave; follow-up and pursuit are not Remaining Moves substeps."
+    },
+    "sources": [
+      {
+        "title": "Occupancy",
+        "url": "https://tow.whfb.app/battlefield-terrain/occupancy",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B04519",
+        "field": "text",
+        "from": "도주 중인 경우를 제외하면, 특수 지형을 점유하고 있는 유닛은 Remaining Moves sub-phase 동안 특수 지형을 떠날 수 있습니다.",
+        "to": "도주 중인 유닛을 제외하면, 특수 지형을 점유한 유닛은 자신의 잔여 이동(Remaining Moves) 서브페이즈에 그 지형을 떠날 수 있습니다. 다음의 전투 후 이동으로도 떠날 수 있습니다."
+      },
+      {
+        "blockId": "B04520",
+        "field": "text",
+        "from": "특수 지형을 떠나려면 유닛이 다음 중 하나를 수행합니다.",
+        "to": "그 밖에 사용할 수 있는 이탈 기회는 다음과 같습니다."
+      }
+    ]
+  },
+  {
+    "id": "special-dark-aura",
+    "blocks": [
+      "B04568"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "다크 오라의 수정 대상",
+      "en": "Dark Aura affected models"
+    },
+    "explanation": {
+      "ko": "피어·테러를 유발하는 점유 유닛이 아니라, 그 유닛이 유발한 피어·테러 때문에 리더십 테스트를 하는 모든 적 유닛이 -1을 받습니다.",
+      "en": "The -1 affects all enemy units testing Leadership because of Fear or Terror caused by the occupier, not the occupying unit itself."
+    },
+    "sources": [
+      {
+        "title": "Dark Ruins",
+        "url": "https://tow.whfb.app/battlefield-terrain/dark-ruins",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B04568",
+        "field": "text",
+        "from": "어두운 폐허를 점유한 유닛이 Fear 또는 Terror를 유발하는 경우, 해당 유닛은 Leadership Test를 할 때 -1 수정치를 받습니다.",
+        "to": "어두운 폐허를 점유한 유닛이 피어(Fear) 또는 테러(Terror)를 유발한다면, 그 유닛이 유발한 피어 또는 테러 때문에 리더십 테스트를 하는 모든 적 유닛은 자신의 리더십 특성치에 -1 수정치를 적용합니다."
+      }
+    ]
+  },
+  {
+    "id": "special-tower-los",
+    "blocks": [
+      "B04610"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "탑 점유 유닛을 향한 시야",
+      "en": "Line of sight to tower occupants"
+    },
+    "explanation": {
+      "ko": "탑 점유 유닛이 다른 유닛을 넘어 볼 수 있듯이, 다른 유닛도 중간의 유닛·모델을 넘어 탑 점유 유닛을 볼 수 있습니다. 목적어가 뒤바뀐 번역을 정정했습니다.",
+      "en": "Other units can see the tower’s occupants across or through intervening units/models, just as the occupants can see out. The target of the line is clarified."
+    },
+    "sources": [
+      {
+        "title": "Tower",
+        "url": "https://tow.whfb.app/battlefield-terrain/tower",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B04610",
+        "field": "text",
+        "from": "마찬가지로 다른 유닛도 탑을 점유한 유닛을 가로질러 또는 그 사이로 시야를 확보할 수 있습니다.",
+        "to": "마찬가지로 다른 유닛도 중간에 있는 다른 유닛이나 모델을 가로질러 또는 통과하여 탑을 점유한 유닛으로 시야를 그을 수 있습니다."
+      }
+    ]
+  },
+  {
+    "id": "special-breath-body-missing",
+    "blocks": [
+      "B02751",
+      "B02752"
+    ],
+    "status": "review",
+    "severity": "rule",
+    "title": {
+      "ko": "브레스 웨폰 본문 누락",
+      "en": "Missing Breath Weapon body"
+    },
+    "explanation": {
+      "ko": "원문 누락에 대한 검증 보충: 브레스 웨폰은 라운드당 1회, 자신의 턴 사격 페이즈에 사용합니다. 화염 템플릿의 좁은 끝을 모델 전면 아크의 베이스 가장자리에 대고, 넓은 끝을 목표 위에 놓습니다. 템플릿 전체가 모델의 시야 아크 안에 있어야 하며, 아래에 베이스가 걸친 모델은 명중 위험이 있습니다. 스트렝스와 특수 규칙은 해당 생물의 규칙을 따릅니다. 스탠드 앤 슛 반응이나 근접전 교전 중에는 사용할 수 없습니다. 제공 문서에는 도해만 남아 있어, 이 설명은 확인한 현행 영문 규칙에 근거해 별도로 보충했습니다.",
+      "en": "Verified supplement for a missing passage: Use a Breath Weapon once per round in your own Shooting phase. Touch the flame template’s narrow end to the base edge along the model’s front arc and place the broad end over the target; the whole template must fit within its vision arc. Models beneath it risk a hit. Use the creature’s specified Strength and special rules. It cannot be used for Stand & Shoot or while engaged in combat. This source-based supplement accompanies a figure whose rule body is absent from the supplied document."
+    },
+    "sources": [
+      {
+        "title": "Breath Weapon",
+        "url": "https://tow.whfb.app/special-rules/breath-weapon",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": []
+  },
+  {
+    "id": "special-terrain-eight-boundary",
+    "blocks": [
+      "B04380",
+      "B04381",
+      "B04382",
+      "B04383",
+      "B04384",
+      "B04385"
+    ],
+    "status": "review",
+    "severity": "rule",
+    "title": {
+      "ko": "정확히 8인치인 지형의 계수",
+      "en": "Terrain exactly eight inches wide"
+    },
+    "explanation": {
+      "ko": "온라인 원문도 2~8인치와 8~12인치 범위를 함께 사용합니다. 정확히 8인치인 경계는 문구만으로 단정하지 않고 게임 전에 합의할 검토 항목으로 남깁니다.",
+      "en": "The source itself uses both 2–8 and 8–12 inch ranges. The exact 8-inch boundary remains a pre-game clarification rather than an invented amendment."
+    },
+    "sources": [
+      {
+        "title": "The Size Of Things",
+        "url": "https://tow.whfb.app/battlefield-terrain/the-size-of-things",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": []
+  },
+  {
+    "id": "special-frenzy-scope",
+    "blocks": [
+      "B02879",
+      "B02883",
+      "B02884",
+      "B02887"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "프렌지의 발동 턴과 적용 대상",
+      "en": "Frenzy timing and affected model"
+    },
+    "explanation": {
+      "ko": "+1 어택은 돌격한 턴 또는 팔로 업한 다음 턴에만 적용됩니다. 기병의 탈것, 전차를 끄는 짐승, 몬스터의 기수에게 이 보너스를 옮기지 않습니다. 돌격 선언 의무는 실제로 돌격을 선언할 수 있을 때 적용됩니다.",
+      "en": "The extra Attack applies in a charge turn or the turn after following up. It does not transfer to a cavalry mount, chariot beasts or a monster’s rider. The compulsory-charge condition applies when the unit can actually declare a charge."
+    },
+    "sources": [
+      {
+        "title": "Frenzy",
+        "url": "https://tow.whfb.app/special-rules/frenzy",
+        "checkedAt": "2026-11-04"
+      },
+      {
+        "title": "Official FAQ & Errata v1.5.3, Page 170 – Frenzy",
+        "url": "https://tow.whfb.app/errata",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B02879",
+        "field": "text",
+        "from": "돌격 이동(Charge Move) 을 수행한 턴 또는 그 다음 턴 동안,",
+        "to": "돌격 이동(Charge Move)을 수행한 턴 또는 팔로 업(Follow Up) 이동을 수행한 다음 턴 동안,"
+      },
+      {
+        "blockId": "B02883",
+        "field": "text",
+        "from": "전차(Chariot)의 경우 전차 자체에는 적용되지 않고,",
+        "to": "전차(Chariot)의 경우 전차를 끄는 짐승(Beasts)에게는 적용되지 않고,"
+      },
+      {
+        "blockId": "B02884",
+        "field": "text",
+        "from": "기수(Rider)의 경우 기수에게 적용됩니다.",
+        "to": "몬스터(Monster)의 경우 그 기수(Rider)에게는 적용되지 않습니다."
+      },
+      {
+        "blockId": "B02887",
+        "field": "text",
+        "from": "광란 모델이 하나라도 포함된 유닛은 해당 턴의 돌격 선언 & 돌격 반응(Declare Charges & Charge Reactions) 서브페이즈에 반드시 돌격을 선언해야 한다면 돌격을 선언해야 합니다.",
+        "to": "프렌지(Frenzy) 모델이 하나라도 포함된 유닛이 자신의 턴 돌격 선언 및 돌격 반응(Declare Charges & Charge Reactions) 서브페이즈에 돌격을 선언할 수 있다면, 반드시 돌격을 선언해야 합니다."
+      }
+    ]
+  },
+  {
+    "id": "special-stomp-last",
+    "blocks": [
+      "B03113"
+    ],
+    "status": "verified",
+    "severity": "rule",
+    "title": {
+      "ko": "스톰프는 이니셔티브 1 공격보다도 나중에 해결",
+      "en": "Stomps follow even Initiative 1 attacks"
+    },
+    "explanation": {
+      "ko": "현행 정오는 스톰프를 이니셔티브 1의 공격까지 모두 끝난 뒤에 해결하도록 명시합니다. 문서의 마지막 문장은 이 순서를 전달하지 못합니다.",
+      "en": "The current amendment expressly places Stomp Attacks after all other attacks, including Initiative 1. The final sentence in the document loses that timing."
+    },
+    "sources": [
+      {
+        "title": "Stomp Attacks",
+        "url": "https://tow.whfb.app/special-rules/stomp-attacks",
+        "checkedAt": "2026-11-04"
+      },
+      {
+        "title": "Official FAQ & Errata v1.5.3, Page 177 – Stomp Attacks (X)",
+        "url": "https://tow.whfb.app/errata",
+        "checkedAt": "2026-11-04"
+      }
+    ],
+    "patches": [
+      {
+        "blockId": "B03113",
+        "field": "text",
+        "from": "발구르기 공격은 전투에서 가장 마지막에 수행되는 공격으로, 다른 모든 공격이 해결된 후에 수행합니다. 여기에는 스톰프 공격을 수행하는 모델이 가진 공격도 포함됩니다.",
+        "to": "발구르기 공격(Stomp Attacks)은 이니셔티브(Initiative) 1에 수행하는 공격을 포함해 다른 모든 공격이 끝난 뒤, 가장 마지막에 해결합니다."
+      }
+    ]
+  }
+]

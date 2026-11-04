@@ -483,7 +483,7 @@ function showScreen(next) {
     button.classList.toggle('active',button.dataset.screen===next);
     button.setAttribute('aria-pressed',String(button.dataset.screen===next));
   }
-  if(next==='rules'||next==='tutorial')document.querySelector('[data-rules-view="'+(next==='tutorial'?'tutorial':'handbook')+'"]')?.click();
+  if(next==='rules'||next==='tutorial')document.querySelector('[data-rules-view="'+(next==='tutorial'?'tutorial':'document')+'"]')?.click();
   if (next === 'saved') renderSaved();
   if (next === 'play') {renderPlay();loadPlaySources(CORE.loadPlayRoster(state.faction)?.army);}
   window.scrollTo(0,0);

@@ -62,6 +62,6 @@ test('all authored handbook assets are available in the complete offline cache',
   for(const asset of ['./handbook.js','./handbook.css','./data/handbook-foundations.json','./data/handbook-battles.json','./data/handbook-specials.json'])assert(assets.includes(asset),asset);
   assert(!assets.includes('./update.html'));
   for(const asset of assets)assert(fs.existsSync(path.join(__dirname,'../dist',asset)),asset);
-  assert.match(worker,/bth-tow-v48-rules-handbook/);
-  assert.match(fs.readFileSync(path.join(__dirname,'../dist/update.html'),'utf8'),/targetVersion=48/);
+  assert.match(worker,/bth-tow-v49-document-rulebook/);
+  assert.match(fs.readFileSync(path.join(__dirname,'../dist/update.html'),'utf8'),/targetVersion=49/);
 });

@@ -6,6 +6,8 @@ The builder offers Open War, Combined Arms and Grand Melee settings, faction spe
 
 Confirm a roster to save a separate play reference. Every selected model, champion and mount profile is shown, with verified option bonuses beside the original characteristics. Weapon alternatives and temporary bonuses use labelled conditional rows. Editing the draft does not change the confirmed roster until it is confirmed again. Units without indexed profiles can use manually entered base characteristics.
 
+The rules area includes the complete supplied Korean document in 30 chapters and 937 sections, with 81 tables, 62 lossless figures, full text search, source notes and previous/next navigation. The bilingual ruling guide, quick sheet, original rules index and tutorial remain available. Verified document corrections retain their original wording and sources. The document body remains Korean; the reader controls follow the selected interface language.
+
 ## Run locally
 
 ```sh

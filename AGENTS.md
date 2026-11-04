@@ -14,6 +14,14 @@ A GitHub Pages deployment does not update apps installed from the Sites origin.
 Publish application fixes to both origins while those installations are supported,
 and verify that their application files match before reporting completion.
 
+Since release 48, the Sites platform redirects its previous generated origin to
+its current generated origin, including worker and update requests. Resolve the
+current origin with `get_site`; keep legacy addresses only in private hosting
+metadata. Cross-origin redirects cannot update legacy service-worker scripts or
+move their browser storage. Verify current deployments separately and do not
+claim legacy installations or rosters migrated. Seed/JSON export and import is
+the available transfer flow; preserve the old storage and app installation.
+
 Preserve the original manifest identity, scope, and localStorage keys. Existing
 rosters belong to each origin's browser storage. Update the existing origin in
 place; any future move needs a working data transfer flow before redirecting it.

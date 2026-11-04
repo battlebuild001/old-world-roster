@@ -1,0 +1,100 @@
+/* Complete Korean source book using the existing Old World theme. */
+#documentBookPanel{min-width:0}
+.docBookIntro{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.docBookIntro>div{min-width:0}.docBookIntro h2{margin-top:5px}
+.docBookSourceBadge{flex:none;max-width:100%;padding:7px 10px;border:1px solid var(--color-border);border-radius:5px;background:var(--color-surface);color:var(--color-text-muted);font-size:11px;line-height:1.6;white-space:normal}
+.docBookTools{display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,300px);gap:12px;margin:20px 0 10px}
+.docBookTools>div,.docBookLayout>*{min-width:0}
+.docBookTools label,.docBookJumpLabel{display:block;margin-bottom:6px;color:var(--color-text-muted);font-size:12px;font-weight:700;line-height:1.5}
+.docBookTools input,.docBookTools select,#documentBookJump{width:100%;min-width:0;max-width:100%;min-height:48px;font-size:16px}
+.docBookStatus{min-height:24px;margin:10px 0 18px;color:var(--color-text-muted);font-size:12px;line-height:1.7}
+.docBookLayout{display:grid;grid-template-columns:minmax(215px,280px) minmax(0,1fr);gap:22px;align-items:start}
+.docBookSidebar{position:sticky;top:78px;max-height:calc(100dvh - 110px);overflow:auto;border:1px solid var(--color-border);border-radius:8px;background:var(--color-surface);scrollbar-width:thin;scrollbar-color:var(--color-border) transparent}
+.docBookSidebar summary{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:48px;padding:14px 15px;list-style:none;cursor:pointer;color:var(--color-link);font-size:13px;font-weight:750}
+.docBookSidebar summary::-webkit-details-marker{display:none}.docBookSidebar summary:after{content:'+';font-size:20px;font-weight:400}.docBookSidebar details[open]>summary:after{content:'−'}
+.docBookListChapter{margin:0;padding:14px 14px 7px;border-top:1px solid var(--color-border);color:var(--color-text-muted);font-size:11px;line-height:1.65;font-weight:750}
+.docBookListEntry{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:48px;margin:0;padding:11px 14px;border:0;border-bottom:1px solid var(--color-border);border-radius:0;background:transparent;color:var(--color-text);font:inherit;font-size:13px;line-height:1.55;text-align:left;cursor:pointer}
+.docBookListEntry>span:first-child{min-width:0;overflow-wrap:anywhere}.docBookListEntry>span:last-child{color:var(--color-text-muted);font-size:22px}
+.docBookListEntry:hover,.docBookListEntry.active{background:var(--color-surface-muted)}.docBookListEntry.active{box-shadow:inset 3px 0 var(--color-action)}
+.docBookEnglish{display:block;margin-top:4px;color:var(--color-text-muted);font:400 12px/1.6 system-ui,-apple-system,sans-serif;letter-spacing:0}
+.docBookSnippet{display:block;margin-top:8px;color:var(--color-text-muted);font-size:11px;line-height:1.65}
+#documentBookMore{width:calc(100% - 20px);min-height:44px;margin:10px;font-size:12px;line-height:1.6;white-space:normal}
+.docBookArticle{min-width:0;padding:27px 30px;border:1px solid var(--color-border);border-radius:8px;background:var(--color-surface);color:var(--color-text);font-size:16px;line-height:1.9;overflow-wrap:anywhere}
+.docBookArticleHead{padding-bottom:23px;margin-bottom:24px;border-bottom:1px solid var(--color-border)}
+.docBookBreadcrumb{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:12px;color:var(--color-text-muted);font-size:11px;line-height:1.6}
+.docBookBreadcrumb>span:first-child{min-width:0}.docBookBreadcrumb>span:last-child{flex:none;font-variant-numeric:tabular-nums}
+.docBookArticle h3{margin:0 0 12px;color:var(--color-text);font:650 clamp(24px,2.7vw,31px)/1.45 Georgia,"Noto Serif KR",serif;scroll-margin-top:80px;overflow-wrap:anywhere}
+.docBookArticle h3 .docBookEnglish{margin-top:7px;font-size:14px;line-height:1.55}
+.docBookSourceTitle{margin:8px 0;color:var(--color-text-muted);font-size:12px;line-height:1.7}
+.docBookArticleActions{display:flex;flex-wrap:wrap;gap:8px;margin:19px 0}
+.docBookArticleActions button{min-height:44px;padding:8px 11px;font-size:12px;line-height:1.6;white-space:normal}
+.docBookJumpLabel{margin-top:20px}
+#documentBookJump{font-size:14px}
+.docBookBody{max-width:76ch;margin:0 auto}
+.docBookParagraph{scroll-margin-top:84px}.docBookParagraph p{margin:0 0 14px;white-space:pre-line}
+.docBookFragment p{margin-bottom:3px}
+.docBookBody .docBookParagraph:has(+.docBookSubheading){margin-bottom:24px}
+.docBookSubheading{margin:27px 0 13px;color:var(--color-link);font-size:18px;font-weight:750;line-height:1.65;scroll-margin-top:84px}
+.docBookAnchor{height:0;scroll-margin-top:84px}
+.docBookArticle mark{padding:0 1px;background:var(--color-action);color:var(--color-canvas);border-radius:2px}
+.docBookReview{margin:20px 0;padding:15px 16px;border:1px solid var(--color-border);border-left:3px solid var(--color-action);border-radius:0 6px 6px 0;background:var(--color-surface-muted);font-size:14px;line-height:1.8}
+.docBookReview.pending{border-left-color:var(--color-brass,var(--color-text-muted))}
+.docBookReview strong{display:block;font-size:13px;line-height:1.7}.docBookReview p{margin:8px 0 0;white-space:pre-line}
+.docBookReviewBadge{display:block;margin-bottom:4px;color:var(--color-link);font-size:11px;font-weight:750}
+.docBookReviewSources{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:10px}
+.docBookReviewSources a{display:inline-flex;align-items:center;min-height:44px;max-width:100%;color:var(--color-link);font-size:12px;line-height:1.6;text-underline-offset:4px;overflow-wrap:anywhere}
+.docBookOriginal{margin:14px 0 22px;padding:0 13px;border:1px solid var(--color-border);border-radius:6px;color:var(--color-text-muted);font-size:13px}
+.docBookOriginal>summary{display:flex;align-items:center;gap:8px;min-height:44px;padding:7px 0;list-style:none;cursor:pointer;line-height:1.65;color:var(--color-link)}
+.docBookOriginal>summary::-webkit-details-marker{display:none}.docBookOriginal>summary:before{content:'+';font-size:18px}.docBookOriginal[open]>summary:before{content:'−'}
+.docBookOriginal>p{margin:5px 0 15px;white-space:pre-line;line-height:1.8}
+.docBookTableRegion{max-width:100%;margin:20px 0;overflow:auto;border:1px solid var(--color-border);border-radius:6px;scrollbar-width:thin;scrollbar-color:var(--color-action) transparent;overscroll-behavior-x:contain}
+.docBookTable{width:100%;border-collapse:collapse;font-size:13px;line-height:1.75;font-variant-numeric:tabular-nums}
+.docBookTable th,.docBookTable td{border:1px solid var(--color-border);padding:10px 12px;vertical-align:top;text-align:left;white-space:pre-line;overflow-wrap:anywhere}
+.docBookTable thead th{position:sticky;top:0;z-index:1;background:var(--color-surface-muted);color:var(--color-text);font-weight:750}
+.docBookTable tbody th{background:var(--color-surface-muted);font-weight:650}
+.docBookTableRegion:not(.docBookMatrix) th:first-child{min-width:65px}.docBookTableRegion:not(.docBookMatrix) td{min-width:110px}
+.docBookTableRegion:not(.docBookMatrix) th:last-child,.docBookTableRegion:not(.docBookMatrix) td:last-child{min-width:130px}
+.docBookMatrix .docBookTable{min-width:620px;text-align:center}.docBookMatrix th,.docBookMatrix td{min-width:43px;text-align:center;white-space:normal}
+.docBookMatrix th:first-child{position:sticky;left:0;z-index:1;background:var(--color-surface-muted)}.docBookMatrix thead th:first-child{z-index:2}
+.docBookTableTools{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:18px 0 8px;color:var(--color-text-muted);font-size:11px}
+.docBookTableTools button{min-height:44px;padding:8px 12px;font-size:12px}
+.docBookTableTools+.docBookTableRegion{margin-top:0}
+.docBookTableCards{display:none}.docBookSmartTable[data-table-mode=cards]>.docBookTableRegion{display:none}.docBookSmartTable[data-table-mode=cards]>.docBookTableCards{display:block}
+.docBookTableCard{margin:12px 0;padding:15px;border:1px solid var(--color-border);border-radius:6px;background:var(--color-surface-muted)}
+.docBookTableCard h5{margin:0 0 12px;color:var(--color-link);font-size:15px;line-height:1.7}
+.docBookTableCard dl{margin:0}.docBookTableCard dl>div+div{margin-top:13px;padding-top:12px;border-top:1px solid var(--color-border)}
+.docBookTableCard dt{margin-bottom:4px;color:var(--color-text-muted);font-size:12px;font-weight:750}.docBookTableCard dd{margin:0;font-size:15px;line-height:1.8;white-space:pre-line}
+.docBookFigure{margin:23px 0;padding:12px;border:1px solid var(--color-border);border-radius:6px;background:var(--color-surface-muted)}
+.docBookFigure>img{display:block;width:auto;max-width:100%;height:auto;margin:0 auto;border-radius:2px}
+.docBookFigure figcaption{margin:10px 0 0;color:var(--color-text-muted);font-size:12px;line-height:1.7;overflow-wrap:anywhere}
+.docBookImageZoom>summary{display:flex;align-items:center;min-height:44px;margin-top:5px;cursor:pointer;color:var(--color-link);font-size:12px;font-weight:750}
+.docBookImageZoom>p{margin:3px 0 10px;color:var(--color-text-muted);font-size:12px;line-height:1.7}
+.docBookImagePan{max-width:100%;max-height:75dvh;overflow:auto;border:1px solid var(--color-border);border-radius:4px;background:var(--color-canvas);overscroll-behavior:contain;scrollbar-color:var(--color-action) transparent}
+.docBookImagePan>img{display:block;max-width:none;width:auto;height:auto;margin:0}
+.docBookPageNav{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:28px;padding-top:22px;border-top:1px solid var(--color-border)}
+.docBookPageButton{display:flex;flex-direction:column;gap:6px;min-height:72px;min-width:0;padding:12px;text-align:left;font-size:12px;line-height:1.6;white-space:normal;overflow-wrap:anywhere}
+.docBookPageButton:last-child{align-items:flex-end;text-align:right}.docBookPageButton>span{color:var(--color-text-muted);font-size:11px}.docBookPageButton strong{font-weight:650}
+.docBookMuted{margin:14px;color:var(--color-text-muted);font-size:14px;line-height:1.8}
+.docBookError{margin:15px 0;padding:17px;border:1px solid var(--color-border);border-radius:8px;background:var(--color-surface-muted)}
+.docBookError p{margin:0 0 12px;line-height:1.8}.docBookError button{min-height:44px}
+.docBookAttribution{margin-top:24px;color:var(--color-text-muted);font-size:12px;line-height:1.85}.docBookAttribution p{margin:7px 0;white-space:pre-line}
+.docBookVisuallyHidden{position:absolute!important;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:1100px){.docBookLayout{grid-template-columns:minmax(195px,235px) minmax(0,1fr);gap:16px}.docBookArticle{padding:23px}}
+@media(max-width:880px){
+  .docBookLayout{grid-template-columns:minmax(0,1fr);gap:16px}.docBookSidebar{position:static;max-height:none}
+  #documentBookList{max-height:365px;overflow:auto;overscroll-behavior:contain}.docBookTools{grid-template-columns:minmax(0,1fr)}
+  .docBookArticle{padding:20px}.docBookArticle h3{scroll-margin-top:76px}
+}
+@media(max-width:680px){
+  .docBookIntro{display:block}.docBookSourceBadge{display:inline-block;margin-top:10px}.docBookTools{margin-top:16px}
+  .docBookArticle{padding:19px 16px;font-size:16px;line-height:1.85}.docBookArticle h3{font-size:25px}
+  .docBookArticleHead{padding-bottom:20px;margin-bottom:20px}.docBookArticleActions{gap:7px;margin-top:17px}
+  .docBookArticleActions button{flex:1 1 auto;padding:9px;font-size:12px}#documentBookJump{font-size:16px}
+  .docBookReview{padding:13px;font-size:14px}.docBookParagraph p{margin-bottom:13px}.docBookSubheading{font-size:18px}
+  .docBookTable th,.docBookTable td{padding:9px;font-size:12px}.docBookTableRegion:not(.docBookMatrix) td{min-width:85px}
+  .docBookSmartTable[data-table-mode=auto]>.docBookTableRegion{display:none}.docBookSmartTable[data-table-mode=auto]>.docBookTableCards{display:block}
+  .docBookFigure{padding:9px}.docBookPageNav{gap:8px}.docBookPageButton{padding:10px;font-size:11px}
+}
+@media(max-width:360px){.docBookArticle{padding:16px 13px}.docBookBreadcrumb{gap:8px}.docBookTableCard{padding:12px}.docBookArticleActions button{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.docBookArticle *{scroll-behavior:auto!important}}
+@media print{.docBookTools,.docBookSidebar,.docBookArticleActions,.docBookPageNav,.docBookJumpLabel,#documentBookJump,.docBookImageZoom,.docBookTableTools{display:none!important}.docBookLayout{display:block}.docBookArticle{border:0;padding:0}.docBookFigure,.docBookReview,.docBookTableCard{break-inside:avoid}.docBookTableRegion{overflow:visible}.docBookSmartTable>.docBookTableRegion{display:block!important}.docBookTableCards{display:none!important}}
