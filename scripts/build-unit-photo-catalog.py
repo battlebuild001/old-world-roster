@@ -120,7 +120,8 @@ def image_candidates(page,page_url):
  return out
 
 def main():
- parser=argparse.ArgumentParser();parser.add_argument('--roster',help='Optional canonical faction/name roster JSON; defaults to repository army datasets');parser.add_argument('--cache',default=str(Path(tempfile.gettempdir())/'tow-unit-photo-cache'));parser.add_argument('--workers',type=int,default=6);parser.add_argument('--max-photos',type=int,default=2);parser.add_argument('--requests-per-second',type=float,default=1);parser.add_argument('--offline',action='store_true',help='Use only previously cached articles and images');args=parser.parse_args()
+ parser=argparse.ArgumentParser();parser.add_argument('--roster',help='Optional canonical faction/name roster JSON; defaults to repository army datasets');parser.add_argument('--cache',default=str(Path(tempfile.gettempdir())/'tow-unit-photo-cache'));parser.add_argument('--workers',type=int,default=6);parser.add_argument('--max-photos',type=int,default=2);parser.add_argument('--requests-per-second',type=float,default=1);parser.add_argument('--offline',action='store_true',help='Use only previously cached articles and images');parser.add_argument('--allow-legacy-sources',action='store_true',help='Explicitly allow rebuilding the archived third-party-source catalogue');args=parser.parse_args()
+ if not args.allow_legacy_sources:raise SystemExit('Use build-official-unit-photo-catalog.py for the current official-source gallery. Archived third-party rebuilding requires --allow-legacy-sources.')
  global REQUEST_INTERVAL,NETWORK_PAUSED,RATE_LIMITED
  NETWORK_PAUSED=args.offline
  REQUEST_INTERVAL=1/max(0.1,min(args.requests_per_second,1))

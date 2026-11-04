@@ -12,7 +12,20 @@ The default rules view is an authored playbook. It connects related rules into l
 
 Quick sheet → Roll charts includes rank thresholds, combat-result scoring and the three-way Break-test table, with a helper for entered dice, Leadership, losing margin and Unit Strength comparison. Unit photo buttons open an in-app miniature gallery with source captions, zoom and previous/next navigation. Catalogue matches use canonical English unit and faction names. Device photographs can be opened for the current session without uploading them or changing saved rosters.
 
-The unit catalogue shows a thumbnail on the left. Tapping it opens the matching photograph in the gallery, initially fitted in full without cropping. Photograph identities are checked per image; official reviewed build examples distinguish the Duke, Baron and Paladin. Unverified associations remain empty until identified.
+The unit catalogue shows a thumbnail on the left. Tapping it opens the matching photograph in the gallery, initially fitted in full without cropping. Photographs come from the official Warhammer store and reviewed Warhammer Community build examples, checked on 2026-11-04. Current Old World products take priority; an exact same-name Age of Sigmar model is labelled as such. Photograph identities are checked per unit, army and individual image; the Duke, Baron and Paladin retain distinct verified build examples. Unverified associations remain empty until identified.
+
+## Refresh official photographs
+
+Keep fetched product metadata and source-image caches outside this repository. The product feed contains descriptions used for review; the published catalogue contains only photograph credits, source links and factual matching evidence.
+
+```sh
+python3 scripts/fetch-official-warhammer-products.py --output /tmp/tow-official-products.json
+python3 scripts/build-official-unit-photo-catalog.py --products /tmp/tow-official-products.json --cache /tmp/tow-official-photo-cache --dry-run
+python3 scripts/build-official-unit-photo-catalog.py --products /tmp/tow-official-products.json --cache /tmp/tow-official-photo-cache
+node --test tests/*.test.js
+```
+
+The builder prefers current Old World product photographs, checks individual variant filenames for combined kits, preserves reviewed official character identities, and removes unused former assets. `scripts/reviewed-official-community-photos.json` supplies individually reviewed official article photographs only when no store match exists. Optional `--legacy-products` accepts a separately reviewed official product feed for exact same-name legacy models. It does not map renamed units or generic faction images. Source requests are limited to one per second and stop on a rate-limit response. The archived Lexicanum builder requires an explicit `--allow-legacy-sources` flag and must not replace the official release catalogue.
 
 ## Run locally
 

@@ -1,0 +1,346 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-04",
+  "source": "Reviewed official Warhammer Community photographs",
+  "bindings": [
+    {
+      "faction": "tomb-kings-of-khemri",
+      "name": "Skeleton Archers",
+      "photos": [
+        {
+          "fileUrl": "https://assets.warhammer-community.com/articles/0-2026/september/wc14-09/big-autumn-preview/image2-05-xkke1t9pas.jpg",
+          "sourceUrl": "https://www.warhammer-community.com/en-gb/articles/6pknf9l6/the-big-autumn-preview-new-tomb-kings-march-out/",
+          "caption": "Skeleton Archers · 2026 plastic models · regiment and command options",
+          "credit": "Games Workshop / Warhammer Community; original photograph and miniature rights remain with Games Workshop. Official source checked 2026-11-04.",
+          "publishedAt": "2026-09-18",
+          "identity": {
+            "approved": true,
+            "unit": "Skeleton Archers",
+            "faction": "tomb-kings-of-khemri",
+            "method": "official-caption",
+            "evidence": "Official article heading: Skeleton Archers. Adjacent paragraph identifies interchangeable heads, quivers and decorations. Visually reviewed: skeleton bowmen regiment with bow-bearing command models; no other unit pictured.",
+            "proofUrl": "https://www.warhammer-community.com/en-gb/articles/6pknf9l6/the-big-autumn-preview-new-tomb-kings-march-out/",
+            "visualReview": {
+              "approved": true,
+              "imageKey": "6pknf9l6-2",
+              "reviewedAt": "2026-11-04"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "faction": "tomb-kings-of-khemri",
+      "name": "Skeleton Chariots",
+      "photos": [
+        {
+          "fileUrl": "https://assets.warhammer-community.com/articles/0-2026/september/wc14-09/big-autumn-preview/image4-05-imr6frxikr.jpg",
+          "sourceUrl": "https://www.warhammer-community.com/en-gb/articles/6pknf9l6/the-big-autumn-preview-new-tomb-kings-march-out/",
+          "caption": "Skeleton Chariots · 2026 plastic models · individual chariot and crew options",
+          "credit": "Games Workshop / Warhammer Community; original photograph and miniature rights remain with Games Workshop. Official source checked 2026-11-04.",
+          "publishedAt": "2026-09-18",
+          "identity": {
+            "approved": true,
+            "unit": "Skeleton Chariots",
+            "faction": "tomb-kings-of-khemri",
+            "method": "official-caption",
+            "evidence": "Official article heading: Skeleton Chariots. Paragraph: Skeleton Chariots are the pride of the Tomb Kings; musician, standard bearer, and champion options. Visually reviewed: two views/builds of the same skeletal-horse chariot kit, with no unrelated unit.",
+            "proofUrl": "https://www.warhammer-community.com/en-gb/articles/6pknf9l6/the-big-autumn-preview-new-tomb-kings-march-out/",
+            "visualReview": {
+              "approved": true,
+              "imageKey": "6pknf9l6-4",
+              "reviewedAt": "2026-11-04"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "faction": "grand-cathay",
+      "name": "Shugengan Lord",
+      "photos": [
+        {
+          "fileUrl": "https://assets.warhammer-community.com/preorders-jun21-tow_03-shugenganlord-9uvsrbswsm.jpg",
+          "sourceUrl": "https://www.warhammer-community.com/en-gb/articles/mhlo1zjg/saturday-pre-orders-the-armies-of-grand-cathay-arrive-on-the-shores-of-the-old-world/",
+          "caption": "Shugengan Lord on Great Spirit Longma · official miniature photograph",
+          "credit": "Games Workshop / Warhammer Community; original photograph and miniature rights remain with Games Workshop. Official source checked 2026-11-04.",
+          "publishedAt": "2025-06-21",
+          "identity": {
+            "approved": true,
+            "unit": "Shugengan Lord",
+            "faction": "grand-cathay",
+            "method": "official-caption",
+            "evidence": "Official heading and adjacent paragraph explicitly name Shugengan Lord on Great Spirit Longma. Visually reviewed: single sword-bearing Shugengan rider on winged Great Spirit Longma. Does not establish Shugengan General rank; bound only to Shugengan Lord.",
+            "proofUrl": "https://www.warhammer-community.com/en-gb/articles/mhlo1zjg/saturday-pre-orders-the-armies-of-grand-cathay-arrive-on-the-shores-of-the-old-world/",
+            "visualReview": {
+              "approved": true,
+              "imageKey": "mhlo1zjg-3",
+              "reviewedAt": "2026-11-04"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "faction": "grand-cathay",
+      "name": "Gate Master",
+      "photos": [
+        {
+          "fileUrl": "https://assets.warhammer-community.com/preorders-jun21-tow_06-gatemasters-jv4opbnodf.jpg",
+          "sourceUrl": "https://www.warhammer-community.com/en-gb/articles/mhlo1zjg/saturday-pre-orders-the-armies-of-grand-cathay-arrive-on-the-shores-of-the-old-world/",
+          "caption": "Gate Master · mounted and on-foot kit builds · official miniature photograph",
+          "credit": "Games Workshop / Warhammer Community; original photograph and miniature rights remain with Games Workshop. Official source checked 2026-11-04.",
+          "publishedAt": "2025-06-21",
+          "identity": {
+            "approved": true,
+            "unit": "Gate Master",
+            "faction": "grand-cathay",
+            "method": "official-caption",
+            "evidence": "Official heading: Gate Masters of the Celestial Cities. Paragraph: this kit contains two Gate Masters, one mounted and one on foot. Visually reviewed: mounted sword-bearing Gate Master and on-foot Gate Master bearing standard. Does not establish Gate Keeper rank; bound only to Gate Master.",
+            "proofUrl": "https://www.warhammer-community.com/en-gb/articles/mhlo1zjg/saturday-pre-orders-the-armies-of-grand-cathay-arrive-on-the-shores-of-the-old-world/",
+            "visualReview": {
+              "approved": true,
+              "imageKey": "mhlo1zjg-4",
+              "reviewedAt": "2026-11-04"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "faction": "grand-cathay",
+      "name": "Astromancer",
+      "photos": [
+        {
+          "fileUrl": "https://assets.warhammer-community.com/sundaypreview-apr26-tow_01-astromancers-443o7punlf.jpg",
+          "sourceUrl": "https://www.warhammer-community.com/en-gb/articles/k3qwksjs/saturday-pre-orders-grand-cathay-and-solar-auxilia-reinforcements/",
+          "caption": "Astromancer · mounted and on-foot kit builds, with Crowman familiar · official 2026 photograph",
+          "credit": "Games Workshop / Warhammer Community; original photograph and miniature rights remain with Games Workshop. Official source checked 2026-11-04.",
+          "publishedAt": "2026-05-02",
+          "identity": {
+            "approved": true,
+            "unit": "Astromancer",
+            "faction": "grand-cathay",
+            "method": "official-caption",
+            "evidence": "Official heading: Astromancers of the Celestial Court. Paragraph explicitly identifies one wizard on foot, one on Cathayan horse and a Crowman lore familiar, usable as Astromancer or Supreme Astromancer. Visually reviewed those three kit components. To avoid sharing rank photos, bound only to Astromancer.",
+            "proofUrl": "https://www.warhammer-community.com/en-gb/articles/k3qwksjs/saturday-pre-orders-grand-cathay-and-solar-auxilia-reinforcements/",
+            "visualReview": {
+              "approved": true,
+              "imageKey": "k3qwksjs-1",
+              "reviewedAt": "2026-11-04"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "faction": "high-elf-realms",
+      "name": "Ishaya Vess",
+      "photos": [
+        {
+          "fileUrl": "https://assets.warhammer-community.com/preorders-feb15-tow_07-ishayavess-akb74v53zv.jpg",
+          "sourceUrl": "https://www.warhammer-community.com/en-gb/articles/9ghpgled/saturday-pre-orders-the-high-elf-realms-show-the-rest-of-the-old-world-whos-best/",
+          "caption": "Ishaya Vess, Sentinel of the Silent Isle · official miniature photograph",
+          "credit": "Games Workshop / Warhammer Community; original photograph and miniature rights remain with Games Workshop. Official source checked 2026-11-04.",
+          "publishedAt": "2025-02-15",
+          "identity": {
+            "approved": true,
+            "unit": "Ishaya Vess",
+            "faction": "high-elf-realms",
+            "method": "official-caption",
+            "evidence": "Official heading: Ishaya Vess Sentinel of the Silent Isle. Visually reviewed: single female elf character with eye patch, sword and bow, matching the named character product section.",
+            "proofUrl": "https://www.warhammer-community.com/en-gb/articles/9ghpgled/saturday-pre-orders-the-high-elf-realms-show-the-rest-of-the-old-world-whos-best/",
+            "visualReview": {
+              "approved": true,
+              "imageKey": "9ghpgled-7",
+              "reviewedAt": "2026-11-04"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "faction": "empire-of-man",
+      "name": "Witch Hunter",
+      "photos": [
+        {
+          "fileUrl": "https://assets.warhammer-community.com/sundaypreview-jan12-tow_08-witchhunter-qthsnyaxfw.jpg",
+          "sourceUrl": "https://www.warhammer-community.com/en-gb/articles/0drukjdc/sunday-preview-the-full-fury-of-the-empire-of-man-plus-extra-fury-from-the-imperium-of-mankind/",
+          "caption": "Witch Hunter · on foot · official miniature photograph",
+          "credit": "Games Workshop / Warhammer Community; original photograph and miniature rights remain with Games Workshop. Official source checked 2026-11-04.",
+          "publishedAt": "2025-01-12",
+          "identity": {
+            "approved": true,
+            "unit": "Witch Hunter",
+            "faction": "empire-of-man",
+            "method": "official-caption",
+            "evidence": "Official heading: Witch Hunter. Paragraph explicitly discusses Witch Hunters and their role hunting mutants, heretics and undead. Visually reviewed: single human in wide-brimmed hat, long coat, sword and pistols; no other character pictured.",
+            "proofUrl": "https://www.warhammer-community.com/en-gb/articles/0drukjdc/sunday-preview-the-full-fury-of-the-empire-of-man-plus-extra-fury-from-the-imperium-of-mankind/",
+            "visualReview": {
+              "approved": true,
+              "imageKey": "0drukjdc-16",
+              "reviewedAt": "2026-11-04"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "faction": "warriors-of-chaos",
+      "name": "Galrauch",
+      "photos": [
+        {
+          "fileUrl": "https://assets.warhammer-community.com/sundaypreview-jan12-tow_12-galrauch-mwbktbmmcb.jpg",
+          "sourceUrl": "https://www.warhammer-community.com/en-gb/articles/0drukjdc/sunday-preview-the-full-fury-of-the-empire-of-man-plus-extra-fury-from-the-imperium-of-mankind/",
+          "caption": "Galrauch the Great Drake · official miniature photograph",
+          "credit": "Games Workshop / Warhammer Community; original photograph and miniature rights remain with Games Workshop. Official source checked 2026-11-04.",
+          "publishedAt": "2025-01-12",
+          "identity": {
+            "approved": true,
+            "unit": "Galrauch",
+            "faction": "warriors-of-chaos",
+            "method": "official-caption",
+            "evidence": "Official heading: Galrauch the Great Drake. Paragraph explicitly identifies the first Chaos dragon and describes a two-headed nightmare. Visually reviewed: single two-headed warped dragon matching that description.",
+            "proofUrl": "https://www.warhammer-community.com/en-gb/articles/0drukjdc/sunday-preview-the-full-fury-of-the-empire-of-man-plus-extra-fury-from-the-imperium-of-mankind/",
+            "visualReview": {
+              "approved": true,
+              "imageKey": "0drukjdc-20",
+              "reviewedAt": "2026-11-04"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "faction": "empire-of-man",
+      "name": "Empire War Wagon",
+      "photos": [
+        {
+          "fileUrl": "https://assets.warhammer-community.com/preorders-feb01-tow_01-warwagon-2aywhdcyoy.jpg",
+          "sourceUrl": "https://www.warhammer-community.com/en-gb/articles/7uor6wf4/saturday-pre-orders-gitz-gangers-and-the-empire-of-man/",
+          "caption": "Empire War Wagon · 2025 remastered Forge World resin model, with included Engineer",
+          "credit": "Games Workshop / Warhammer Community; original photograph and miniature rights remain with Games Workshop. Official source checked 2026-11-04.",
+          "publishedAt": "2025-02-01",
+          "identity": {
+            "approved": true,
+            "unit": "Empire War Wagon",
+            "faction": "empire-of-man",
+            "method": "official-caption",
+            "evidence": "Official heading: Empire War Wagon (Made to Order). Paragraph explicitly identifies War Wagons as mobile bunkers and states this remastered resin miniature includes a new Empire Engineer with Hochland long rifle. Visually reviewed: horse-drawn armed tower wagon, crew and included Engineer.",
+            "proofUrl": "https://www.warhammer-community.com/en-gb/articles/7uor6wf4/saturday-pre-orders-gitz-gangers-and-the-empire-of-man/",
+            "visualReview": {
+              "approved": true,
+              "imageKey": "7uor6wf4-17",
+              "reviewedAt": "2026-11-04"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "faction": "tomb-kings-of-khemri",
+      "name": "Tomb King",
+      "photos": [
+        {
+          "fileUrl": "https://assets.warhammer-community.com/articles/08dae967-86ce-42b9-87e3-595092fba1c2/5sn4rxgt0progfri.jpg",
+          "sourceUrl": "https://www.warhammer-community.com/en-gb/articles/UYUEHlkn/saturday-pre-orders-tomb-kings-bretonnian-lords-and-solar-auxilia-marshal-the-troops/",
+          "caption": "Tomb King on Necrolith Bone Dragon · king rider build · official miniature photograph",
+          "credit": "Games Workshop / Warhammer Community; original photograph and miniature rights remain with Games Workshop. Official source checked 2026-11-04.",
+          "publishedAt": "2024-03-02",
+          "identity": {
+            "approved": true,
+            "unit": "Tomb King",
+            "faction": "tomb-kings-of-khemri",
+            "method": "official-caption",
+            "evidence": "Official heading: Tomb King on Necrolith Bone Dragon. Visually reviewed this image shows the armoured king with long spear on the dragon. The next image is explicitly marked Optional Assembly: Liche Priest and is excluded; no priest build is labelled Tomb King.",
+            "proofUrl": "https://www.warhammer-community.com/en-gb/articles/UYUEHlkn/saturday-pre-orders-tomb-kings-bretonnian-lords-and-solar-auxilia-marshal-the-troops/",
+            "visualReview": {
+              "approved": true,
+              "imageKey": "UYUEHlkn-7",
+              "reviewedAt": "2026-11-04"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "faction": "beastmen-brayherds",
+      "name": "Wargor",
+      "photos": [
+        {
+          "fileUrl": "https://assets.warhammer-community.com/gallery3b-kwokpi98rt.png",
+          "sourceUrl": "https://www.warhammer-community.com/en-gb/articles/thbon3tc/defend-or-defile-the-wood-elf-realms-and-beastman-brayherds-battle-for-the-forests-of-the-old-world/",
+          "caption": "Wargor Battle Standard Bearer · official returning metal miniature photograph",
+          "credit": "Games Workshop / Warhammer Community; original photograph and miniature rights remain with Games Workshop. Official source checked 2026-11-04.",
+          "publishedAt": "2025-03-27",
+          "identity": {
+            "approved": true,
+            "unit": "Wargor",
+            "faction": "beastmen-brayherds",
+            "method": "official-caption",
+            "evidence": "Official Returning metal miniatures paragraph explicitly lists the Wargor Battle Standard Bearer. Visually reviewed this single-image gallery entry: one armoured beastman carrying a large red Chaos battle standard, distinct from nearby Chieftain/Shaman composite images.",
+            "proofUrl": "https://www.warhammer-community.com/en-gb/articles/thbon3tc/defend-or-defile-the-wood-elf-realms-and-beastman-brayherds-battle-for-the-forests-of-the-old-world/",
+            "visualReview": {
+              "approved": true,
+              "imageKey": "thbon3tc-16",
+              "reviewedAt": "2026-11-04"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "faction": "beastmen-brayherds",
+      "name": "Chaos Spawn",
+      "photos": [
+        {
+          "fileUrl": "https://assets.warhammer-community.com/gawi61me9ooxkzit.jpg",
+          "sourceUrl": "https://www.warhammer-community.com/en-gb/articles/7pAfldn6/saturday-pre-orders-chaos-in-the-old-world/",
+          "caption": "Chaos Spawn · official miniature photograph",
+          "credit": "Games Workshop / Warhammer Community; original photograph and miniature rights remain with Games Workshop. Official source checked 2026-11-04.",
+          "publishedAt": "2024-09-14",
+          "identity": {
+            "approved": true,
+            "unit": "Chaos Spawn",
+            "faction": "beastmen-brayherds",
+            "method": "official-caption",
+            "evidence": "Official article product heading: Chaos Spawn. Visually reviewed: one mutated fleshy quadrupedal creature with tentacles and extra jaws, not the next image logo or a different Chaos unit. Chaos Spawn is the same named unit also listed in Beastmen Brayherds.",
+            "proofUrl": "https://www.warhammer-community.com/en-gb/articles/7pAfldn6/saturday-pre-orders-chaos-in-the-old-world/",
+            "visualReview": {
+              "approved": true,
+              "imageKey": "7pAfldn6-4",
+              "reviewedAt": "2026-11-04"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "faction": "beastmen-brayherds",
+      "name": "Bray-Shaman",
+      "photos": [
+        {
+          "fileUrl": "https://assets.warhammer-community.com/image5b-nzcdxykdon.jpg",
+          "sourceUrl": "https://www.warhammer-community.com/en-gb/articles/thbon3tc/defend-or-defile-the-wood-elf-realms-and-beastman-brayherds-battle-for-the-forests-of-the-old-world/",
+          "caption": "Bray-Shaman · on foot · returning plastic miniature · official photograph",
+          "credit": "Games Workshop / Warhammer Community; original photograph and miniature rights remain with Games Workshop. Official source checked 2026-11-04.",
+          "publishedAt": "2025-03-27",
+          "identity": {
+            "approved": true,
+            "unit": "Bray-Shaman",
+            "faction": "beastmen-brayherds",
+            "method": "official-caption",
+            "evidence": "March reveal: Returning plastic miniatures section places a single staff-bearing shaman photo separately from the axe-bearing Chieftain. Official May 25 2025 Returning Beastmen Brayherds Lords product section explicitly identifies Plastic Chieftains and Bray-Shamans. Visually opened thbon3tc-4.jpg: one unarmoured horned shaman on foot, skull-topped staff, ritual scrolls, no other unit. This is assigned only to ordinary Bray-Shaman; no Great Bray-Shaman rank claim.",
+            "proofUrl": "https://www.warhammer-community.com/en-gb/articles/ck4pqjsu/sunday-preview-change-comes-to-the-mortal-realms-and-the-brayherds-raid-the-old-world/",
+            "additionalProofUrl": "https://www.warhammer-community.com/en-gb/articles/thbon3tc/defend-or-defile-the-wood-elf-realms-and-beastman-brayherds-battle-for-the-forests-of-the-old-world/",
+            "visualReview": {
+              "approved": true,
+              "imageKey": "thbon3tc-4",
+              "reviewedAt": "2026-11-04"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -41,6 +41,43 @@ test('duplicate canonical entries merge without duplicate images and normalized 
  const found=photos.findPhotos({name:'Empire Knight',factionId:'empire-of-man'},catalog);found.pop();assert.equal(catalog.entries[0].photos.length,1);
 });
 
+test('an official-only catalogue rejects third-party, lookalike and credential-bearing source URLs',()=>{
+ const official={...picture,sourceUrl:'https://www.warhammer.com/en-GB/shop/empire-knights',fileUrl:'https://www.warhammer.com/app/resources/catalog/product/920x950/EmpireKnights.jpg'};
+ const badSources=['https://example.org/knights','https://warhammer.com.example.org/image','https://name:secret@www.warhammer.com/image','http://www.warhammer.com/image'];
+ for(const bad of badSources){
+  for(const field of ['fileUrl','sourceUrl']){
+   const catalog=photos.normalizeCatalog({officialOnly:true,entries:[entry('Empire Knights','empire-of-man',[],[{...official,[field]:bad}])]});
+   assert.equal(photos.findPhotos({name:'Empire Knights',factionId:'empire-of-man'},catalog).length,0,field+': '+bad);
+  }
+ }
+ const catalog=photos.normalizeCatalog({officialOnly:true,checkedAt:'2026-11-04',entries:[entry('Empire Knights','empire-of-man',[],[official])]});
+ assert.equal(catalog.officialOnly,true);assert.equal(catalog.checkedAt,'2026-11-04');
+ assert.equal(photos.findPhotos({name:'Empire Knights',factionId:'empire-of-man'},catalog).length,1);
+});
+
+test('the published gallery contains only official source images and keeps current kit variants separate',()=>{
+ const fs=require('node:fs'),path=require('node:path');
+ const raw=JSON.parse(fs.readFileSync(path.join(__dirname,'../dist/data/unit-photos.json'),'utf8'));
+ assert.equal(raw.officialOnly,true);assert.equal(raw.counts.officialOnly,true);assert.equal(raw.checkedAt,'2026-11-04');
+ const files=new Set();let pictured=0;
+ for(const item of raw.entries){
+  if(item.photos.length)pictured++;
+  for(const photo of item.photos){
+   assert(photos.officialSource(photo.sourceUrl),item.name+' page');assert(photos.officialSource(photo.fileUrl),item.name+' image');
+   assert(photos.officialSource(photo.identity.proofUrl),item.name+' proof');
+   assert(photos.safeImage(photo.src));assert.equal(photo.checkedAt,raw.checkedAt);
+   assert(fs.existsSync(path.join(__dirname,'../dist',photo.src)));files.add(photo.src);
+   if(photo.legacyReference)assert.match(photo.caption,/Age of Sigmar/);
+  }
+ }
+ assert.equal(pictured,raw.counts.withPhotos);assert.equal(files.size,raw.counts.images);
+ assert.equal(files.size,fs.readdirSync(path.join(__dirname,'../dist/unit-photo-images')).filter(file=>file.endsWith('.webp')).length,'Former source images must not remain deployed');
+ const catalog=photos.normalizeCatalog(raw),variants=['Mounted Knights of the Realm','Knights Errant','Knights of the Realm on Foot'].map(name=>photos.findPhotos({name,factionId:'kingdom-of-bretonnia'},catalog));
+ assert(variants.every(found=>found.length===1));assert.equal(new Set(variants.map(found=>found[0].src)).size,3);
+ const chaos=photos.findPhotos({name:'Chaos Knights',factionId:'warriors-of-chaos'},catalog);
+ assert.equal(chaos.length,1);assert.match(chaos[0].sourceUrl,/chaos-knights-2026/);
+});
+
 test('unverified or cross-unit photographs cannot enter the gallery',()=>{
  const verified={approved:true,unit:'Duke',faction:'kingdom-of-bretonnia',method:'official-caption'};
  const catalog=photos.normalizeCatalog({entries:[

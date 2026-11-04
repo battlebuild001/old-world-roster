@@ -12,17 +12,19 @@
   function originalName(source,record){return phrase(source?.name_en||record?.name||source?.name_de||source?.id||'');}
   function safeImage(value){return typeof value==='string'&&/^\.\/unit-photo-images\/[a-zA-Z0-9_-]+\.(?:webp|png|jpe?g)$/.test(value)?value:null;}
   function safeSourceURL(value){try{const url=new URL(String(value||''));return url.protocol==='https:'&&!url.username&&!url.password?url.href:null;}catch{return null;}}
+  function officialSource(value){try{const url=new URL(String(value||''));return url.protocol==='https:'&&!url.username&&!url.password&&['warhammer.com','www.warhammer.com','static.warhammer.com','warhammer-community.com','www.warhammer-community.com','assets.warhammer-community.com'].includes(url.hostname);}catch{return false;}}
   function freeze(value){if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);for(const child of Object.values(value))freeze(child);}return value;}
   function normalizeCatalog(input){
     if(!input||!Array.isArray(input.entries))throw Error('Invalid unit photo catalogue');
-    const merged=new Map();
+    const merged=new Map(),officialOnly=input.officialOnly===true;
     for(const item of input.entries){
       const name=phrase(item.name),faction=phrase(item.faction);if(!name||!validFaction(faction)||!Array.isArray(item.photos))continue;
       const key=faction+'\u0000'+nameKey(name),entry=merged.get(key)||{name,faction,aliases:[],photos:[]};
       entry.aliases=[...new Set([...entry.aliases,...(Array.isArray(item.aliases)?item.aliases:[]).map(phrase).filter(Boolean)])];
       for(const photo of item.photos){
         const src=safeImage(photo?.src),identity=photo?.identity;
-        if(!src||identity?.approved!==true||identity.faction!==faction||nameKey(identity.unit)!==nameKey(name)||!['exact-unit-name','official-caption'].includes(identity.method)||entry.photos.some(existing=>existing.src===src))continue;
+        if(!src||identity?.approved!==true||identity.faction!==faction||nameKey(identity.unit)!==nameKey(name)||!['exact-unit-name','official-caption','official-product-title-and-image'].includes(identity.method)||entry.photos.some(existing=>existing.src===src))continue;
+        if(officialOnly&&(!officialSource(photo.sourceUrl)||!officialSource(photo.fileUrl)))continue;
         entry.photos.push({src,width:Math.max(0,Math.min(30000,Math.trunc(Number(photo.width)||0))),height:Math.max(0,Math.min(30000,Math.trunc(Number(photo.height)||0))),caption:phrase(photo.caption)||name,credit:phrase(photo.credit),identity:{approved:true,unit:phrase(identity.unit),faction,method:identity.method,evidence:phrase(identity.evidence||identity.proof),proofUrl:safeSourceURL(identity.proofUrl)},sourceUrl:safeSourceURL(photo.sourceUrl),fileUrl:safeSourceURL(photo.fileUrl)});
       }
       merged.set(key,entry);
@@ -30,7 +32,7 @@
     const owners=new Map();
     for(const entry of merged.values())for(const photo of entry.photos){const key=entry.faction+'\u0000'+photo.src;if(!owners.has(key))owners.set(key,new Set());owners.get(key).add(nameKey(entry.name));}
     for(const entry of merged.values())entry.photos=entry.photos.filter(photo=>owners.get(entry.faction+'\u0000'+photo.src).size===1);
-    return freeze({schemaVersion:2,entries:[...merged.values()],counts:{entries:merged.size,photos:[...merged.values()].reduce((total,entry)=>total+entry.photos.length,0)}});
+    return freeze({schemaVersion:2,officialOnly,checkedAt:phrase(input.checkedAt),source:phrase(input.source),entries:[...merged.values()],counts:{entries:merged.size,photos:[...merged.values()].reduce((total,entry)=>total+entry.photos.length,0)}});
   }
   function findPhotos({name,factionId}={},catalog=state.catalog){
     if(!catalog?.entries||!validFaction(factionId)||!nameKey(name))return [];
@@ -134,6 +136,7 @@
     thumbs.hidden=photos.length<2;
     const caption=$('photoCaption');caption.replaceChildren(text('p',photo.caption||state.target.name));
     if(photo.credit)caption.append(text('p',photo.credit,'photoCredit'));
+    if(!photo.local&&state.catalog?.officialOnly&&state.catalog.checkedAt)caption.append(text('p',tr('공식 자료 확인일: ','Official sources checked: ')+state.catalog.checkedAt,'photoCredit'));
     if(photo.sourceUrl){const link=text('a',tr('사진 출처 ↗','Photo source ↗'));link.href=photo.sourceUrl;link.target='_blank';link.rel='noopener noreferrer';link.referrerPolicy='no-referrer';caption.append(link);}
     renderZoom();
   }
@@ -144,7 +147,7 @@
     $('photoStatus').textContent=state.status==='loading'?tr('유닛 사진을 준비하고 있습니다…','Preparing the unit photographs…'):'';
     const photos=pictures(),empty=$('photoEmpty');empty.hidden=photos.length>0||state.status==='loading';empty.replaceChildren();
     if(state.status==='error'){empty.append(text('h3',tr('사진 자료를 불러오지 못했습니다.','The photograph catalogue could not load.')),text('p',tr('인터넷 연결을 확인한 뒤 다시 불러오세요. 기기 사진도 이 창에서 열 수 있습니다.','Check your connection and retry. You can also open a local photograph in this viewer.')));const button=text('button',tr('다시 불러오기','Retry'));button.type='button';button.addEventListener('click',async()=>{const request=state.request;const catalog=await load();if(state.open&&request===state.request){state.basePhotos=findPhotos(state.target,catalog);state.index=0;render();}});empty.append(button);}
-    else if(!photos.length)empty.append(text('h3',tr('이 유닛과 일치하는 사진이 아직 없습니다.','There are no matching photographs for this unit yet.')),text('p',tr('보유한 모델 사진을 기기에서 열어 볼 수 있습니다.','You can open a photograph of your model from your device.')));
+    else if(!photos.length)empty.append(text('h3',tr('이 유닛으로 확인된 공식 사진이 아직 없습니다.','No official photograph has been identified for this unit yet.')),text('p',tr('보유한 모델 사진을 기기에서 열어 볼 수 있습니다.','You can open a photograph of your model from your device.')));
     $('photoGallery').hidden=!photos.length;
     $('photoLocalButton').textContent=tr('기기에서 사진 열기','Open a photo from this device');$('photoLocalHint').textContent=tr('JPG·PNG·WebP · 한 장당 최대 15MB. 업로드·저장하지 않으며, 창을 닫으면 사라집니다.','JPG, PNG or WebP · Up to 15MB each. Never uploaded or saved; removed when this viewer closes.');$('photoFileStatus').textContent=state.fileMessage;
     if(photos.length)renderPhoto();
@@ -166,6 +169,6 @@
       image.src=photo.src;button.querySelector('img')?.remove();button.append(image);
     });
   }
-  return {originalName,nameKey,safeImage,safeSourceURL,normalizeCatalog,findPhotos,validateLocalImage,open,close,load,addLocalFiles,bindThumbnail,
+  return {originalName,nameKey,safeImage,safeSourceURL,officialSource,normalizeCatalog,findPhotos,validateLocalImage,open,close,load,addLocalFiles,bindThumbnail,
     get ready(){return state.promise||Promise.resolve(state.catalog);},get status(){return state.status;},get catalog(){return state.catalog;},get isOpen(){return state.open;},get photos(){return pictures();}};
 });
