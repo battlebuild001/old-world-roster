@@ -82,9 +82,9 @@ test('every diagram is a bounded local asset and present in the complete offline
   for(const file of ['./document-book.js','./document-book.css','./data/document-rulebook.json'])assert(assets.includes(file),file);
   assert.equal(new Set(assets).size,assets.length);assert.equal(assets.length,159);
   assert(!assets.includes('./update.html'));
-  assert.match(worker,/bth-tow-v55-official-unit-photos/);
+  assert.match(worker,/bth-tow-v56-borderless-unit-thumbnails/);
   const updater=fs.readFileSync(path.join(__dirname,'../dist/update.html'),'utf8');
-  assert.match(updater,/targetVersion=55/);assert.match(updater,/Date\.now\(\)\+180000/);
+  assert.match(updater,/targetVersion=56/);assert.match(updater,/Date\.now\(\)\+180000/);
 });
 
 test('full text search reaches spells, items, table contents and corrected original wording',()=>{
