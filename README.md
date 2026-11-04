@@ -12,6 +12,8 @@ The default rules view is an authored playbook. It connects related rules into l
 
 Quick sheet → Roll charts includes rank thresholds, combat-result scoring and the three-way Break-test table, with a helper for entered dice, Leadership, losing margin and Unit Strength comparison. Unit photo buttons open an in-app miniature gallery with source captions, zoom and previous/next navigation. Catalogue matches use canonical English unit and faction names. Device photographs can be opened for the current session without uploading them or changing saved rosters.
 
+The unit catalogue shows a thumbnail on the left. Tapping it opens the matching photograph in the gallery, initially fitted in full without cropping. Photograph identities are checked per image; official reviewed build examples distinguish the Duke, Baron and Paladin. Unverified associations remain empty until identified.
+
 ## Run locally
 
 ```sh

@@ -10,8 +10,8 @@
 .photoEmpty h3{margin:0 0 13px;color:var(--color-text);font-size:19px;line-height:1.7}.photoEmpty p{max-width:65ch;margin:0;color:var(--color-text-muted);font-size:15px;line-height:1.85}
 .photoEmpty button{margin-top:18px;min-height:44px;font-size:14px}
 .photoViewport{position:relative;display:grid;place-items:center;min-width:0;width:100%;height:min(55dvh,560px);min-height:240px;overflow:hidden;border:1px solid var(--color-border);border-radius:6px;background:#E8E2D8;scrollbar-color:var(--color-action) transparent;overscroll-behavior:contain}
-.photoViewport>img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
-.photoViewport.zoomed{display:block;overflow:auto;touch-action:pan-x pan-y}.photoViewport.zoomed>img{max-width:none;max-height:none;height:auto;object-fit:initial}
+.photoViewport>img{display:block;min-width:0;min-height:0;max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain;object-position:center}
+.photoViewport.zoomed{display:block;overflow:auto;touch-action:pan-x pan-y}.photoViewport.zoomed>img{max-width:none;max-height:none;height:auto;object-fit:contain;object-position:center}
 .photoImageStatus{position:absolute;inset:auto 12px 12px;margin:0;padding:10px 13px;border-radius:5px;background:var(--color-surface);color:var(--color-text-muted);font-size:13px;line-height:1.7;text-align:center}
 .photoImageStatus:empty{display:none}.photoImageStatus button{display:block;min-height:44px;margin:9px auto 0;padding:8px 13px;font-size:13px}
 .photoControls{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:center;margin-top:14px}

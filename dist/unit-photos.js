@@ -21,12 +21,16 @@
       const key=faction+'\u0000'+nameKey(name),entry=merged.get(key)||{name,faction,aliases:[],photos:[]};
       entry.aliases=[...new Set([...entry.aliases,...(Array.isArray(item.aliases)?item.aliases:[]).map(phrase).filter(Boolean)])];
       for(const photo of item.photos){
-        const src=safeImage(photo?.src);if(!src||entry.photos.some(existing=>existing.src===src))continue;
-        entry.photos.push({src,width:Math.max(0,Math.min(30000,Math.trunc(Number(photo.width)||0))),height:Math.max(0,Math.min(30000,Math.trunc(Number(photo.height)||0))),caption:phrase(photo.caption)||name,credit:phrase(photo.credit),sourceUrl:safeSourceURL(photo.sourceUrl),fileUrl:safeSourceURL(photo.fileUrl)});
+        const src=safeImage(photo?.src),identity=photo?.identity;
+        if(!src||identity?.approved!==true||identity.faction!==faction||nameKey(identity.unit)!==nameKey(name)||!['exact-unit-name','official-caption'].includes(identity.method)||entry.photos.some(existing=>existing.src===src))continue;
+        entry.photos.push({src,width:Math.max(0,Math.min(30000,Math.trunc(Number(photo.width)||0))),height:Math.max(0,Math.min(30000,Math.trunc(Number(photo.height)||0))),caption:phrase(photo.caption)||name,credit:phrase(photo.credit),identity:{approved:true,unit:phrase(identity.unit),faction,method:identity.method,evidence:phrase(identity.evidence||identity.proof),proofUrl:safeSourceURL(identity.proofUrl)},sourceUrl:safeSourceURL(photo.sourceUrl),fileUrl:safeSourceURL(photo.fileUrl)});
       }
       merged.set(key,entry);
     }
-    return freeze({schemaVersion:1,entries:[...merged.values()],counts:{entries:merged.size,photos:[...merged.values()].reduce((total,entry)=>total+entry.photos.length,0)}});
+    const owners=new Map();
+    for(const entry of merged.values())for(const photo of entry.photos){const key=entry.faction+'\u0000'+photo.src;if(!owners.has(key))owners.set(key,new Set());owners.get(key).add(nameKey(entry.name));}
+    for(const entry of merged.values())entry.photos=entry.photos.filter(photo=>owners.get(entry.faction+'\u0000'+photo.src).size===1);
+    return freeze({schemaVersion:2,entries:[...merged.values()],counts:{entries:merged.size,photos:[...merged.values()].reduce((total,entry)=>total+entry.photos.length,0)}});
   }
   function findPhotos({name,factionId}={},catalog=state.catalog){
     if(!catalog?.entries||!validFaction(factionId)||!nameKey(name))return [];
@@ -145,6 +149,23 @@
     $('photoLocalButton').textContent=tr('기기에서 사진 열기','Open a photo from this device');$('photoLocalHint').textContent=tr('JPG·PNG·WebP · 한 장당 최대 15MB. 업로드·저장하지 않으며, 창을 닫으면 사라집니다.','JPG, PNG or WebP · Up to 15MB each. Never uploaded or saved; removed when this viewer closes.');$('photoFileStatus').textContent=state.fileMessage;
     if(photos.length)renderPhoto();
   }
-  return {originalName,nameKey,safeImage,safeSourceURL,normalizeCatalog,findPhotos,validateLocalImage,open,close,load,addLocalFiles,
+  const thumbnailRequests=new WeakMap();
+  function bindThumbnail(button,{name,factionId}={}){
+    if(!root?.document||!button)return;
+    const request={name:phrase(name),factionId:phrase(factionId)};thumbnailRequests.set(button,request);
+    button.dataset.photoState='loading';
+    // Native lazy loading defers the image itself; all thumbnails share one catalogue request.
+    load().then(catalog=>{
+      if(!button.isConnected||thumbnailRequests.get(button)!==request)return;
+      const photo=findPhotos(request,catalog)[0];
+      if(!photo){button.dataset.photoState='unavailable';return;}
+      const image=root.document.createElement('img');image.alt='';image.width=photo.width||64;image.height=photo.height||76;
+      image.loading='lazy';image.decoding='async';image.referrerPolicy='no-referrer';
+      image.onload=()=>{if(!button.isConnected||thumbnailRequests.get(button)!==request)return;button.dataset.photoState='ready';button.classList.add('has-unit-photo');};
+      image.onerror=()=>{if(!button.isConnected||thumbnailRequests.get(button)!==request)return;image.remove();button.classList.remove('has-unit-photo');button.dataset.photoState='unavailable';};
+      image.src=photo.src;button.querySelector('img')?.remove();button.append(image);
+    });
+  }
+  return {originalName,nameKey,safeImage,safeSourceURL,normalizeCatalog,findPhotos,validateLocalImage,open,close,load,addLocalFiles,bindThumbnail,
     get ready(){return state.promise||Promise.resolve(state.catalog);},get status(){return state.status;},get catalog(){return state.catalog;},get isOpen(){return state.open;},get photos(){return pictures();}};
 });

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-04",
+  "bindings": [
+    {
+      "faction": "kingdom-of-bretonnia",
+      "name": "Duke",
+      "photos": [
+        {
+          "src": "./unit-photo-images/406db348280c834f66d3.webp",
+          "width": 900,
+          "height": 785,
+          "caption": "듀크 · 로열 페가수스 · 랜스와 사당 장식 투구 조립형 (Duke on Royal Pegasus)",
+          "sourceUrl": "https://www.warhammer-community.com/en-gb/articles/f1aBpsHY/bretonnia-kit-focus-knights-of-the-realm-walk-so-their-lord-can-fly/",
+          "fileUrl": "https://assets.warhammer-community.com/gallery/all/suurz0vswmkpeu88.jpg",
+          "credit": "Games Workshop / Warhammer Community; original photograph and model rights remain with Games Workshop.",
+          "identity": {
+            "unit": "Duke",
+            "method": "official-caption",
+            "proof": "a Duke – hefting a knightly lance",
+            "proofUrl": "https://www.warhammer-community.com/en-gb/articles/f1aBpsHY/bretonnia-kit-focus-knights-of-the-realm-walk-so-their-lord-can-fly/"
+          }
+        }
+      ]
+    },
+    {
+      "faction": "kingdom-of-bretonnia",
+      "name": "Baron",
+      "photos": [
+        {
+          "src": "./unit-photo-images/e82595c467b457cb84e1.webp",
+          "width": 833,
+          "height": 900,
+          "caption": "배런 · 로열 페가수스 · 검과 서클릿 조립형 (Baron on Royal Pegasus)",
+          "sourceUrl": "https://www.warhammer-community.com/en-gb/articles/d7ppzrbp/warhammer-day-preview-the-kingdom-of-bretonnia-revealed/",
+          "fileUrl": "https://assets.warhammer-community.com/gallery/all/b5j8f73rknb0xvcu.jpg",
+          "credit": "Games Workshop / Warhammer Community; original photograph and model rights remain with Games Workshop.",
+          "identity": {
+            "unit": "Baron",
+            "method": "official-caption",
+            "proof": "a Baron wearing a more restrained circlet",
+            "proofUrl": "https://www.warhammer-community.com/en-gb/articles/f1aBpsHY/bretonnia-kit-focus-knights-of-the-realm-walk-so-their-lord-can-fly/"
+          }
+        }
+      ]
+    },
+    {
+      "faction": "kingdom-of-bretonnia",
+      "name": "Paladin",
+      "photos": [
+        {
+          "src": "./unit-photo-images/5255b70d2488c72f7be9.webp",
+          "width": 900,
+          "height": 869,
+          "caption": "팔라딘 · 배틀 스탠다드 베어러 · 로열 페가수스 (Paladin Battle Standard Bearer on Royal Pegasus)",
+          "sourceUrl": "https://www.warhammer-community.com/en-gb/articles/f1aBpsHY/bretonnia-kit-focus-knights-of-the-realm-walk-so-their-lord-can-fly/",
+          "fileUrl": "https://assets.warhammer-community.com/articles/e0f3a3dd-7c75-4bbd-850b-91f6649cadd9/ndfwxor6rfbodr1f.jpg",
+          "credit": "Games Workshop / Warhammer Community; original photograph and model rights remain with Games Workshop.",
+          "identity": {
+            "unit": "Paladin",
+            "method": "official-caption",
+            "proof": "a Paladin riding a Royal Pegasus",
+            "proofUrl": "https://www.warhammer-community.com/en-gb/articles/f1aBpsHY/bretonnia-kit-focus-knights-of-the-realm-walk-so-their-lord-can-fly/"
+          }
+        }
+      ]
+    }
+  ]
+}

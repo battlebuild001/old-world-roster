@@ -22,4 +22,6 @@ The reading edition preserves all substantive source text, 81 tables and 62 figu
 
 `dist/data/unit-photos.json` links unit names to miniature photographs from the [Warhammer Fantasy Lexicanum](https://whfb.lexicanum.com/) galleries. Each photograph retains its source page, original image URL, caption and credit. Photographs are separate from the army datasets' CC BY 4.0 license; rights remain with their respective owners. Local WebP copies are resized for the in-app reference viewer and omit image metadata. Unmatched units are not assigned unrelated faction photographs.
 
+Individual image identities are checked by `scripts/photo_identity.py`. Reviewed associations in `scripts/reviewed-unit-photos.json` include official [Warhammer Community](https://www.warhammer-community.com/) build examples for the Duke, Baron and Paladin, retaining their identification text and source links. Article galleries are used for discovery; each displayed photograph carries its own unit and faction identification. The gallery and catalogue thumbnails use these same verified associations.
+
 The viewer loads model photographs when opened and keeps viewed images in a separate browser cache. A device image can also be opened locally for the current session; it is not uploaded or added to a roster export.

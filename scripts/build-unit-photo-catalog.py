@@ -11,6 +11,7 @@ from pathlib import Path
 from io import BytesIO
 from email.utils import parsedate_to_datetime
 from PIL import Image,ImageOps
+from photo_identity import verify_photo
 
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://whfb.lexicanum.com'
@@ -20,7 +21,8 @@ NEXT_REQUEST=0.0
 REQUEST_INTERVAL=1.0
 NETWORK_PAUSED=False
 RATE_LIMITED=False
-# These aliases describe the same established troop/model type or rank variants.
+# Article lookup hints only. A page is not evidence that its photos depict a unit.
+# Every candidate photograph must independently pass the identity policy.
 ALIASES={
  ('kingdom-of-bretonnia','Duke'):'Bretonnian_Lord',('kingdom-of-bretonnia','Baron'):'Bretonnian_Lord',('kingdom-of-bretonnia','Paladin'):'Bretonnian_Lord',('kingdom-of-bretonnia','Prophetess'):'Damsel',('kingdom-of-bretonnia','Mounted Knights of the Realm'):'Knight_of_the_Realm',('kingdom-of-bretonnia','Knights of the Realm on Foot'):'Knight_of_the_Realm',('kingdom-of-bretonnia','Peasant Bowmen'):'Peasant_Bowman',('kingdom-of-bretonnia','Sergeant-at-Arms'):'Sergeant-at-Arms',
  ('dwarfen-mountain-holds','King'):'Dwarf_Lord',('dwarfen-mountain-holds','Thane'):'Thane',('dwarfen-mountain-holds','Engineer'):'Dwarf_Engineer',('dwarfen-mountain-holds','Engineer Sapper'):'Dwarf_Engineer',('dwarfen-mountain-holds','Dwarf Warriors'):'Dwarf_Warrior',('dwarfen-mountain-holds','Royal Clan Warriors'):'Dwarf_Warrior',('dwarfen-mountain-holds','Rangers'):'Dwarf_Ranger',('dwarfen-mountain-holds','Cannon'):'Dwarf_Cannon',('dwarfen-mountain-holds','Bolt Thrower'):'Dwarf_Bolt_Thrower',('dwarfen-mountain-holds','Scout Gyrocopters'):'Gyrocopter',
@@ -137,7 +139,11 @@ def main():
    army=json.loads(army_file.read_text());names=[unit['name_en'] for category in ['characters','core','special','rare','mercenaries'] for unit in army.get(category,[]) if isinstance(unit,dict) and unit.get('name_en')]
    if names:roster.setdefault(army_file.stem,[]).extend(names)
  units=list(dict.fromkeys((faction,name) for faction,names in roster.items() for name in names));unit_candidates={(f,n):candidates(n,f) for f,n in units}
- all_pages={};selected={}
+ review_path=ROOT/'scripts/reviewed-unit-photos.json'
+ reviews=json.loads(review_path.read_text()) if review_path.exists() else {'bindings':[]}
+ reviewed={(item['faction'],clean_name(item['name'])):item['photos'] for item in reviews['bindings']}
+ all_pages={};selected={key:reviewed[(key[0],clean_name(key[1]))] for key in units if (key[0],clean_name(key[1])) in reviewed}
+ rejected=[]
  for phase in range(4):
   todo=list(dict.fromkeys(values[phase] for key,values in unit_candidates.items() if key not in selected and len(values)>phase))
   def page_task(p):
@@ -152,7 +158,12 @@ def main():
   for key,values in unit_candidates.items():
    if key in selected:continue
    for p in values[:phase+1]:
-    if all_pages.get(p):selected[key]=all_pages[p];break
+    approved=[]
+    for photo in all_pages.get(p,[]):
+     verdict=verify_photo(key[0],key[1],photo)
+     if verdict['approved']:approved.append(photo)
+     else:rejected.append({'faction':key[0],'name':key[1],'fileUrl':photo['fileUrl'],'reason':verdict['reason']})
+    if approved:selected[key]=approved;break
   print(json.dumps({'phase':phase+1,'matchedUnits':len(selected),'unitEntries':len(units),'pagesThisPhase':len(todo)}),flush=True)
  unique_images={item['fileUrl']:item for photos in selected.values() for item in photos[:args.max_photos+2]}
  photo_files={}
@@ -177,17 +188,18 @@ def main():
  for faction,name in units:
   photos=[]
   choices=selected.get((faction,name),[])
-  if faction=='kingdom-of-bretonnia' and clean_name(name) in ['Duke','Baron','Paladin']:
-   # Prefer unnamed generic character sculpts over named heroes on the same page.
-   choices=sorted(choices,key=lambda item:bool(re.search(r'Bohemond|Gilon',item['caption'],re.I)))
+  reviewed_urls={photo['fileUrl'] for photo in reviewed.get((faction,clean_name(name)),[])}
   for photo in choices:
    if photo['fileUrl'] in photo_files:
     item=dict(photo_files[photo['fileUrl']])
-    if faction=='vampire-counts' and clean_name(name) in ['Vampire Count','Vampire Thrall']:
-     item['caption']+=' · 뱀파이어 캐릭터 모델 참고사진 (Vampire character model reference)'
-    if faction=='kingdom-of-bretonnia' and clean_name(name) in ['Duke','Baron','Paladin']:
-     item['caption']+=' · 브레토니아 캐릭터 모델 참고사진 (Bretonnian character model reference)'
-    photos.append(item)
+    for field in ['caption','sourceUrl','fileUrl','credit']:item[field]=photo[field]
+    if photo['fileUrl'] in reviewed_urls:
+     identity={**photo['identity'],'approved':True,'faction':faction,'unit':clean_name(name),'policyVersion':1}
+    else:
+     verdict=verify_photo(faction,name,photo)
+     if not verdict['approved']:continue
+     identity={'approved':True,'faction':faction,'unit':clean_name(name),'method':'exact-unit-name','evidence':verdict['matchedLabel'],'policyVersion':1}
+    item['identity']=identity;photos.append(item)
    if len(photos)>=args.max_photos:break
   if photos:matched+=1
   else:
@@ -198,11 +210,22 @@ def main():
     diagnostics.append({'page':page,'status':state})
    missing.append({'faction':faction,'name':name,'tried':diagnostics})
   entries.append({'name':name,'faction':faction,'aliases':[clean_name(name)] if clean_name(name)!=name else [],'photos':photos})
+ # One photograph must not silently stand in for distinct units in the same army.
+ owners={}
+ photo_hashes={photo['src']:hashlib.sha256((ROOT/'dist'/photo['src']).read_bytes()).hexdigest() for entry in entries for photo in entry['photos']}
+ for entry in entries:
+  for photo in entry['photos']:owners.setdefault((entry['faction'],photo_hashes[photo['src']]),set()).add(clean_name(entry['name']).casefold())
+ ambiguous={key for key,names in owners.items() if len(names)>1}
+ for entry in entries:
+  entry['photos']=[photo for photo in entry['photos'] if (entry['faction'],photo_hashes[photo['src']]) not in ambiguous]
+ matched=sum(bool(entry['photos']) for entry in entries)
+ missing=[{'faction':entry['faction'],'name':entry['name'],'reason':'No independently identified unit photograph'} for entry in entries if not entry['photos']]
+ (cache/'identity-rejections.json').write_text(json.dumps({'rejected':rejected,'ambiguousSameArmyPhotos':len(ambiguous)},ensure_ascii=False,indent=2)+'\n')
  used={photo['src'].rsplit('/',1)[-1] for entry in entries for photo in entry['photos']}
  for p in output.glob('*.webp'):
   if p.name not in used:p.unlink()
  counts={'entries':len(entries),'withPhotos':matched,'withoutPhotos':len(missing),'images':len(used),'imageBytes':sum(p.stat().st_size for p in output.glob('*.webp')),'factions':len(roster),'networkPaused':RATE_LIMITED,'offlineBuild':args.offline}
- data={'schemaVersion':1,'source':'Warhammer Fantasy Lexicanum miniature galleries','checkedAt':'2026-11-04','entries':entries,'counts':counts}
+ data={'schemaVersion':2,'identityPolicyVersion':1,'source':'Reviewed Warhammer Community photographs and individually matched Lexicanum miniature photographs','checkedAt':'2026-11-04','entries':entries,'counts':counts}
  (ROOT/'dist/data/unit-photos.json').write_text(json.dumps(data,ensure_ascii=False,separators=(',',':'))+'\n');(cache/'missing-units.json').write_text(json.dumps(missing,ensure_ascii=False,indent=2)+'\n');print(json.dumps({'complete':True,**counts}),flush=True)
 
 if __name__=='__main__':main()

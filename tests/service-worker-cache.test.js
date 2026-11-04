@@ -89,8 +89,10 @@ test('unit photographs are cached on first view without adding them to the requi
   const first=await app.image();assert.equal(first.status,200);
   const count=app.requests.length;const second=await app.image();
   assert.equal(second.status,200);assert.equal(app.requests.length,count,'Second view uses the photo cache');
-  assert(app.stores.get('tow-unit-photo-v1').size===1);
-  await app.activate();assert(app.stores.has('tow-unit-photo-v1'),'App activation preserves already viewed photographs');
+  assert(app.stores.get('tow-unit-photo-v2').size===1);
+  app.stores.set('tow-unit-photo-v1',new Map([['old','unverified photograph']]));
+  await app.activate();assert(app.stores.has('tow-unit-photo-v2'),'App activation preserves already viewed verified photographs');
+  assert.equal(app.stores.has('tow-unit-photo-v1'),false,'Unverified legacy photo cache is discarded without touching roster storage');
   assert.equal((await app.status()).ready,true);
 });
 
@@ -98,7 +100,7 @@ test('an unavailable or nonimage response does not poison the unit photo cache',
   for(const override of [{status:404},{contentType:'text/html'}]){
     const app=worker({overrides:{'/unit-photo-images/example.webp':override}});
     await app.image();await app.image();
-    assert.equal(app.requests.length,2);assert.equal(app.stores.get('tow-unit-photo-v1').size,0);
+    assert.equal(app.requests.length,2);assert.equal(app.stores.get('tow-unit-photo-v2').size,0);
   }
 });
 

@@ -29,6 +29,12 @@ function unitPhotoLink(source,record=null,army=state){
   link.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h4l2-3h4l2 3h4v13H4V7Z"/><circle cx="12" cy="13" r="4"/></svg>';
   link.append(node('span',playText('사진 보기','Photos')));return link;
 }
+function unitPhotoThumbnail(source){
+  const button=unitPhotoLink(source);if(!button)return null;
+  button.classList.add('unitPhotoThumbnail');button.querySelector('span')?.remove();
+  window.TOWUnitPhotos.bindThumbnail?.(button,{name:window.TOWUnitPhotos.originalName(source),factionId:source?._sourceFaction||state.faction});
+  return button;
+}
 function refreshUnitPhotoLink(titleId,source,record=null){
   const heading=$(titleId);if(!heading)return;
   const host=heading.parentElement;host.querySelector('.unitPhotoLink')?.remove();
@@ -563,7 +569,7 @@ function renderReference() {
       const ruleList=keywords(unit);
       if(ruleList.length){const details=document.createElement('details');details.className='pickerRules';details.open=expandedRules.has(key);details.append(node('summary',playText(`규칙 ${ruleList.length}`,`${ruleList.length} rules`)));const pills=node('div','','rulePills');for(const rule of ruleList)pills.append(ruleChip(rule));details.append(pills);main.append(details);}
       const select=node('button',`${playText('선택','Select')} +`,'primary pickerSelect');select.type='button';select.dataset.referenceAction='quickadd';select.dataset.catalogKey=key;select.title=playText('장비·마법 아이템 등 옵션을 선택합니다.','Choose equipment, magic items and other options.');
-      card.append(main,select);const photo=unitPhotoLink(unit);if(photo){photo.classList.add('pickerPhotoLink');card.append(photo);}list.append(card);
+      const photo=unitPhotoThumbnail(unit);if(photo)card.append(photo);card.append(main,select);list.append(card);
     }
     grid.append(group);
   }
