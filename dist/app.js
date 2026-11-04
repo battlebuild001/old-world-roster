@@ -22,12 +22,12 @@ function unitPhotoLink(source,record=null,army=state){
   const name=photos.originalName(source,record);if(!name)return null;
   const faction=source?._sourceFaction||record?.sourceFaction||army.faction;
   const factionName=metadata?.armies?.find(item=>item.id===faction)?.name_en||slugTitle(faction);
-  const link=node('a','','unitPhotoLink');link.href=photos.imageURL({name,faction:factionName});
-  link.target='_blank';link.rel='noopener noreferrer';link.referrerPolicy='no-referrer';link.dataset.noI18n='';
-  link.setAttribute('aria-label',playText(`${pairedName(name)} 사진 검색 · Google 이미지, 새 탭`,`${name} photos · Google Images, new tab`));
-  link.title=playText('Google 이미지에서 모델 사진을 새 탭으로 봅니다.','View model photos in Google Images in a new tab.');
+  const link=node('button','','unitPhotoLink');link.type='button';link.dataset.noI18n='';
+  link.setAttribute('aria-label',playText(`${pairedName(name)} 유닛 사진 보기`,`${name} unit photos`));
+  link.title=playText('앱 안에서 모델 사진을 보고 확대합니다.','View and enlarge model photos in this app.');
+  link.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();photos.open?.({name,factionId:faction,faction:factionName,trigger:link});});
   link.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h4l2-3h4l2 3h4v13H4V7Z"/><circle cx="12" cy="13" r="4"/></svg>';
-  link.append(node('span',playText('사진 검색','Photos')));return link;
+  link.append(node('span',playText('사진 보기','Photos')));return link;
 }
 function refreshUnitPhotoLink(titleId,source,record=null){
   const heading=$(titleId);if(!heading)return;
@@ -404,7 +404,7 @@ function dismissTopAppLayer() {
   const dialog=window.TOWUIAccessibility?.getActiveDialog();
   if(dialog){
     const backdrop=dialog.closest('.modal-backdrop, .sheetBackdrop, .ruleBackdrop');
-    const closeIds={ruleBackdrop:'closeRule',configBackdrop:'closeConfig',detailBackdrop:'closeDetail',editBackdrop:'cancelEdit',seedBackdrop:'seedClose',installBackdrop:'closeInstall'};
+    const closeIds={ruleBackdrop:'closeRule',configBackdrop:'closeConfig',detailBackdrop:'closeDetail',editBackdrop:'cancelEdit',seedBackdrop:'seedClose',installBackdrop:'closeInstall',photoBackdrop:'closePhoto'};
     const button=$(closeIds[backdrop?.id]);
     if(button){button.click();return true;}
   }

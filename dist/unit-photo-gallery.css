@@ -1,0 +1,36 @@
+/* Actual photographs stay in the app, above the unit sheet that opened them. */
+#photoBackdrop{z-index:95;background:#080605d9}
+#photoBackdrop .photoSheet{width:min(1100px,100%);max-height:94dvh;background:var(--color-surface);border:1px solid var(--color-border)}
+.photoSheet .sheetHead{align-items:flex-start}.photoSheet .sheetHead>div{min-width:0}
+#photoHeading{overflow-wrap:anywhere;font-size:clamp(23px,3vw,31px);line-height:1.45}
+.photoFaction{margin:7px 0 0;color:var(--color-text-muted);font-size:13px;line-height:1.6}
+.photoBody{min-height:0;padding:20px;overflow:auto}.photoBody [hidden]{display:none!important}
+.photoStatus{margin:0;color:var(--color-text-muted);font-size:14px;line-height:1.7}.photoStatus:not(:empty){margin-bottom:16px}
+.photoEmpty{padding:30px 22px;border:1px solid var(--color-border);border-radius:6px;background:var(--color-canvas)}
+.photoEmpty h3{margin:0 0 13px;color:var(--color-text);font-size:19px;line-height:1.7}.photoEmpty p{max-width:65ch;margin:0;color:var(--color-text-muted);font-size:15px;line-height:1.85}
+.photoEmpty button{margin-top:18px;min-height:44px;font-size:14px}
+.photoViewport{position:relative;display:grid;place-items:center;min-width:0;width:100%;height:min(55dvh,560px);min-height:240px;overflow:hidden;border:1px solid var(--color-border);border-radius:6px;background:#E8E2D8;scrollbar-color:var(--color-action) transparent;overscroll-behavior:contain}
+.photoViewport>img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.photoViewport.zoomed{display:block;overflow:auto;touch-action:pan-x pan-y}.photoViewport.zoomed>img{max-width:none;max-height:none;height:auto;object-fit:initial}
+.photoImageStatus{position:absolute;inset:auto 12px 12px;margin:0;padding:10px 13px;border-radius:5px;background:var(--color-surface);color:var(--color-text-muted);font-size:13px;line-height:1.7;text-align:center}
+.photoImageStatus:empty{display:none}.photoImageStatus button{display:block;min-height:44px;margin:9px auto 0;padding:8px 13px;font-size:13px}
+.photoControls{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:center;margin-top:14px}
+.photoControls button,.photoLocal button{min-height:46px;padding:10px 12px;border:1px solid var(--color-border);border-radius:5px;background:var(--color-surface-muted);color:var(--color-text);font:600 14px/1.5 system-ui,-apple-system,sans-serif;white-space:normal;cursor:pointer}
+.photoControls button:disabled{cursor:default;opacity:.4}.photoControls button:hover:not(:disabled),.photoLocal button:hover{border-color:var(--color-action);color:var(--color-link)}
+#photoZoom[aria-pressed=true]{border-color:var(--color-action);color:var(--color-link)}
+#photoCounter{min-width:50px;color:var(--color-text-muted);text-align:center;font-size:13px;font-variant-numeric:tabular-nums}
+.photoZoomHint{margin:11px 0 0;color:var(--color-text-muted);font-size:12px;line-height:1.7}
+.photoThumbnails{display:flex;gap:9px;max-width:100%;margin-top:18px;padding:3px 0 8px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin}
+.photoThumbnails .photoThumbnail{flex:none;display:grid;place-items:center;width:84px;min-height:74px;margin:0;padding:5px;border:1px solid var(--color-border);border-radius:5px;background:var(--color-canvas);cursor:pointer}
+.photoThumbnail img{display:block;max-width:100%;width:72px;height:64px;object-fit:contain}.photoThumbnail[aria-pressed=true]{border-color:var(--color-action);box-shadow:inset 0 0 0 1px var(--color-action)}
+.photoCaption{margin-top:15px;padding-top:13px;border-top:1px solid var(--color-border)}.photoCaption p{margin:0 0 7px;color:var(--color-text);font-size:14px;line-height:1.75;overflow-wrap:anywhere}.photoCaption .photoCredit{color:var(--color-text-muted);font-size:12px;white-space:pre-line}.photoCaption a{display:inline-flex;align-items:center;min-height:44px;color:var(--color-link);font-size:12px;line-height:1.6;text-underline-offset:4px}
+.photoLocal{margin-top:24px;padding-top:20px;border-top:1px solid var(--color-border)}.photoLocal p{margin:10px 0 0;color:var(--color-text-muted);font-size:12px;line-height:1.8}#photoFileStatus:empty{display:none}
+.photoSheet button:focus-visible,.photoSheet a:focus-visible,.photoViewport:focus-visible{outline:2px solid var(--color-focus);outline-offset:3px}
+@media(max-width:680px){
+ #photoBackdrop{padding:0}.photoSheet{width:100%;height:100dvh;max-height:100dvh!important;border-radius:0!important}.photoSheet .sheetHead{padding:17px 15px}#photoHeading{font-size:23px}
+ .photoBody{padding:15px}.photoViewport{height:45dvh;min-height:220px}.photoEmpty{padding:24px 17px}.photoEmpty h3{font-size:18px}
+ .photoControls{gap:8px;grid-template-columns:minmax(0,1fr) 50px minmax(0,1fr)}.photoControls #photoZoom{grid-column:1/-1}.photoControls button{padding:10px 8px;font-size:14px}
+ .photoLocal button{width:100%}.photoThumbnails{gap:8px}.photoLocal{padding-bottom:max(8px,env(safe-area-inset-bottom))}
+}
+@media(prefers-reduced-motion:reduce){.photoSheet *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+@media print{#photoBackdrop{display:none!important}}

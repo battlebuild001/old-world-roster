@@ -20,4 +20,6 @@ The reading edition preserves all substantive source text, 81 tables and 62 figu
 
 `dist/combat-charts.js` contains authored combat-result and Break-test reference tables and examples. Factual troop-type thresholds, scores and exceptions were checked against the Online Rules Index and the official errata it reproduces on 2026-11-04. Source links are included in the chart. The Break helper covers the ordinary test and does not infer a unit's special rules.
 
-Unit photo buttons open Google Images searches using unit and faction names. The application does not download, embed or redistribute those search results or model photographs.
+`dist/data/unit-photos.json` links unit names to miniature photographs from the [Warhammer Fantasy Lexicanum](https://whfb.lexicanum.com/) galleries. Each photograph retains its source page, original image URL, caption and credit. Photographs are separate from the army datasets' CC BY 4.0 license; rights remain with their respective owners. Local WebP copies are resized for the in-app reference viewer and omit image metadata. Unmatched units are not assigned unrelated faction photographs.
+
+The viewer loads model photographs when opened and keeps viewed images in a separate browser cache. A device image can also be opened locally for the current session; it is not uploaded or added to a roster export.

@@ -6,7 +6,7 @@ const vm=require('node:vm');
 const workerSource=fs.readFileSync(require.resolve('../dist/sw.js'),'utf8');
 
 function worker({scope='https://roster.example/',canonicalHTML=true,overrides={}}={}){
-  const handlers=new Map(),stores=new Map(),writes=[];
+  const handlers=new Map(),stores=new Map(),writes=[],requests=[];
   let skipWaitingCalls=0;
   const key=request=>typeof request==='string'?request:request.url||request.href;
   function clone(response){
@@ -34,6 +34,7 @@ function worker({scope='https://roster.example/',canonicalHTML=true,overrides={}
   };
   const network=async request=>{
     const url=new URL(key(request));
+    requests.push(url.href);
     const override=overrides[url.pathname]||{};
     if(override.error)throw override.error;
     const html=url.pathname.endsWith('.html');
@@ -41,7 +42,7 @@ function worker({scope='https://roster.example/',canonicalHTML=true,overrides={}
     const target=override.target||(html&&canonicalHTML?canonical.href:url.href);
     const body=html?'<main>Current roster and play mode</main>':'cached asset';
     const response=new Response(body,{status:override.status||200,headers:{
-      'content-type':html?'text/html; charset=utf-8':'application/octet-stream',
+      'content-type':override.contentType||(html?'text/html; charset=utf-8':url.pathname.endsWith('.webp')?'image/webp':'application/octet-stream'),
       'content-encoding':'gzip','content-length':'9999','x-version':'latest'
     }});
     Object.defineProperties(response,{redirected:{value:target!==url.href},url:{value:target}});
@@ -54,8 +55,10 @@ function worker({scope='https://roster.example/',canonicalHTML=true,overrides={}
     await Promise.all(pending);
     return response?await response:undefined;
   }
-  return {writes,stores,scope,get skipWaitingCalls(){return skipWaitingCalls;},
+  return {writes,stores,requests,scope,get skipWaitingCalls(){return skipWaitingCalls;},
     install:()=>dispatch('install'),
+    activate:()=>dispatch('activate'),
+    image:(name='unit-photo-images/example.webp')=>dispatch('fetch',{request:{method:'GET',mode:'no-cors',destination:'image',url:new URL(name,scope).href}}),
     async status(){let result;await dispatch('message',{data:{type:'CACHE_STATUS'},ports:[{postMessage(value){result=value;}}]});return result;},
     navigate:()=>dispatch('fetch',{request:{method:'GET',mode:'navigate',redirect:'manual',url:scope}})
   };
@@ -77,6 +80,25 @@ test('Sites canonical HTML redirects cache successfully and serve nonredirected 
     assert.equal(response.headers.get('content-type'),'text/html; charset=utf-8');
     assert.equal(response.headers.get('x-version'),'latest');
     assert.match(await response.text(),/Current roster and play mode/);
+  }
+});
+
+test('unit photographs are cached on first view without adding them to the required installation or deleting them on activation',async()=>{
+  const app=worker();await app.install();
+  assert(!app.requests.some(url=>url.includes('/unit-photo-images/')),'Photos are loaded only when viewed');
+  const first=await app.image();assert.equal(first.status,200);
+  const count=app.requests.length;const second=await app.image();
+  assert.equal(second.status,200);assert.equal(app.requests.length,count,'Second view uses the photo cache');
+  assert(app.stores.get('tow-unit-photo-v1').size===1);
+  await app.activate();assert(app.stores.has('tow-unit-photo-v1'),'App activation preserves already viewed photographs');
+  assert.equal((await app.status()).ready,true);
+});
+
+test('an unavailable or nonimage response does not poison the unit photo cache',async()=>{
+  for(const override of [{status:404},{contentType:'text/html'}]){
+    const app=worker({overrides:{'/unit-photo-images/example.webp':override}});
+    await app.image();await app.image();
+    assert.equal(app.requests.length,2);assert.equal(app.stores.get('tow-unit-photo-v1').size,0);
   }
 });
 
