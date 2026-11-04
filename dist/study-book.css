@@ -155,11 +155,6 @@
 .studyFooter{margin:38px 0 0;padding:20px 0 0;border-top:1px solid var(--color-border);color:var(--color-text-muted);font-size:10px;line-height:1.95}.studyFooter p{margin:0 0 9px;max-width:100ch;white-space:pre-line}
 .studyError{margin:20px 0;padding:22px;border:1px solid var(--color-border);border-left:2px solid var(--color-action);background:var(--color-surface);font-size:15px;line-height:1.8}.studyError p{margin:0 0 15px}.studyError button{min-height:44px;font-size:13px}
 .studyLoading{padding:30px 0 65px}.studyLoading>span{display:block;height:14px;max-width:650px;margin:20px 0;background:var(--color-surface)}.studyLoading>span:first-child{height:42px;max-width:420px;margin-bottom:35px}.studyLoading>span:last-child{max-width:440px}
-/* The book switcher is secondary navigation, not a wall of primary buttons. */
-#rulesScreen>.rulesViewTabs{display:flex;flex-wrap:nowrap;gap:22px;align-items:center;max-width:100%;margin-bottom:22px;padding:0;border:0;border-bottom:1px solid var(--color-border);overflow-x:auto;scrollbar-width:thin}
-#rulesScreen>.rulesViewTabs button{flex:none;max-width:none;min-height:47px;margin:0;padding:9px 0 12px;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;color:var(--color-text-muted);box-shadow:none;font-size:12px;font-weight:500;line-height:1.7;white-space:nowrap}
-#rulesScreen>.rulesViewTabs button:hover{color:var(--color-text)}
-#rulesScreen>.rulesViewTabs button.active{border-bottom-color:var(--color-action);color:var(--color-link);background:transparent;font-weight:650}
 @media(min-width:1450px){.studyReadingLayout{gap:65px;grid-template-columns:245px minmax(0,1fr)}.studyHero{gap:65px;padding:60px 0}}
 @media(max-width:1100px){.studyHero{gap:27px;grid-template-columns:minmax(0,1.2fr) minmax(230px,.8fr)}.studyHero h2{font-size:43px}.studyChapterGroup{grid-template-columns:195px minmax(0,1fr);gap:24px}.studyTurnStrip{grid-template-columns:200px minmax(0,1fr);gap:16px;padding:20px}.studyTurnStrip button{padding-left:10px;padding-right:10px}.studyReadingLayout{gap:30px;grid-template-columns:190px minmax(0,1fr)}}
 @media(max-width:900px){
@@ -183,8 +178,36 @@
  .studyStepsSection{margin:28px 0}.studySectionLabel{margin-bottom:21px}.studySteps>li{grid-template-columns:26px minmax(0,1fr);gap:12px;padding-bottom:27px}.studyStepIndex{font-size:20px}.studyBook .studySteps h4{font-size:17px;line-height:1.75;margin-top:0;margin-bottom:10px}.studySteps p{font-size:16px;line-height:1.95}
  .studyWorkedExample{margin:29px 0;padding:20px 17px}.studyWorkedExample h4{font-size:18px;line-height:1.65;margin-top:13px;margin-bottom:18px}.studyExampleSituation p,.studyExampleResolution p{font-size:15px;line-height:1.95}.studyExampleResolution{margin-top:17px;padding-top:16px}.studyExceptions{margin:28px 0}.studyExceptions li{font-size:15px;line-height:1.95}.studyExceptions h4{font-size:14px}.studyIllustrations{margin:28px 0}.studyIllustrations .docBookFigure{padding:9px;margin:22px 0}
  .studySources{margin-top:30px}.studySources>summary{font-size:11px;gap:8px}.studySourceCount{font-size:9px}.studySourceLinks{grid-template-columns:minmax(0,1fr);gap:0}.studySourcesBody{font-size:12px}.studySourceReview{padding:14px}.studyPageNav{gap:18px;margin-top:27px}.studyPageNav button{min-height:98px;padding:15px 0}.studyPageNav button>strong{font-size:12px;line-height:1.9}.studyPageNav button>span{font-size:10px}.studyLessonJump select{font-size:16px}.studyFooter{margin-top:30px;padding-top:18px;font-size:10px;line-height:1.95}
- #rulesScreen>.rulesViewTabs{gap:20px;margin-bottom:19px;padding-bottom:0}#rulesScreen>.rulesViewTabs button{min-height:46px;font-size:11px;padding-top:8px;padding-bottom:11px}
+
 }
 @media(max-width:360px){.studyHero h2{font-size:31px}.studyHeroMeta{gap:12px}.studyHeroMeta>span+span{padding-left:12px}.studyUtilityActions{gap:10px}.studyUtilityActions button{font-size:9px}.studyUtilityActions button svg{display:none}.studyTurnStrip{padding:17px 13px}.studyTurnStrip button{padding-left:7px;padding-right:7px}.studyReadingArticle h2{font-size:27px!important}.studyChapterCardMeta{display:block}.studyChapterCardMeta>span{margin:0 6px}.studySourceCount{display:none}}
 @media(prefers-reduced-motion:reduce){.studyBook *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 @media print{.studyUtility,.studySearchTools,.studyStatus,.studyReadingTop,.studyReadingAside,.studyPageNav,.studyLessonJump,.studySources,.rulesViewTabs{display:none!important}.studyReadingLayout{display:block}.studyReadingArticle{padding:0}.studyLessonBody,.studyArticleHead{max-width:none}.studyTakeaway,.studyDiagram,.studyWorkedExample,.docBookFigure{break-inside:avoid}.studyFooter{font-size:10px}.studyLessonBody{font-size:11pt;line-height:1.7}}
+
+/* Library navigation explicitly resets the older light tab styling. */
+#librarySectionTabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;overflow:visible}
+#librarySectionTabs button{min-width:0;min-height:50px;padding:10px 8px;color:var(--color-text);font-size:14px;font-weight:650;line-height:1.5;white-space:normal;overflow-wrap:anywhere;text-align:center}
+#librarySectionTabs button:hover{background:var(--color-surface);color:var(--color-text)}
+#librarySectionTabs button.active{background:var(--color-surface-muted);border-bottom-color:var(--color-action);color:var(--color-link)}
+#rulesScreen>.rulesViewTabs{box-sizing:border-box;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;width:100%;max-width:100%;margin:0 0 24px;padding:6px;border:1px solid var(--color-border);border-radius:8px;background:var(--color-surface);overflow:visible}
+#rulesScreen>.rulesViewTabs button{min-width:0;max-width:100%;min-height:48px;margin:0;padding:10px 12px;border:1px solid transparent;border-radius:5px;background:transparent;color:var(--color-text);box-shadow:none;font-size:14px;font-weight:550;line-height:1.5;white-space:normal;overflow-wrap:anywhere;text-align:center}
+#rulesScreen>.rulesViewTabs button:hover{background:var(--color-surface-muted)}
+#rulesScreen>.rulesViewTabs button.active{background:var(--color-action);color:var(--color-canvas);font-weight:750}
+#rulesScreen>.rulesViewTabs [hidden],body[data-screen="tutorial"] #rulesScreen>.rulesViewTabs{display:none!important}
+#rulesScreen>.rulesViewTabs button:focus-visible,#librarySectionTabs button:focus-visible{outline:2px solid var(--color-focus);outline-offset:2px}
+/* Search controls appear only after the reader requests them. */
+#studySearchTools[hidden]{display:none!important}
+#studySearchTools{margin:0 0 16px;padding:16px;border:1px solid var(--color-border);border-radius:6px;background:var(--color-surface)}
+#studySearchTools .studySearchField>div,#studySearchTools select{background:var(--color-canvas)}
+#studySearchToggle{gap:8px;padding:8px 13px;border:1px solid var(--color-border);border-radius:5px;background:var(--color-surface);color:var(--color-text);font-size:14px;white-space:normal}
+#studySearchToggle[aria-expanded="true"]{border-color:var(--color-action);background:var(--color-surface-muted);color:var(--color-link)}
+.studyUtility{flex-wrap:wrap}.studyUtilityActions{margin-left:auto}
+@media(max-width:680px){
+ #rulesScreen>.rulesViewTabs{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-bottom:20px}
+ #rulesScreen>.rulesViewTabs button{padding:11px 8px;font-size:14px}
+ .studyUtility .studyEdition{display:none}.studyUtilityActions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;gap:8px}
+ .studyUtilityActions button{justify-content:center;min-width:0;min-height:46px;padding:8px 6px;font-size:13px;line-height:1.5;white-space:normal;text-align:center}
+ #studySearchToggle{padding:8px 6px;font-size:13px}
+ #studySearchTools{padding:13px}.studyChapterFilter select{font-size:16px}
+}
+@media print{#rulesScreen>.rulesViewTabs,#studySearchTools,#librarySectionTabs{display:none!important}}

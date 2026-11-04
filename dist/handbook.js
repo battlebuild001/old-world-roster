@@ -92,7 +92,7 @@
     refreshViewLabels();
   }
   function refreshViewLabels(){
-    const labels={study:['룰북','Rulebook'],document:['참고 문서','Source document'],handbook:['판정 가이드','Ruling guide'],library:['원문 색인','Source index'],tutorial:['처음 배우기','Learn to play']};
+    const labels={study:['본문 읽기','Read'],document:['참고 문서','Source document'],handbook:['판정 가이드','Ruling guide'],library:['원문 색인','Source index'],tutorial:['처음 배우기','Learn to play']};
     root?.document?.querySelectorAll('[data-rules-view]').forEach(button=>{const value=labels[button.dataset.rulesView];if(value)button.textContent=tr(...value);});
     $('handbookPanel')?.setAttribute('data-no-i18n','');
   }

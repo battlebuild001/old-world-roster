@@ -43,7 +43,7 @@
     }
     return freeze({schemaVersion:1,metadata:{...(input.metadata||{})},chapters,lessons});
   }
-  const state={data:null,source:null,status:'loading',error:'',promise:null,selected:null,query:'',chapter:'all',shown:40,tableModes:{}};
+  const state={data:null,source:null,status:'loading',error:'',promise:null,selected:null,query:'',chapter:'all',shown:40,tableModes:{},searchOpen:false};
   const $=id=>root?.document?.getElementById(id);
   const language=()=>root?.TOWI18n?.language||'ko';
   const tr=(ko,en)=>language()==='en'?en:language()==='both'?ko+' / '+en:ko;
@@ -93,20 +93,31 @@
   async function open(id,{navigate=true,focus=true}={}){
     if(!state.data)await (state.status==='loading'&&state.promise?state.promise:load());
     const chapter=state.data?.chapters.find(item=>item.id===id),lesson=find(id)||chapter?.lessons[0];if(!lesson)return false;
-    state.selected=lesson.id;state.query='';state.chapter='all';state.shown=40;
+    state.selected=lesson.id;state.query='';state.chapter='all';state.shown=40;state.searchOpen=false;
     if(navigate)root.showScreen?.('rules');root.TOWHandbook?.setView('study');render();if(focus)focusHeading();return true;
   }
-  function select(id){const chapter=state.data?.chapters.find(item=>item.id===id),lesson=find(id)||chapter?.lessons[0];if(!lesson)return;state.selected=lesson.id;state.query='';state.chapter='all';render();focusHeading();}
-  function contents(){state.selected=null;state.query='';state.chapter='all';state.shown=40;render();const heading=$('studyBookTitle');heading?.focus?.({preventScroll:true});heading?.scrollIntoView?.({block:'start',behavior:'auto'});}
-  function backToContents(){if(!state.selected&&!state.query.trim()&&state.chapter==='all')return false;contents();return true;}
+  function select(id){const chapter=state.data?.chapters.find(item=>item.id===id),lesson=find(id)||chapter?.lessons[0];if(!lesson)return;state.selected=lesson.id;state.query='';state.chapter='all';state.searchOpen=false;render();focusHeading();}
+  function contents(){state.selected=null;state.query='';state.chapter='all';state.shown=40;state.searchOpen=false;render();const heading=$('studyBookTitle');heading?.focus?.({preventScroll:true});heading?.scrollIntoView?.({block:'start',behavior:'auto'});}
+  function backToContents(){if(state.searchOpen){setSearchOpen(false,{focus:true});return true;}if(!state.selected&&!state.query.trim()&&state.chapter==='all')return false;contents();return true;}
+  function renderSearchDisclosure(){
+    const button=$('studySearchToggle'),panel=$('studySearchTools');if(!button||!panel)return;
+    button.setAttribute('aria-expanded',String(state.searchOpen));panel.hidden=!state.searchOpen;
+    $('studySearchToggleLabel').textContent=state.searchOpen?tr('검색 닫기','Close search'):tr('검색','Search');
+  }
+  function setSearchOpen(open,{focus=false}={}){
+    state.searchOpen=Boolean(open);renderSearchDisclosure();
+    if(focus)(state.searchOpen?$('studyBookSearch'):$('studySearchToggle'))?.focus?.({preventScroll:true});
+  }
   function mount(){
     const host=$('studyBookPanel');if(!host||host.dataset.studyMounted)return;host.dataset.studyMounted='true';host.setAttribute('data-no-i18n','');
-    host.innerHTML='<div class="studyBook"><div class="studyUtility"><span id="studyEdition" class="studyEdition"></span><div class="studyUtilityActions"><button type="button" data-study-quick>'+icon('compass')+'<span id="studyQuickLabel"></span></button><button type="button" data-study-guide>'+icon('book')+'<span id="studyGuideLabel"></span></button></div></div><div class="studySearchTools"><div class="studySearchField"><label id="studySearchLabel" for="studyBookSearch"></label><div>'+icon('search')+'<input id="studyBookSearch" type="search" autocomplete="off" spellcheck="false"></div></div><div class="studyChapterFilter"><label id="studyChapterLabel" for="studyBookChapter"></label><select id="studyBookChapter"></select></div></div><p id="studyStatus" class="studyStatus" role="status" aria-live="polite" aria-atomic="true"></p><div id="studyError"></div><div id="studyMain"></div><footer id="studyFooter" class="studyFooter"></footer></div>';
+    host.innerHTML='<div class="studyBook"><div class="studyUtility"><span id="studyEdition" class="studyEdition"></span><div class="studyUtilityActions"><button type="button" id="studySearchToggle" data-study-search aria-controls="studySearchTools" aria-expanded="false">'+icon('search')+'<span id="studySearchToggleLabel"></span></button><button type="button" data-study-quick>'+icon('compass')+'<span id="studyQuickLabel"></span></button><button type="button" data-study-guide>'+icon('book')+'<span id="studyGuideLabel"></span></button></div></div><div id="studySearchTools" class="studySearchTools" hidden><div class="studySearchField"><label id="studySearchLabel" for="studyBookSearch"></label><div>'+icon('search')+'<input id="studyBookSearch" type="search" autocomplete="off" spellcheck="false"></div></div><div class="studyChapterFilter"><label id="studyChapterLabel" for="studyBookChapter"></label><select id="studyBookChapter"></select></div></div><p id="studyStatus" class="studyStatus" role="status" aria-live="polite" aria-atomic="true"></p><div id="studyError"></div><div id="studyMain"></div><footer id="studyFooter" class="studyFooter"></footer></div>';
     $('studyBookSearch').addEventListener('input',event=>{state.query=event.target.value;state.selected=null;state.shown=40;renderBody();});
     $('studyBookChapter').addEventListener('change',event=>{state.chapter=event.target.value;state.selected=null;state.shown=40;renderBody();});
     host.addEventListener('change',event=>{if(event.target.id==='studyLessonJump')select(event.target.value);});
+    host.addEventListener('keydown',event=>{if(event.key==='Escape'&&state.searchOpen&&$('studySearchTools').contains(event.target)){event.preventDefault();setSearchOpen(false,{focus:true});}});
     host.addEventListener('click',event=>{
       const button=event.target.closest('button');if(!button)return;
+      if(button.hasAttribute('data-study-search'))setSearchOpen(!state.searchOpen,{focus:true});
       if(button.dataset.studyLesson)select(button.dataset.studyLesson);
       if(button.dataset.studyChapter)select(button.dataset.studyChapter);
       if(button.dataset.studySource)root.TOWDocumentBook?.open(button.dataset.studySource);
@@ -122,6 +133,7 @@
   function render(){
     if(!$('studyBookPanel'))return;mount();
     $('studyBookPanel').setAttribute('aria-busy',String(state.status==='loading'));
+    renderSearchDisclosure();
     $('studyEdition').textContent='THE OLD WORLD / FIELD MANUAL';
     $('studyQuickLabel').textContent=tr('퀵시트','Quick sheet');$('studyGuideLabel').textContent=tr('판정 가이드','Ruling guide');
     $('studySearchLabel').textContent=tr('지금 필요한 규칙 찾기','Find the rule you need');$('studyBookSearch').placeholder=tr('돌격, 브레이크, 마법 시전…','Charge, Break tests, casting spells…');if($('studyBookSearch').value!==state.query)$('studyBookSearch').value=state.query;
