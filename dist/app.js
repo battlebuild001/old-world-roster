@@ -291,6 +291,28 @@ function playRuleButton(name,url=null){
   if(url)try{const path=new URL(url,'https://tow.whfb.app/');if(path.hostname==='tow.whfb.app')button.dataset.rulePath=path.pathname;}catch{}
   return button;
 }
+function renderPlayItems(items){
+  if(!items.length)return null;
+  const section=node('section','','playSelectedItems');
+  section.setAttribute('aria-label',playText('선택 아이템','Selected items'));
+  section.append(node('h3',playText('선택 아이템','Selected items')));
+  for(const type of itemTypes(items)){
+    const group=node('div','','playItemCategory');group.append(node('h4',itemTypeName(type)));
+    const list=node('ul','','playItemList');
+    for(const item of items.filter(item=>item.type===type)){
+      const row=node('li','','playItemRow'),button=playRuleButton(item.name,item.url);
+      button.classList.add('playItemButton');button.replaceChildren(sourceName('span',item.name,'playItemName'));
+      if(item.count>1)button.append(node('span',`×${item.count}`,'playItemCount'));
+      button.title=playText('아이템 규칙 보기','View item rules');
+      button.setAttribute('aria-label',`${pairedName(item.name)}${item.count>1?` ×${item.count}`:''} · ${itemTypeName(type)}${item.bearer?` · ${pairedName(item.bearer)}`:''}`);
+      row.append(button);
+      const context=[item.bearer,item.pool].filter(Boolean);if(context.length)row.append(node('small',context.map(pairedName).join(' · '),'playItemContext'));
+      list.append(row);
+    }
+    group.append(list);section.append(group);
+  }
+  return section;
+}
 function renderPlayProfiles(model,unit,rows=window.TOWPlayProfiles.displayRows(model)){
   const table=node('table','','playProfileTable');table.setAttribute('aria-label',playText(`${unit.name} 전체 능력치`,`${unit.name} complete profiles`));
   const head=document.createElement('thead'),headers=node('tr','');for(const key of model.keys||['M','WS','BS','S','T','W','I','A','Ld']){const th=annotateStatHeader(node('th',key),key);th.scope='col';headers.append(th);}head.append(headers);table.append(head);
@@ -333,11 +355,14 @@ function renderPlay(){
   const findings=matchedFindings(army);summary.append(node('strong',`${army.units.length} ${label('유닛','units')} · ${army.units.reduce((sum,unit)=>sum+unit.count,0)} ${label('모델','models')}`),node('span',findings.some(item=>item.kind==='error')?label('편성 제한 초과','Check limits'):label('확정 로스터','Confirmed roster')));
   for(const unit of army.units){
     const source=rosterSource(unit,army),choices=source?OPT.describe(source,unit.selections,unit.magicItems,optionComposition(source)):[];
+    const items=window.TOWPlayProfiles?.selectedItems(unit,source,ruleInfo)||[];
     const rules=source?keywords(source):[];
-    if(search&&!`${unit.name} ${unit.label} ${choices.join(' ')} ${rules.join(' ')} ${pairedName(unit.name)}`.toLowerCase().includes(search))continue;
+    const itemSearch=items.map(item=>`${pairedName(item.name)} ${itemTypeName(item.type)} ${item.bearer}`).join(' ');
+    if(search&&!`${unit.name} ${unit.label} ${choices.join(' ')} ${rules.join(' ')} ${pairedName(unit.name)} ${itemSearch}`.toLowerCase().includes(search))continue;
     const card=node('article','','playCard playOverviewCard');card.dataset.unitId=unit.id;
     const head=node('div','','playCardHead');const title=node('span','','playCardTitle');title.append(sourceName('strong',unit.name),node('small',`${unit.count} ${label('모델','models')} · ${label(categoryKo[unit.category]||unit.category,CATEGORY_LABELS[unit.category]||unit.category)}${unit.label?` · ${unit.label}`:''}`));head.append(title,node('b',`${fmt(unit.points)} pts`));card.append(head);const photo=unitPhotoLink(source,unit,army);if(photo){const photoRow=node('div','','unitPhotoPlayRow');photoRow.append(photo);card.append(photoRow);}
     const body=node('div','','playCardBody');
+    const selectedItems=renderPlayItems(items);if(selectedItems)body.append(selectedItems);
     const model=window.TOWPlayProfiles?.create({source,unit,ruleInfo,optionModel:OPT,weaponProfiles:playWeaponProfiles,composition:unit.sourceComposition||source?._optionComposition||army.composition});
     const profileRows=model?window.TOWPlayProfiles.displayRows(model):[];
     if(model?.profiles?.length){body.append(renderPlayProfiles(model,unit,profileRows));const sources=node('div','','playBonusSources');for(const profile of model.profiles){const bonuses=new Map();for(const [key,values] of Object.entries(profile.modifiers||{}))for(const effect of values){const list=bonuses.get(effect.source)||[];list.push(`${key} ${Number(effect.value)>0?'+':''}${effect.value}`);bonuses.set(effect.source,list);}for(const [name,values] of bonuses)sources.append(node('p',`${pairedName(profile.name)} · ${pairedName(name)}: ${values.join(' · ')}`));}if(sources.childElementCount)body.append(sources);}

@@ -70,6 +70,23 @@ window.TOWPlayProfiles = (() => {
   };
   const armour = {'light armour':'6+','heavy armour':'5+','full plate armour':'4+','armour of destiny':'5+','armour of silvered steel':'3+','master rune of gromril':'2+','daemonic platemail':'4+','padded hauberk':'5+'};
 
+  // Read the confirmed selections independently of profile/effect support.
+  // Every stored row is one copy; different slots and item pools stay separate.
+  function selectedItems(unit={},source=null,ruleInfo=()=>null){
+    const groups=new Map();
+    for(const item of Array.isArray(unit.magicItems)?unit.magicItems:[]){
+      const name=nameOf(item).trim();if(!name)continue;
+      const slot=item.slot??null,type=String(item.type||''),group=String(item.group||'');
+      const key=JSON.stringify([slot,group,type,name.normalize('NFKC').toLowerCase()]);
+      if(groups.has(key)){groups.get(key).count++;continue;}
+      const commandIndex=Number.isInteger(slot)?slot-(source?.items?.length||0):-1;
+      const bearer=commandIndex>=0?nameOf(source?.command?.[commandIndex]):'';
+      const pool=Number.isInteger(slot)?nameOf(source?.items?.[slot]):'';
+      groups.set(key,{name,type,group,slot,count:1,url:ruleInfo(name)?.url||sourceUrl(name),bearer,pool});
+    }
+    return [...groups.values()];
+  }
+
   function lookup(source, ruleInfo) {
     if(!source || typeof ruleInfo!=='function')return null;
     const name=nameOf(source), direct=ruleInfo(name);
@@ -330,8 +347,8 @@ window.TOWPlayProfiles = (() => {
       const cap=mods.some(mod=>mod.cap)?10:Infinity;
       profile.effective[key]=Math.min(cap,amount);
     }
-    if(result.unresolved.length)result.notes.push({ko:'일부 아이템의 조건부 효과는 자동 합산하지 않습니다. 아래 아이템 이름을 눌러 규칙을 확인하세요.',en:'Some item effects are not calculated automatically. Tap their names below to check their conditions.'});
+    if(result.unresolved.length)result.notes.push({ko:'일부 아이템의 조건부 효과는 자동 합산하지 않습니다. 선택 아이템 이름을 눌러 규칙을 확인하세요.',en:'Some item effects are not calculated automatically. Tap the selected item names to check their conditions.'});
     return result;
   }
-  return Object.freeze({keys,create,lookup,displayRows});
+  return Object.freeze({keys,create,lookup,displayRows,selectedItems});
 })();
