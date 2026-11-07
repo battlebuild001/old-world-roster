@@ -313,6 +313,22 @@ function renderPlayItems(items){
   }
   return section;
 }
+function renderPlayMagic(unit,source){
+  const magic=OPT.wizardState(source,unit.selections,unit.magicItems,unit.sourceComposition||source?._optionComposition||state.composition);
+  if(!magic.lores.length&&!magic.level)return null;
+  const section=node('section','','playMagic');section.append(node('h3',playText('마법','Magic')));
+  const bearer=magic.grantedBy?window.TOWPlayProfiles?.selectedItems(unit,source).find(item=>item.name.replace(/\*/g,'').trim().toLowerCase()==='wizarding hat')?.bearer:'';
+  if(magic.level)section.append(node('strong',`${bearer?`${pairedName(bearer)} · `:''}${playText(`레벨 ${magic.level} 위저드`,`Level ${magic.level} Wizard`)}`));
+  if(magic.lores.includes(unit.lore)){
+    const name=unit.lore==='shadowlands'?'Lore of the Shadowlands':slugTitle(unit.lore);
+    section.append(playRuleButton(name,ruleInfo(name)?.url));
+  }else section.append(node('p',playText('학파가 선택되지 않았습니다. 유닛 편집에서 선택하세요.','No lore selected. Choose one when editing this unit.'),'playMeta'));
+  if(magic.grantedBy){
+    section.append(node('p',playText('위저딩 햇: 선택 학파에서 무작위 주문 1개. 기존 마법 레벨에 더하지 않고 레벨 1로 적용합니다.','Wizarding Hat: one randomly generated spell from the selected lore. Sets the wearer to Level 1; does not add a level.'),'playMeta'));
+    section.append(playRuleButton('Stupidity',ruleInfo('Stupidity')?.url||'special-rules/stupidity'));
+  }
+  return section;
+}
 function renderPlayProfiles(model,unit,rows=window.TOWPlayProfiles.displayRows(model)){
   const table=node('table','','playProfileTable');table.setAttribute('aria-label',playText(`${unit.name} 전체 능력치`,`${unit.name} complete profiles`));
   const head=document.createElement('thead'),headers=node('tr','');for(const key of model.keys||['M','WS','BS','S','T','W','I','A','Ld']){const th=annotateStatHeader(node('th',key),key);th.scope='col';headers.append(th);}head.append(headers);table.append(head);
@@ -363,6 +379,7 @@ function renderPlay(){
     const head=node('div','','playCardHead');const title=node('span','','playCardTitle');title.append(sourceName('strong',unit.name),node('small',`${unit.count} ${label('모델','models')} · ${label(categoryKo[unit.category]||unit.category,CATEGORY_LABELS[unit.category]||unit.category)}${unit.label?` · ${unit.label}`:''}`));head.append(title,node('b',`${fmt(unit.points)} pts`));card.append(head);const photo=unitPhotoLink(source,unit,army);if(photo){const photoRow=node('div','','unitPhotoPlayRow');photoRow.append(photo);card.append(photoRow);}
     const body=node('div','','playCardBody');
     const selectedItems=renderPlayItems(items);if(selectedItems)body.append(selectedItems);
+    const magic=renderPlayMagic(unit,source);if(magic)body.append(magic);
     const model=window.TOWPlayProfiles?.create({source,unit,ruleInfo,optionModel:OPT,weaponProfiles:playWeaponProfiles,composition:unit.sourceComposition||source?._optionComposition||army.composition});
     const profileRows=model?window.TOWPlayProfiles.displayRows(model):[];
     if(model?.profiles?.length){body.append(renderPlayProfiles(model,unit,profileRows));const sources=node('div','','playBonusSources');for(const profile of model.profiles){const bonuses=new Map();for(const [key,values] of Object.entries(profile.modifiers||{}))for(const effect of values){const list=bonuses.get(effect.source)||[];list.push(`${key} ${Number(effect.value)>0?'+':''}${effect.value}`);bonuses.set(effect.source,list);}for(const [name,values] of bonuses)sources.append(node('p',`${pairedName(profile.name)} · ${pairedName(name)}: ${values.join(' · ')}`));}if(sources.childElementCount)body.append(sources);}
@@ -971,6 +988,26 @@ function refreshConfig() {
   $('configPoints').textContent=`${fmt(OPT.price(source,count,selections,configured.magicItems,optionComposition(source)))} pts`;
   $('configMagic').classList.toggle('hidden',!magicGroups(source,selections).length);
   if(magicGroups(source,selections).length)refreshMagicPicker();
+  refreshConfigLore();
+}
+function refreshConfigLore(){
+  if(!configured)return;
+  const {source,selections,magicItems}=configured,magic=OPT.wizardState(source,selections,magicItems,optionComposition(source));
+  const offerHat=source.id==='chaos-lord'&&!magic.grantedBy;
+  $('configLore').classList.toggle('hidden',!magic.lores.length&&!offerHat);
+  const host=$('loreChoices');host.replaceChildren();
+  if(!magic.lores.includes(configured.lore))configured.lore=magic.lores[0]||'';
+  if(offerHat){
+    host.append(node('p',playText('카오스 로드는 위저딩 햇을 선택하면 마법을 배울 수 있습니다. 45 pts · 레벨 1 · 무작위 주문 1개 · 스투피디티.','A Chaos Lord can learn magic with the Wizarding Hat. 45 pts · Level 1 · one random spell · Stupidity.'),'viewHint'));
+    const learn=node('button',playText('마법 배우기 · 위저딩 햇 +45 pts','Learn magic · Wizarding Hat +45 pts'),'secondary learnMagic');learn.type='button';learn.dataset.learnMagic='hat';host.append(learn);
+  }
+  if(magic.grantedBy)host.append(node('p',playText('위저딩 햇 적용: 레벨 1 마법사. 아래 학파에서 주문 1개를 무작위 생성하며 스투피디티를 얻습니다.','Wizarding Hat: Level 1 Wizard. Randomly generate one spell from the lore below; gains Stupidity.'),'viewHint'));
+  for(const value of magic.lores){
+    const row=node('div','','loreChoice'),label=node('label','','configChoice'+(value===configured.lore?' selected':'')),input=document.createElement('input');
+    input.type='radio';input.name='lorePick';input.value=value;input.checked=value===configured.lore;
+    label.append(input,sourceName('span',slugTitle(value),'configChoiceText'));row.append(label);
+    const rule=value==='shadowlands'?'Lore of the Shadowlands':slugTitle(value),links=optionRuleLinks(rule);if(links)row.append(links);host.append(row);
+  }
 }
 function refreshOpenNames(){if(configured){$('configTitle').textContent=pairedName(labelOf(configured.source));refreshUnitPhotoLink('configTitle',configured.source);refreshConfig();}if(detailUnit)openUnitDetail(detailUnit);}
 document.addEventListener('tow-language-change',refreshOpenNames);
@@ -987,9 +1024,6 @@ function openConfig(source,existing=null,initialCount=null) {
   $('configLabel').value=existing?.label||'';$('configNotes').value=configured.options;
   $('configSave').textContent=existing?'변경 저장':'로스터에 추가';
   $('configMagic').classList.toggle('hidden',!magicGroups(source,configured.selections).length);
-  $('configLore').classList.toggle('hidden',!source.lores?.length);
-  const loreChoices=$('loreChoices');loreChoices.replaceChildren();
-  for(const value of source.lores||[]){const row=node('div','','loreChoice');const label=node('label','','configChoice'+(value===configured.lore?' selected':''));const input=document.createElement('input');input.type='radio';input.name='lorePick';input.value=value;input.checked=value===configured.lore;label.append(input,sourceName('span',slugTitle(value),'configChoiceText'));row.append(label);const rule=value==='shadowlands'?'Lore of the Shadowlands':slugTitle(value);const links=optionRuleLinks(rule);if(links)row.append(links);loreChoices.append(row);}
   $('configBackdrop').classList.remove('hidden');refreshConfig();loadMagicData().then(()=>{if(configured?.source===source)refreshMagicPicker();});$('configTitle').focus({preventScroll:true});
 }
 function closeConfig(){$('configBackdrop').classList.add('hidden');configured=null;}
@@ -1087,7 +1121,18 @@ $('detailOptions').addEventListener('click',event=>{const rule=event.target.clos
 $('detailAdd').addEventListener('click',()=>{if(detailUnit)quickAdd(detailUnit);closeUnitDetail();});
 const configGroups=$('configGroups');
 configGroups.addEventListener('click',event=>{const rule=event.target.closest('[data-rule]');if(rule)openRule(rule.dataset.rule);});
-$('loreChoices').addEventListener('click',event=>{const rule=event.target.closest('[data-rule]');if(rule)openRule(rule.dataset.rule);});
+$('loreChoices').addEventListener('click',async event=>{
+  const learn=event.target.closest('[data-learn-magic]');
+  if(learn&&configured){
+    const target=configured;await loadMagicData();if(configured!==target)return;
+    for(const {group,slot} of magicGroups(target.source,target.selections)){
+      const hat=magicOptions(group).find(item=>labelOf(item)==='Wizarding Hat');
+      if(hat){addMagicItem(slot,hat);return;}
+    }
+    toast(playText('아이템 자료를 불러오지 못했습니다. 다시 시도하세요.','Could not load the item. Please retry.'));return;
+  }
+  const rule=event.target.closest('[data-rule]');if(rule)openRule(rule.dataset.rule);
+});
 $('loreChoices').addEventListener('change',event=>{if(!configured||event.target.name!=='lorePick')return;configured.lore=event.target.value;for(const row of $('loreChoices').querySelectorAll('.configChoice'))row.classList.toggle('selected',row.querySelector('input')?.checked);});
 configGroups.addEventListener('change',event=>{
   if(!configured)return;
@@ -1143,7 +1188,8 @@ $('configSave').addEventListener('click',()=>{
   if(!configured)return;
   const {source,selections,magicItems}=configured,count=whole($('configCount').value,Number(source.minimum)||1,Math.min(999,Number(source.maximum)||999));
   const old=state.units.find(unit=>unit.id===configured.id);
-  const record=normalizeUnit({...old,name:labelOf(source),category:source.category,count,points:OPT.price(source,count,selections,magicItems,optionComposition(source)),label:$('configLabel').value.trim(),options:$('configNotes').value.trim(),sourceId:source.id,sourceFaction:source._sourceFaction||state.faction,sourceComposition:optionComposition(source),isDetachment:$('configDetachment').checked,manualStats:readManualStats('config'),basePoints:source.points,selections,magicItems,lore:source.lores?.length ? configured.lore : '',pointsOverride:false});
+  const magic=OPT.wizardState(source,selections,magicItems,optionComposition(source));
+  const record=normalizeUnit({...old,name:labelOf(source),category:source.category,count,points:OPT.price(source,count,selections,magicItems,optionComposition(source)),label:$('configLabel').value.trim(),options:$('configNotes').value.trim(),sourceId:source.id,sourceFaction:source._sourceFaction||state.faction,sourceComposition:optionComposition(source),isDetachment:$('configDetachment').checked,manualStats:readManualStats('config'),basePoints:source.points,selections,magicItems,lore:magic.lores.includes(configured.lore)?configured.lore:'',pointsOverride:false});
   if(old)state.units[state.units.indexOf(old)]=record;else state.units.push(record);
   const keepChoosing=!old&&screen==='reference';
   closeConfig();update();if(!keepChoosing)showScreen('roster');toast(old?'유닛 옵션을 저장했습니다.':'유닛을 로스터에 추가했습니다.');

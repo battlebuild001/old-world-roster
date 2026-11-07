@@ -28,6 +28,20 @@ window.BTHTOWOptions = (() => {
     return result;
   }
   const active=(value)=>value===true || Number(value)>0;
+  const hatLores=['battle-magic','daemonology','dark-magic','elementalism','high-magic','illusion','necromancy','waaagh-magic'];
+  function wizardState(source,selections={},magicItems=[],composition=''){
+    const hat=(magicItems||[]).some(item=>String(item.name_en||item.name||'').replace(/\*/g,'').trim().toLowerCase()==='wizarding hat');
+    if(hat)return {level:1,lores:[...hatLores],grantedBy:'Wizarding Hat',randomSpells:1,stupidity:true};
+    let level=0;
+    const choices=source?entries(source,composition):[],byPath=new Map(choices.map(item=>[item.path,item]));
+    for(const item of choices){
+      let parent=item,enabled=true;
+      while(parent){if(!active(selections[parent.path])){enabled=false;break;}parent=parent.parentKey?byPath.get(parent.parentKey):null;}
+      const match=String(item.entry.name_en||'').match(/\bLevel\s+(\d+)\s+Wizard\b/i);
+      if(enabled&&match)level=Math.max(level,Number(match[1]));
+    }
+    return {level,lores:[...(source?.lores||[])],grantedBy:null,randomSpells:level,stupidity:false};
+  }
   function itemChoices(data,group,faction,composition) {
     if(!data)return [];
     const types=new Set(group.types||[]),pools=['general',faction];
@@ -61,5 +75,5 @@ window.BTHTOWOptions = (() => {
     for(const [key,count] of itemCounts)labels.push(count>1?`${count}× ${key.split('\u0000')[1]}`:key.split('\u0000')[1]);
     return labels;
   }
-  return Object.freeze({fields,key,valid,defaults,entries,price,describe,active,itemChoices});
+  return Object.freeze({fields,key,valid,defaults,entries,price,describe,active,itemChoices,wizardState});
 })();

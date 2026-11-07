@@ -295,6 +295,8 @@ label,.sheetBody h3,.configGroup h3,#configMagic h3,#configLore h3{color:var(--c
 .playItemName{min-width:0;overflow-wrap:anywhere}.playItemCount{flex:none;padding:1px 7px;border-radius:4px;background:var(--color-surface-muted);color:var(--color-action);font-variant-numeric:tabular-nums;font-weight:800}
 .playItemContext{display:block;margin:3px 2px 0;color:var(--color-text-muted);font-size:10px;line-height:1.5;overflow-wrap:anywhere}
 .playItemButton:focus-visible{outline:2px solid var(--color-focus);outline-offset:2px}
+.playMagic{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 14px;padding:0 0 12px;border-bottom:1px solid var(--color-border)}
+.playMagic h3,.playMagic p{flex-basis:100%;margin:0}.playMagic h3{color:var(--color-action);font-size:13px}.playMagic>strong{font-size:12px}.playMagic>.rulePill,.learnMagic{min-height:44px}
 @media(max-width:900px){.bottomNav{grid-template-columns:repeat(5,minmax(0,1fr))}}
 @media(max-width:680px){.playHead{display:block}.playActions{margin-top:13px;justify-content:stretch}.playActions button{flex:1 1 calc(50% - 7px)}.playActions #playConfirm{flex-basis:100%}.playSummary{display:grid}.playCardHead{padding:13px}.playCardBody{padding:0 10px 14px}.playStatCell{font-size:13px}.playBonus,.playFixed{font-size:10px}.playProfileLabel th{font-size:11px}.playProfileTable thead th{font-size:9px}}
 @media print{.bottomNav,.sectionNav,#homeScreen{display:none!important}.top,.shell{margin-left:0}.shell{max-width:none;padding:14px}body,.shell,.top,.panel,.metric,.unit,.category-breakdown{background:#fff!important;color:#111!important}.shell *,.top *{color:#111!important;background-image:none!important;box-shadow:none!important}.panel,.metric,.unit{border-color:#bbb!important}}
